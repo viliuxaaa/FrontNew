@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import Layout from "../Layout/Layout"
+import { useState } from "react";
 
 function ImageView() {
     const [value, setValue] = useState(0)

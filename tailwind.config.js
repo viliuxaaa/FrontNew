@@ -16,7 +16,7 @@ module.exports = {
         h1: '2.6rem',
       },
       screens: {
-        xs: '450px',
+        xs: '440px',
         
       },
       colors: {
@@ -27,7 +27,9 @@ module.exports = {
         text: "#111827",
         textHover: "#6A826D",
         background: "#faecd7",
-        accentLower: "#E3F0E7"
+        accentLower: "#E3F0E7",
+        custom: "#685206",
+        darkMain: "#A88756"
       }
     },
   },

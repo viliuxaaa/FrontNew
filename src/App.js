@@ -7,6 +7,10 @@ import Posters from "./Screens/Posters";
 import UploadPoster from "./Screens/UploadPoster";
 import ViewPoster from "./Screens/ViewPoster";
 import Demo from "./Screens/Demo";
+import Dashboard from "./Screens/Dashboard/Admin/Dashboard";
+import SkelbimuList from "./Screens/Dashboard/Admin/SkelbimuList";
+import Profile from "./Screens/Dashboard/Profile";
+import Favorites from "./Screens/Dashboard/Favorites";
 
 function App() {
   return (
@@ -18,6 +22,10 @@ function App() {
       <Route path='*' element={<NotFound />} />
       <Route path="/upload" element={<UploadPoster />} />
       <Route path="/view" element={<ViewPoster />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/skelbimulist" element={<SkelbimuList />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="/favorites" element={<Favorites />} />
       <Route path="/demo" element={<Demo />} />
     </Routes>
   );

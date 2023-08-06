@@ -1,4 +1,3 @@
-import Layout from "../Layout/Layout"
 
 function SinglePosterDetailed() {
     return (
