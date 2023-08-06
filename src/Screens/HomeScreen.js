@@ -1,6 +1,5 @@
 import Category from "../Components/Category"
 import LatestPosters from "../Components/LatestPosters"
-//import SinglePoster from "../Components/SinglePoster"
 import Layout from "../Layout/Layout"
 
 function HomeScreen() {

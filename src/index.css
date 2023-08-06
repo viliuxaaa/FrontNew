@@ -3,10 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
-body, html {
+body {
   font-family: "Poppins", sans-serif;
   font-weight: 400;
-  zoom: 0.90;
+  zoom: 0.85;
 }
 
 input:focus,textarea:focus,select:focus{

@@ -1,11 +1,18 @@
 
 import { Carousel } from "react-responsive-carousel";
 import PosterImgModal from "./Modals/PosterImgModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 function ImageView() {
     const [modalOpen, setModalOpen] = useState(false);
+    const [img, setImg] = useState(null);
+
+    useEffect(() => {
+      if(modalOpen === false){
+        setImg();
+      }
+    },[modalOpen])
 
     const imageData = [
         {
@@ -44,7 +51,10 @@ function ImageView() {
       ];
 
     const renderSlides = imageData.map((image) => (
-        <div key={image.alt} onClick={() => setModalOpen(true)}>
+        <div key={image.alt} onClick={() => {
+          setImg(image); 
+          setModalOpen(true);
+      }} >
           <img src={image.url} alt={image.alt} className="w-full aspect-[1/1] object-cover my-2" />
           
         </div>
@@ -53,7 +63,7 @@ function ImageView() {
 
     return (
         <> 
-          <PosterImgModal modalOpen={modalOpen} setModalOpen={setModalOpen}/>
+          <PosterImgModal modalOpen={modalOpen} setModalOpen={setModalOpen} img={img}/>
             <div className="my-10">
                 <div className="flex-colo">
 

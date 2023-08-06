@@ -7,7 +7,7 @@ function NavBar() {
     const Hover = ({isActive}) => (isActive ? "text-custom" : hover)
     return (
         <>
-        <div className="bg-main shadow-md sticky top-0 z-20">
+        <div className="bg-main shadow-md md:sticky top-0 z-20">
             <div className="container mx-auto py-6 px-2 lg:grid gap-10 grid-cols-7 justify-between items-center">
                 {/* Logo */}
                 <div className="col-span-1 block pb-1">
@@ -36,7 +36,7 @@ function NavBar() {
                     </form>
                 </div>
                 {/* menus */}
-                <div className="col-span-3 font-medium pt-1 text-sm xl:gap-14 2xl:gap-24 justify-between flex items-center">
+                <div className="col-span-3 font-medium pt-4 text-sm xl:gap-14 2xl:gap-24 justify-between flex items-center">
                   <NavLink to="/upload" className={Hover}>Add Poster</NavLink>  
                   <NavLink to="/posters" className={Hover}>Skelbimai</NavLink>  
                   <NavLink to="/view" className={Hover}>Single</NavLink>

@@ -27,7 +27,7 @@ module.exports = {
         textHover: "#6A826D",
         background: "#faecd7",
         accentLower: "#E3F0E7",
-        custom: "#685206",
+        custom: "#433622",
         darkMain: "#A88756"
       }
     },

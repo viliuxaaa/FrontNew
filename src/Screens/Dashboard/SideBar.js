@@ -89,7 +89,7 @@ function SideBar({admin, children}) {
     <Layout>
         <div className='min-h-screen container mx-auto px-2 text-text'>
             <div className='xl:grid grid-cols-8 gap-10 items-start md:py-12 py-6'>
-                <div className='col-span-2 sticky bg-darkAccent border border-gray-800 p-6 rounded-md xl:mb-0 mb-0'>
+                <div className='col-span-2 xs:my-2 xl:my-0 sticky bg-darkAccent border border-gray-800 p-6 rounded-md xl:mb-0 mb-0'>
                     
 
                     {
