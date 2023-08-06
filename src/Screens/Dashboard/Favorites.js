@@ -1,6 +1,6 @@
 import React from 'react'
 import SideBar from './SideBar'
-import Table from '../../Components/Table'
+import FavoriteTable from '../../Components/FavoriteTable'
 import { posters } from '../../Data/PosterData'
 
 function Favorites() {
@@ -14,7 +14,7 @@ function Favorites() {
                </button>
             </div>
             {/* admin - true gives admin controls */}
-            <Table data={posters} admin={false} />
+            <FavoriteTable data={posters} />
         </div>
     </SideBar>
   )

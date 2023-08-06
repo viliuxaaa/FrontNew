@@ -11,6 +11,7 @@ import Dashboard from "./Screens/Dashboard/Admin/Dashboard";
 import SkelbimuList from "./Screens/Dashboard/Admin/SkelbimuList";
 import Profile from "./Screens/Dashboard/Profile";
 import Favorites from "./Screens/Dashboard/Favorites";
+import Password from "./Screens/Dashboard/Password";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
       <Route path="/skelbimulist" element={<SkelbimuList />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/favorites" element={<Favorites />} />
+      <Route path="/password" element={<Password />} />
       <Route path="/demo" element={<Demo />} />
     </Routes>
   );

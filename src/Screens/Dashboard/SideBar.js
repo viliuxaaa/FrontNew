@@ -43,11 +43,6 @@ function SideBar({admin, children}) {
             link:"/favorites",
             icon:FaHeart,
         },
-        {
-            name:"Change Password",
-            link:"/password",
-            icon:RiLockPasswordLine,
-        },
     ]
 
     const Links = [
@@ -62,8 +57,8 @@ function SideBar({admin, children}) {
             icon: FaListAlt,
             },
             {
-            name: "Pridėti filmą",
-            link: "/upload", // sekantis
+            name: "Pridėti Skelbima",
+            link: "/upload",
             icon: RiMovie2Fill,
             },
             {
@@ -77,8 +72,8 @@ function SideBar({admin, children}) {
             icon: FaHeart,
             },
             {
-            name: "Keisti slaptažodį", // reikia sukurti puslapį
-            link: "/keisti-slaptazodi",
+            name: "Keisti slaptažodį",
+            link: "/password",
             icon: RiLockPasswordLine,
             },
     ]
