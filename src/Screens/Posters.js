@@ -1,8 +1,15 @@
+import { Link } from "react-router-dom";
 import PosterMaxDetail from "../Components/PosterMaxDetail"
+import AxiosFetch from "../hooks/AxiosFetch";
 
 import Layout from "../Layout/Layout"
 
 function Posters() {
+
+    const getAllPosters = `/api/v1//poster/get/all`;
+    const [posters, isPending, error] = AxiosFetch(getAllPosters)
+    console.log(posters)
+
     return (
         <Layout>
             <div className="my-10 min-h-screen px-2 md:px-0">
@@ -12,9 +19,9 @@ function Posters() {
                             <h1 className="tracking-wider text-lg font-md font-sans">All posters</h1>
                         </div>
                     </div>
-                    {/* {posters.slice(0, 8).map((post, i) => (
-                        <PosterMaxDetail key={i} post={post}/>
-                    ))} */}
+                    {posters && posters.map((poster, i) => (
+                        <PosterMaxDetail key={i} poster={poster}/>
+                    ))}
                 </div>
             </div>
         </Layout>
