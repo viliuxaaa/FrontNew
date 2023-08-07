@@ -15,7 +15,7 @@ module.exports = {
         h1: '2.6rem',
       },
       screens: {
-        xs: '440px',
+        xs: '390px',
         
       },
       colors: {

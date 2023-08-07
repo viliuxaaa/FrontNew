@@ -4,7 +4,7 @@ import { BiHomeAlt } from 'react-icons/bi'
 
 function NotFound() {
   return (
-      <div className='flex-colo gap-8 w-full main-h-screen text-white bg-main lg:py-20 py-10 px-6'>
+      <div className='flatzoom flex-colo gap-8 w-full min-h-screen text-white bg-main lg:py-20 py-10 px-6'>
         <img 
           className='w-full h-96 object-contain' 
           src='/images/404.jpg'

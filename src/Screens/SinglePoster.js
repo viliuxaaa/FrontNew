@@ -1,7 +1,11 @@
 import Layout from "../Layout/Layout"
 import ImageView from "../Components/ImageView";
+import { useParams } from "react-router-dom";
+import { posters } from "../Data/PosterData";
 
-function ViewPoster() {
+function SinglePoster() {
+    const {id} = useParams();
+    const post = posters.find((post) => post.postName === id);
     return (
         <Layout>
             <div className="grid grid-cols-1 lg:grid-cols-2 mt-10 md:mt-10 mb-20">
@@ -47,4 +51,4 @@ function ViewPoster() {
     )
 }
 
-export default ViewPoster
+export default SinglePoster

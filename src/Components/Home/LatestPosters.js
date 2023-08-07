@@ -1,7 +1,7 @@
 
 import {useState} from "react";
-import { posters } from "../Data/PosterData"
-import SinglePoster from "./SinglePoster";
+import { posters } from "../../Data/PosterData"
+import SinglePoster from "../PosterMinDetail";
 
 
 function LatestPosters() {

@@ -1,4 +1,5 @@
-import SinglePosterDetailed from "../Components/SinglePosterDetailed"
+import PosterMaxDetail from "../Components/PosterMaxDetail"
+import { posters } from "../Data/PosterData"
 import Layout from "../Layout/Layout"
 
 function Posters() {
@@ -11,9 +12,9 @@ function Posters() {
                             <h1 className="tracking-wider text-lg font-md font-sans">All posters</h1>
                         </div>
                     </div>
-                <SinglePosterDetailed />
-                <SinglePosterDetailed />
-                <SinglePosterDetailed />
+                    {posters.slice(0, 8).map((post, i) => (
+                        <PosterMaxDetail key={i} post={post}/>
+                    ))}
                 </div>
             </div>
         </Layout>

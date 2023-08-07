@@ -9,6 +9,10 @@ body {
   zoom: 0.85;
 }
 
+.flatzoom {
+  zoom: 1.2;
+}
+
 input:focus,textarea:focus,select:focus{
   outline: 0 !important;
   box-shadow: none !important;

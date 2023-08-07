@@ -6,13 +6,13 @@ function SinglePoster() {
                     <img src="https://picsum.photos/200/300" alt="dog" className="w-32 h-32 aspect-[1/1] rounded-xl"/>
                 </div>
                 <div>
-                    <h2 className="text-xl font-semibold">This is a title</h2>
-                    <p>
+                    <h2 className="text-xl text-text font-semibold">This is a title</h2>
+                    <p className="text-text max-w-2xl">
                         This is some text that will be displayed in the second column.
                         This is some text that will be displayed in the second column.
                     </p>
                     <br/>
-                    <p className="align-text-bottom sm:text-sm xs:text-base md:text-base text-b">
+                    <p className="align-text-bottom text-text sm:text-sm xs:text-base md:text-base text-b">
                         50 eur
                     </p>  
                 </div>

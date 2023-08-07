@@ -1,5 +1,5 @@
 import Category from "../Components/Category"
-import LatestPosters from "../Components/LatestPosters"
+import LatestPosters from "../Components/Home/LatestPosters"
 import Layout from "../Layout/Layout"
 
 function HomeScreen() {
@@ -12,7 +12,7 @@ function HomeScreen() {
     const category1 = ["Vienas"]
     return (
         <Layout>
-            <div className="container flex-rows mx-auto min-h-screen px-10 py-10 text-text">
+            <div className="container flex-rows mx-auto min-h-screen py-10 text-text">
                 <div className="grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 grid-cols-1">
                     <div className="flex lg:justify-center lg:col-span-2 lg:row-span-2">
                         <LatestPosters />
