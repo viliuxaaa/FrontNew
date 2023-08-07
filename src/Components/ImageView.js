@@ -2,63 +2,32 @@
 import { Carousel } from "react-responsive-carousel";
 import PosterImgModal from "./Modals/PosterImgModal";
 import { useEffect, useState } from "react";
+import AxiosFetch from "../hooks/AxiosFetch";
 
 
-function ImageView() {
+function ImageView( {poster} ) {
     const [modalOpen, setModalOpen] = useState(false);
     const [img, setImg] = useState(null);
+    const getPosterImg = `api/v1/images/poster/get/${poster.posterId}/` 
+    const [image0, isPending, error] = AxiosFetch(getPosterImg + `0`);
 
+    console.log(poster)
+    console.log( image0 )
     useEffect(() => {
       if(modalOpen === false){
         setImg();
       }
     },[modalOpen])
 
-    const imageData = [
-        {
-          label: "Image 1",
-          alt: "image1",
-          url:
-          "https://images.unsplash.com/photo-1580910051074-3eb694886505?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHBob25lfGVufDB8fDB8fHww&w=1000&q=80"
-        },
-        {
-          label: "Image 2",
-          alt: "image2",
-          url:
-          "https://tecdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(76).webp"
-        },
-        {
-          label: "Image 3",
-          alt: "image3",
-          url: "https://tecdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(70).webp"
-        },
-        {
-          label: "Image 4",
-          alt: "imagedfsf4",
-          url:
-            "https://tecdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(75).webp"
-        },
-        {
-            label: "Image 5",
-            alt: "image5",
-            url: "https://images.unsplash.com/photo-1533282960533-51328aa49826?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8d2lkZXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
-        },
-        {
-            label: "Image 6",
-            alt: "image6",
-            url: "https://tecdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(72).webp"
-        }
-      ];
-
-    const renderSlides = imageData.map((image) => (
-        <div key={image.alt} onClick={() => {
-          setImg(image); 
-          setModalOpen(true);
-      }} >
-          <img src={image.url} alt={image.alt} className="w-full aspect-[1/1] object-cover my-2" />
+    // const renderSlides = images.map((image) => (
+    //     <div key={image.alt} onClick={() => {
+    //       setImg(image); 
+    //       setModalOpen(true);
+    //   }} >
+    //       <img src={image.url} alt={image.alt} className="w-full aspect-[1/1] object-cover my-2" />
           
-        </div>
-      ));
+    //     </div>
+    //   ));
 
 
     return (
@@ -77,7 +46,16 @@ function ImageView() {
                           className="carousel-container"
                           
                           >
-                          {renderSlides}
+
+                          {  image0 &&
+                            <div key={image0.alt} onClick={() => {
+                            setImg(image0); 
+                            setModalOpen(true);
+                        }} >
+                            <img src={image0} alt="0-pic" className="w-full aspect-[1/1] object-cover my-2" />
+                            
+                          </div>}
+                          
                         </Carousel>
                     </div>
                 </div>

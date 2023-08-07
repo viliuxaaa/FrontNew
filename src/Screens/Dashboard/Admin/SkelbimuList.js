@@ -1,8 +1,8 @@
 import React from 'react'
 import SideBar from '../SideBar'
 import { FaSearch } from 'react-icons/fa'
-import Table from '../../../Components/Table'
-import { posters } from '../../../Data/PosterData'
+// import Table from '../../../Components/Table'
+
 
 function SkelbimuList() {
   return (
@@ -31,7 +31,7 @@ function SkelbimuList() {
                </button>
             </div>
             <h3 className='text-md font-medium mt-6 text-border'>Mano Skelbimai</h3>
-            <Table data={posters} admin={false} />
+            {/* <Table data={posters} admin={false} /> */}
         </div>
     </SideBar>
   )

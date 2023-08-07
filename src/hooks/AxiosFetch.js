@@ -11,7 +11,7 @@ const AxiosFetch = (url) => {
             try{
                 const response = await axios.get(url);
                 setData(response.data);
-                console.log(response);
+                // console.log(response);
                 setIsPending(false);
             } catch (error){
                 error.message = "Connection to the server failed";
@@ -21,7 +21,7 @@ const AxiosFetch = (url) => {
         }
         getData();
     },[url]);
-    console.log("stuff from AxiosFetch.js" + data, isPending, error);
+    // console.log("stuff from AxiosFetch.js" + data, isPending, error);
     return [ data, isPending, error ];
 }
  
