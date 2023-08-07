@@ -11,7 +11,7 @@ import SkelbimuList from "./Screens/Dashboard/Admin/SkelbimuList";
 import Profile from "./Screens/Dashboard/Profile";
 import Favorites from "./Screens/Dashboard/Favorites";
 import Password from "./Screens/Dashboard/Password";
-import SinglePoster from "./Components/PosterMinDetail";
+import SinglePoster from "./Screens/SinglePoster";
 
 function App() {
   return (
