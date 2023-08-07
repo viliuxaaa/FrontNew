@@ -8,8 +8,11 @@ import AxiosFetch from "../hooks/AxiosFetch";
 function ImageView( {poster} ) {
     const [modalOpen, setModalOpen] = useState(false);
     const [img, setImg] = useState(null);
-    const getPosterImg = `api/v1/images/poster/get/${poster.posterId}/` 
+    const getPosterImg = `/api/v1/images/poster/get/${poster.posterId}/` 
     const [image0, isPending, error] = AxiosFetch(getPosterImg + `0`);
+
+    const propertyCount = Object.keys(poster.images).length;
+    const itemElements = [];
 
     console.log(poster)
     console.log( image0 )
@@ -19,15 +22,20 @@ function ImageView( {poster} ) {
       }
     },[modalOpen])
 
-    // const renderSlides = images.map((image) => (
-    //     <div key={image.alt} onClick={() => {
-    //       setImg(image); 
-    //       setModalOpen(true);
-    //   }} >
-    //       <img src={image.url} alt={image.alt} className="w-full aspect-[1/1] object-cover my-2" />
-          
-    //     </div>
-    //   ));
+    for (let i = 0; i < propertyCount; i++) {
+      itemElements.push(
+        <div key={i + " position"} onClick={() => {
+          setImg(
+              {label: "Image 1", alt: "image1", url: getPosterImg + i}
+            ); 
+          setModalOpen(true);
+        }} >
+          <img  src={getPosterImg + i} alt={`${i} position`} className="w-full aspect-[1/1] object-cover my-2" />
+        </div>        
+      );
+    }
+
+    console.log(getPosterImg + `0`)
 
 
     return (
@@ -46,16 +54,7 @@ function ImageView( {poster} ) {
                           className="carousel-container"
                           
                           >
-
-                          {  image0 &&
-                            <div key={image0.alt} onClick={() => {
-                            setImg(image0); 
-                            setModalOpen(true);
-                        }} >
-                            <img src={image0} alt="0-pic" className="w-full aspect-[1/1] object-cover my-2" />
-                            
-                          </div>}
-                          
+                          {itemElements}
                         </Carousel>
                     </div>
                 </div>
