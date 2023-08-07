@@ -5,6 +5,10 @@ function PosterMinDetail({poster}) {
     const posterIMG_URL="/api/v1/images/poster/get/" + poster.posterId + "/0";
     
     const [image, isPending, error ] = AxiosFetch(posterIMG_URL);
+
+    let shortDescription = poster.description.substring(0, 100)
+    const lastSpace = shortDescription.lastIndexOf(" ")
+    shortDescription = shortDescription.substring(0, lastSpace)
    
 
     return (
@@ -17,7 +21,7 @@ function PosterMinDetail({poster}) {
                     <div className="pl-5">
                         <h2 className="text-xl text-text font-semibold">{poster.postName}</h2>
                         <p className="text-text max-w-2xl">
-                            {poster.description}
+                            {shortDescription}
                         </p>
                         <br/>
                         <p className="align-text-bottom text-text sm:text-sm xs:text-base md:text-base text-b">

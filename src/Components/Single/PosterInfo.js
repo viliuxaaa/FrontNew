@@ -2,6 +2,7 @@ import React from 'react'
 import ImageView from '../ImageView'
 
 function PosterInfo({poster}) {
+    const labas = "labas <br /> labas" 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 mt-10 md:mt-10 mb-20">
                 <div className="xs:order-last lg:order-first lg:mt-12">
@@ -16,9 +17,7 @@ function PosterInfo({poster}) {
                             <h1 className="my-3">Aprasymas</h1>
                         </div>
                         <div className="bg-subMain h-fit p-3 border-y-2 border-darkMain">
-                            <p className="break-after-column">
-                                {poster?.description}
-                            </p>
+                            <p className="break-after-column" dangerouslySetInnerHTML={{ __html: poster?.description }} />                            
                         </div>
                         <div className="bg-subMain h-fit p-3">
                             <p className="text-3xl">Sukurtas: {poster.createdAt}</p>
