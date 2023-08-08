@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import MainModalForCity from './MainModalForCity'
 
-function CityModal({ modalOpen, setModalOpen, CityData }) {
+function CityModal({ modalOpen, setModalOpen, setCheckedValues, checkedValues, CityData }) {
 
-    const [checkedValues, setCheckedValues] = useState([]);
+    
 
 
     const handleCheckboxChange = (event) => {
@@ -15,9 +15,6 @@ function CityModal({ modalOpen, setModalOpen, CityData }) {
         }
     };
 
-    useEffect(() => {
-        console.log(checkedValues)
-    }, [checkedValues])
 
   return (
     <MainModalForCity modalOpen={modalOpen} setModalOpen={setModalOpen} setCheckedValues={setCheckedValues} checkedValues={checkedValues}>

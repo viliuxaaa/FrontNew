@@ -12,6 +12,13 @@ function NavBar() {
     const [modalOpen, setModalOpen ] = useState(false)
     const [city, setCity] = useState();
 
+    const [checkedValues, setCheckedValues] = useState([]);
+
+    
+    useEffect(() => {
+        console.log(checkedValues)
+    }, [checkedValues])
+
     useEffect(() => {
         if(modalOpen === false) {
           setCity();
@@ -28,6 +35,8 @@ function NavBar() {
         <CityModal
           modalOpen={modalOpen} 
           setModalOpen={setModalOpen} 
+          setCheckedValues={setCheckedValues}
+          checkedValues={checkedValues}
           CityData={CityData} 
         />
         <div className="bg-main shadow-md md:sticky top-0 z-20 h-[165px] lg:h-full">
