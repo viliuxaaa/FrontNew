@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import CityModal from "../../Components/Modals/CityModal";
 import  cities  from "../../enums/Cities"
-
+import  useAuth  from '../../hooks/useAuth';
 function NavBar() {
     const [modalOpen, setModalOpen ] = useState(false)
     const [city, setCity] = useState();
@@ -20,6 +20,7 @@ function NavBar() {
 
       const CityData = cities;     
 
+    const { auth } = useAuth();
     const hover = "hover:text-cyan-800 transition hover:scale-105 transitions text-text";
     const Hover = ({isActive}) => (isActive ? "text-custom" : hover)
     
@@ -70,11 +71,18 @@ function NavBar() {
                 {/* menus */}
                 <div className="col-span-3 pt-1 lg:pt-0 font-medium text-sm xl:gap-14 2xl:gap-24 justify-between flex items-center">
                   <NavLink to="/upload" className={Hover}>Add Poster</NavLink>  
-                  <NavLink to="/skelbimai" className={Hover}>Skelbimai</NavLink>
+                  <NavLink to="/posters/search/:searchType" className={Hover}>Skelbimai</NavLink>
                   <NavLink to="/dashboard" className={Hover}>Dash</NavLink>   
-                  <NavLink to="/login" className={Hover}>
-                    <CgUser className="w-8 h-8" />
-                  </NavLink> 
+                  { auth ?                   
+                    (
+                        <NavLink to="/profile" className={Hover}>
+                        <CgUser className="w-8 h-8" />
+                        </NavLink>
+                    ) : (
+                        <NavLink to="/login" className={Hover}>
+                        <CgUser className="w-8 h-8" />
+                        </NavLink>
+                    )} 
                 </div>
             </div>
             <div className="absolute flex font-medium text-text w-18 h-7 right-7 top-4">
