@@ -16,7 +16,7 @@ import SinglePoster from "./Screens/SinglePoster";
 function App() {
   return (
     <Routes>
-      <Route path="/posters" element={<Posters />} />
+      <Route path="/posters/search/:searchType" element={<Posters />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path='/' element={<HomeScreen />} />

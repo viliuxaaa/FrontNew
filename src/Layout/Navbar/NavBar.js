@@ -6,6 +6,7 @@ import { BiChevronDown } from "react-icons/bi";
 import { useState } from "react";
 import { useEffect } from "react";
 import CityModal from "../../Components/Modals/CityModal";
+import  cities  from "../../enums/Cities"
 
 function NavBar() {
     const [modalOpen, setModalOpen ] = useState(false)
@@ -17,48 +18,7 @@ function NavBar() {
         }
       }, [modalOpen])
 
-      const CityData = [
-        {title:"Vilnius"},
-        {title:"Kaunas"},
-        {title:"Kedainiai"},
-        {title:"Palanga"},
-        {title:"Klaipeda"},
-        {title:"Vilnius"},
-        {title:"Kaunas"},
-        {title:"Kedainiai"},
-        {title:"Palanga"},
-        {title:"Klaipeda"},
-        {title:"Vilnius"},
-        {title:"Kaunas"},
-        {title:"Kedainiai"},
-        {title:"Palanga"},
-        {title:"Klaipeda"},
-        {title:"Vilnius"},
-        {title:"Kaunas"},
-        {title:"Kedainiai"},
-        {title:"Palanga"},
-        {title:"Klaipeda"},
-        {title:"Vilnius"},
-        {title:"Kaunas"},
-        {title:"Kedainiai"},
-        {title:"Palanga"},
-        {title:"Klaipeda"},
-        {title:"Vilnius"},
-        {title:"Kaunas"},
-        {title:"Kedainiai"},
-        {title:"Palanga"},
-        {title:"Klaipeda"},
-        {title:"Vilnius"},
-        {title:"Kaunas"},
-        {title:"Kedainiai"},
-        {title:"Palanga"},
-        {title:"Klaipeda"},
-        {title:"Vilnius"},
-        {title:"Kaunas"},
-        {title:"Kedainiai"},
-        {title:"Palanga"},
-        {title:"Klaipeda"},
-    ]
+      const CityData = cities;     
 
     const hover = "hover:text-cyan-800 transition hover:scale-105 transitions text-text";
     const Hover = ({isActive}) => (isActive ? "text-custom" : hover)

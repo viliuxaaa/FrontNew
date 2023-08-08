@@ -285,7 +285,7 @@ function UploadPoster() {
                                 {/* ********* BR ******** */}
                                 <hr className="h-px my-8 bg-black border-0 dark:bg-gray-700" />
 
-                                {/* ********* STATE ******** */}
+                                {/* ********* WHO ******** */}
                                 <div>
                                     <label
                                         htmlFor="who"
