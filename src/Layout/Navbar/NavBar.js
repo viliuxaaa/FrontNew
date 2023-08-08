@@ -70,7 +70,7 @@ function NavBar() {
                 {/* menus */}
                 <div className="col-span-3 pt-1 lg:pt-0 font-medium text-sm xl:gap-14 2xl:gap-24 justify-between flex items-center">
                   <NavLink to="/upload" className={Hover}>Add Poster</NavLink>  
-                  <NavLink to="/posters" className={Hover}>Skelbimai</NavLink>
+                  <NavLink to="/skelbimai" className={Hover}>Skelbimai</NavLink>
                   <NavLink to="/dashboard" className={Hover}>Dash</NavLink>   
                   <NavLink to="/login" className={Hover}>
                     <CgUser className="w-8 h-8" />
