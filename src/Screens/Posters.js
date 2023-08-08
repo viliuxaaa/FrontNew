@@ -1,12 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import PosterMaxDetail from "../Components/PosterMaxDetail"
 import AxiosFetch from "../hooks/AxiosFetch";
 
 import Layout from "../Layout/Layout"
 
 function Posters() {
+    const {searchType} = useParams();
 
-    const getAllPosters = `/api/v1//poster/get/all`;
+    const getAllPosters = `/api/v1/poster/get/search?${searchType}`;
     const [posters, isPending, error] = AxiosFetch(getAllPosters)
     console.log(posters)
 
