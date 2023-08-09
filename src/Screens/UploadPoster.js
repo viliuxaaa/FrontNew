@@ -1,8 +1,14 @@
 import Layout from "../Layout/Layout"
 import { useState } from "react";
-import {Link, useParams } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import useAuth from "../hooks/useAuth";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import { useTranslation } from "react-i18next"
+import { computerAEnum as catA,
+    categoryTranslationKeys as langFileStrings,
+    allArrays,
+    cities
+  } from '../enums/AllEnumArrays';
 
 // ======== PRIDETI EDIT FUNKCIONALUMA ( KAINA, NUOTRAUKOS?, TEL NR, DESCRIPTION )
 
@@ -12,9 +18,7 @@ const PHONE_REGEX = /^[+]?\d+$/;
 
 function UploadPoster() {
     const privateAxios = useAxiosPrivate();
-    // const [t, i18n] = useTranslation("global");
-    
-    const { id } = useParams();
+    const [t, i18n] = useTranslation("global");
     
 
     const [tempLangString, setTempLangString] = useState("");
@@ -50,11 +54,11 @@ function UploadPoster() {
           postName: postName, 
           description: posterDescription,
           price: +price,
-          categoryA: categoryA,
-          categoryB: categoryB,
+          categoryA: "KOMPIUTERIAI",
+          categoryB: "NESIOJAMI_KOMPIUTERIAI",
           status: "ACTIVE",
           phoneNumber: phoneNumber,
-          city: city,
+          city: "Vilnius",
           website: website,
           videoLink: videoLink
         }
@@ -65,12 +69,12 @@ function UploadPoster() {
           const response = await privateAxios.post(createURL,{
             postName: postName, 
             description: posterDescription,
-            price: +price, //konvertuoja i skaiciu
-            categoryA: categoryA,
-            categoryB: categoryB,
+            price: +price, //converts into a number value
+            categoryA: "KOMPIUTERIAI",
+            categoryB: "NESIOJAMI_KOMPIUTERIAI",
             status: "ACTIVE",
-            phoneNumber: phoneNumber,
-            city: city,
+            phoneNumber: "5671861",
+            city: "Vilnius",
             website: website,
             videoLink: videoLink
           }
@@ -100,19 +104,19 @@ function UploadPoster() {
       // ======= event watch makes sure that once the primary category is selected, a selection for secondary will appear
     const handleSelectA = (event) => {
         //when not using local simple variable the code displays older selection than it was
-        // let selection = catA.indexOf(event.target.value)
-        // setTempLangString(langFileStrings[selection]);
-        // setCatBArray(allArrays[selection]);
-        // setCategoryA(event.target.value);
+        let selection = catA.indexOf(event.target.value)
+        setTempLangString(langFileStrings[selection]);
+        setCatBArray(allArrays[selection]);
+        setCategoryA(event.target.value);
         
-        console.log(event.target.value)
-        console.log(catA.indexOf(event.target.value)) 
+        // console.log(event.target.value)
+        // console.log(catA.indexOf(event.target.value)) 
     }
     const handleSelectB = (event) => { //testing using temmporary variable because setCategoryB works slower thus console shows previous meaning of it
-        console.log(catBArray)
-        const i = event.target.value
+        // console.log(catBArray)
+        // const i = event.target.value
         setCategoryB(event.target.value);
-        console.log(i);
+        // console.log(i);
     }
     const handlePhoneNumberChange = (e) => {
         if ( PHONE_REGEX.test(e.target.value) ){
@@ -180,18 +184,24 @@ function UploadPoster() {
                                 <div>
                                     <label
                                         htmlFor="categoryA"
+                                        onChange={handleSelectA}
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     >
                                         First category
                                     </label>
-                                    <select
-                                        id="categoryA"
+                                    <select id="categoryA" 
+                                        onChange={handleSelectA}
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     >
-                                        <option value="">---</option>
-                                        <option value="KOMPIUTERIAI">Kompiuteriai</option>
-                                        
+                                        { catA.map((category, index) => {
+                                            return(
+                                            <option value={category} key={index}  selected={ category === categoryA }> 
+                                                {t("computerCategoryA."+ index)}
+                                            </option>
+                                            );
+                                        })}
                                     </select>
+                                    
                                 </div>
 
                                 {/* ********* CATEGORY B ******** */}
@@ -202,13 +212,19 @@ function UploadPoster() {
                                     >
                                         Second category
                                     </label>
-                                    <select
-                                        id="categoryB"
+                                    <select 
+                                        id="categoryB" 
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        onChange={handleSelectB}
                                     >
-                                        <option value="">---</option>
-                                        <option value="NESIOJAMI_KOMPIUTERIAI">Nesiojami kompiuteriai</option>
-                                        
+                                        { catBArray.map( ( bCategory, index) => {
+                                        return (              
+                                            <option value={bCategory} key={index} selected={ bCategory === categoryB}>
+                                            {t( tempLangString+"."+ index)} 
+                                            </option>                 
+                                        );
+                                        })}
+                                        {/* {console.log(catBArray)} */}
                                     </select>
                                 </div>
 
@@ -219,7 +235,6 @@ function UploadPoster() {
                                         rows={7}
                                         className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         placeholder="Description"
-                                        defaultValue={""}
                                         maxLength={1000}
                                         value={posterDescription} 
                                         onChange={handleDescriptionChange}
@@ -419,7 +434,7 @@ function UploadPoster() {
                                 </div>
 
                                 {/* ********* BR ******** */}
-                                <hr className="h-px my-8 bg-black border-0 dark:bg-gray-700" />
+                                {/* <hr className="h-px my-8 bg-black border-0 dark:bg-gray-700" /> */}
 
                                 {/* ********* STATE ******** PASLEPTAS KOL NERA UPDATED */}
                                 <div className="hidden">
@@ -439,7 +454,7 @@ function UploadPoster() {
                                 </div>
 
                                 {/* ********* BR ******** */}
-                                <hr className="h-px my-8 bg-black border-0 dark:bg-gray-700" />
+                                {/* <hr className="h-px my-8 bg-black border-0 dark:bg-gray-700" /> */}
 
                                 {/* ********* STATE ********  PASLEPTAS KOL NERA UPDATED*/}
                                 <div className="hidden">
