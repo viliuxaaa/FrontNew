@@ -12,8 +12,10 @@ import Profile from "./Screens/Dashboard/Profile";
 import Favorites from "./Screens/Dashboard/Favorites";
 import Password from "./Screens/Dashboard/Password";
 import SinglePoster from "./Screens/SinglePoster";
+import Aos from 'aos';
 
 function App() {
+  Aos.init();
   return (
     <Routes>
       <Route path="/posters/search/" element={<Posters />} />

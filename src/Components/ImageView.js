@@ -14,8 +14,8 @@ function ImageView( {poster} ) {
     const propertyCount = Object.keys(poster.images).length;
     const itemElements = [];
 
-    console.log(poster)
-    console.log( image0 )
+    // console.log(poster)
+    // console.log( image0 )
     useEffect(() => {
       if(modalOpen === false){
         setImg();
@@ -35,7 +35,7 @@ function ImageView( {poster} ) {
       );
     }
 
-    console.log(getPosterImg + `0`)
+    // console.log(getPosterImg + `0`)
 
 
     return (

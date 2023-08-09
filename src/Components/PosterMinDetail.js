@@ -66,16 +66,17 @@ function PosterMinDetail({poster}) {
                     <div className="flex-shrink-0">
                         <img src={posterIMG_URL} alt="dog" className="w-32 h-32 aspect-[1/1] rounded-xl"/>
                     </div>
-                    <div className="pl-5">
+                    <div className="pl-5 flex flex-col justify-between h-full">
+                    <div>
                         <h2 className="text-xl text-text font-semibold">{titleToDisplay}</h2>
-                        <p className="text-text max-w-2xl">
-                            {descToDisplay}
-                        </p>
-                        <br/>
-                        <p className="pt-3 align-text-bottom sm:text-sm xs:text-base md:text-base">
-                            Kaina: {poster?.price} &euro;
+                        <p className="text-text max-w-2xl">{descToDisplay}</p>
+                    </div>
+                    <div className="mt-auto pt-3">
+                        <p className="align-text-bottom sm:text-sm xs:text-base md:text-base">
+                            Kaina: <span className="font-medium pl-2">{poster.price}</span> &euro;
                         </p>
                     </div>
+                </div>
                 </Link>
             </div>
         </>
