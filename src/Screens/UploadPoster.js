@@ -1,6 +1,154 @@
 import Layout from "../Layout/Layout"
+import { useState } from "react";
+import {Link, useParams } from 'react-router-dom';
+import useAuth from "../hooks/useAuth";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
+
+// ======== PRIDETI EDIT FUNKCIONALUMA ( KAINA, NUOTRAUKOS?, TEL NR, DESCRIPTION )
+
+const PRICE_REGEX = /^[0-9]+$/;
+const CATEGORY_CITY_REGEX = /^[a-zA-Z]+$/;
+const PHONE_REGEX = /^[+]?\d+$/;
 
 function UploadPoster() {
+    const privateAxios = useAxiosPrivate();
+    // const [t, i18n] = useTranslation("global");
+    
+    const { id } = useParams();
+    
+
+    const [tempLangString, setTempLangString] = useState("");
+    
+
+    const {auth} = useAuth();  
+    const createURL="api/v1/poster/"+auth.userId+"/create"; //GALIMAI PERKELTI EDIT FUNKCIONALUMA I KITA FORMA
+    const updateIMG_URL = "api/v1/images/poster/"+auth.userId+""
+
+
+    const [success, setSuccess] = useState(false);
+    const [requestError, setRequestError] = useState("");
+    const [postName, setPostName] = useState("");
+    const [posterDescription, setPosterDescription] = useState("");
+    
+    const [price, setPrice] = useState('');
+    
+    const [categoryA, setCategoryA] = useState('');
+    const [selectKey, setSelectKey] = useState();
+    const [catBArray, setCatBArray] = useState([]);
+    const [categoryB, setCategoryB] = useState("");
+    
+    const [phoneNumber, setPhoneNumber] = useState(" ");
+    const [tempPhoneNumber, setTempPhoneNumber] = useState("");
+
+    const [city, setCity] = useState('');
+    const [website, setWebsite] = useState('');
+    const [videoLink, setVideoLink] = useState('');
+
+    async function handleSubmit(event)  {
+        event.preventDefault();
+        const newPoster = { //created poster to be able to inspect whether all parameters are getting through
+          postName: postName, 
+          description: posterDescription,
+          price: +price,
+          categoryA: categoryA,
+          categoryB: categoryB,
+          status: "ACTIVE",
+          phoneNumber: phoneNumber,
+          city: city,
+          website: website,
+          videoLink: videoLink
+        }
+        console.log(newPoster);
+        console.log(createURL)
+        
+        try {
+          const response = await privateAxios.post(createURL,{
+            postName: postName, 
+            description: posterDescription,
+            price: +price, //konvertuoja i skaiciu
+            categoryA: categoryA,
+            categoryB: categoryB,
+            status: "ACTIVE",
+            phoneNumber: phoneNumber,
+            city: city,
+            website: website,
+            videoLink: videoLink
+          }
+          );
+          console.log(response.data);
+          setSuccess(true);
+        } catch(err) {
+          setRequestError(err.message);
+          console.log(requestError);
+          
+        }
+    }
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    //================= Setting all inputs and select windows ==============================
+    const handleNameChange = (event) => {
+        setPostName(event.target.value);
+    }
+    const handleDescriptionChange = (e) => {
+        setPosterDescription(e.target.value);
+    }
+    const handlePriceChange = (e) =>{
+        setPrice(e.target.value);   
+    }
+      
+      // ======= event watch makes sure that once the primary category is selected, a selection for secondary will appear
+    const handleSelectA = (event) => {
+        //when not using local simple variable the code displays older selection than it was
+        // let selection = catA.indexOf(event.target.value)
+        // setTempLangString(langFileStrings[selection]);
+        // setCatBArray(allArrays[selection]);
+        // setCategoryA(event.target.value);
+        
+        console.log(event.target.value)
+        console.log(catA.indexOf(event.target.value)) 
+    }
+    const handleSelectB = (event) => { //testing using temmporary variable because setCategoryB works slower thus console shows previous meaning of it
+        console.log(catBArray)
+        const i = event.target.value
+        setCategoryB(event.target.value);
+        console.log(i);
+    }
+    const handlePhoneNumberChange = (e) => {
+        if ( PHONE_REGEX.test(e.target.value) ){
+          setPhoneNumber(e.target.value);
+        } 
+        setTempPhoneNumber(e.target.value);
+    }
+    const handleSelectCity = (e) => {
+        setCity(e.target.value);
+    }
+    const handleWebsiteChange = (e) =>{
+        setWebsite(e.target.value);
+    }
+    const handleVideoLinkChange = (e) => {
+        setVideoLink(e.target.value);
+    }
+
+    
+
+    const handleInputChange1 = (e) => {
+        console.log(e.target.files[0])
+        this.setState({
+            selectedFile: e.target.files[0]
+        })
+    }
+    const handleReset = () => {
+        setSuccess(false);
+        setPostName("");
+        setPosterDescription("");
+       
+        setCategoryA("");
+        setCategoryB("");
+        setPhoneNumber("");
+        setCity("");
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
     return (
         <>
             <Layout>
@@ -10,19 +158,21 @@ function UploadPoster() {
                             <h1 className="text-2xl flex-rows font-bold leading-tight tracking-tight text-gray-900 md:text-2x">
                                 Add a poster
                             </h1>
-                            <form className="space-y-4 md:space-y-6" action="#">
+                            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                                 {/* ********* TITLE ******** */}
                                 <div className="mb-6">
                                     <label
-                                        htmlFor="base-input"
+                                        htmlFor="posterName"
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     >
                                         Title
                                     </label>
                                     <input
                                         type="text"
-                                        id="base-input"
+                                        id="posterName"
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        value={postName} 
+                                        onChange={handleNameChange}
                                     />
                                 </div>
 
@@ -38,10 +188,9 @@ function UploadPoster() {
                                         id="categoryA"
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     >
-                                        <option>United States</option>
-                                        <option>Canada</option>
-                                        <option>France</option>
-                                        <option>Germany</option>
+                                        <option value="">---</option>
+                                        <option value="KOMPIUTERIAI">Kompiuteriai</option>
+                                        
                                     </select>
                                 </div>
 
@@ -57,21 +206,23 @@ function UploadPoster() {
                                         id="categoryB"
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     >
-                                        <option>United States</option>
-                                        <option>Canada</option>
-                                        <option>France</option>
-                                        <option>Germany</option>
+                                        <option value="">---</option>
+                                        <option value="NESIOJAMI_KOMPIUTERIAI">Nesiojami kompiuteriai</option>
+                                        
                                     </select>
                                 </div>
 
                                 {/* ********* DESCRIPTION ******** */}
                                 <div className="mb-6 flex-rows">
                                     <textarea
-                                        id="message"
+                                        id="posterDescription"
                                         rows={7}
                                         className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         placeholder="Description"
                                         defaultValue={""}
+                                        maxLength={1000}
+                                        value={posterDescription} 
+                                        onChange={handleDescriptionChange}
                                     />
                                 </div>
 
@@ -81,11 +232,15 @@ function UploadPoster() {
                                         htmlFor="price"
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     >
-                                        Price
+                                        Price (eur)
                                     </label>
                                     <input
                                         type="number"
                                         id="price"
+                                        step = "1"
+                                        min = "0"
+                                        value={price} 
+                                        onChange={handlePriceChange}
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     />
                                 </div>
@@ -117,9 +272,10 @@ function UploadPoster() {
                                                 <span className="font-semibold">Click to upload</span> or drag and drop
                                             </p>
                                             </div>
-                                            <input id="dropzone-file1" type="file" className="hidden" />
+                                            <input id="dropzone-file1" type="file" className="hidden"onChange={handleInputChange1} />
                                         </label>
                                     </div>
+                                {/* ******************************************************************* */}
                                     <div className="flex items-center justify-center w-full">
                                         <label
                                             htmlFor="dropzone-file2"
@@ -265,8 +421,8 @@ function UploadPoster() {
                                 {/* ********* BR ******** */}
                                 <hr className="h-px my-8 bg-black border-0 dark:bg-gray-700" />
 
-                                {/* ********* STATE ******** */}
-                                <div>
+                                {/* ********* STATE ******** PASLEPTAS KOL NERA UPDATED */}
+                                <div className="hidden">
                                     <label
                                         htmlFor="state"
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -285,8 +441,8 @@ function UploadPoster() {
                                 {/* ********* BR ******** */}
                                 <hr className="h-px my-8 bg-black border-0 dark:bg-gray-700" />
 
-                                {/* ********* WHO ******** */}
-                                <div>
+                                {/* ********* STATE ********  PASLEPTAS KOL NERA UPDATED*/}
+                                <div className="hidden">
                                     <label
                                         htmlFor="who"
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"

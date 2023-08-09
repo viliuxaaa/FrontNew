@@ -12,23 +12,35 @@ import Profile from "./Screens/Dashboard/Profile";
 import Favorites from "./Screens/Dashboard/Favorites";
 import Password from "./Screens/Dashboard/Password";
 import SinglePoster from "./Screens/SinglePoster";
+import RequireAuth from './Components/RequireAuth';
 
 function App() {
   return (
     <Routes>
+      <Route path="/posters/search/" element={<Posters />} />
       <Route path="/posters/search/:searchType" element={<Posters />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path='/' element={<HomeScreen />} />
       <Route path='*' element={<NotFound />} />
-      <Route path="/upload" element={<UploadPoster />} />
       <Route path="/skelbimas/:id" element={<SinglePoster />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/skelbimulist" element={<SkelbimuList />} />
-      <Route path="/profile" element={<Profile />} />
-      <Route path="/favorites" element={<Favorites />} />
-      <Route path="/password" element={<Password />} />
-      <Route path="/demo" element={<Demo />} />
+      
+      <Route element={<RequireAuth allowedRoles={['ADMIN', 'MANAGER', 'USER']} />}>
+        <Route path="/upload" element={<UploadPoster />} />
+        <Route path="/favorites" element={<Favorites />} />
+        <Route path="/password" element={<Password />} />
+        <Route path="/profile" element={<Profile />} />
+        
+        
+      </Route>
+
+      <Route path="/demo" element={<Demo />} /> 
+      
+      
+      
+      
     </Routes>
   );
 }

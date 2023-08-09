@@ -27,7 +27,10 @@ function PosterMaxDetail({poster}) {
                         <br/>
                         <p className="align-text-bottom sm:text-sm xs:text-base md:text-base">
                             Kaina: {poster?.price} &euro;
-                        </p>              
+                        </p>
+                        <p className="align-text-bottom sm:text-sm xs:text-base md:text-base">
+                            Miestas: {poster?.city} &euro;
+                        </p>                
                     </div>
                 </Link>    
             </div>
