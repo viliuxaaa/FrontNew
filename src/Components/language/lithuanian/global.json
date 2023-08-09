@@ -18,6 +18,7 @@
         "city" : "Miestas",
         "searchPlaceHolder" : "Paieška",
         "categoriesPlaceHolder" : "Kategorijos"
+  
     },
     "computerCategoryA":{
         "0":"---",
@@ -127,14 +128,43 @@
         "uploadFailed": "Nepavyko įkelti skelbimo, prašome patikrinti ar visi laukai nurodyti gerai",
         "ufPostName": "Įrašykite tinkamą skelbimo pavadinimą!", 
         "ufPostDescription": "Skelbimas privalo turėti bent minimalų apibūdinimą!",
-        "ufPhoneNumber": "telefono numerį pateikite formatu +370XXXXXXXX",
+        "ufPhoneNumber": "telefono numerį pateikite formatu +3706XXXXXXX",
         "ufCity": "Pasirinkite miestą!",
         "ufCatA": "Pasirinkite prekės kategorija!",
         "ufCatB": "Pasirinkite prekės kategorijos šaką!",
         "ufPrice": "Įveskite tinkamą kainą!"
+    },
+
+    "loginFrame": {
+        "signInText": "Prisijungti į paskyrą",
+        "username": "Prisijungimo vardas",
+        "password": "Slaptažodis",
+        "rememberMeText": "Prisiminti mane",
+        "signInButton": "Prisijungti",
+        "dontHaveAcc": "Neturite paskyros?",
+        "signUp": "Registruotis"
+    },
+
+    "registerFrame": {
+        "createAccText": "Prideti naują skelbimą",
+        "username": "Skelbimo pavadinimas:",
+        "firstName": "Prekės/paslaugos aprašymas",
+        "firstNamePlaceHolder":"Įrašykite prekės kainą (eur): ",
+        "lastName":"Pasirinkite prekes kategoriją: ",
+        "lastNamePlaceHolder": "Prekes kategorijos šaka: ",
+        "email": "Pasirinkte kategorija",
+        "emailPlaceHolder": "Kontaktinis numeris: ",
+        "password":"priimami formata: +370XXXXXXXX",
+        "confirmPassword": "Iš kur pardavinėjama prekė: ",
+        "iAcceptText": "Įrašykite vietovę: ",
+        "termsAndConditionsLink": "Nuoroda į prekės tinklalapį (jei toks yra):",
+        "createAccButton": "Nuoroda į vaizdinę medžiagą (jei tokia yra):",
+        "alredyHaveText": "Nuotraukas šiuo metu galima įkelti tik vėliau. Atsiprašome už nesklandumus",
+        "loginLink":"Įkelti skelbimą!"
     }
 
 
 
 
 }
+

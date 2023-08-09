@@ -4,17 +4,17 @@ import { BiChevronDown } from 'react-icons/bi';
 import  CategoryA  from "../../enums/CategoryA"
 import { useTranslation } from "react-i18next";
 
-const CatData = CategoryA.categoryA;
+
 
 function FilterIndex({catt, setCatt}) {
-
+    const CatData = CategoryA();
     const [t, i18n] = useTranslation("global");
     const [cat, setCat] = useState({name:t("navbarButtons.categoriesPlaceHolder")});
-
+    const categoryA = CategoryA()
     useEffect(() => {
-        for(let i=0; i < CategoryA.categoryA.length; i++) {
-            if(CategoryA.categoryA[i].name === cat.name) {
-                setCatt(CategoryA.categoryA[i].search)
+        for(let i=0; i < categoryA.length; i++) {
+            if(categoryA[i].name === cat.name) {
+                setCatt(categoryA[i].search)
             }
         }
     }, [cat])

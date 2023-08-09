@@ -5,39 +5,40 @@ const CategoryA = () => {
     
     const categoryA = [
         {
-            name: t("Jokia"),
+            name: t("computerCategoryA.0"),
             search: "",
         },
+        
         {
-            name: t("Kompiuteriai"),
+            name: t("computerCategoryA.1"),
             search: "category=a&type=kompiuteriai",
         },
         {
-            name: t("Išoriniai Įrenginiai"),
+            name: t("computerCategoryA.2"),
             search: "category=a&type=isoriniai_irenginiai",
         },
         {
-            name: t("Kompiuterių komponentai"),
+            name: t("computerCategoryA.3"),
             search: "category=a&type=kompiuteriu_komponentai",
         },
         {
-            name: t("Priedai, aksesuarai"),
+            name: t("computerCategoryA.4"),
             search: "category=a&type=priedai_aksesuarai",
         },
         {
-            name: t("Programinė įranga, žaidimai"),
+            name: t("computerCategoryA.5"),
             search: "category=a&type=programine_iranga_zaidimai",
         },
         {
-            name: t("Tinklo įranga"),
+            name: t("computerCategoryA.6"),
             search: "category=a&type=tinklo_iranga",
         },
         {
-            name: t("Paslaugos, remontas"),
+            name: t("computerCategoryA.7"),
             search: "category=a&type=paslaugos_remontas",
         },
         {
-            name: t("Konsolės"),
+            name: t("computerCategoryA.8"),
             search: "category=a&type=konsoles",
         }
     ];

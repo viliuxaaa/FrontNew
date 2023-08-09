@@ -1,7 +1,9 @@
 import Layout from "../Layout/Layout"
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function Register() {
+    const [t, i18n] = useTranslation("global");
     return (
         <Layout>
             
@@ -18,7 +20,7 @@ function Register() {
                         <div className="w-full bg-gradient-to-t from-accentLower from-30% to-background to-100% rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                             <div className="shrink p-6 space-y-4 md:space-y-6 sm:p-8">
                                 <h1 className="text-xl font-bold leading-tight tracking-tight text-text md:text-2xl dark:text-white">
-                                    Create and account
+                                {t("registerFrame.createAccText")}
                                 </h1>
                                 <form className="space-y-4 md:space-y-6" action="#">
                                     <div>
@@ -26,7 +28,7 @@ function Register() {
                                         htmlFor="username"
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                         >
-                                        Username
+                                        {t("registerFrame.username")}
                                         </label>
                                         <input
                                         type="username"
@@ -42,17 +44,36 @@ function Register() {
                                         htmlFor="firstname"
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                         >
-                                        First name
+                                        {t("registerFrame.firstName")}
                                         </label>
                                         <input
                                         type="firstname"
                                         name="firstname"
                                         id="firstname"
                                         className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="John"
+                                        placeholder={t("registerFrame.firstNamePlaceHolder")}
                                         required=""
                                         />
                                     </div>
+
+                                    {/* "registerFrame": {
+                                        "createAccText": "Prideti naują skelbimą",
+                                        "username": "Skelbimo pavadinimas:",
+                                        "firstName": "Prekės/paslaugos aprašymas",
+                                        "firstNamePlaceHolder":"Įrašykite prekės kainą (eur): ",
+                                        "lastName":"Pasirinkite prekes kategoriją: ",
+                                        "lastNamePlaceHolder": "Prekes kategorijos šaka: ",
+                                        "email": "Pasirinkte kategorija",
+                                        "emailPlaceHolder": "Kontaktinis numeris: ",
+                                        "password":"priimami formata: +370XXXXXXXX",
+                                        "confirmPassword": "Iš kur pardavinėjama prekė: ",
+                                        "iAcceptText": "Įrašykite vietovę: ",
+                                        "termsAndConditionsLink": "Nuoroda į prekės tinklalapį (jei toks yra):",
+                                        "createAccButton": "Nuoroda į vaizdinę medžiagą (jei tokia yra):",
+                                        "alredyHaveText": "Nuotraukas šiuo metu galima įkelti tik vėliau. Atsiprašome už nesklandumus",
+                                        "loginLink":"Įkelti skelbimą!" */}
+
+
                                     <div>
                                         <label
                                         htmlFor="lastname"
@@ -96,7 +117,6 @@ function Register() {
                                         type="password"
                                         name="password"
                                         id="password"
-                                        placeholder="••••••••"
                                         className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         required=""
                                         />
@@ -112,7 +132,6 @@ function Register() {
                                         type="confirm-password"
                                         name="confirm-password"
                                         id="confirm-password"
-                                        placeholder="••••••••"
                                         className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         required=""
                                         />

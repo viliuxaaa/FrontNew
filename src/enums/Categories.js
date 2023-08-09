@@ -1,4 +1,10 @@
+import { useTranslation } from "react-i18next";
+
+
+
+
 const categories = {
+    
     category1 : {
         name: "Kompiuteriai",
         search: "category=a&type=kompiuteriai",
