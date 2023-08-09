@@ -2,10 +2,6 @@ import React, { useEffect, useState } from 'react'
 import MainModalForCity from './MainModalForCity'
 
 function CityModal({ modalOpen, setModalOpen, setCheckedValues, checkedValues, CityData }) {
-
-    
-
-
     const handleCheckboxChange = (event) => {
         const value = event.target.value;
         if (event.target.checked) {
@@ -14,7 +10,6 @@ function CityModal({ modalOpen, setModalOpen, setCheckedValues, checkedValues, C
             setCheckedValues((prevValues) => prevValues.filter(item => item !== value));
         }
     };
-
 
   return (
     <MainModalForCity modalOpen={modalOpen} setModalOpen={setModalOpen} setCheckedValues={setCheckedValues} checkedValues={checkedValues}>

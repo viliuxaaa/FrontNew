@@ -1,17 +1,21 @@
 import { Listbox, Transition } from '@headlessui/react';
-import { useState, Fragment } from 'react';
+import { useState, Fragment, useEffect } from 'react';
 import { BiChevronDown } from 'react-icons/bi';
+import  categoryA  from "../../enums/CategoryA"
 
-const CatData = [
-    {title:"Category1"},
-    {title:"Category2"},
-    {title:"Category3"},
-    {title:"Category4"},
-]
+const CatData = categoryA;
 
-function FilterIndex() {
+function FilterIndex({catt, setCatt}) {
 
-    const [cat, setCat] = useState({title:"Category"});
+    const [cat, setCat] = useState({name:"Category"});
+
+    useEffect(() => {
+        for(let i=0; i < categoryA.length; i++) {
+            if(categoryA[i].name === cat.name) {
+                setCatt(categoryA[i].search)
+            }
+        }
+    }, [cat])
 
     const Filter = [
         {
@@ -28,7 +32,7 @@ function FilterIndex() {
                     <div className='relative'>
                         {/* button */}
                         <Listbox.Button className="relative border border-gray-800 w-full text-text bg-background rounded cursor-default py-4 pl-1 text-left text-xs">
-                            <span className='block truncate'>{item.value.title}</span>
+                            <span className='block truncate'>{item.value.name}</span>
                             <span className='absolute inset-y-0 right-0 flex items-center pointer-events-none'>
                                 <BiChevronDown className="h-5 w-5" aria-hidden="true" />
                             </span>
@@ -46,7 +50,7 @@ function FilterIndex() {
                                                    <span className={`block truncated ${
                                                     selected ? 'font-semibold' : 'font-normal'
                                                     }`}>
-                                                    {item.title} 
+                                                    {item.name} 
                                                     {
                                                         selected ? (
                                                             <span className='absolute inset-y-0 left-0 flex items-center pl-1'>
