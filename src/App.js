@@ -13,12 +13,16 @@ import Favorites from "./Screens/Dashboard/Favorites";
 import Password from "./Screens/Dashboard/Password";
 import SinglePoster from "./Screens/SinglePoster";
 import RequireAuth from './Components/RequireAuth';
+import Aos from 'aos';
 
 function App() {
+  Aos.init();
   return (
     <Routes>
       <Route path="/posters/search/" element={<Posters />} />
       <Route path="/posters/search/:searchType" element={<Posters />} />
+      {/*  PUBLIC ROUTES */}
+      <Route path="/posters" element={<Posters />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path='/' element={<HomeScreen />} />

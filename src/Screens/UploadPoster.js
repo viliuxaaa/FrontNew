@@ -54,11 +54,11 @@ function UploadPoster() {
           postName: postName, 
           description: posterDescription,
           price: +price,
-          categoryA: "KOMPIUTERIAI",
-          categoryB: "NESIOJAMI_KOMPIUTERIAI",
+          categoryA: categoryA,
+          categoryB: categoryB,
           status: "ACTIVE",
           phoneNumber: phoneNumber,
-          city: "Vilnius",
+          city: city,
           website: website,
           videoLink: videoLink
         }
@@ -69,12 +69,12 @@ function UploadPoster() {
           const response = await privateAxios.post(createURL,{
             postName: postName, 
             description: posterDescription,
-            price: +price, //converts into a number value
-            categoryA: "KOMPIUTERIAI",
-            categoryB: "NESIOJAMI_KOMPIUTERIAI",
+            price: +price, //konvertuoja i skaiciu
+            categoryA: categoryA,
+            categoryB: categoryB,
             status: "ACTIVE",
-            phoneNumber: "5671861",
-            city: "Vilnius",
+            phoneNumber: phoneNumber,
+            city: city,
             website: website,
             videoLink: videoLink
           }
@@ -109,14 +109,14 @@ function UploadPoster() {
         setCatBArray(allArrays[selection]);
         setCategoryA(event.target.value);
         
-        // console.log(event.target.value)
-        // console.log(catA.indexOf(event.target.value)) 
+        console.log(event.target.value)
+        console.log(catA.indexOf(event.target.value)) 
     }
     const handleSelectB = (event) => { //testing using temmporary variable because setCategoryB works slower thus console shows previous meaning of it
-        // console.log(catBArray)
-        // const i = event.target.value
+        console.log(catBArray)
+        const i = event.target.value
         setCategoryB(event.target.value);
-        // console.log(i);
+        console.log(i);
     }
     const handlePhoneNumberChange = (e) => {
         if ( PHONE_REGEX.test(e.target.value) ){

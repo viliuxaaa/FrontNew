@@ -2,24 +2,43 @@ import Layout from "../Layout/Layout"
 import { useParams } from "react-router-dom";
 import AxiosFetch from "../hooks/AxiosFetch";
 import PosterInfo from "../Components/Single/PosterInfo";
+import PosterMinDetail from '../Components/PosterMinDetail';
+import { useEffect, useState } from "react";
 
 function SinglePoster() {
 
-    const {id} = useParams();
+    const { id } = useParams();
     const posterInfoURL = "/api/v1/poster/get/" + id;
-    
-    const [ poster, isLoaded, error] = AxiosFetch(posterInfoURL);
-    
-    
-    // const post = posters.find((post) => post.postName === id);
+    const postersInfoURL = "/api/v1/poster/get/all";
+
+    const [poster, isLoaded, error] = AxiosFetch(posterInfoURL);
+    const [posters, isLoadeds, errors] = AxiosFetch(postersInfoURL);
+    const [relatedPosters, setRelatedPosters] = useState([]);
+
+    useEffect(() => {
+        if (!isLoaded && !isLoadeds) {
+            const related = posters.filter(p => p.city === poster.city);
+            setRelatedPosters(related);
+        }
+    }, [isLoaded, isLoadeds, poster, posters]);
+
+
     return (
         <Layout>
             { error && <p> Error in the fetch</p>}
-            { poster && <> 
+            { posters && poster &&<> 
             <PosterInfo poster={poster} />
-            <div className='container mx-auto min-h-screen px-2 my-6'>
-                {/* kaskas jau po skelbimo info */}
-                Like {' '} share {' '} enjoy {' '}
+            <div className='container mx-auto h-full px-3 my-6 border bg-darkAccent border-gray-800 rounded-md'>
+                <div className='my-10'>
+                    <h1 className="text-text font-semibold text-2xl text-center">Jus gali sudominti</h1>
+                <div className='grid sm:mt-10 mt-6 md:grid-cols-2 gap-2 w-full text-text'>
+                    {
+                    relatedPosters.slice(0,10).map((poster,index) => (
+                        <PosterMinDetail key={index} poster={poster}/>
+                    ))
+                    }
+                </div>
+                </div>
             </div>
             </> 
             }

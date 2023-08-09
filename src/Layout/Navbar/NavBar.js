@@ -21,6 +21,7 @@ function NavBar() {
     }
 
     const [searchLink, setSearchLink] = useState("")
+<<<<<<< HEAD
 
     
 
@@ -28,6 +29,8 @@ function NavBar() {
     useEffect(() => {
         console.log(checkedValues)
     }, [checkedValues])
+=======
+>>>>>>> naujas
 
     useEffect(() => {
         let a = ""
@@ -45,10 +48,17 @@ function NavBar() {
         setSearchLink(a + b + c)
     }, [catt, checkedValues, text])
 
+<<<<<<< HEAD
+
+    const CityData = cities;
+    const categoryData = categoryA     
+=======
+>>>>>>> naujas
 
     const CityData = cities;
     const categoryData = categoryA     
 
+    const { auth } = useAuth();
     const hover = "hover:text-cyan-800 transition hover:scale-105 transitions text-text";
     const Hover = ({isActive}) => (isActive ? "text-custom" : hover)
     
@@ -92,6 +102,7 @@ function NavBar() {
                         />
                         
                     </form>
+                    <span className="w-[5px]"></span>
                     {/* Miestas */}
                     <button onClick={() => setModalOpen(true)} className="relative border border-gray-800 w-[170px] text-text bg-background rounded py-4 pl-1 text-left text-xs">
                             Miestas
@@ -99,6 +110,10 @@ function NavBar() {
                                     <BiChevronDown className="h-5 w-5" aria-hidden="true" />
                             </span>
                     </button>
+<<<<<<< HEAD
+=======
+                    <span className="w-[5px]"></span>
+>>>>>>> naujas
                     <FilterIndex
                         catt={catt}
                         setCatt={setCatt} 
@@ -107,11 +122,18 @@ function NavBar() {
                 {/* menus */}
                 <div className="col-span-3 pt-1 lg:pt-0 font-medium text-sm xl:gap-14 2xl:gap-24 justify-between flex items-center">
                   <NavLink to="/upload" className={Hover}>Add Poster</NavLink>  
-                  <NavLink to="/posters" className={Hover}>Skelbimai</NavLink>
+                  <NavLink to="/posters/search/:searchType" className={Hover}>Skelbimai</NavLink>
                   <NavLink to="/dashboard" className={Hover}>Dash</NavLink>   
-                  <NavLink to="/login" className={Hover}>
-                    <CgUser className="w-8 h-8" />
-                  </NavLink> 
+                  { auth ?                   
+                    (
+                        <NavLink to="/profile" className={Hover}>
+                        <CgUser className="w-8 h-8" />
+                        </NavLink>
+                    ) : (
+                        <NavLink to="/login" className={Hover}>
+                        <CgUser className="w-8 h-8" />
+                        </NavLink>
+                    )} 
                 </div>
             </div>
             <div className="absolute flex font-medium text-text w-18 h-7 right-7 top-4">

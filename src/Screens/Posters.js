@@ -6,7 +6,7 @@ import Layout from "../Layout/Layout"
 
 function Posters() {
     const {searchType} = useParams();
-
+    
     const getAllPosters = `/api/v1/poster/get/search?${searchType}`;
     const [posters, isPending, error] = AxiosFetch(getAllPosters)
     console.log(posters)
