@@ -1,9 +1,10 @@
 import Category from "../Components/Category"
 import LatestPosters from "../Components/Home/LatestPosters"
 import Layout from "../Layout/Layout"
-import categories from "../enums/Categories"
+import Categories from "../enums/Categories"
 
 function HomeScreen() {
+    const categories = Categories();
 
     return (
         <Layout>
@@ -43,4 +44,3 @@ function HomeScreen() {
 }
 
 export default HomeScreen
-

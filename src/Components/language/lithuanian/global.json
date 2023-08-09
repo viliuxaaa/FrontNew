@@ -39,7 +39,7 @@
         "4": "Planšetiniai kompiuteriai",
         "5": "Žaidimų kompiuteriai",
         "6": "Elektroninės skaityklės",
-        "7": "Kompiuteriai kita"
+        "7": "Kita"
     },
     "externalDevCategoryB": {
         "0": "---",
@@ -49,14 +49,14 @@
         "4": "Daugiafunkciniai įrenginiai",
         "5": "Klaviatūros, pelės, web kameros",
         "6": "Žaidimų priedai",
-        "7": "Išoriniai įrenginiai (kita)"
+        "7": "Kita"
     },
 
     "computerComponentCategoryB": {
         "0": "---",
         "1": "Nešiojamiems kompiuteriams",
         "2": "Stacionariems kompiuteriams",
-        "3": "Kompiuterių komponentai (kita)"
+        "3": "Kita"
     },
     "accessoriesCategoryB": {
         "0": "---",
@@ -65,8 +65,8 @@
         "3": "Atminties kortelės, USB atmintinės",
         "4": "HDD dėžutės ir išoriniai HDD",
         "5": "Krepšiai kompiuteriams",
-        "6": "UPS",
-        "7": "Priedai, aksesuarai (kita)"
+        "6": "UPS (NMŠ)",
+        "7": "Kita"
     },
 
     "softwareAndGamesCategoryB": {
@@ -77,17 +77,17 @@
         "4": "Mokomosios programos",
         "5": "Operacinės sistemos",
         "6": "Techninė programinė įranga",
-        "7": "Programinė įranga, žaidimai (kita)"
+        "7": "Kita"
     },
     "networkStuffCategoryB": {
         "0": "---",
         "1": "Belaidžio tinklo įranga",
-        "2": "Hub'as",
+        "2": "Hub",
         "3": "Maršrutizatoriai",
         "4": "Modemai",
-        "5": "Switch'as",
+        "5": "Switch",
         "6": "Aksesuarai, kabeliai",
-        "7": "Tinklo įranga (kita)"
+        "7": "Kita"
     },
     "technicalServicesCategoryB": {
         "0": "---",
@@ -95,7 +95,7 @@
         "2": "Remontas",
         "3": "Spausdinimas, kopijavimas",
         "4": "Supirkimas",
-        "5": "Paslaugos, remontas (kita)"
+        "5": "Kita"
     },
     "consolesCategoryB": {
         "0": "---",
@@ -146,21 +146,21 @@
     },
 
     "registerFrame": {
-        "createAccText": "Prideti naują skelbimą",
-        "username": "Skelbimo pavadinimas:",
-        "firstName": "Prekės/paslaugos aprašymas",
-        "firstNamePlaceHolder":"Įrašykite prekės kainą (eur): ",
-        "lastName":"Pasirinkite prekes kategoriją: ",
-        "lastNamePlaceHolder": "Prekes kategorijos šaka: ",
-        "email": "Pasirinkte kategorija",
-        "emailPlaceHolder": "Kontaktinis numeris: ",
-        "password":"priimami formata: +370XXXXXXXX",
-        "confirmPassword": "Iš kur pardavinėjama prekė: ",
-        "iAcceptText": "Įrašykite vietovę: ",
-        "termsAndConditionsLink": "Nuoroda į prekės tinklalapį (jei toks yra):",
-        "createAccButton": "Nuoroda į vaizdinę medžiagą (jei tokia yra):",
-        "alredyHaveText": "Nuotraukas šiuo metu galima įkelti tik vėliau. Atsiprašome už nesklandumus",
-        "loginLink":"Įkelti skelbimą!"
+        "createAccText": "Sukurti paskyrą",
+        "username": "Prisijungimo vardas",
+        "firstName": "Vardas",
+        "firstNamePlaceHolder":"Vardenis",
+        "lastName":"Pavardė",
+        "lastNamePlaceHolder": "Pavardenis",
+        "email": "El. paštas",
+        "emailPlaceHolder": "vardenis@mail.com",
+        "password":"Slaptažodis",
+        "confirmPassword": "Patvirtinti slaptažodį",
+        "iAcceptText": "Sutinku su",
+        "termsAndConditionsLink": "taisyklėmis ir sąlygomis",
+        "createAccButton": "Sukurti paskyrą",
+        "alredyHaveText": "Jau turite paskyrą?",
+        "loginLink":"Prisijungti"
     }
 
 
