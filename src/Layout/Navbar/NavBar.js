@@ -8,17 +8,39 @@ import { useEffect } from "react";
 import CityModal from "../../Components/Modals/CityModal";
 import  cities  from "../../enums/Cities"
 import  useAuth  from '../../hooks/useAuth';
+import  categoryA  from "../../enums/CategoryA"
+
 function NavBar() {
     const [modalOpen, setModalOpen ] = useState(false)
-    const [city, setCity] = useState();
+    const [checkedValues, setCheckedValues] = useState([]);
+
+    const [catt, setCatt] = useState("");
+    const[text, setText] = useState("")
+    const handleChange = (value) => {
+        setText(value);
+    }
+
+    const [searchLink, setSearchLink] = useState("")
 
     useEffect(() => {
-        if(modalOpen === false) {
-          setCity();
+        let a = ""
+        let b = ""
+        let c = ""
+        if (catt !== "") {
+            a = catt; 
         }
-      }, [modalOpen])
+        if (text !== "") {
+            b = "&string=" + text; 
+        }
+        if (checkedValues.length > 0) {
+            c = "&city=" + checkedValues; 
+        }
+        setSearchLink(a + b + c)
+    }, [catt, checkedValues, text])
 
-      const CityData = cities;     
+
+    const CityData = cities;
+    const categoryData = categoryA     
 
     const { auth } = useAuth();
     const hover = "hover:text-cyan-800 transition hover:scale-105 transitions text-text";
@@ -29,6 +51,8 @@ function NavBar() {
         <CityModal
           modalOpen={modalOpen} 
           setModalOpen={setModalOpen} 
+          setCheckedValues={setCheckedValues}
+          checkedValues={checkedValues}
           CityData={CityData} 
         />
         <div className="bg-main shadow-md md:sticky top-0 z-20 h-[165px] lg:h-full">
@@ -47,18 +71,22 @@ function NavBar() {
                 <div className="col-span-3 flex w-full">
                     <form  className="w-full border border-text text-sm bg-background rounded flex-btn gap-4">
                         <button 
-                            type="submit" 
+                            type="button" 
                             className="bg-subMain w-12 flex-colo h-12 rounded text-text"
                         >
-                            <FaSearch />  
+                            <Link to={"/posters/search/" + searchLink}>
+                                <FaSearch />
+                            </Link> 
                         </button>
                         <input
                             type="text" 
                             placeholder="Ko Ieskosime ?"
-                            className="font-medium placeholder:text-text text-sm w-11/12 h-12 bg-transparent border-none px-2 text-text" 
+                            className="font-medium placeholder:text-text text-sm w-11/12 h-12 bg-transparent border-none px-2 text-text"
+                            onChange={(e) => handleChange(e.target.value)}
                         />
                         
                     </form>
+                    <span className="w-[5px]"></span>
                     {/* Miestas */}
                     <button onClick={() => setModalOpen(true)} className="relative border border-gray-800 w-[170px] text-text bg-background rounded py-4 pl-1 text-left text-xs">
                             Miestas
@@ -66,7 +94,11 @@ function NavBar() {
                                     <BiChevronDown className="h-5 w-5" aria-hidden="true" />
                             </span>
                     </button>
-                    <FilterIndex />
+                    <span className="w-[5px]"></span>
+                    <FilterIndex
+                        catt={catt}
+                        setCatt={setCatt} 
+                    />
                 </div>
                 {/* menus */}
                 <div className="col-span-3 pt-1 lg:pt-0 font-medium text-sm xl:gap-14 2xl:gap-24 justify-between flex items-center">

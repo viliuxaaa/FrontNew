@@ -1,12 +1,59 @@
+import { useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom"
 
 function PosterMaxDetail({poster}) {
 
     const getPosterImg = `/api/v1/images/poster/get/${poster.posterId}/0`
+    // mazinam title teksta
+    let shortTitle = poster.postName.substring(0, 40);
+    const lastSp = shortTitle.lastIndexOf(" ");
+
+    if (lastSp !== -1) {
+        shortTitle = shortTitle.substring(0, lastSp) + "...";
+    } else {
+        shortTitle = shortTitle + "...";
+    }
+    // telefonam descriptionas
+    let shortDescription = poster.description.substring(0, 55);
+    const lastSpace = shortDescription.lastIndexOf(" ");
     
-    let shortDescription = poster.description.substring(0, 100)
-    const lastSpace = shortDescription.lastIndexOf(" ")
-    shortDescription = shortDescription.substring(0, lastSpace)
+    if (lastSpace !== -1) {
+        shortDescription = shortDescription.substring(0, lastSpace) + "...";
+    } else {
+        shortDescription = shortDescription + "...";
+    }
+    // website descriptionas
+    let longDescription = poster.description.substring(0, 75);
+    const lastSpac = longDescription.lastIndexOf(" ");
+    
+    if (lastSpace !== -1) {
+        longDescription = longDescription.substring(0, lastSpac) + "...";
+    } else {
+        longDescription = longDescription + "...";
+    }
+
+    const [titleToDisplay, setTitleToDisplay] = useState(poster.postName);
+    const [descToDisplay, setDescToDisplay] = useState(poster.description);
+
+    useEffect(() => {
+        function handleResize() {
+            if (window.innerWidth < 760) {
+                setTitleToDisplay(shortTitle);
+                setDescToDisplay(shortDescription);
+            } else {
+                setTitleToDisplay(poster.postName);
+                setDescToDisplay(longDescription);
+            }
+        }
+
+        window.addEventListener("resize", handleResize);
+        handleResize(); // Initial call
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, [shortTitle, poster.postName, shortDescription, poster.description]);
 
     return (
         <> 
@@ -20,14 +67,17 @@ function PosterMaxDetail({poster}) {
                             />
                     </div>
                     <div className="xs:w-[400px] md:w-[800px] border-[2px] border-main xs:p-1 h-40 p-2 shadow-md bg-subMain rounded-r-lg">
-                        <h2 className="sm:text-sm xs:text-base md:text-xl font-semibold">{poster?.postName}</h2>
-                        <p className="sm:text-sm xs:text-sm xxs:text-sm md:text-base">
-                            {shortDescription}                     
+                        <h2 className="xs:text-base md:text-xl font-semibold">{titleToDisplay}</h2>
+                        <p className="">
+                            {descToDisplay}                     
                         </p>
                         <br/>
-                        <p className="align-text-bottom sm:text-sm xs:text-base md:text-base">
+                        <p className="pt-3 align-text-bottom sm:text-sm xs:text-base md:text-base float-right">
                             Kaina: {poster?.price} &euro;
-                        </p>              
+                        </p>
+                        <p className="pt-3 align-text-bottom sm:text-sm xs:text-base md:text-base">
+                            {poster?.city}
+                        </p>                
                     </div>
                 </Link>    
             </div>

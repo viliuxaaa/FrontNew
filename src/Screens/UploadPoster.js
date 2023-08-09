@@ -3,6 +3,12 @@ import { useState } from "react";
 import {Link, useParams } from 'react-router-dom';
 import useAuth from "../hooks/useAuth";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import { computerAEnum as catA,
+    categoryTranslationKeys as langFileStrings,
+    allArrays,
+    cities
+  } from '../enums/AllEnumArrays';
+  
 
 // ======== PRIDETI EDIT FUNKCIONALUMA ( KAINA, NUOTRAUKOS?, TEL NR, DESCRIPTION )
 
