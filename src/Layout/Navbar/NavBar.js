@@ -84,6 +84,7 @@ function NavBar() {
                         />
                         
                     </form>
+                    <span className="w-[5px]"></span>
                     {/* Miestas */}
                     <button onClick={() => setModalOpen(true)} className="relative border border-gray-800 w-[170px] text-text bg-background rounded py-4 pl-1 text-left text-xs">
                             Miestas
@@ -91,6 +92,7 @@ function NavBar() {
                                     <BiChevronDown className="h-5 w-5" aria-hidden="true" />
                             </span>
                     </button>
+                    <span className="w-[5px]"></span>
                     <FilterIndex
                         catt={catt}
                         setCatt={setCatt} 

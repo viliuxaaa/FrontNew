@@ -14,9 +14,9 @@ function CityModal({ modalOpen, setModalOpen, setCheckedValues, checkedValues, C
   return (
     <MainModalForCity modalOpen={modalOpen} setModalOpen={setModalOpen} setCheckedValues={setCheckedValues} checkedValues={checkedValues}>
         <div className='inline-block border border-border md:w-3/5 lg:w-4/5 align-middle p-1 overflow-y-auto h-4/5 lg:h-3/5 2xl:-2/5 bg-darkAccent text-white'>
-                <div className='flex flex-col pb-10 gap-1'>
+                <div className='flex flex-col pb-1 gap-1'>
                 <h3 className="mb-5 text-lg font-medium text-gray-900 dark:text-white">Visi Miestai</h3>
-                    <ul className="grid w-full gap-6 md:grid-cols-8">
+                    <ul className="grid w-full gap-2 grid-cols-2 md:grid-cols-4 lg:grid-cols-6 2xl:grid-cols-8">
                         {CityData.map((city,i) => (
                             <li key={i} className='flex'>
                                 <label className="inline-flex items-center justify-between w-full p-1 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 hover:text-gray-600 peer-checked:text-gray-600 hover:bg-gray-50">                           
