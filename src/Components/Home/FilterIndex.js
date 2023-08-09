@@ -22,7 +22,7 @@ function FilterIndex() {
     ]
 
   return (
-    <div className='bg-dry text-dryGray grid grid-cols-2 rounded w-[400px]'>
+    <div className='bg-dry text-dryGray grid grid-cols-1 rounded w-[170px]'>
         {Filter.map((item, index) => (
                 <Listbox key={index} value={item.value} onChange={item.onChange}>
                     <div className='relative'>
