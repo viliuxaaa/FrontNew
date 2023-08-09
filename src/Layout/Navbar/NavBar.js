@@ -21,16 +21,13 @@ function NavBar() {
     }
 
     const [searchLink, setSearchLink] = useState("")
-<<<<<<< HEAD
 
     
 
     
-    useEffect(() => {
-        console.log(checkedValues)
-    }, [checkedValues])
-=======
->>>>>>> naujas
+    // useEffect(() => {
+    //     console.log(checkedValues)
+    // }, [checkedValues])
 
     useEffect(() => {
         let a = ""
@@ -48,12 +45,6 @@ function NavBar() {
         setSearchLink(a + b + c)
     }, [catt, checkedValues, text])
 
-<<<<<<< HEAD
-
-    const CityData = cities;
-    const categoryData = categoryA     
-=======
->>>>>>> naujas
 
     const CityData = cities;
     const categoryData = categoryA     
@@ -110,10 +101,7 @@ function NavBar() {
                                     <BiChevronDown className="h-5 w-5" aria-hidden="true" />
                             </span>
                     </button>
-<<<<<<< HEAD
-=======
                     <span className="w-[5px]"></span>
->>>>>>> naujas
                     <FilterIndex
                         catt={catt}
                         setCatt={setCatt} 
