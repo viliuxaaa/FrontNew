@@ -35,6 +35,7 @@ function NavBar() {
       const loginSuccess = params.get('loginSuccess');
       const regSuccess = params.get('registrationSuccess');
       const posterSuccess = params.get('posterSuccess');
+      const passwordSuccess = params.get('passwordSuccess');
   
       if (loginSuccess === 'true') {
           toast.success('👍 Sėkmingai prisijungta!', {
@@ -62,6 +63,18 @@ function NavBar() {
       }
       if (posterSuccess === 'true') {
         toast.success('Skelbimas sėkmingai įdėtas!📣', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
+      if (passwordSuccess === 'true') {
+        toast.success('Slaptažodis sėkmingai pakeistas!🔐', {
           position: "bottom-right",
           autoClose: 5000,
           hideProgressBar: false,
