@@ -25,23 +25,25 @@ function SinglePoster() {
 
     return (
         <Layout>
+            <div className="min-h-screen">
             { error && <p> Error in the fetch</p>}
             { posters && poster &&<> 
-            <PosterInfo poster={poster} />
-            <div className='container mx-auto h-full px-3 my-6 border bg-darkAccent border-gray-800 rounded-md'>
-                <div className='my-10'>
-                    <h1 className="text-text font-semibold text-2xl text-center">Jus gali sudominti</h1>
-                <div className='grid sm:mt-10 mt-6 md:grid-cols-2 gap-2 w-full text-text'>
-                    {
-                    relatedPosters.slice(0,10).map((poster,index) => (
-                        <PosterMinDetail key={index} poster={poster}/>
-                    ))
-                    }
+                <PosterInfo poster={poster} />
+                <div className='container mx-auto h-full px-3 my-6 border bg-darkAccent border-gray-800 rounded-md'>
+                    <div className='my-10'>
+                        <h1 className="text-text font-semibold text-2xl text-center">Jus gali sudominti</h1>
+                        <div className='grid sm:mt-10 mt-6 md:grid-cols-2 gap-2 w-full text-text'>
+                            {
+                                relatedPosters.slice(0,10).map((poster,index) => (
+                                    <PosterMinDetail key={index} poster={poster}/>
+                                    ))
+                                }
+                        </div>
+                    </div>
                 </div>
-                </div>
-            </div>
             </> 
             }
+            </div>
         </Layout>
         
     )

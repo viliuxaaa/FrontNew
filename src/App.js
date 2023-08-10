@@ -14,6 +14,10 @@ import Password from "./Screens/Dashboard/Password";
 import SinglePoster from "./Screens/SinglePoster";
 import RequireAuth from './Components/RequireAuth';
 import Aos from 'aos';
+import Duk from "./Screens/Duk";
+import Taisykles from "./Screens/Taisykles";
+import Politika from "./Screens/Politika";
+import Kontaktai from "./Screens/Kontaktai";
 
 function App() {
   Aos.init();
@@ -30,6 +34,10 @@ function App() {
       <Route path="/skelbimas/:id" element={<SinglePoster />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/skelbimulist" element={<SkelbimuList />} />
+      <Route path="/duk" element={<Duk />} />
+      <Route path="/taisykles" element={<Taisykles />} />
+      <Route path="/politika" element={<Politika />} />
+      <Route path="/kontaktai" element={<Kontaktai />} />
       
       <Route element={<RequireAuth allowedRoles={['ADMIN', 'MANAGER', 'USER']} />}>
         <Route path="/upload" element={<UploadPoster />} />
