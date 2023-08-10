@@ -1,112 +1,62 @@
 import { Link } from "react-router-dom"
 
 function Footer() {
-    const Links = [
-        {
-            title: 'Company',
-            links: [
-                {
-                    name: "Home",
-                    link: "/"
-                },
-                {
-                    name: "About Us",
-                    link: "/about-us"
-                },
-                {
-                    name: "Contact Us",
-                    link: "/contact-us"
-                },
-                {
-                    name: "Movies",
-                    link: "/movies"
-                }
-            ]
-        },
-        {
-            title: 'Top Categories',
-            links: [
-                {
-                    name: "Action",
-                    link: "#"
-                },
-                {
-                    name: "Romantic",
-                    link: "#"
-                },
-                {
-                    name: "Drama",
-                    link: "#"
-                },
-                {
-                    name: "Historical",
-                    link: "#"
-                }
-            ]
-        },
-        {
-            title: 'My Account',
-            links: [
-                {
-                    name: "Dashboard",
-                    link: "/dashboard"
-                },
-                {
-                    name: "My Favorite",
-                    link: "/favorite"
-                },
-                {
-                    name: "Profile",
-                    link: "/profile"
-                },
-                {
-                    name: "Change Password",
-                    link: "/password"
-                }
-            ]
-        }
-    ]
+
     return (
-        <div className="bg-main py-4 shadow-md border-black">
+        <footer className="bg-main py-4 shadow-md border-black">
             <div className="container mx-auto px-10">
-                <div className="grid grid-cols-2 md:grid-cols-7 xl:grid-cols-12 gap-5 sm:gap-9 lg:gap-11 xl-gap-7 py-10 justify-between">
-                    {Links.map((link, index) => (
-                        <div key={index} className="col-span-1 md:col-span-2 lg:col-span-3 pb-3.5 sm:pb-0">
-                            <h3 className="text-md text-text lg:leading-7 font-semibold mb-4 sm:mb-5 lg:mb-6 pb-0.5">{link.title}</h3>
-                            <ul className="text-sm font-medium flex flex-col space-y-3">
-                                {link.links.map((text, index) => (
-                                    <li key={index} className="flex items-baseline">
-                                        <Link to={text.link} className="text-text inline-block w-full hover:text-textHover">
-                                            {text.name}   
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
-
-                    <div className="pb-3.5 font-medium sm:pb-0 col-span-1 md:col-span-2 lg:col-span-3">
-                        <Link to="/">
-                            <img src="/images/logo.png" alt="logo" className="w-2/4 object-contain h-12" />
-                        </Link>
-                        <p className="leading-7 text-sm text-text mt-3">
-                            <span>
-                                Lorem 196 Andrew Road, Suite 200, New York, NY 10007
-                            </span>
-                            <br/>
-                            <span>
-                                Tell: +255 754 661 423
-                            </span>
-                            <br/>
-                            <span>
-                                Email: viliuxaaa@gmail.com
-                            </span>
-                        </p>
-                    </div>
-
+                <div className="sm:flex sm:items-center sm:justify-between">
+                <a
+                    href="https://flowbite.com/"
+                    className="flex items-center mb-4 sm:mb-0"
+                >
+                    <img src="/images/logo.png" alt="logo" className="w-full object-contain h-12" /><br />
+                </a>
+                <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
+                <li>
+                    <p className="text-text">
+                        Darbo laikas: I-V 08:20 - 17:00
+                    </p>
+                    </li>
+                    <li>
+                    <p className="text-text pl-6">
+                        Pagalba: +370 865 84454
+                    </p>
+                    </li>
+                </ul>
+                <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
+                    <li>
+                    <a href="#" className="mr-4 hover:underline text-text md:mr-6 ">
+                        D.U.K
+                    </a>
+                    </li>
+                    <li>
+                    <a href="#" className="mr-4 hover:underline text-text md:mr-6">
+                        Naudojimo taisyklės
+                    </a>
+                    </li>
+                    <li>
+                    <a href="#" className="mr-4 hover:underline text-text md:mr-6 ">
+                        Privatumo politika
+                    </a>
+                    </li>
+                    <li>
+                    <a href="#" className="hover:underline text-text">
+                        Kontaktai
+                    </a>
+                    </li>
+                </ul>
                 </div>
+                <hr className="my-6 border-gray-600 sm:mx-auto dark:border-gray-700 lg:my-8 text-text" />
+                <span className="block text-sm text-text sm:text-center dark:text-gray-800 ">
+               2023-2024{" "} © {" "}
+                <a href="/" className="hover:underline text-text">
+                UAB „Aštuonios rankos“
+                </a>
+                </span>
             </div>
-        </div>
+            </footer>
+
     )
 }
 
