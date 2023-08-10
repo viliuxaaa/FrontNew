@@ -1,6 +1,6 @@
 import Layout from "../Layout/Layout"
 import { useState } from "react";
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import useAuth from "../hooks/useAuth";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useTranslation } from "react-i18next"
@@ -44,6 +44,13 @@ function UploadPoster() {
     const [phoneNumber, setPhoneNumber] = useState(" ");
     const [tempPhoneNumber, setTempPhoneNumber] = useState("");
 
+    // for poster succes notification
+    const navigate = useNavigate();
+    const handlePosterSuccess = () => {
+        navigate('/?registrationSuccess=true');
+        };
+    /////////////////////////////////
+
     const [city, setCity] = useState('');
     const [website, setWebsite] = useState('');
     const [videoLink, setVideoLink] = useState('');
@@ -81,6 +88,7 @@ function UploadPoster() {
           );
           console.log(response.data);
           setSuccess(true);
+          handlePosterSuccess();
         } catch(err) {
           setRequestError(err.message);
           console.log(requestError);

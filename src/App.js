@@ -41,10 +41,6 @@ function App() {
       </Route>
 
       <Route path="/demo" element={<Demo />} /> 
-      
-      
-      
-      
     </Routes>
   );
 }

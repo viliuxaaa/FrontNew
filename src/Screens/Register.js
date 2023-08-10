@@ -7,7 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Register.css";
 
 const USER_REGEX = /^[a-zA-Z](?!.*\s)[a-zA-Z0-9-_]{3,23}/;
@@ -47,6 +47,13 @@ function Register() {
 
     const [errMsg, setErrMsg] = useState("");
     const [success, setSuccess] = useState(false);
+
+    // for reg succes notification
+    const navigate = useNavigate();
+    const handleRegSuccess = () => {
+        navigate('/?registrationSuccess=true');
+        };
+    /////////////////////////////////
 
     // useEffect(() => {
     //     userRef.current.focus();
@@ -119,6 +126,7 @@ function Register() {
             console.log(lastName)
             console.log(response.data);
             console.log(response.data.access_token);
+            handleRegSuccess();
             setSuccess(true);
             //clear input fields
             setUser("");

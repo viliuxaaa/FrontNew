@@ -1,18 +1,25 @@
 import Layout from "../Layout/Layout"
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
 import useAuth from "../hooks/useAuth";
+
 
 const LOGIN_URL = "api/v1/auth/authenticate";
 
 const Login = () => {
     const { setAuth } = useAuth();
 
-    const navigate = useNavigate();
-    const location = useLocation();
-    const from = location.state?.from?.pathname || "/home";
+    
+    // const location = useLocation();
+    // const from = location.state?.from?.pathname || "/";
 
+    // for login succes notification
+    const navigate = useNavigate();
+    const handleLoginSuccess = () => {
+        navigate('/?loginSuccess=true');
+      };
+    /////////////////////////////////
     const userRef = useRef();
     const errRef = useRef();
     const [user, setUser] = useState("");
@@ -42,10 +49,11 @@ const Login = () => {
             const userId = response?.data?.user_id;
             setAuth({ userId, user, email, roles, accessToken });
             console.log({userId, user, email, roles, accessToken});
+            handleLoginSuccess();
             setUser("");
             setPwd("");
 
-            navigate(from, { replace: true });
+            // navigate(from, { replace: true });
         } catch (err){
             if (!err?.response) {
                 setErrMsg("No Server response");

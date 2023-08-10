@@ -1,16 +1,19 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
-import { CgUser } from "react-icons/cg";
+import { CgProfile, CgUser } from "react-icons/cg";
 import FilterIndex from "../../Components/Home/FilterIndex";
-import { BiChevronDown } from "react-icons/bi";
+import { BiChevronDown, BiLogIn } from "react-icons/bi";
 import { useState } from "react";
 import { useEffect } from "react";
 import CityModal from "../../Components/Modals/CityModal";
 import  cities  from "../../enums/Cities"
 import  useAuth  from '../../hooks/useAuth';
-import  categoryA  from "../../enums/CategoryA"
+import axios from "../../api/axios";
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 function NavBar() {
+
     const [modalOpen, setModalOpen ] = useState(false)
     const [checkedValues, setCheckedValues] = useState([]);
 
@@ -22,9 +25,67 @@ function NavBar() {
 
     const [searchLink, setSearchLink] = useState("")
 
+//  cia bus notificationas login success
+    const location = useLocation();
+
+    useEffect(() => {
+      const params = new URLSearchParams(location.search);
+      const loginSuccess = params.get('loginSuccess');
+      const regSuccess = params.get('registrationSuccess');
+      const posterSuccess = params.get('posterSuccess');
+  
+      if (loginSuccess === 'true') {
+          toast.success('👍 Sėkmingai prisijungta!', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
+      if (regSuccess === 'true') {
+        toast.success('Sėkmingai užsiregistravote! 🎉', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
+      if (posterSuccess === 'true') {
+        toast.success('Skelbimas sėkmingai įdėtas!📣', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
+    }, [location.search]);
+  ///////////////////////////////////////////////////  
+    const { auth, setAuth } = useAuth();
+
+    const logout_URL="/api/v1/auth/logout";
     
 
-    
+    const handleLogout = async () => {
+        try {
+          await axios.post(logout_URL); // Send logout request using axios directly
+          setAuth(false); // Update the auth state locally
+        } catch (error) {
+          console.error("Logout error:", error);
+        }
+      };
+
     // useEffect(() => {
     //     console.log(checkedValues)
     // }, [checkedValues])
@@ -47,9 +108,8 @@ function NavBar() {
 
 
     const CityData = cities;
-    const categoryData = categoryA     
+    // const categoryData = categoryA     
 
-    const { auth } = useAuth();
     const hover = "hover:text-cyan-800 transition hover:scale-105 transitions text-text";
     const Hover = ({isActive}) => (isActive ? "text-custom" : hover)
     
@@ -109,14 +169,19 @@ function NavBar() {
                 </div>
                 {/* menus */}
                 <div className="col-span-3 pt-1 lg:pt-0 font-medium text-sm xl:gap-14 2xl:gap-24 justify-between flex items-center">
-                  <NavLink to="/upload" className={Hover}>Add Poster</NavLink>  
+                  <NavLink to="/upload" className='hover:shake text-text text-base'>Add Poster</NavLink>  
                   <NavLink to="/posters/search/:searchType" className={Hover}>Skelbimai</NavLink>
-                  <NavLink to="/dashboard" className={Hover}>Dash</NavLink>   
-                  { auth ?                   
+                  <NavLink to="/dashboard" className={Hover}>Dash</NavLink>
+                  { auth?.userId ?                   
                     (
-                        <NavLink to="/profile" className={Hover}>
-                        <CgUser className="w-8 h-8" />
-                        </NavLink>
+                        <>
+                            <NavLink to="/profile" className={Hover}>
+                                <CgProfile className="w-7 h-7" />
+                            </NavLink>
+                            <NavLink to="/" onClick={handleLogout} className={Hover}>
+                                <BiLogIn className="w-8 h-8" />
+                            </NavLink>
+                        </>
                     ) : (
                         <NavLink to="/login" className={Hover}>
                         <CgUser className="w-8 h-8" />
@@ -130,7 +195,7 @@ function NavBar() {
                 </button>
                 <span className="pt-[2px]">|</span>
                 <button className="w-9 h-7 transition justify-center items-center hover:scale-105 hover:text-teal-600">
-                    RU
+                    EN
                 </button>
             </div>
         </div>
