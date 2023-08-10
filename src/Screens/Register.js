@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import "./Register.css";
+import { useTranslation } from "react-i18next";
 
 const USER_REGEX = /^[a-zA-Z](?!.*\s)[a-zA-Z0-9-_]{3,23}/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{6,24}/;
@@ -18,6 +19,8 @@ const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const REGISTER_URL = "api/v1/auth/register";
 
 function Register() {
+    const [t, i18n] = useTranslation("global");
+
     const userRef = useRef(); //focus on the user input when page is loaded
     const errRef = useRef(); //error focus
 
@@ -149,21 +152,7 @@ function Register() {
 
     return (
         <Layout>
-            {success ? (
-                <section>
-                    <h1 className="text-4xl font-bold text-green-800">
-                        Success!
-                    </h1>
-                    <p>
-                        <a
-                            href="/login"
-                            className="text-blue-500 hover:text-blue-400"
-                        >
-                            Sign In
-                        </a>
-                    </p>
-                </section>
-            ) : (<>
+            
             <div className="my-10 mx-auto min-h-screen">
                 <div className=" dark:bg-gray-900">
                     <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto">
@@ -177,7 +166,7 @@ function Register() {
                         <div className="w-full bg-gradient-to-t from-accentLower from-30% to-background to-100% rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                             <div className="shrink p-6 space-y-4 md:space-y-6 sm:p-8">
                                 <h1 className="text-xl font-bold leading-tight tracking-tight text-text md:text-2xl dark:text-white">
-                                    Create an account
+                                    {t("registerFrame.createAccText")}
                                 </h1>
                                 <p
                                     ref={errRef}
@@ -192,7 +181,7 @@ function Register() {
                                         htmlFor="username"
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                         >
-                                            Username:
+                                            {t("registerFrame.username")}
                                             <span className={validName ? "valid" : "hide"}>
                                                 <FontAwesomeIcon icon={faCheck} />
                                             </span>
@@ -238,7 +227,7 @@ function Register() {
                                         htmlFor="firstname"
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                         >
-                                            First name
+                                            {t("registerFrame.firstName")}
                                             <FontAwesomeIcon
                                                 icon={faCheck}
                                                 className={
@@ -262,7 +251,7 @@ function Register() {
                                             ref={userRef}
                                             onChange={(e) => setFirstName(e.target.value)}
                                             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="John"
+                                            placeholder={t("registerFrame.firstNamePlaceHolder")}
                                             required
                                             aria-invalid={validFirstName ? "false" : "true"}
                                             aria-describedby="firstnote"
@@ -289,7 +278,7 @@ function Register() {
                                             htmlFor="lastname"
                                             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                         >
-                                            Last Name
+                                            {t("registerFrame.lastName")}
                                             <FontAwesomeIcon
                                                 icon={faCheck}
                                                 className={
@@ -309,7 +298,7 @@ function Register() {
                                             id="lastname"
                                             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             onChange={(e) => setLastName(e.target.value)}
-                                            placeholder="Doe"
+                                            placeholder={t("registerFrame.lastNamePlaceHolder")}
                                             required
                                             aria-invalid={validLastName ? "false" : "true"}
                                             aria-describedby="lastnote"
@@ -335,7 +324,7 @@ function Register() {
                                             htmlFor="email"
                                             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                         >
-                                            Your email
+                                            {t("registerFrame.email")}
                                             <FontAwesomeIcon
                                                 icon={faCheck}
                                                 className={
@@ -355,7 +344,7 @@ function Register() {
                                             ref={userRef}
                                             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             onChange={(e) => setEmail(e.target.value)}
-                                            placeholder="name@email.com"
+                                            placeholder={t("registerFrame.emailPlaceHolder")}
                                             required
                                             aria-invalid={validEmail ? "false" : "true"}
                                             aria-describedby="emailnote"
@@ -380,7 +369,7 @@ function Register() {
                                             htmlFor="password"
                                             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                         >
-                                            Password
+                                            {t("registerFrame.password")}
                                             <FontAwesomeIcon
                                                 icon={faCheck}
                                                 className={validPwd ? "valid" : "hide"}
@@ -398,7 +387,6 @@ function Register() {
                                         id="password"
                                         onChange={(e) => setPwd(e.target.value)}
                                         value={pwd}
-                                        placeholder="••••••••"
                                         className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         required
                                         aria-invalid={validPwd ? "false" : "true"}
@@ -434,19 +422,19 @@ function Register() {
                                         htmlFor="confirm-password"
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                         >
-                                        Confirm password
-                                        <FontAwesomeIcon
-                                            icon={faCheck}
-                                            className={
-                                                validMatch && matchPwd ? "valid" : "hide"
-                                            }
-                                        />
-                                        <FontAwesomeIcon
-                                            icon={faTimes}
-                                            className={
-                                                validMatch || !matchPwd ? "hide" : "invalid"
-                                            }
-                                        />
+                                            {t("registerFrame.confirmPassword")}
+                                            <FontAwesomeIcon
+                                                icon={faCheck}
+                                                className={
+                                                    validMatch && matchPwd ? "valid" : "hide"
+                                                }
+                                            />
+                                            <FontAwesomeIcon
+                                                icon={faTimes}
+                                                className={
+                                                    validMatch || !matchPwd ? "hide" : "invalid"
+                                                }
+                                            />
                                         </label>
                                         <input
                                             type="password"
@@ -454,7 +442,6 @@ function Register() {
                                             id="confirm-password"
                                             onChange={(e) => setMatchPwd(e.target.value)}
                                             value={matchPwd}
-                                            placeholder="••••••••"
                                             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             required
                                             aria-invalid={validMatch ? "false" : "true"}
@@ -489,9 +476,9 @@ function Register() {
                                                 htmlFor="terms"
                                                 className="text-text font-medium"
                                             >
-                                                I accept the{" "}
+                                                {t("registerFrame.iAcceptText")}{" "}
                                                 <Link className="font-medium text-primary-600 hover:underline dark:text-primary-500">
-                                                    Terms and Conditions
+                                                    {t("registerFrame.termsAndConditionsLink")}
                                                 </Link>
                                 
                                             </label>
@@ -501,12 +488,12 @@ function Register() {
                                         type="submit"
                                         className="border-[2px] border-main w-full shadow-md bg-subMain hover:text-black text-text bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                                     >
-                                        Create an account
+                                        {t("registerFrame.createAccButton")}
                                     </button>
                                     <p className="text-base text-text font-medium">
-                                        Already have an account?{" "}
+                                        {t("registerFrame.alredyHaveText")}{" "}
                                         <Link to="/login" className="font-medium text-primary-600 hover:underline dark:text-primary-500">
-                                            Login here
+                                            {t("registerFrame.loginLink")}
                                         </Link>
                                     </p>
                                 </form>
@@ -515,9 +502,8 @@ function Register() {
                     </div>
                 </div>
             </div>
-            </>)}
         </Layout>
     )
 }
 
-export default Register
+export default Register;

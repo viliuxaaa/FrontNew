@@ -11,9 +11,11 @@ import  useAuth  from '../../hooks/useAuth';
 import axios from "../../api/axios";
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import  categoryA  from "../../enums/CategoryA"
+import { useTranslation } from "react-i18next";
 
 function NavBar() {
-
+    const [t, i18n] = useTranslation("global");
     const [modalOpen, setModalOpen ] = useState(false)
     const [checkedValues, setCheckedValues] = useState([]);
 
@@ -90,6 +92,7 @@ function NavBar() {
     //     console.log(checkedValues)
     // }, [checkedValues])
 
+  
     useEffect(() => {
         let a = ""
         let b = ""
@@ -147,7 +150,7 @@ function NavBar() {
                         </button>
                         <input
                             type="text" 
-                            placeholder="Ko Ieskosime ?"
+                            placeholder={t("navbarButtons.searchPlaceHolder")}
                             className="font-medium placeholder:text-text text-sm w-11/12 h-12 bg-transparent border-none px-2 text-text"
                             onChange={(e) => handleChange(e.target.value)}
                         />
@@ -156,7 +159,7 @@ function NavBar() {
                     <span className="w-[5px]"></span>
                     {/* Miestas */}
                     <button onClick={() => setModalOpen(true)} className="relative border border-gray-800 w-[170px] text-text bg-background rounded py-4 pl-1 text-left text-xs">
-                            Miestas
+                            {t("navbarButtons.city")}
                             <span className='absolute inset-y-0 right-0 flex items-center pointer-events-none'>
                                     <BiChevronDown className="h-5 w-5" aria-hidden="true" />
                             </span>
@@ -169,9 +172,11 @@ function NavBar() {
                 </div>
                 {/* menus */}
                 <div className="col-span-3 pt-1 lg:pt-0 font-medium text-sm xl:gap-14 2xl:gap-24 justify-between flex items-center">
-                  <NavLink to="/upload" className='hover:shake text-text text-base'>Add Poster</NavLink>  
-                  <NavLink to="/posters/search/:searchType" className={Hover}>Skelbimai</NavLink>
-                  <NavLink to="/dashboard" className={Hover}>Dash</NavLink>
+                  <NavLink to="/upload" className='hover:shake text-text text-base'>
+                    {t("navbarButtons.newPostButton")}
+                  </NavLink>  
+                  <NavLink to="/posters/search/:searchType" className={Hover}>{t("navbarButtons.allPosts")}</NavLink>
+                  <NavLink to="/dashboard" className={Hover}>{t("navbarButtons.dash")}</NavLink>
                   { auth?.userId ?                   
                     (
                         <>
@@ -197,10 +202,10 @@ function NavBar() {
                 <button className="w-9 h-7 transition justify-center items-center hover:scale-105 hover:text-teal-600">
                     EN
                 </button>
-            </div>
-        </div>
-        </>
-    )
+            </div> 
+      </div>
+    </>
+  );
 }
 
-export default NavBar
+export default NavBar;

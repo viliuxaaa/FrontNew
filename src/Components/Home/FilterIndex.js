@@ -1,14 +1,16 @@
 import { Listbox, Transition } from '@headlessui/react';
 import { useState, Fragment, useEffect } from 'react';
 import { BiChevronDown } from 'react-icons/bi';
-import  categoryA  from "../../enums/CategoryA"
+import  CategoryA  from "../../enums/CategoryA"
+import { useTranslation } from "react-i18next";
 
-const CatData = categoryA;
+
 
 function FilterIndex({catt, setCatt}) {
-
-    const [cat, setCat] = useState({name:"Category"});
-
+    const CatData = CategoryA();
+    const [t, i18n] = useTranslation("global");
+    const [cat, setCat] = useState({name:t("navbarButtons.categoriesPlaceHolder")});
+    const categoryA = CategoryA()
     useEffect(() => {
         for(let i=0; i < categoryA.length; i++) {
             if(categoryA[i].name === cat.name) {
