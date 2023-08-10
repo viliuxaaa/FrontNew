@@ -163,7 +163,7 @@
         "loginLink":"Prisijungti"
     },
 
-     "registerValidations": {
+    "registerValidations": {
         "username4To24Char": "Nuo 4 iki 24 simbolių",
         "beginWithLetter": "Turi prasidėti raide",
         "usernameSymbolsAllowed": "Galima naudoti raides, skaičius, brūkšnius ir apatinius brūkšnius ",
@@ -176,6 +176,15 @@
         "passwordMustInclude": "Privalo turėti didžiają ir mažają raides, skaičių ir specialų simbolį",
         "passwordSpecialSymbols": "Galimi specialūs simboliai:",
         "passwordMustMatch": "Slaptažodis turi sutapti"
+    },
+
+    "footerFrame": {
+        "footerWorkingHours": "Darbo laikas: I-V 08:20 - 17:00",
+        "footerHelp": "Pagalba: +370 865 84454",
+        "footerFAQ": "D.U.K.",
+        "footerRules":"Naudojimo taisyklės",
+        "footerPrivacy":"Privatumo politika",
+        "footerContacts": "Kontaktai"
     }
 }
 

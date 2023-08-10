@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom"
+import { useTranslation } from "react-i18next";
 
 function Footer() {
+
+    const [t, i18n] = useTranslation("global");
 
     return (
         <footer className="bg-main py-4 shadow-md border-black">
@@ -15,34 +18,34 @@ function Footer() {
                 <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
                 <li>
                     <p className="text-text">
-                        Darbo laikas: I-V 08:20 - 17:00
+                        {t("footerFrame.footerWorkingHours")}
                     </p>
                     </li>
                     <li>
                     <p className="text-text pl-6">
-                        Pagalba: +370 865 84454
+                    {t("footerFrame.footerHelp")}
                     </p>
                     </li>
                 </ul>
                 <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
                     <li>
                     <a href="/duk" className="mr-4 hover:underline text-text md:mr-6 ">
-                        D.U.K
+                    {t("footerFrame.footerFAQ")}
                     </a>
                     </li>
                     <li>
                     <a href="/taisykles" className="mr-4 hover:underline text-text md:mr-6">
-                        Naudojimo taisyklės
+                    {t("footerFrame.footerRules")}
                     </a>
                     </li>
                     <li>
                     <a href="/politika" className="mr-4 hover:underline text-text md:mr-6 ">
-                        Privatumo politika
+                    {t("footerFrame.footerPrivacy")}
                     </a>
                     </li>
                     <li>
                     <a href="/kontaktai" className="hover:underline text-text">
-                        Kontaktai
+                    {t("footerFrame.footerContacts")}
                     </a>
                     </li>
                 </ul>
