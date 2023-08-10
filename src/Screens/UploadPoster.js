@@ -20,17 +20,14 @@ function UploadPoster() {
     const privateAxios = useAxiosPrivate();
     const [t, i18n] = useTranslation("global");
     const [tempLangString, setTempLangString] = useState("");
-    
-    const [posterId, setPosterId] = useState("");
+
     const {auth} = useAuth();  
 
-
-
     const createURL="api/v1/poster/"+auth.userId+"/create"; //GALIMAI PERKELTI EDIT FUNKCIONALUMA I KITA FORMA
-    const updateIMG_URL = "api/v1/images/poster/"+auth.userId+"/"+posterId+"/upload"
+    // const updateIMG_URL = "api/v1/images/poster/"+auth.userId+"/"+posterId+"/upload"
     const images = new FormData();
     
-    const [success, setSuccess] = useState(false);
+    
     const [requestError, setRequestError] = useState("");
     const [postName, setPostName] = useState("");
     const [posterDescription, setPosterDescription] = useState("");
@@ -38,13 +35,11 @@ function UploadPoster() {
     const [price, setPrice] = useState('');
     
     const [categoryA, setCategoryA] = useState('');
-    const [selectKey, setSelectKey] = useState();
     const [catBArray, setCatBArray] = useState([]);
     const [categoryB, setCategoryB] = useState("");
     
     const [phoneNumber, setPhoneNumber] = useState(" ");
-    const [tempPhoneNumber, setTempPhoneNumber] = useState("");
-
+    
     // for poster succes notification
     const navigate = useNavigate();
     const handlePosterSuccess = () => {
@@ -63,33 +58,36 @@ function UploadPoster() {
     const [selectedFile5, setSelectedFile5] = useState(null);
     const [selectedFile6, setSelectedFile6] = useState(null);
 
+    const [selectedFile1Uploaded, setSelectedFile1Uploaded] = useState(false);
+    const [selectedFile2Uploaded, setSelectedFile2Uploaded] = useState(false);
+    const [selectedFile3Uploaded, setSelectedFile3Uploaded] = useState(false);
+    const [selectedFile4Uploaded, setSelectedFile4Uploaded] = useState(false);
+    const [selectedFile5Uploaded, setSelectedFile5Uploaded] = useState(false);
+    const [selectedFile6Uploaded, setSelectedFile6Uploaded] = useState(false);
+
     async function handleSubmit(event)  {
         event.preventDefault();
-        const newPoster = { //created poster to be able to inspect whether all parameters are getting through
-          postName: postName, 
-          description: posterDescription,
-          price: +price,
-          categoryA: categoryA,
-          categoryB: categoryB,
-          status: "ACTIVE",
-          phoneNumber: phoneNumber,
-          city: city,
-          website: website,
-          videoLink: videoLink
-        }
-        console.log(newPoster);
-        console.log(createURL)
+        // const newPoster = { //created poster to be able to inspect whether all parameters are getting through
+        //   postName: postName, 
+        //   description: posterDescription,
+        //   price: +price,
+        //   categoryA: categoryA,
+        //   categoryB: categoryB,
+        //   status: "ACTIVE",
+        //   phoneNumber: phoneNumber,
+        //   city: city,
+        //   website: website,
+        //   videoLink: videoLink
+        // }
+        
         
         try {
-
             images.append('image', selectedFile1)
             images.append('image', selectedFile2)
             images.append('image', selectedFile3)
             images.append('image', selectedFile4)
             images.append('image', selectedFile5)
             images.append('image', selectedFile6)
-
-            console.log(images)
 
             const response = await privateAxios.post(createURL,{
                 postName: postName, 
@@ -103,32 +101,22 @@ function UploadPoster() {
                 website: website,
                 videoLink: videoLink
             });
-            console.log(images)
-            console.log(images.getAll('image')) 
             console.log(response.data);
 
-            setPosterId(response.data.posterId);
-
-            console.log(posterId)
-
             handlePosterSuccess();
-            setSuccess(true);
+         
             if ( response.data.posterId ){
 /////////////////////////////////////////////////////////////////////////////////////
                 uploadImg( response.data.posterId );
-                
             } 
-
-
         } catch(err) {
           setRequestError(err.message);
           console.log(requestError);
-          
         }
     }
     async function uploadImg( id ){
         try{
-            console.log("api/v1/images/poster/"+auth.userId+"/"+id+"/upload")
+            // console.log("api/v1/images/poster/"+auth.userId+"/"+id+"/upload")
             await privateAxios.post("api/v1/images/poster/"+auth.userId+"/"+id+"/upload", images, {
                 headers:{
                     'Content-Type':'multipart/form-data'
@@ -136,8 +124,7 @@ function UploadPoster() {
             });
             console.log('Image uploaded successfully')
         }catch (error) {
-            console.error('Error uploading image: ' + error);
-            
+            console.error('Error uploading image: ' + error); 
         }
     }
 
@@ -174,7 +161,7 @@ function UploadPoster() {
         if ( PHONE_REGEX.test(e.target.value) ){
           setPhoneNumber(e.target.value);
         } 
-        setTempPhoneNumber(e.target.value);
+        
     }
     const handleSelectCity = (e) => {
         setCity(e.target.value);
@@ -189,85 +176,91 @@ function UploadPoster() {
    
 
     const handleInputChange1 = (e) => {
-        if (e.target.files){
+        if (e.target.files[0].size < 2097152 ){
             setSelectedFile1(e.target.files[0])
-            // console.log(e.target.files);
-            // console.log(selectedFile1);
+            setSelectedFile1Uploaded(true);
+            console.log()
         }
     }
     const handleInputChange2 = (e) => {
-        if (e.target.files){
+        if (e.target.files[0].size < 2097152){
             setSelectedFile2(e.target.files[0])
-            console.log(e.target.files);
+            setSelectedFile2Uploaded(true);
         }
     }
     const handleInputChange3 = (e) => {
-        if (e.target.files){
+        if (e.target.files[0].size < 2097152){
             setSelectedFile3(e.target.files[0])
-            // console.log(e.target.files);
+            setSelectedFile3Uploaded(true);
         }
     }
     const handleInputChange4 = (e) => {
-        if (e.target.files){
+        if (e.target.files[0].size < 2097152){
             setSelectedFile4(e.target.files[0])
-            // console.log(e.target.files);
+            setSelectedFile4Uploaded(true);
         }
     }
-    const handleInputChange5 = (e) => {
-        if (e.target.files){
+    const handleInputChange5 = (e) => { //1 923 300
+        if (e.target.files[0].size < 2097152){
             setSelectedFile5(e.target.files[0])
-            // console.log(e.target.files);
+            setSelectedFile5Uploaded(true);
         }
     }
     const handleInputChange6 = (e) => {
-        if (e.target.files){
+        if (e.target.files[0].size < 2097152){
             setSelectedFile6(e.target.files[0])
-            // console.log(e.target.files);
+            setSelectedFile6Uploaded(true);
         }
     }
-    const handleReset = () => {
-        setSuccess(false);
-        setPostName("");
-        setPosterDescription("");
-       
-        setCategoryA("");
-        setCategoryB("");
-        setPhoneNumber("");
-        setCity("");
-    }
 
-    const inputFIeld = ( x, y ) => {
+    const inputFIeld = ( x, y, selectedFileUploaded, selectedFile ) => {
         return(
-        <div className="flex items-center justify-center w-full">
+        <div className="flex items-center justify-center w-full">  
             <label
                 htmlFor={y}
                 className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
             >
-                <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                <svg
-                    className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 20 16"
-                >
-                    <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                <div className="flex flex-col items-center justify-center pt-5 pb-6  ">
+                {selectedFileUploaded ? 
+                (
+                <>
+                    <img
+                        src={URL.createObjectURL(selectedFile)}
+                        alt="Selected File Preview"
+                        className=" object-contain rounded-lg"
                     />
-                </svg>
-                <p className="m-2 text-xs text-gray-500 dark:text-gray-400">
-                    <span className="font-semibold">Click to upload</span> or drag and drop
-                </p>
+                    <p className="m-2 text-xs text-gray-500 dark:text-gray-400">
+                        <span className="font-semibold" >Change image</span> 
+                    </p>
+                </>
+                ) : (
+                <>
+                    <svg
+                        className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 20 16"
+                    >
+                        <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                        />
+                    </svg>
+                    <p className="m-2 text-xs text-gray-500 dark:text-gray-400">
+                        <span className="font-semibold">Upload picture</span>
+                        <br/>
+                        <span className="font-semibold"> up to 2 Mb size</span> 
+                    </p>
+                </>)}
                 </div>
-                <input id={y} type="file" className="hidden"onChange={x} />
+                <input id={y} type="file" className="hidden"onChange={x} accept="image/png, image/webp, image/jpeg" />
             </label>
         </div>);
     }
-
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////
     return (
@@ -378,13 +371,14 @@ function UploadPoster() {
                                 </div>
 
                                 {/* ********* FILE UPLOAD ******** */}
+                                
                                 <div className="grid grid-cols-3 gap-2">
-                                    {inputFIeld(handleInputChange1, "dropzone-file1")}
-                                    {inputFIeld(handleInputChange2, "dropzone-file2")}
-                                    {inputFIeld(handleInputChange3, "dropzone-file3")}
-                                    {inputFIeld(handleInputChange4, "dropzone-file4")}
-                                    {inputFIeld(handleInputChange5, "dropzone-file5")}
-                                    {inputFIeld(handleInputChange6, "dropzone-file6")}
+                                    {inputFIeld(handleInputChange1, "dropzone-file1", selectedFile1Uploaded, selectedFile1)}
+                                    {inputFIeld(handleInputChange2, "dropzone-file2", selectedFile2Uploaded, selectedFile2)}
+                                    {inputFIeld(handleInputChange3, "dropzone-file3", selectedFile3Uploaded, selectedFile3)}
+                                    {inputFIeld(handleInputChange4, "dropzone-file4", selectedFile4Uploaded, selectedFile4)}
+                                    {inputFIeld(handleInputChange5, "dropzone-file5", selectedFile5Uploaded, selectedFile5)}
+                                    {inputFIeld(handleInputChange6, "dropzone-file6", selectedFile6Uploaded, selectedFile6)}
                                 </div>
 
                                 {/* ********* BR ******** */}

@@ -9,19 +9,16 @@ function Password() {
             <h2 className='text-xl font-bold'>Change Password</h2>
             <Input 
                 label="Slaptazodis" 
-                placeholder="*******"
                 type="password"
                 bg={true}
             />
             <Input 
-                label="Naujas Slaptazodis" 
-                placeholder="*******"
+                label="Naujas Slaptazodis"
                 type="password"
                 bg={true}
             />
             <Input 
                 label="Patvirtinti Slaptazodi" 
-                placeholder="*******"
                 type="password"
                 bg={true}
             />

@@ -1,6 +1,5 @@
 
 import {useState} from "react";
-// import { posters } from "../../Data/PosterData"
 import SinglePoster from "../PosterMinDetail";
 import AxiosFetch from "../../hooks/AxiosFetch";
 import PosterMinDetail from "../PosterMinDetail";
