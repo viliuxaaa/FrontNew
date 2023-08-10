@@ -10,12 +10,13 @@ const LOGIN_URL = "api/v1/auth/authenticate";
 const Login = () => {
     const { setAuth } = useAuth();
 
-    
+    const navigate = useNavigate();
+
     // const location = useLocation();
     // const from = location.state?.from?.pathname || "/";
 
     // for login succes notification
-    const navigate = useNavigate();
+   
     const handleLoginSuccess = () => {
         navigate('/?loginSuccess=true');
       };
@@ -49,6 +50,7 @@ const Login = () => {
             const userId = response?.data?.user_id;
             setAuth({ userId, user, email, roles, accessToken });
             console.log({userId, user, email, roles, accessToken});
+            
             handleLoginSuccess();
             setUser("");
             setPwd("");

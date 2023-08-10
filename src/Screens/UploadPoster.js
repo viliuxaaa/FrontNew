@@ -19,16 +19,17 @@ const PHONE_REGEX = /^[+]?\d+$/;
 function UploadPoster() {
     const privateAxios = useAxiosPrivate();
     const [t, i18n] = useTranslation("global");
-    
-
     const [tempLangString, setTempLangString] = useState("");
     
-
+    const [posterId, setPosterId] = useState("");
     const {auth} = useAuth();  
+
+
+
     const createURL="api/v1/poster/"+auth.userId+"/create"; //GALIMAI PERKELTI EDIT FUNKCIONALUMA I KITA FORMA
-    const updateIMG_URL = "api/v1/images/poster/"+auth.userId+""
-
-
+    const updateIMG_URL = "api/v1/images/poster/"+auth.userId+"/"+posterId+"/upload"
+    const images = new FormData();
+    
     const [success, setSuccess] = useState(false);
     const [requestError, setRequestError] = useState("");
     const [postName, setPostName] = useState("");
@@ -47,13 +48,20 @@ function UploadPoster() {
     // for poster succes notification
     const navigate = useNavigate();
     const handlePosterSuccess = () => {
-        navigate('/?registrationSuccess=true');
-        };
+        navigate('/?posterSuccess=true');
+    };
     /////////////////////////////////
 
     const [city, setCity] = useState('');
     const [website, setWebsite] = useState('');
     const [videoLink, setVideoLink] = useState('');
+
+    const [selectedFile1, setSelectedFile1] = useState(null);
+    const [selectedFile2, setSelectedFile2] = useState(null);
+    const [selectedFile3, setSelectedFile3] = useState(null);
+    const [selectedFile4, setSelectedFile4] = useState(null);
+    const [selectedFile5, setSelectedFile5] = useState(null);
+    const [selectedFile6, setSelectedFile6] = useState(null);
 
     async function handleSubmit(event)  {
         event.preventDefault();
@@ -73,29 +81,65 @@ function UploadPoster() {
         console.log(createURL)
         
         try {
-          const response = await privateAxios.post(createURL,{
-            postName: postName, 
-            description: posterDescription,
-            price: +price, //konvertuoja i skaiciu
-            categoryA: categoryA,
-            categoryB: categoryB,
-            status: "ACTIVE",
-            phoneNumber: phoneNumber,
-            city: city,
-            website: website,
-            videoLink: videoLink
-          }
-          );
-          console.log(response.data);
-          setSuccess(true);
-          handlePosterSuccess();
+
+            images.append('image', selectedFile1)
+            images.append('image', selectedFile2)
+            images.append('image', selectedFile3)
+            images.append('image', selectedFile4)
+            images.append('image', selectedFile5)
+            images.append('image', selectedFile6)
+
+            console.log(images)
+
+            const response = await privateAxios.post(createURL,{
+                postName: postName, 
+                description: posterDescription,
+                price: +price, //konvertuoja i skaiciu
+                categoryA: categoryA,
+                categoryB: categoryB,
+                status: "ACTIVE",
+                phoneNumber: phoneNumber,
+                city: city,
+                website: website,
+                videoLink: videoLink
+            });
+            console.log(images)
+            console.log(images.getAll('image')) 
+            console.log(response.data);
+
+            setPosterId(response.data.posterId);
+
+            console.log(posterId)
+
+            handlePosterSuccess();
+            setSuccess(true);
+            if ( response.data.posterId ){
+/////////////////////////////////////////////////////////////////////////////////////
+                uploadImg( response.data.posterId );
+                
+            } 
+
+
         } catch(err) {
           setRequestError(err.message);
           console.log(requestError);
           
         }
     }
-
+    async function uploadImg( id ){
+        try{
+            console.log("api/v1/images/poster/"+auth.userId+"/"+id+"/upload")
+            await privateAxios.post("api/v1/images/poster/"+auth.userId+"/"+id+"/upload", images, {
+                headers:{
+                    'Content-Type':'multipart/form-data'
+                }
+            });
+            console.log('Image uploaded successfully')
+        }catch (error) {
+            console.error('Error uploading image: ' + error);
+            
+        }
+    }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     //================= Setting all inputs and select windows ==============================
@@ -142,13 +186,44 @@ function UploadPoster() {
         setVideoLink(e.target.value);
     }
 
-    
+   
 
     const handleInputChange1 = (e) => {
-        console.log(e.target.files[0])
-        this.setState({
-            selectedFile: e.target.files[0]
-        })
+        if (e.target.files){
+            setSelectedFile1(e.target.files[0])
+            // console.log(e.target.files);
+            // console.log(selectedFile1);
+        }
+    }
+    const handleInputChange2 = (e) => {
+        if (e.target.files){
+            setSelectedFile2(e.target.files[0])
+            console.log(e.target.files);
+        }
+    }
+    const handleInputChange3 = (e) => {
+        if (e.target.files){
+            setSelectedFile3(e.target.files[0])
+            // console.log(e.target.files);
+        }
+    }
+    const handleInputChange4 = (e) => {
+        if (e.target.files){
+            setSelectedFile4(e.target.files[0])
+            // console.log(e.target.files);
+        }
+    }
+    const handleInputChange5 = (e) => {
+        if (e.target.files){
+            setSelectedFile5(e.target.files[0])
+            // console.log(e.target.files);
+        }
+    }
+    const handleInputChange6 = (e) => {
+        if (e.target.files){
+            setSelectedFile6(e.target.files[0])
+            // console.log(e.target.files);
+        }
     }
     const handleReset = () => {
         setSuccess(false);
@@ -160,6 +235,40 @@ function UploadPoster() {
         setPhoneNumber("");
         setCity("");
     }
+
+    const inputFIeld = ( x, y ) => {
+        return(
+        <div className="flex items-center justify-center w-full">
+            <label
+                htmlFor={y}
+                className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+            >
+                <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                <svg
+                    className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 20 16"
+                >
+                    <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                    />
+                </svg>
+                <p className="m-2 text-xs text-gray-500 dark:text-gray-400">
+                    <span className="font-semibold">Click to upload</span> or drag and drop
+                </p>
+                </div>
+                <input id={y} type="file" className="hidden"onChange={x} />
+            </label>
+        </div>);
+    }
+
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////
     return (
         <>
@@ -203,7 +312,7 @@ function UploadPoster() {
                                     >
                                         { catA.map((category, index) => {
                                             return(
-                                            <option value={category} key={index}  selected={ category === categoryA }> 
+                                            <option value={category} key={index}  > 
                                                 {t("computerCategoryA."+ index)}
                                             </option>
                                             );
@@ -227,7 +336,7 @@ function UploadPoster() {
                                     >
                                         { catBArray.map( ( bCategory, index) => {
                                         return (              
-                                            <option value={bCategory} key={index} selected={ bCategory === categoryB}>
+                                            <option value={bCategory} key={index} >
                                             {t( tempLangString+"."+ index)} 
                                             </option>                 
                                         );
@@ -270,175 +379,12 @@ function UploadPoster() {
 
                                 {/* ********* FILE UPLOAD ******** */}
                                 <div className="grid grid-cols-3 gap-2">
-                                    <div className="flex items-center justify-center w-full">
-                                        <label
-                                            htmlFor="dropzone-file1"
-                                            className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
-                                        >
-                                            <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                                            <svg
-                                                className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                                                aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 20 16"
-                                            >
-                                                <path
-                                                stroke="currentColor"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                                                />
-                                            </svg>
-                                            <p className="m-2 text-xs text-gray-500 dark:text-gray-400">
-                                                <span className="font-semibold">Click to upload</span> or drag and drop
-                                            </p>
-                                            </div>
-                                            <input id="dropzone-file1" type="file" className="hidden"onChange={handleInputChange1} />
-                                        </label>
-                                    </div>
-                                {/* ******************************************************************* */}
-                                    <div className="flex items-center justify-center w-full">
-                                        <label
-                                            htmlFor="dropzone-file2"
-                                            className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
-                                        >
-                                            <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                                            <svg
-                                                className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                                                aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 20 16"
-                                            >
-                                                <path
-                                                stroke="currentColor"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                                                />
-                                            </svg>
-                                            <p className="m-2 text-xs text-gray-500 dark:text-gray-400">
-                                                <span className="font-semibold">Click to upload</span> or drag and drop
-                                            </p>
-                                            </div>
-                                            <input id="dropzone-file2" type="file" className="hidden" />
-                                        </label>
-                                    </div>
-                                    <div className="flex items-center justify-center w-full">
-                                        <label
-                                            htmlFor="dropzone-file3"
-                                            className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
-                                        >
-                                            <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                                            <svg
-                                                className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                                                aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 20 16"
-                                            >
-                                                <path
-                                                stroke="currentColor"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                                                />
-                                            </svg>
-                                            <p className="m-2 text-xs text-gray-500 dark:text-gray-400">
-                                                <span className="font-semibold">Click to upload</span> or drag and drop
-                                            </p>
-                                            </div>
-                                            <input id="dropzone-file3" type="file" className="hidden" />
-                                        </label>
-                                    </div>
-                                    <div className="flex items-center justify-center w-full">
-                                        <label
-                                            htmlFor="dropzone-file4"
-                                            className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
-                                        >
-                                            <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                                            <svg
-                                                className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                                                aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 20 16"
-                                            >
-                                                <path
-                                                stroke="currentColor"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                                                />
-                                            </svg>
-                                            <p className="m-2 text-xs text-gray-500 dark:text-gray-400">
-                                                <span className="font-semibold">Click to upload</span> or drag and drop
-                                            </p>
-                                            </div>
-                                            <input id="dropzone-file4" type="file" className="hidden" />
-                                        </label>
-                                    </div>
-                                    <div className="flex items-center justify-center w-full">
-                                        <label
-                                            htmlFor="dropzone-file5"
-                                            className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
-                                        >
-                                            <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                                            <svg
-                                                className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                                                aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 20 16"
-                                            >
-                                                <path
-                                                stroke="currentColor"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                                                />
-                                            </svg>
-                                            <p className="m-2 text-xs text-gray-500 dark:text-gray-400">
-                                                <span className="font-semibold">Click to upload</span> or drag and drop
-                                            </p>
-                                            </div>
-                                            <input id="dropzone-file5" type="file" className="hidden" />
-                                        </label>
-                                    </div>
-                                    <div className="flex items-center justify-center w-full">
-                                        <label
-                                            htmlFor="dropzone-file6"
-                                            className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
-                                        >
-                                            <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                                            <svg
-                                                className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                                                aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 20 16"
-                                            >
-                                                <path
-                                                stroke="currentColor"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                                                />
-                                            </svg>
-                                            <p className="m-2 text-xs text-gray-500 dark:text-gray-400">
-                                                <span className="font-semibold">Click to upload</span> or drag and drop
-                                            </p>
-                                            </div>
-                                            <input id="dropzone-file6" type="file" className="hidden" />
-                                        </label>
-                                    </div>
+                                    {inputFIeld(handleInputChange1, "dropzone-file1")}
+                                    {inputFIeld(handleInputChange2, "dropzone-file2")}
+                                    {inputFIeld(handleInputChange3, "dropzone-file3")}
+                                    {inputFIeld(handleInputChange4, "dropzone-file4")}
+                                    {inputFIeld(handleInputChange5, "dropzone-file5")}
+                                    {inputFIeld(handleInputChange6, "dropzone-file6")}
                                 </div>
 
                                 {/* ********* BR ******** */}
@@ -495,6 +441,7 @@ function UploadPoster() {
                                             type="tel"
                                             id="price"
                                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            onChange={handlePhoneNumberChange}
                                         />
                                     </div>
                                     
@@ -508,12 +455,16 @@ function UploadPoster() {
                                     >
                                         City
                                     </label>
-                                    <select
-                                        id="city"
+                                    <select 
+                                        id="city" 
+                                        onChange={handleSelectCity}
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     >
-                                        <option>Vilnius</option>
-                                        <option>Kaunas</option>
+                                        { cities.map( ( arrCity, index) => {
+                                            return(
+                                            <option value={arrCity} key={index} > {arrCity} </option>
+                                            );
+                                        })}
                                     </select>
                                 </div>
 
@@ -522,12 +473,15 @@ function UploadPoster() {
                                     <label
                                         htmlFor="web"
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                        
                                     >
                                         Web link
                                     </label>
                                     <input
                                         type="text"
                                         id="web"
+                                        onChange={handleWebsiteChange}
+                                        value={website}
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     />
                                 </div>
@@ -543,6 +497,8 @@ function UploadPoster() {
                                     <input
                                         type="text"
                                         id="video"
+                                        onChange={handleVideoLinkChange}
+                                        value={videoLink}
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     />
                                 </div>
