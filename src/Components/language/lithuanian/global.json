@@ -161,10 +161,21 @@
         "createAccButton": "Sukurti paskyrą",
         "alredyHaveText": "Jau turite paskyrą?",
         "loginLink":"Prisijungti"
+    },
+
+     "registerValidations": {
+        "username4To24Char": "Nuo 4 iki 24 simbolių",
+        "beginWithLetter": "Turi prasidėti raide",
+        "usernameSymbolsAllowed": "Galima naudoti raides, skaičius, brūkšnius ir apatinius brūkšnius ",
+        "name3to24Char":"Nuo 3 iki 24 simbolių",
+        "nameOnlyLetters":"Gallima naudoti tik raides",
+        "lastname3to24Char": "Nuo 3 iki 24 simbolių",
+        "lastnameOnlyLetters": "Gallima naudoti tik raides",
+        "emailValid": "El. paštas turi buti galiojantis",
+        "password8to24Char":"Nuo 4 iki 24 simbolių",
+        "passwordMustInclude": "Privalo turėti didžiają ir mažają raides, skaičių ir specialų simbolį",
+        "passwordSpecialSymbols": "Galimi specialūs simboliai:",
+        "passwordMustMatch": "Slaptažodis turi sutapti"
     }
-
-
-
-
 }
 

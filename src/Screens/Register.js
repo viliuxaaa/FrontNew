@@ -13,8 +13,8 @@ import { useTranslation } from "react-i18next";
 
 const USER_REGEX = /^[a-zA-Z](?!.*\s)[a-zA-Z0-9-_]{3,23}/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{6,24}/;
-const FIRST_REGEX = /^[A-Za-z]{3,24}$/;
-const LAST_REGEX = /^[A-Za-z]{3,24}$/;
+const FIRST_REGEX = /^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ]{3,24}$/;
+const LAST_REGEX = /^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ]{3,24}$/;
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const REGISTER_URL = "api/v1/auth/register";
 
@@ -215,11 +215,11 @@ function Register() {
                                             }
                                         >
                                             <FontAwesomeIcon icon={faInfoCircle} />
-                                            4 to 24 characters.
+                                            {t("registerValidations.username4To24Char")}
                                             <br />
-                                            Must begin with a letter.
+                                            {t("registerValidations.beginWithLetter")}
                                             <br />
-                                            Letters, numbers, underscore, hyphens allowed.
+                                            {t("registerValidations.usernameSymbolsAllowed")}
                                         </p>
                                     </div>
                                     <div>
@@ -267,9 +267,9 @@ function Register() {
                                             }
                                         >
                                             <FontAwesomeIcon icon={faInfoCircle} />
-                                            3 to 24 characters.
+                                            {t("registerValidations.name3to24Char")}
                                             <br />
-                                            Only letters allowed.
+                                            {t("registerValidations.nameOnlyLetters")}
                                         </p>
                                     </div>
                                     {/* LASTNAME */}
@@ -314,9 +314,9 @@ function Register() {
                                             }
                                         >
                                             <FontAwesomeIcon icon={faInfoCircle} />
-                                            3 to 24 characters.
+                                            {t("registerValidations.lastname3to24Char")}
                                             <br />
-                                            Letters only allowed.
+                                            {t("registerValidations.lastnameOnlyLetters")}
                                         </p>
                                     </div>
                                     <div>
@@ -360,7 +360,7 @@ function Register() {
                                             }
                                         >
                                             <FontAwesomeIcon icon={faInfoCircle} />
-                                            Email has to be valid
+                                            {t("registerValidations.emailValid")}
                                         </p>
                                     </div>
                                     {/* PASSWORD */}
@@ -403,12 +403,11 @@ function Register() {
                                             }
                                         >
                                             <FontAwesomeIcon icon={faInfoCircle} />
-                                            8 to 24 characters.
+                                            {t("registerValidations.password8to24Char")}
                                             <br />
-                                            Must include uppercase and lowercase letters, a
-                                            number and a special character.
+                                            {t("registerValidations.passwordMustInclude")}
                                             <br />
-                                            Allowed special characters:{" "}
+                                            {t("registerValidations.passwordSpecialSymbols")}{" "}
                                             <span aria-label="exclamation mark">!</span>{" "}
                                             <span aria-label="at symbol">@</span>{" "}
                                             <span aria-label="hashtag">#</span>{" "}
@@ -453,12 +452,12 @@ function Register() {
                                             id="confirmnote"
                                             className={
                                                 matchFocus && !validMatch
-                                                    ? "visible"
-                                                    : "invisible"
+                                                    ? "instructions"
+                                                    : "offscreen"
                                             }
                                         >
                                             <FontAwesomeIcon icon={faInfoCircle} />
-                                            Must match the first password input field.
+                                            {t("registerValidations.passwordMustMatch")}
                                         </p>
                                     </div>
                                     <div className="flex items-start">
