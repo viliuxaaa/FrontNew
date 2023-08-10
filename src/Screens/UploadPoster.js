@@ -9,6 +9,7 @@ import { computerAEnum as catA,
     allArrays,
     cities
   } from '../enums/AllEnumArrays';
+import { CiCircleRemove } from 'react-icons/ci'
 
 // ======== PRIDETI EDIT FUNKCIONALUMA ( KAINA, NUOTRAUKOS?, TEL NR, DESCRIPTION )
 
@@ -224,14 +225,16 @@ function UploadPoster() {
                 {selectedFileUploaded ? 
                 (
                 <>
-                    <img
-                        src={URL.createObjectURL(selectedFile)}
-                        alt="Selected File Preview"
-                        className=" object-contain rounded-lg"
-                    />
-                    <p className="m-2 text-xs text-gray-500 dark:text-gray-400">
-                        <span className="font-semibold" >Change image</span> 
-                    </p>
+                    <button>
+                        <img
+                            src={URL.createObjectURL(selectedFile)}
+                            alt="Selected File Preview"
+                            className=" object-contain rounded-lg h-[90px]"
+                        />
+                        <p className="m-2 text-xs text-gray-500 dark:text-gray-400">
+                            <span className="font-semibold" >Remove image</span> 
+                        </p>
+                    </button>
                 </>
                 ) : (
                 <>
