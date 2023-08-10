@@ -198,7 +198,7 @@ function UploadPoster() {
         }
     }
     const handleInputChange2 = (e) => {
-        if (e.target.files[0].size < 2097152){
+        if (e.target.files[0]?.size < 2097152){
             setSelectedFile2(e.target.files[0])
            
         }
@@ -231,13 +231,14 @@ function UploadPoster() {
         return(
         <div className="flex items-center justify-center w-full">  
             <label
-                htmlFor={id}
+                
                 className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
             >
-                <div className="flex flex-col items-center justify-center pt-5 pb-6  ">
+                
                 { selectedFile ? 
                 (
                 <>
+                    <div className="flex flex-col items-center justify-center pt-5 pb-6  ">
                     <button onClick={() => {
                         setSelectedFile(null)
                     }}>
@@ -250,9 +251,11 @@ function UploadPoster() {
                             <span className="font-semibold" >Remove image</span> 
                         </p>
                     </button>
+                    </div>
                 </>
                 ) : (
                 <>
+                    <div className="flex flex-col items-center justify-center pt-5 pb-6  ">
                     <svg
                         className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
                         aria-hidden="true"
@@ -273,9 +276,11 @@ function UploadPoster() {
                         <br/>
                         <span className="font-semibold"> up to 2 Mb size</span> 
                     </p>
+                     <input type="file" className="hidden"onChange={handleInputChange} accept="image/png, image/webp, image/jpeg" />
+                    </div>
                 </>)}
-                </div>
-                <input id={id} type="file" className="hidden"onChange={handleInputChange} accept="image/png, image/webp, image/jpeg" />
+                
+               
             </label>
         </div>);
     }
