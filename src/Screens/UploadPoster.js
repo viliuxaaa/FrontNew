@@ -1,6 +1,6 @@
 import Layout from "../Layout/Layout"
 import { useState } from "react";
-import {Link, useNavigate} from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import useAuth from "../hooks/useAuth";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useTranslation } from "react-i18next"
@@ -9,49 +9,54 @@ import { computerAEnum as catA,
     allArrays,
     cities
   } from '../enums/AllEnumArrays';
-import { CiCircleRemove } from 'react-icons/ci'
+import { CiCircleRemove } from 'react-icons/ci'//WHAT WAS I IMPORTED FOR?
 
 // ======== PRIDETI EDIT FUNKCIONALUMA ( KAINA, NUOTRAUKOS?, TEL NR, DESCRIPTION )
 
 const PRICE_REGEX = /^[0-9]+$/;
-const CATEGORY_CITY_REGEX = /^[a-zA-Z]+$/;
+const CITY_REGEX = /^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ\s]+$/;
 const PHONE_REGEX = /^[+]?\d+$/;
+const CATEGORY_REGEX = /^(?=.*[a-zA-Z_]{4,})[a-zA-Z_]*$/;
+const NAME_DESCRIPTION_REGEX = /^(?=.*[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ0-9\s]{5,})[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ0-9\s]*$/;
 
 function UploadPoster() {
     const privateAxios = useAxiosPrivate();
     const [t, i18n] = useTranslation("global");
     const [tempLangString, setTempLangString] = useState("");
-
     const {auth} = useAuth();  
 
     const createURL="api/v1/poster/"+auth.userId+"/create"; //GALIMAI PERKELTI EDIT FUNKCIONALUMA I KITA FORMA
     // const updateIMG_URL = "api/v1/images/poster/"+auth.userId+"/"+posterId+"/upload"
+    //Cannot use updateIMGURL because it updates too slow with the poster ID
     const images = new FormData();
     
-    
     const [requestError, setRequestError] = useState("");
+
     const [postName, setPostName] = useState("");
+    const [postNameValid, setPostNameValid] = useState(false);
+
     const [posterDescription, setPosterDescription] = useState("");
+    const [posterDescriptionValid, setPosterDescriptionValid] = useState(false);
     
     const [price, setPrice] = useState('');
-    
+    const [priceValid, setPriceValid] = useState(false);
+
     const [categoryA, setCategoryA] = useState('');
+    const [categoryAValid, setCategoryAValid] = useState(false);
+
     const [catBArray, setCatBArray] = useState([]);
     const [categoryB, setCategoryB] = useState("");
+    const [categoryBValid, setCategoryBValid] = useState(false);
     
     const [phoneNumber, setPhoneNumber] = useState(" ");
-    
-    // for poster succes notification
-    const navigate = useNavigate();
-    const handlePosterSuccess = () => {
-        navigate('/?posterSuccess=true');
-    };
-    /////////////////////////////////
+    const [phoneNumberValid, setPhoneNumberValid] = useState(false);
 
     const [city, setCity] = useState('');
+    const [cityValid, setCityValid] = useState(false);
+
     const [website, setWebsite] = useState('');
     const [videoLink, setVideoLink] = useState('');
-
+    
     const [selectedFile1, setSelectedFile1] = useState(null);
     const [selectedFile2, setSelectedFile2] = useState(null);
     const [selectedFile3, setSelectedFile3] = useState(null);
@@ -59,30 +64,42 @@ function UploadPoster() {
     const [selectedFile5, setSelectedFile5] = useState(null);
     const [selectedFile6, setSelectedFile6] = useState(null);
 
-    const [selectedFile1Uploaded, setSelectedFile1Uploaded] = useState(false);
-    const [selectedFile2Uploaded, setSelectedFile2Uploaded] = useState(false);
-    const [selectedFile3Uploaded, setSelectedFile3Uploaded] = useState(false);
-    const [selectedFile4Uploaded, setSelectedFile4Uploaded] = useState(false);
-    const [selectedFile5Uploaded, setSelectedFile5Uploaded] = useState(false);
-    const [selectedFile6Uploaded, setSelectedFile6Uploaded] = useState(false);
+    // for poster succes notification
+    const navigate = useNavigate();
+    const handlePosterSuccess = () => {
+        navigate('/?posterSuccess=true');
+    };
+    /////////////////////////////////
+
+    function posterCheck(){
+        if (
+            postNameValid &&
+            posterDescriptionValid &&
+            priceValid &&
+            categoryAValid &&
+            categoryBValid &&
+            phoneNumberValid &&
+            cityValid 
+        ){
+            if (
+                selectedFile1 ||
+                selectedFile2 ||
+                selectedFile3 ||
+                selectedFile4 ||
+                selectedFile5 ||
+                selectedFile6 
+            ){
+                return true;
+            }
+            return false;
+        } return false;
+    }
 
     async function handleSubmit(event)  {
         event.preventDefault();
-        // const newPoster = { //created poster to be able to inspect whether all parameters are getting through
-        //   postName: postName, 
-        //   description: posterDescription,
-        //   price: +price,
-        //   categoryA: categoryA,
-        //   categoryB: categoryB,
-        //   status: "ACTIVE",
-        //   phoneNumber: phoneNumber,
-        //   city: city,
-        //   website: website,
-        //   videoLink: videoLink
-        // }
-        
-        
-        try {
+        let check = posterCheck();
+
+        if ( check ){try {
             images.append('image', selectedFile1)
             images.append('image', selectedFile2)
             images.append('image', selectedFile3)
@@ -113,7 +130,7 @@ function UploadPoster() {
         } catch(err) {
           setRequestError(err.message);
           console.log(requestError);
-        }
+        }}
     }
     async function uploadImg( id ){
         try{
@@ -129,42 +146,42 @@ function UploadPoster() {
         }
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////
-    //================= Setting all inputs and select windows ==============================
-    const handleNameChange = (event) => {
-        setPostName(event.target.value);
+    //================= Setting all data and select windows ==============================
+    const handleNameChange = (e) => {
+        setPostNameValid(NAME_DESCRIPTION_REGEX.test(e.target.value));
+        setPostName(e.target.value);
     }
     const handleDescriptionChange = (e) => {
+        setPosterDescriptionValid(NAME_DESCRIPTION_REGEX.test(e.target.value) );
         setPosterDescription(e.target.value);
     }
     const handlePriceChange = (e) =>{
+        setPriceValid(PRICE_REGEX.test(e.target.value));
         setPrice(e.target.value);   
     }
-      
+
       // ======= event watch makes sure that once the primary category is selected, a selection for secondary will appear
-    const handleSelectA = (event) => {
-        //when not using local simple variable the code displays older selection than it was
-        let selection = catA.indexOf(event.target.value)
+    const handleSelectA = (e) => {
+        setCategoryAValid(CATEGORY_REGEX.test());
+        //when not using local simple variable the code displays previous selection, (with const and setConst it works too slow)
+        let selection = catA.indexOf(e.target.value)
         setTempLangString(langFileStrings[selection]);
         setCatBArray(allArrays[selection]);
-        setCategoryA(event.target.value);
+        setCategoryA(e.target.value);
         
-        console.log(event.target.value)
-        console.log(catA.indexOf(event.target.value)) 
+        // console.log(e.target.value)
+        // console.log(catA.indexOf(e.target.value)) 
     }
-    const handleSelectB = (event) => { //testing using temmporary variable because setCategoryB works slower thus console shows previous meaning of it
-        console.log(catBArray)
-        const i = event.target.value
-        setCategoryB(event.target.value);
-        console.log(i);
+    const handleSelectB = (e) => { //testing using temmporary variable because setCategoryB works slower thus console shows previous meaning of it
+        setCategoryBValid(CATEGORY_REGEX.test(e.target.value) )
+        setCategoryB(e.target.value);
     }
     const handlePhoneNumberChange = (e) => {
-        if ( PHONE_REGEX.test(e.target.value) ){
-          setPhoneNumber(e.target.value);
-        } 
-        
+        setPhoneNumberValid( PHONE_REGEX.test(e.target.value) )
+        setPhoneNumber(e.target.value);
     }
     const handleSelectCity = (e) => {
+        setCityValid( CITY_REGEX.test(e.target.value ));
         setCity(e.target.value);
     }
     const handleWebsiteChange = (e) =>{
@@ -173,59 +190,57 @@ function UploadPoster() {
     const handleVideoLinkChange = (e) => {
         setVideoLink(e.target.value);
     }
-
-   
-
+    ///////////////////////////////////////////////////////FILE INPUT HANDLING//////////////////////////////////
     const handleInputChange1 = (e) => {
         if (e.target.files[0].size < 2097152 ){
-            setSelectedFile1(e.target.files[0])
-            setSelectedFile1Uploaded(true);
+            setSelectedFile1(e.target.files[0])    
             console.log()
         }
     }
     const handleInputChange2 = (e) => {
         if (e.target.files[0].size < 2097152){
             setSelectedFile2(e.target.files[0])
-            setSelectedFile2Uploaded(true);
+           
         }
     }
     const handleInputChange3 = (e) => {
         if (e.target.files[0].size < 2097152){
             setSelectedFile3(e.target.files[0])
-            setSelectedFile3Uploaded(true);
         }
     }
     const handleInputChange4 = (e) => {
         if (e.target.files[0].size < 2097152){
             setSelectedFile4(e.target.files[0])
-            setSelectedFile4Uploaded(true);
+            
         }
     }
-    const handleInputChange5 = (e) => { //1 923 300
+    const handleInputChange5 = (e) => {
         if (e.target.files[0].size < 2097152){
             setSelectedFile5(e.target.files[0])
-            setSelectedFile5Uploaded(true);
+            
         }
     }
     const handleInputChange6 = (e) => {
         if (e.target.files[0].size < 2097152){
             setSelectedFile6(e.target.files[0])
-            setSelectedFile6Uploaded(true);
+            
         }
     }
 
-    const inputFIeld = ( x, y, selectedFileUploaded, selectedFile ) => {
+    const inputFIeld = ( handleInputChange, id, selectedFile, setSelectedFile ) => {
         return(
         <div className="flex items-center justify-center w-full">  
             <label
-                htmlFor={y}
+                htmlFor={id}
                 className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
             >
                 <div className="flex flex-col items-center justify-center pt-5 pb-6  ">
-                {selectedFileUploaded ? 
+                { selectedFile ? 
                 (
                 <>
-                    <button>
+                    <button onClick={() => {
+                        setSelectedFile(null)
+                    }}>
                         <img
                             src={URL.createObjectURL(selectedFile)}
                             alt="Selected File Preview"
@@ -260,7 +275,7 @@ function UploadPoster() {
                     </p>
                 </>)}
                 </div>
-                <input id={y} type="file" className="hidden"onChange={x} accept="image/png, image/webp, image/jpeg" />
+                <input id={id} type="file" className="hidden"onChange={handleInputChange} accept="image/png, image/webp, image/jpeg" />
             </label>
         </div>);
     }
@@ -291,6 +306,14 @@ function UploadPoster() {
                                         value={postName} 
                                         onChange={handleNameChange}
                                     />
+                                    {
+                                        postNameValid && postName.length !== 0 ?
+                                        <></>:<></>
+                                    }
+                                    <p className={ postNameValid && postName.length !== 0 ?
+                                        "":"hidden" }>
+                                        Title should be concise!!!
+                                    </p>
                                 </div>
 
                                 {/* ********* CATEGORY A ******** */}
@@ -376,12 +399,13 @@ function UploadPoster() {
                                 {/* ********* FILE UPLOAD ******** */}
                                 
                                 <div className="grid grid-cols-3 gap-2">
-                                    {inputFIeld(handleInputChange1, "dropzone-file1", selectedFile1Uploaded, selectedFile1)}
-                                    {inputFIeld(handleInputChange2, "dropzone-file2", selectedFile2Uploaded, selectedFile2)}
-                                    {inputFIeld(handleInputChange3, "dropzone-file3", selectedFile3Uploaded, selectedFile3)}
-                                    {inputFIeld(handleInputChange4, "dropzone-file4", selectedFile4Uploaded, selectedFile4)}
-                                    {inputFIeld(handleInputChange5, "dropzone-file5", selectedFile5Uploaded, selectedFile5)}
-                                    {inputFIeld(handleInputChange6, "dropzone-file6", selectedFile6Uploaded, selectedFile6)}
+                                    {/* handleInputChange, id,  selectedFile,  setSelectedFile  */}
+                                    {inputFIeld( handleInputChange1, "dropzone-file1", selectedFile1, setSelectedFile1 )}
+                                    {inputFIeld( handleInputChange2, "dropzone-file2", selectedFile2, setSelectedFile2 )}
+                                    {inputFIeld( handleInputChange3, "dropzone-file3", selectedFile3, setSelectedFile3 )}
+                                    {inputFIeld( handleInputChange4, "dropzone-file4", selectedFile4, setSelectedFile4 )}
+                                    {inputFIeld( handleInputChange5, "dropzone-file5", selectedFile5, setSelectedFile5 )}
+                                    {inputFIeld( handleInputChange6, "dropzone-file6", selectedFile6, setSelectedFile6 )}
                                 </div>
 
                                 {/* ********* BR ******** */}
@@ -436,12 +460,11 @@ function UploadPoster() {
                                         <h1>+</h1>
                                         <input
                                             type="tel"
-                                            id="price"
+                                            id="phoneNumber"
                                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             onChange={handlePhoneNumberChange}
                                         />
-                                    </div>
-                                    
+                                    </div>  
                                 </div>
 
                                 {/* ********* City ******** */}
