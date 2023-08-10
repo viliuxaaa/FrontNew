@@ -3,10 +3,12 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
 import useAuth from "../hooks/useAuth";
+import { useTranslation } from "react-i18next";
 
 const LOGIN_URL = "api/v1/auth/authenticate";
 
 const Login = () => {
+    const [t, i18n] = useTranslation("global");
     const { setAuth } = useAuth();
 
     const navigate = useNavigate();
@@ -82,7 +84,7 @@ const Login = () => {
                         <div className="w-full bg-gradient-to-t from-accentLower from-5% to-background to-90% rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                             <h1 className="text-2xl font-bold leading-tight tracking-tight text-gray-900 md:text-2x">
-                                Sign in to your account
+                              {t("loginFrame.signInText")}
                             </h1>
                             <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                             <div>
@@ -90,7 +92,7 @@ const Login = () => {
                                 htmlFor="username"
                                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 >
-                                Username
+                                  {t("loginFrame.username")}
                                 </label>
                                 <input
                                 type="text"
@@ -109,7 +111,7 @@ const Login = () => {
                                 htmlFor="password"
                                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 >
-                                Password
+                                  {t("loginFrame.password")}
                                 </label>
                                 <input
                                 type="password"
@@ -137,31 +139,31 @@ const Login = () => {
                                     htmlFor="remember"
                                     className="text-text font-medium"
                                     >
-                                    Remember me
+                                      {t("loginFrame.rememberMeText")}
                                     </label>
                                 </div>
                                 </div>
                             </div>
                             <button
-                                type="submit"
-                                className="border-[2px] border-main w-full shadow-md bg-subMain hover:text-black text-text bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                              type="submit"
+                              className="border-[2px] border-main w-full shadow-md bg-subMain hover:text-black text-text bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                             >
-                                Sign in
+                              {t("loginFrame.signInButton")}
                             </button>
                             
                             <p className="text-base text-text font-medium">
-                                Don’t have an account yet?{" "}
+                              {t("loginFrame.dontHaveAcc")}{" "}
                                 <Link to="/register" className="font-medium text-primary-600 hover:underline dark:text-primary-500">
-                                    Sign up
+                                  {t("loginFrame.signUp")}
                                 </Link>
                             </p>
                             </form>
                         </div>
-                        </div>
-                    </div>
-                </section>
-        </Layout>
-    )
+                      </div> 
+        </div>
+      </section>
+    </Layout>
+  );
 }
 
-export default Login
+export default Login;
