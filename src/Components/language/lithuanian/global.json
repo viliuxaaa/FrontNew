@@ -257,6 +257,41 @@
         "8": "VI-VII - nedirbame",
         "9":"Įmonės kodas 132333124",
         "10": "PVM mok. kodas LT313115229"
+    },
+
+    "uploadPosterFrame":{
+        "removeImage": "Pašalinti nuotrauką",
+        "uploadImageIconText": "Įkelti nuotrauką",
+        "max2Mb": "Iki 2Mb",
+        "EditPosterText": "Atnaujinti skelbimą",
+        "AddPosterText": "Naujas skelbimas",
+        "titleText":"Pavadinimas *",
+        "titleLongerThan10Char":"Privalo būti ne trumpesnis nei 10 raidžių",
+        "firstCat": "Kategorija *",
+        "1stCatMustBePicked": "Pasirinkte kategoriją",
+        "2ndCat": "Kategorijos šaka *",
+        "2ndCatMustBePicked":"Pasirinkite kategorijos šaką",
+        "descriptionPlaceHolder": "Aprašymas *",
+        "descriptionLongerThan10Char": "Privalo būti ne trumpesnis nei 10 raidžių",
+        "priceText": "Kaina * (eur)",
+        "priceMustBeWhole": "Privalo būti sveikas skaičius",
+        "imgUploadText": "Įkelkite nuotraukas *",
+        "mustUpload1":"Būtina įkelti bent vieną nuotrauką",
+        "stateText": "Būklė",
+        "stateNew": "Naujas", 
+        "stateUsed": "Naudotas",
+        "youAre": "Jūs esate:",
+        "private": "Privatus asmuo",
+        "company": "Juridinis asmuo",
+        "phoneNumberText": "Kontaktinis tel. nr.",
+        "phoneNumberMustHave": "Tel nr. formatas: +3706XXXXXXX",
+        "cityText": "Miestas",
+        "cityMustBePicked": "Privalote pasirinkti miestą",
+        "webLink": "Nuoroda į prekės puslapį",
+        "videoLink": "Nuoroda į video",
+        "requiredFields": "* - privalomi laukai",
+        "addButton": "Įkelti skelbimą",
+        "errorConnecting": "Klaida jungiantis prie serverio"
     }
 }
 
