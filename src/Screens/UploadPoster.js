@@ -1,8 +1,9 @@
 import Layout from "../Layout/Layout"
-import { useState } from "react";
-import { useNavigate} from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from 'react-router-dom';
 import useAuth from "../hooks/useAuth";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import axios from '../api/axios';
 import { useTranslation } from "react-i18next"
 import { computerAEnum as catA,
     categoryTranslationKeys as langFileStrings,
@@ -23,9 +24,14 @@ function UploadPoster() {
     const privateAxios = useAxiosPrivate();
     const [t, i18n] = useTranslation("global");
     const [tempLangString, setTempLangString] = useState("");
-    const {auth} = useAuth();  
+
+    const {auth} = useAuth();
+    const { id } = useParams();
+    
+    
     const [submitAttempt, setSubmitAttempt] = useState(0);
 
+    const posterInfoURL = `api/v1/poster/get/`+ id;
     const createURL="api/v1/poster/"+auth.userId+"/create"; //GALIMAI PERKELTI EDIT FUNKCIONALUMA I KITA FORMA
     // const updateIMG_URL = "api/v1/images/poster/"+auth.userId+"/"+posterId+"/upload"
     //Cannot use updateIMGURL because it updates too slow with the poster ID
@@ -114,18 +120,6 @@ function UploadPoster() {
             images.append('image', selectedFile4)
             images.append('image', selectedFile5)
             images.append('image', selectedFile6)
-            
-            const poster = {
-                postName: postName,
-                posterDescription: posterDescription,
-                price: +price,
-                phoneNumber: phoneNumber,
-                categoryA: categoryA,
-                categoryB: categoryB,
-                city: city
-
-            }
-            console.log(poster)
 
             const response = await privateAxios.post(createURL,{
                 postName: postName, 
@@ -165,6 +159,46 @@ function UploadPoster() {
             console.error('Error uploading image: ' + error); 
         }
     }
+    //============================= POSTER UPDATE FUNCTIONALITY =======================
+    useEffect(() => {
+        if ( id ){ 
+        async function loadPoster() {
+          try{
+            const response = await axios.get(posterInfoURL);
+            
+            setPostName(response.data.postName);
+            setPostNameValid(true);//TECHNICALLY SHOULD CHECK WITH REGEX, HOWEVER OLDER SEEDED POSTERS MIGHT NOT MEET THE REQUIREMENTS
+
+            setPosterDescription(response.data.description);
+            setPosterDescriptionValid(true);
+
+            setPrice(response.data.price);
+            setPriceValid(true);
+        
+            setPhoneNumber(response.data.phoneNumber);
+            setPhoneNumberValid(true);
+  
+            setCategoryA(response.data.categoryA);
+            setCategoryAValid(CATEGORY_REGEX.test(response.data.categoryA));
+
+            setCategoryB(response.data.categoryB);
+            setCategoryBValid(CATEGORY_REGEX.test(response.data.categoryB)); 
+
+            setCity(response.data.city);
+            setCityValid(CITY_REGEX.test(response.data.city));
+
+            setWebsite(response.data.website);
+            setVideoLink(response.data.videoLink);
+      
+          } catch (error){
+              error.message = "Connection to the server failed";
+              setRequestError(error);
+          }
+        }
+        loadPoster();
+  
+       }
+      },[])
 
     //================= Setting all data and select windows ==============================
     const handleNameChange = (e) => {
@@ -174,6 +208,7 @@ function UploadPoster() {
     const handleDescriptionChange = (e) => {
         setPosterDescriptionValid(NAME_DESCRIPTION_REGEX.test(e.target.value) );
         setPosterDescription(e.target.value);
+        console.log(posterDescription)
     }
     const handlePriceChange = (e) =>{
         setPriceValid(PRICE_REGEX.test(e.target.value));
@@ -209,38 +244,22 @@ function UploadPoster() {
     }
     ///////////////////////////////////////////////////////FILE INPUT HANDLING//////////////////////////////////
     const handleInputChange1 = (e) => {
-        if (e.target.files[0].size < 2097152 ){
-            setSelectedFile1(e.target.files[0])    
-            e = null;
-        }
+        setSelectedFile1(e.target.files[0])
     }
     const handleInputChange2 = (e) => {
-        if (e.target.files[0]?.size < 2097152){
-            setSelectedFile2(e.target.files[0])  
-        }
+        setSelectedFile2(e.target.files[0])  
     }
     const handleInputChange3 = (e) => {
-        if (e.target.files[0].size < 2097152){
-            setSelectedFile3(e.target.files[0])
-        }
+        setSelectedFile3(e.target.files[0])
     }
     const handleInputChange4 = (e) => {
-        if (e.target.files[0].size < 2097152){
-            setSelectedFile4(e.target.files[0])
-            
-        }
+        setSelectedFile4(e.target.files[0])
     }
     const handleInputChange5 = (e) => {
-        if (e.target.files[0].size < 2097152){
-            setSelectedFile5(e.target.files[0])
-            
-        }
+        setSelectedFile5(e.target.files[0])
     }
     const handleInputChange6 = (e) => {
-        if (e.target.files[0].size < 2097152){
-            setSelectedFile6(e.target.files[0])
-            
-        }
+        setSelectedFile6(e.target.files[0])
     }
     ///////////////////////////////////////FIX POPPING UP NEW INPUT FIELD ////////////////////////////////////////
     const inputFIeld = ( handleInputChange, selectedFile, setSelectedFile ) => {
@@ -304,12 +323,17 @@ function UploadPoster() {
                 <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto min-h-screen text-text">
                     <div className="w-full bg-gradient-to-t from-accentLower from-10% to-background to-90% rounded-lg shadow dark:border md:mt-0 sm:max-w-xl xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                            <h1 className="text-2xl flex-rows font-bold leading-tight tracking-tight text-gray-900 md:text-2x">
+                            { id ? <h1 className="text-2xl flex-rows font-bold leading-tight tracking-tight text-gray-900 md:text-2x">
+                                Editing poster: {postName}
+                            </h1> : <h1 
+                                className="text-2xl flex-rows font-bold leading-tight tracking-tight text-gray-900 md:text-2x"
+                            >
                                 Add a poster
                             </h1>
+                            }
                             <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                                 {/* ********* TITLE ******** */}
-                                <div className="mb-6">
+                                <div className={ id ? "hidden" : "mb-6"}>
                                     <label
                                         htmlFor="posterName"
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -330,7 +354,7 @@ function UploadPoster() {
                                 </div>
 
                                 {/* ********* CATEGORY A ******** */}
-                                <div>
+                                <div className={ id ? "hidden" : ""}>
                                     <label
                                         htmlFor="categoryA"
                                         onChange={handleSelectA}
@@ -358,7 +382,7 @@ function UploadPoster() {
                                 </div>
 
                                 {/* ********* CATEGORY B ******** */}
-                                <div>
+                                <div className={ id ? "hidden" : ""}>
                                     <label
                                         htmlFor="categoryB"
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -429,6 +453,7 @@ function UploadPoster() {
 
                                 {/* ********* FILE UPLOAD ******** */}
                                 <p className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" > Upload photos* </p>
+                                <div>
                                 <div className="grid grid-cols-3 gap-2">
                                     {/* handleInputChange, id,  selectedFile,  setSelectedFile  */}
                                     
@@ -443,6 +468,7 @@ function UploadPoster() {
                                         "":"hidden" }>
                                         Must upload at least 1 photo!
                                 </p>
+                                </div>
 
                                 {/* ********* BR ******** */}
                                 {/* <hr className="h-px my-8 bg-black border-0 dark:bg-gray-700" /> */}
@@ -487,7 +513,7 @@ function UploadPoster() {
                                 </div>
 
                                 {/* ********* Tel Nr *********/}
-                                <div className="mb-6">
+                                <div className={ id ? "hidden" : "mb-6"}>
                                     <label
                                         htmlFor="tel"
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -511,7 +537,7 @@ function UploadPoster() {
                                 </div>
 
                                 {/* ********* City ******** */}
-                                <div>
+                                <div className={ id ? "hidden" : ""}>
                                     <label
                                         htmlFor="city"
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -580,6 +606,9 @@ function UploadPoster() {
                                 >
                                     Add
                                 </button>
+                                <p className={ requestError ? "" : "hidden"} >
+                                    Error connecting to the server!
+                                </p>
                             </form>
                         </div>
                     </div>

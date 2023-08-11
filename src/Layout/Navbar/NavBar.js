@@ -100,11 +100,6 @@ function NavBar() {
           console.error("Logout error:", error);
         }
       };
-
-    // useEffect(() => {
-    //     console.log(checkedValues)
-    // }, [checkedValues])
-
   
     useEffect(() => {
         let a = ""
