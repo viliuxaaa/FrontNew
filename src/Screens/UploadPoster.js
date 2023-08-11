@@ -81,15 +81,6 @@ function UploadPoster() {
     const [selectedFile5, setSelectedFile5] = useState(null);
     const [selectedFile6, setSelectedFile6] = useState(null);
 
-    const setPosterEditImages = [
-        setSelectedFile1,
-        setSelectedFile2,
-        setSelectedFile3,
-        setSelectedFile4,
-        setSelectedFile5,
-        setSelectedFile6
-    ];
-
     // for poster succes notification
     const navigate = useNavigate();
     const handlePosterSuccess = () => {
@@ -182,40 +173,58 @@ function UploadPoster() {
     useEffect(() => {
         if ( id ){ 
         async function loadPoster() {
-          try{
-            const response = await axios.get(posterInfoURL);
+            try{
+                const response = await axios.get(posterInfoURL);
+                
+                
+                setPostName(response.data.postName);
+                setPostNameValid(true);//TECHNICALLY SHOULD CHECK WITH REGEX, HOWEVER OLDER SEEDED POSTERS MIGHT NOT MEET THE REQUIREMENTS
+
+                setPosterDescription(response.data.description);
+                setPosterDescriptionValid(true);
+
+                setPrice(response.data.price);
+                setPriceValid(true);
             
-            setPosterEdit(response.data);
-            setPosterEditImageCount(Object.keys(posterEdit.images).length); //sets how many times should useEffect owrk to lead images
+                setPhoneNumber(response.data.phoneNumber);
+                setPhoneNumberValid(true);
+    
+                setCategoryA(response.data.categoryA);
+                setCategoryAValid(CATEGORY_REGEX.test(response.data.categoryA));
 
-            setPostName(response.data.postName);
-            setPostNameValid(true);//TECHNICALLY SHOULD CHECK WITH REGEX, HOWEVER OLDER SEEDED POSTERS MIGHT NOT MEET THE REQUIREMENTS
+                setCategoryB(response.data.categoryB);
+                setCategoryBValid(CATEGORY_REGEX.test(response.data.categoryB)); 
 
-            setPosterDescription(response.data.description);
-            setPosterDescriptionValid(true);
+                setCity(response.data.city);
+                setCityValid(CITY_REGEX.test(response.data.city));
 
-            setPrice(response.data.price);
-            setPriceValid(true);
-        
-            setPhoneNumber(response.data.phoneNumber);
-            setPhoneNumberValid(true);
-  
-            setCategoryA(response.data.categoryA);
-            setCategoryAValid(CATEGORY_REGEX.test(response.data.categoryA));
+                setWebsite(response.data.website);
+                setVideoLink(response.data.videoLink);
 
-            setCategoryB(response.data.categoryB);
-            setCategoryBValid(CATEGORY_REGEX.test(response.data.categoryB)); 
+                setPosterEdit(response.data);
+                setPosterEditImageCount(Object.keys(posterEdit.images).length); //sets how many times should useEffect owrk to lead images
+                
+                const loadImageFromBackend = async () => {
+                    if (id) {
+                      try {
+                        getImgs();             
+          
+                      //   console.log(selectedFile1)
+                      //   console.log(selectedFile2)
+                       
+                      } catch (err) {
+                        console.log(err);
+                      }
+                    }
+                  };
+              
+                  loadImageFromBackend();
 
-            setCity(response.data.city);
-            setCityValid(CITY_REGEX.test(response.data.city));
 
-            setWebsite(response.data.website);
-            setVideoLink(response.data.videoLink);
-      
-          } catch (error){
-              error.message = "Connection to the server failed";
-              setRequestError(error);
-          }
+            } catch (error){
+                error.message = "Connection to the server failed";
+                setRequestError(error);
+            }
         }
         loadPoster();
   
@@ -289,56 +298,29 @@ function UploadPoster() {
         let imgArray = [];
         try{
             for(let i= 0 ; i < posterEditImgCount ; ++i){
-                const response = await axios.get(`/api/v1/images/poster/get/${id}/0`,{
+                const response = await axios.get(`/api/v1/images/poster/get/${id}/${i}`,{
                     responseType: 'blob',
                 })
-                
+
                 // console.log(response.data)
-                imgArray.push(response.data);
-                setPosterEditImages[0](response.data)
-                
+                imgArray.push(response.data);      
             }
-            console.log(selectedFile1)
-            console.log(selectedFile2)
-
             // console.log(imgArray)
-
             
-            // setSelectedFile1(imgArray[0])
-            // setSelectedFile2(imgArray[1])
-            // setSelectedFile3(imgArray[2])
-            // setSelectedFile4(imgArray[3])
-            // setSelectedFile5(imgArray[4])
-
-            // setSelectedFile6(imgArray[5])
+            setSelectedFile1(imgArray[0])
+            console.log(imgArray)
+            setSelectedFile2(imgArray[1])
+            setSelectedFile3(imgArray[2])
+            setSelectedFile4(imgArray[3])
+            setSelectedFile5(imgArray[4])
+            setSelectedFile6(imgArray[5])
 
             setBlob1URL(URL.createObjectURL(imgArray[0]));
-
-
-            return imgArray;
         } catch(err) {
             console.log(err)
         }
         
     }
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    useEffect(() => {
-        const loadImageFromBackend = async () => {
-          if (id) {
-            try {
-              await getImgs();             
-
-            //   console.log(selectedFile1)
-            //   console.log(selectedFile2)
-             
-            } catch (err) {
-              console.log(err);
-            }
-          }
-        };
-    
-        loadImageFromBackend();
-      }, []);
 
     ///////////////////////////////////////FIX POPPING UP NEW INPUT FIELD ////////////////////////////////////////
     const inputFIeld = ( handleInputChange, selectedFile, setSelectedFile, imgNo ) => {
