@@ -1,9 +1,10 @@
 import React from 'react';
 import { AiOutlineEdit, AiOutlineDelete, AiOutlinePlusCircle } from 'react-icons/ai';
+import {Link} from "react-router-dom";
 
-function PosterMenu() {
+function PosterMenu( id ) {
   return (
-    <div className="flex items-center space-x-4">
+    <div className="flex items-center space-x-4 ">
       {/* add poster button */}
       <div>
         <button
@@ -14,15 +15,13 @@ function PosterMenu() {
         </button>
       </div>
       {/* Edit Button */}
-      <button
+      <Link to={`/edit/${id.id}`}
         className="p-2 border border-gray-500 rounded-lg hover:bg-gray-100"
-        onClick={() => {
-          // Handle edit action
-        }}
         title="Edit Poster"
       >
+        
         <AiOutlineEdit size={26} />
-      </button>
+      </Link>
 
       {/* change state Button - need to make this drop down at some point */}
       <button

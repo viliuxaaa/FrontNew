@@ -4,7 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import useAuth from "../hooks/useAuth";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import axios from '../api/axios';
-import { useTranslation } from "react-i18next"
+import AxiosFetch from '../hooks/AxiosFetch';
+import { useTranslation } from "react-i18next";
 import { computerAEnum as catA,
     categoryTranslationKeys as langFileStrings,
     allArrays,
@@ -28,7 +29,12 @@ function UploadPoster() {
 
     const {auth} = useAuth();
     const { id } = useParams();
-    
+    const [blob1URL, setBlob1URL] = useState();
+    const [blob2URL, setBlob2URL] = useState();
+    const [blob3URL, setBlob3URL] = useState();
+    const [blob4URL, setBlob4URL] = useState();
+    const [blob5URL, setBlob5URL] = useState();
+    const [blob6URL, setBlob6URL] = useState();
     
     const [submitAttempt, setSubmitAttempt] = useState(0);
 
@@ -38,6 +44,9 @@ function UploadPoster() {
     //Cannot use updateIMGURL because it updates too slow with the poster ID
     const images = new FormData();
     
+    const [posterEdit, setPosterEdit] = useState( null );
+    const [posterEditImgCount, setPosterEditImageCount] = useState();
+
     const [requestError, setRequestError] = useState("");
 
     const [postName, setPostName] = useState("");
@@ -71,6 +80,15 @@ function UploadPoster() {
     const [selectedFile4, setSelectedFile4] = useState(null);
     const [selectedFile5, setSelectedFile5] = useState(null);
     const [selectedFile6, setSelectedFile6] = useState(null);
+
+    const setPosterEditImages = [
+        setSelectedFile1,
+        setSelectedFile2,
+        setSelectedFile3,
+        setSelectedFile4,
+        setSelectedFile5,
+        setSelectedFile6
+    ];
 
     // for poster succes notification
     const navigate = useNavigate();
@@ -167,6 +185,9 @@ function UploadPoster() {
           try{
             const response = await axios.get(posterInfoURL);
             
+            setPosterEdit(response.data);
+            setPosterEditImageCount(Object.keys(posterEdit.images).length); //sets how many times should useEffect owrk to lead images
+
             setPostName(response.data.postName);
             setPostNameValid(true);//TECHNICALLY SHOULD CHECK WITH REGEX, HOWEVER OLDER SEEDED POSTERS MIGHT NOT MEET THE REQUIREMENTS
 
@@ -209,7 +230,6 @@ function UploadPoster() {
     const handleDescriptionChange = (e) => {
         setPosterDescriptionValid(NAME_DESCRIPTION_REGEX.test(e.target.value) );
         setPosterDescription(e.target.value);
-        console.log(posterDescription)
     }
     const handlePriceChange = (e) =>{
         setPriceValid(PRICE_REGEX.test(e.target.value));
@@ -262,8 +282,66 @@ function UploadPoster() {
     const handleInputChange6 = (e) => {
         setSelectedFile6(e.target.files[0])
     }
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    async function getImgs(){
+        let imgArray = [];
+        try{
+            for(let i= 0 ; i < posterEditImgCount ; ++i){
+                const response = await axios.get(`/api/v1/images/poster/get/${id}/0`,{
+                    responseType: 'blob',
+                })
+                
+                // console.log(response.data)
+                imgArray.push(response.data);
+                setPosterEditImages[0](response.data)
+                
+            }
+            console.log(selectedFile1)
+            console.log(selectedFile2)
+
+            // console.log(imgArray)
+
+            
+            // setSelectedFile1(imgArray[0])
+            // setSelectedFile2(imgArray[1])
+            // setSelectedFile3(imgArray[2])
+            // setSelectedFile4(imgArray[3])
+            // setSelectedFile5(imgArray[4])
+
+            // setSelectedFile6(imgArray[5])
+
+            setBlob1URL(URL.createObjectURL(imgArray[0]));
+
+
+            return imgArray;
+        } catch(err) {
+            console.log(err)
+        }
+        
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    useEffect(() => {
+        const loadImageFromBackend = async () => {
+          if (id) {
+            try {
+              await getImgs();             
+
+            //   console.log(selectedFile1)
+            //   console.log(selectedFile2)
+             
+            } catch (err) {
+              console.log(err);
+            }
+          }
+        };
+    
+        loadImageFromBackend();
+      }, []);
+
     ///////////////////////////////////////FIX POPPING UP NEW INPUT FIELD ////////////////////////////////////////
-    const inputFIeld = ( handleInputChange, selectedFile, setSelectedFile ) => {
+    const inputFIeld = ( handleInputChange, selectedFile, setSelectedFile, imgNo ) => {
         return(
         <div className="flex items-center justify-center w-full">  
             <label
@@ -277,7 +355,7 @@ function UploadPoster() {
                         setSelectedFile(null)
                     }}>
                         <img
-                            src={URL.createObjectURL(selectedFile)}
+                            src={ URL.createObjectURL(selectedFile) }
                             alt="Selected File Preview"
                             className=" object-contain rounded-lg h-[90px]"
                         />
@@ -423,7 +501,7 @@ function UploadPoster() {
                                             onChange={handleDescriptionChange}
                                         />
                                     </div>
-                                    <p className={ ( !posterDescriptionValid && posterDescription.length < 20 && posterDescription ) || ( !posterDescriptionValid && submitAttempt > 0 ) ?
+                                    <p className={ ( !posterDescriptionValid && posterDescription.length < 10 && posterDescription ) || ( !posterDescriptionValid && submitAttempt > 0 ) ?
                                             "":"hidden" }>
                                             {t("uploadPosterFrame.descriptionLongerThan10Char")}
                                     </p>
@@ -458,12 +536,12 @@ function UploadPoster() {
                                 <div className="grid grid-cols-3 gap-2">
                                     {/* handleInputChange, id,  selectedFile,  setSelectedFile  */}
                                     
-                                    {inputFIeld( handleInputChange1, selectedFile1, setSelectedFile1 )}
-                                    {inputFIeld( handleInputChange2, selectedFile2, setSelectedFile2 )}
-                                    {inputFIeld( handleInputChange3, selectedFile3, setSelectedFile3 )}
-                                    {inputFIeld( handleInputChange4, selectedFile4, setSelectedFile4 )}
-                                    {inputFIeld( handleInputChange5, selectedFile5, setSelectedFile5 )}
-                                    {inputFIeld( handleInputChange6, selectedFile6, setSelectedFile6 )}
+                                    {inputFIeld( handleInputChange1, selectedFile1, setSelectedFile1, 0 )}
+                                    {inputFIeld( handleInputChange2, selectedFile2, setSelectedFile2, 1 )}
+                                    {inputFIeld( handleInputChange3, selectedFile3, setSelectedFile3, 2 )}
+                                    {inputFIeld( handleInputChange4, selectedFile4, setSelectedFile4, 3 )}
+                                    {inputFIeld( handleInputChange5, selectedFile5, setSelectedFile5, 4 )}
+                                    {inputFIeld( handleInputChange6, selectedFile6, setSelectedFile6, 5 )}
                                 </div>
                                 <p className={ !fileCheck() && submitAttempt > 0  ?
                                         "":"hidden" }>
@@ -601,12 +679,25 @@ function UploadPoster() {
                                         {t("uploadPosterFrame.requiredFields")}
                                     </p>
                                 </div>
+                                { id ?
+                                (<button
+                                    type="submit"
+                                    className="border-[2px] border-main w-full shadow-md bg-subMain hover:text-black text-text bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                                >
+                                    Save updated poster
+                                </button> 
+                                ) : (
                                 <button
                                     type="submit"
                                     className="border-[2px] border-main w-full shadow-md bg-subMain hover:text-black text-text bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                                 >
+<<<<<<< Updated upstream
                                     {t("uploadPosterFrame.addButton")}
                                 </button>
+=======
+                                    Add
+                                </button>)}
+>>>>>>> Stashed changes
                                 <p className={ requestError ? "" : "hidden"} >
                                     {t("uploadPosterFrame.errorConnecting")}
                                 </p>

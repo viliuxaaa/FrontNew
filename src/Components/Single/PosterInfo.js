@@ -9,7 +9,7 @@ function PosterInfo({poster}) {
 
     const dateCreated = poster?.createdAt.substring(0,10);
     const dateUpdated = poster.updatedAt && poster.updatedAt.substring(0,10);
-    const edit_URL = "edit/" + poster.posterId;
+  
     
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 mt-10 md:mt-10 mb-20">
@@ -36,11 +36,9 @@ function PosterInfo({poster}) {
                         <div className="bg-subMain rounded-b-xl h-fit p-3 border-y-2 border-darkMain">
                             <p className="text-base md:text-2xl flex">Sukurtas: <span className='font-medium pl-2'>{dateCreated}</span></p>
                             {dateUpdated && <p className="text-base md:text-2xl"><span className='font-medium pl-10'>Atnaujintas:</span> {dateUpdated}</p>} 
-                            {/* WIP TESTING LINK ONLY */}
-                            <Link to={`/edit/${poster.posterId}`} > EDIT ME </Link>
                         </div>
                     </div>
-                    { auth.userId === poster.posterId && <PosterMenu /> }
+                        { auth.userId === poster.posterId && <PosterMenu id={poster.posterId}/>}
                 </div>
             </div>
   )
