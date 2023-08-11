@@ -17,7 +17,7 @@ const PRICE_REGEX = /^[0-9]+$/;
 const CITY_REGEX = /^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ\s]+$/;
 const PHONE_REGEX = /^\d{8,15}$/;
 const CATEGORY_REGEX = /^(?=.*[a-zA-Z_]{4,})[a-zA-Z_]*$/;
-const NAME_DESCRIPTION_REGEX = /^(?=.{5,1000}$)(?=.*[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ0-9\s]{5,})[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ0-9\s]*$/;
+const NAME_DESCRIPTION_REGEX = /^(?=.{10,1000}$)(?=.*[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ0-9\s]{5,})[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ0-9\s]*$/;
 
 function UploadPoster() {
     const privateAxios = useAxiosPrivate();
@@ -114,6 +114,18 @@ function UploadPoster() {
             images.append('image', selectedFile4)
             images.append('image', selectedFile5)
             images.append('image', selectedFile6)
+            
+            const poster = {
+                postName: postName,
+                posterDescription: posterDescription,
+                price: +price,
+                phoneNumber: phoneNumber,
+                categoryA: categoryA,
+                categoryB: categoryB,
+                city: city
+
+            }
+            console.log(poster)
 
             const response = await privateAxios.post(createURL,{
                 postName: postName, 
@@ -142,7 +154,7 @@ function UploadPoster() {
     }
     async function uploadImg( id ){
         try{
-            // console.log("api/v1/images/poster/"+auth.userId+"/"+id+"/upload")
+            console.log("api/v1/images/poster/"+auth.userId+"/"+id+"/upload")
             await privateAxios.post("api/v1/images/poster/"+auth.userId+"/"+id+"/upload", images, {
                 headers:{
                     'Content-Type':'multipart/form-data'
@@ -311,13 +323,9 @@ function UploadPoster() {
                                         value={postName} 
                                         onChange={handleNameChange}
                                     />
-                                    {
-                                        !postNameValid && postName.length !== 0 ?
-                                        <></>:<></>
-                                    }
-                                    <p className={ !postNameValid && postName.length !== 0 ?
+                                    <p className={ (!postNameValid && postName.length !== 0) || ( !postNameValid && submitAttempt > 0 ) ?
                                         "":"hidden" }>
-                                        Poster title should be longer than 5 letters
+                                        Poster title should be longer than 10 letters
                                     </p>
                                 </div>
 
@@ -342,7 +350,7 @@ function UploadPoster() {
                                             );
                                         })}
                                     </select>
-                                    <p className={ !categoryAValid && categoryA  ?
+                                    <p className={ (!categoryAValid && categoryA) || (!categoryAValid && submitAttempt > 0)  ?
                                         "":"hidden" }>
                                         Poster category must be picked!
                                     </p>
@@ -371,7 +379,7 @@ function UploadPoster() {
                                         })}
                                         {/* {console.log(catBArray)} */}
                                     </select>
-                                    <p className={ !categoryBValid && categoryB  ?
+                                    <p className={ (!categoryBValid && categoryB) || ( !categoryBValid && submitAttempt > 0 )  ?
                                         "":"hidden" }>
                                         Poster secondary category must be picked!
                                     </p>
@@ -390,9 +398,9 @@ function UploadPoster() {
                                             onChange={handleDescriptionChange}
                                         />
                                     </div>
-                                    <p className={ !posterDescriptionValid && posterDescription.length < 20 && posterDescription ?
+                                    <p className={ ( !posterDescriptionValid && posterDescription.length < 20 && posterDescription ) || ( !posterDescriptionValid && submitAttempt > 0 ) ?
                                             "":"hidden" }>
-                                            Poster description must be over 20 characters!
+                                            Poster description must be over 10 characters!
                                     </p>
                                 </div>
                                 {/* ********* PRICE ******** */}
@@ -412,7 +420,7 @@ function UploadPoster() {
                                         onChange={handlePriceChange}
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     />
-                                    <p className={ !priceValid && price ?
+                                    <p className={ (!priceValid && price) || (!priceValid && submitAttempt > 0) ?
                                         "":"hidden" }>
                                         Price must be natural a number!
                                     </p>
@@ -496,7 +504,7 @@ function UploadPoster() {
                                             onChange={handlePhoneNumberChange}
                                         />
                                     </div>
-                                    <p className={ !phoneNumberValid && phoneNumber ?
+                                    <p className={ (!phoneNumberValid && submitAttempt>0) || (!phoneNumberValid && phoneNumber) ?
                                         "":"hidden" }>
                                         Phone number must have only numbers. It must be at least 8 symbols in length!
                                     </p>  
@@ -521,7 +529,7 @@ function UploadPoster() {
                                             );
                                         })}
                                     </select>
-                                    <p className={ !cityValid && city ?
+                                    <p className={ (!cityValid && city) || (!cityValid && submitAttempt > 0) ?
                                         "":"hidden" }>
                                         A city must be picked!
                                     </p>
