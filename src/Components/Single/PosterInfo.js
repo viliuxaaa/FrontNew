@@ -38,7 +38,7 @@ function PosterInfo({poster}) {
                             {dateUpdated && <p className="text-base md:text-2xl"><span className='font-medium pl-10'>Atnaujintas:</span> {dateUpdated}</p>} 
                         </div>
                     </div>
-                        { auth.userId === poster.posterId && <PosterMenu id={poster.posterId}/>}
+                        { auth.userId === poster.userId && <PosterMenu id={poster.posterId}/>}
                 </div>
             </div>
   )

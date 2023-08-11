@@ -202,7 +202,7 @@ function UploadPoster() {
                 setVideoLink(response.data.videoLink);
 
                 setPosterEdit(response.data);
-                setPosterEditImageCount(Object.keys(posterEdit.images).length); //sets how many times should useEffect owrk to lead images
+                // setPosterEditImageCount(Object.keys(posterEdit.images).length); //sets how many times should useEffect owrk to lead images
                 
                 const loadImageFromBackend = async () => {
                     if (id) {
@@ -297,7 +297,7 @@ function UploadPoster() {
     async function getImgs(){
         let imgArray = [];
         try{
-            for(let i= 0 ; i < posterEditImgCount ; ++i){
+            for(let i= 0 ; i < 6 ; ++i){
                 const response = await axios.get(`/api/v1/images/poster/get/${id}/${i}`,{
                     responseType: 'blob',
                 })
