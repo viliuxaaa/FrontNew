@@ -18,7 +18,7 @@ const useAxiosPrivate = () => {
                 return config;
             }, (error) => {
                 Promise.reject(error);
-                console.log("failed in private axios");
+                console.log("failed in private axios config");
             }
         );
         

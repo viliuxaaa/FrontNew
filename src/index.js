@@ -7,6 +7,7 @@ import global_lt from './Components/language/lithuanian/global.json';
 import global_en from "./Components/language/english/global.json"
 import i18next from 'i18next';
 import { I18nContext, I18nextProvider } from "react-i18next";
+import { AuthProvider } from './context/AuthProvider';
 
 i18next.init({
   interpolation: {escapeValue: true},
@@ -25,10 +26,11 @@ i18next.init({
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <I18nextProvider i18n={i18next}>
-  
+    <AuthProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
+    </AuthProvider>
  
   </I18nextProvider>
 );

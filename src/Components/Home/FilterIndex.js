@@ -28,7 +28,7 @@ function FilterIndex({catt, setCatt}) {
     ]
 
   return (
-    <div className='bg-dry text-dryGray grid grid-cols-2 rounded w-[400px]'>
+    <div className='bg-dry text-dryGray grid grid-cols-1 rounded w-[170px]'>
         {Filter.map((item, index) => (
                 <Listbox key={index} value={item.value} onChange={item.onChange}>
                     <div className='relative'>
@@ -41,7 +41,7 @@ function FilterIndex({catt, setCatt}) {
                         </Listbox.Button>
                         {/* drop down menu */}
                         <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
-                            <Listbox.Options className="absolute z-10 mt-1 w-full bg-white border border-gray-800 text-text rounded-md shadow-lg max-h-60 ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
+                            <Listbox.Options className="absolute z-10 mt-1 w-[120px] bg-white border border-gray-800 text-text rounded-md shadow-lg max-h-60 ring-opacity-5 overflow-auto focus:outline-none text-xs sm:text-sm">
                                 {
                                     item.items.map((item, index) => (
                                         <Listbox.Option key={index} className={({active}) => `relative cursor-default select-none py-2 pl-1 ${

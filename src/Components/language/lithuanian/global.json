@@ -39,7 +39,7 @@
         "4": "Planšetiniai kompiuteriai",
         "5": "Žaidimų kompiuteriai",
         "6": "Elektroninės skaityklės",
-        "7": "Kompiuteriai kita"
+        "7": "Kita"
     },
     "externalDevCategoryB": {
         "0": "---",
@@ -49,14 +49,14 @@
         "4": "Daugiafunkciniai įrenginiai",
         "5": "Klaviatūros, pelės, web kameros",
         "6": "Žaidimų priedai",
-        "7": "Išoriniai įrenginiai (kita)"
+        "7": "Kita"
     },
 
     "computerComponentCategoryB": {
         "0": "---",
         "1": "Nešiojamiems kompiuteriams",
         "2": "Stacionariems kompiuteriams",
-        "3": "Kompiuterių komponentai (kita)"
+        "3": "Kita"
     },
     "accessoriesCategoryB": {
         "0": "---",
@@ -65,8 +65,8 @@
         "3": "Atminties kortelės, USB atmintinės",
         "4": "HDD dėžutės ir išoriniai HDD",
         "5": "Krepšiai kompiuteriams",
-        "6": "UPS",
-        "7": "Priedai, aksesuarai (kita)"
+        "6": "UPS (NMŠ)",
+        "7": "Kita"
     },
 
     "softwareAndGamesCategoryB": {
@@ -77,17 +77,17 @@
         "4": "Mokomosios programos",
         "5": "Operacinės sistemos",
         "6": "Techninė programinė įranga",
-        "7": "Programinė įranga, žaidimai (kita)"
+        "7": "Kita"
     },
     "networkStuffCategoryB": {
         "0": "---",
         "1": "Belaidžio tinklo įranga",
-        "2": "Hub'as",
+        "2": "Hub",
         "3": "Maršrutizatoriai",
         "4": "Modemai",
-        "5": "Switch'as",
+        "5": "Switch",
         "6": "Aksesuarai, kabeliai",
-        "7": "Tinklo įranga (kita)"
+        "7": "Kita"
     },
     "technicalServicesCategoryB": {
         "0": "---",
@@ -95,7 +95,7 @@
         "2": "Remontas",
         "3": "Spausdinimas, kopijavimas",
         "4": "Supirkimas",
-        "5": "Paslaugos, remontas (kita)"
+        "5": "Kita"
     },
     "consolesCategoryB": {
         "0": "---",
@@ -146,25 +146,68 @@
     },
 
     "registerFrame": {
-        "createAccText": "Prideti naują skelbimą",
-        "username": "Skelbimo pavadinimas:",
-        "firstName": "Prekės/paslaugos aprašymas",
-        "firstNamePlaceHolder":"Įrašykite prekės kainą (eur): ",
-        "lastName":"Pasirinkite prekes kategoriją: ",
-        "lastNamePlaceHolder": "Prekes kategorijos šaka: ",
-        "email": "Pasirinkte kategorija",
-        "emailPlaceHolder": "Kontaktinis numeris: ",
-        "password":"priimami formata: +370XXXXXXXX",
-        "confirmPassword": "Iš kur pardavinėjama prekė: ",
-        "iAcceptText": "Įrašykite vietovę: ",
-        "termsAndConditionsLink": "Nuoroda į prekės tinklalapį (jei toks yra):",
-        "createAccButton": "Nuoroda į vaizdinę medžiagą (jei tokia yra):",
-        "alredyHaveText": "Nuotraukas šiuo metu galima įkelti tik vėliau. Atsiprašome už nesklandumus",
-        "loginLink":"Įkelti skelbimą!"
+        "createAccText": "Sukurti paskyrą",
+        "username": "Prisijungimo vardas",
+        "firstName": "Vardas",
+        "firstNamePlaceHolder":"Vardenis",
+        "lastName":"Pavardė",
+        "lastNamePlaceHolder": "Pavardenis",
+        "email": "El. paštas",
+        "emailPlaceHolder": "vardenis@mail.com",
+        "password":"Slaptažodis",
+        "confirmPassword": "Patvirtinti slaptažodį",
+        "iAcceptText": "Sutinku su",
+        "termsAndConditionsLink": "taisyklėmis ir sąlygomis",
+        "createAccButton": "Sukurti paskyrą",
+        "alredyHaveText": "Jau turite paskyrą?",
+        "loginLink":"Prisijungti"
+    },
+
+    "registerValidations": {
+        "username4To24Char": "Nuo 4 iki 24 simbolių",
+        "beginWithLetter": "Turi prasidėti raide",
+        "usernameSymbolsAllowed": "Galima naudoti raides, skaičius, brūkšnius ir apatinius brūkšnius ",
+        "name3to24Char":"Nuo 3 iki 24 simbolių",
+        "nameOnlyLetters":"Gallima naudoti tik raides",
+        "lastname3to24Char": "Nuo 3 iki 24 simbolių",
+        "lastnameOnlyLetters": "Gallima naudoti tik raides",
+        "emailValid": "El. paštas turi buti galiojantis",
+        "password8to24Char":"Nuo 4 iki 24 simbolių",
+        "passwordMustInclude": "Privalo turėti didžiają ir mažają raides, skaičių ir specialų simbolį",
+        "passwordSpecialSymbols": "Galimi specialūs simboliai:",
+        "passwordMustMatch": "Slaptažodis turi sutapti"
+    },
+
+    "footerFrame": {
+        "footerWorkingHours": "Darbo laikas: I-V 08:20 - 17:00",
+        "footerHelp": "Pagalba: +370 865 84454",
+        "footerFAQ": "D.U.K.",
+        "footerRules":"Naudojimo taisyklės",
+        "footerPrivacy":"Privatumo politika",
+        "footerContacts": "Kontaktai"
+    },
+
+    "FAQFrame": {
+        "1": "Dažniausiai užduodami klausimai",
+        "2": "Kaip galėčiau ištrinti/redaguoti savo skelbimą?",
+        "3": "Jeigu skelbimą dėjote kaip registruotas vartotojas, prisijunkite prie neskelbiu.lt portalo, eikite į „Mano skelbimai“ ir ties norimu skelbimu paspauskite „Pašalinti“.",
+        "4":"Jeigu skelbimą įkėlėte kaip neregistruotas vartotojas, skelbimo įkėlimo dieną, el. paštu arba SMS žinute, turėjote gauti jo prisijungimo duomenis.",
+        "5":"Jeigu prisijungimo duomenų neturite, atsidarykite savo skelbimą neskelbiu.lt portale ir virš jo pavadinimo spauskite langelį 'Tavo skelbimas?', tuomet 'Redaguoti' ir 'Pamiršote prisijungimus?'.",
+        "6":"Kokia yra skelbimo kaina?",
+        "7": "Daugelio kategorijų skelbimai yra NEMOKAMI PRIVATIEMS ASMENIMS, parduodantiems savo asmeninius daiktus. Kai kurių kategorijų skelbimai išlieka mokami. Tai transporto priemonės ir jų dalys, nekilnojamasis turtas, paslaugos ir kt.",
+        "8": "JURIDINIAMS asmenims ir FIZINIAMS ASMENIMS, kurių skelbimai susiję su KOMERCINE VEIKLA, skelbimų įdėjimas yra mokamas.",
+        "9": "Primename, kad skelbimus, apmokant SMS žinute, yra taikomas žinutės administravimo mokestis (jo dydis priklauso nuo mokamos sumos ir yra nurodomas apmokėjimo puslapyje).",
+        "10":"Skelbimai daugumoje kategorijų galioja 60 dienų (drabužių/avalynės kategorijoje - 90 dienų, ilgalaikės namų, butų ir kambarių nuomos kategorijose - 40 dienų, kolekcionavimo ir dovanojimo kategorijose - 30 dienų).",
+        "11":"Kaip veikia skelbimo iškėlimas žvaigždutėmis?",
+        "12": "Žvaigždutėmis skelbimas iškeliamas aukščiau sąraše – kuo daugiau žvaigždučių užsakyta skelbimui, tuo aukščiau sąraše jis bus rodomas. Jei keli skelbimai yra su vienodu žvaigždučių skaičiumi, aukščiau bus rodomas tas, kurio žvaigždutės užsakytos ilgesniam laikui. Skelbimo iškėlimą užsakyti galite prisijungę prie savo skelbimo paskyros. Vienos žvaigždutės kaina vienai parai yra 0,99 €, dvi žvaigždutės vienai parai atitinkamai kainuos 1,98 € ir t.t.",
+        "13": "Kaip apmokėti skelbimus esant užsienyje?",
+        "14": "Skelbimus apmokant SMS žinute, telefono numeris turi būti lietuviškas (kodas +370), bei mokėjimo metu būti Lietuvos teritorijoje. Jei esate užsienyje, galbūt kas nors esantis Lietuvoje galėtų SMS žinutę išsiųsti už Jus.",
+        "15": "Jei naudojatės lietuviško banko el. bankininkyste, neskelbiu.lt paslaugas galite apmokėti iš bet kurios šalies. Taip pat mokėjimą atlikti galite kreditine kortele arba per Paysera sistemą.",
+        "16": "Jeigu nei vienas iš aukščiau pateiktų variantų Jums netinka, parašykite mums el. paštu info@neskelbiu.lt – atsiųsime įmonės rekvizitus, kuriais mokėjimą galima bus atlikti iš bet kurio banko.",
+        "17":"Kas yra asmeninis neskelbiu.lt puslapis ir kaip juo naudotis?",
+        "18": "Jei esate registruotas portalo vartotojas, Jums gali būti sugeneruotas (jeigu taip pažymėjote savo paskyros nustatymuose) asmeninio neskelbiu.lt puslapio adresas. Dedant skelbimą informacijos pildymo formos apačioje galite pažymėti varnelę 'Rodyti šį skelbimą asmeniniame puslapyje'. Tuomet skelbime bus rodoma Jūsų asmeninio puslapio nuoroda, ant kurios paspaudę kiti vartotojai atskirame puslapyje galės matyti visą Jūsų prekių/paslaugų asortimentą (skelbimus, kuriuos pasirinkote rodyti asmeniniame puslapyje).",
+        "19": "Kaip patvirtinti tapatybę?",
+        "20": "Dalies skelbimų kontaktų blokeliuose rodoma žyma „Tapatybė patvirtinta“. Tapatybė patvirtinama automatiškai, už neskelbiu.lt paslaugas apmokėjus banko pavedimu. Jeigu Jūsų tapatybė dar nėra patvirtinta, papildykite neskelbiu.lt sąskaitą banko pavedimu bent 0,1 €."
     }
-
-
-
-
 }
 

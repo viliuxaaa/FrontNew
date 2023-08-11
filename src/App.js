@@ -12,24 +12,43 @@ import Profile from "./Screens/Dashboard/Profile";
 import Favorites from "./Screens/Dashboard/Favorites";
 import Password from "./Screens/Dashboard/Password";
 import SinglePoster from "./Screens/SinglePoster";
+import RequireAuth from './Components/RequireAuth';
+import Aos from 'aos';
+import Duk from "./Screens/Duk";
+import Taisykles from "./Screens/Taisykles";
+import Politika from "./Screens/Politika";
+import Kontaktai from "./Screens/Kontaktai";
 
 function App() {
+  Aos.init();
   return (
     <Routes>
       <Route path="/posters/search/" element={<Posters />} />
       <Route path="/posters/search/:searchType" element={<Posters />} />
+      {/*  PUBLIC ROUTES */}
+      <Route path="/posters" element={<Posters />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path='/' element={<HomeScreen />} />
       <Route path='*' element={<NotFound />} />
-      <Route path="/upload" element={<UploadPoster />} />
       <Route path="/skelbimas/:id" element={<SinglePoster />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/skelbimulist" element={<SkelbimuList />} />
-      <Route path="/profile" element={<Profile />} />
-      <Route path="/favorites" element={<Favorites />} />
-      <Route path="/password" element={<Password />} />
-      <Route path="/demo" element={<Demo />} />
+      <Route path="/duk" element={<Duk />} />
+      <Route path="/taisykles" element={<Taisykles />} />
+      <Route path="/politika" element={<Politika />} />
+      <Route path="/kontaktai" element={<Kontaktai />} />
+      
+      <Route element={<RequireAuth allowedRoles={['ADMIN', 'MANAGER', 'USER']} />}>
+        <Route path="/upload" element={<UploadPoster />} />
+        <Route path="/favorites" element={<Favorites />} />
+        <Route path="/password" element={<Password />} />
+        <Route path="/profile" element={<Profile />} />
+        
+        
+      </Route>
+
+      <Route path="/demo" element={<Demo />} /> 
     </Routes>
   );
 }

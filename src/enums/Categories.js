@@ -1,37 +1,39 @@
 import { useTranslation } from "react-i18next";
 
 const Categories = () => {
+    
+    const [t, i18n] = useTranslation("global");
     const categories = {    
         category1 : {
             name: "Kompiuteriai",
             search: "category=a&type=kompiuteriai",
             subCat: [
                 {
-                    name: "Nešiojami Kompiuteriai",
+                    name: t("computerCategoryB.1"),
                     search: "category=b&type=nesiojami_kompiuteriai"
                 },
                 {
-                    name: "Stacionarūs Kompiuteriai",
+                    name: t("computerCategoryB.2"),
                     search: "category=b&type=stacionarus_kompiuteriai"
                 },
                 {
-                    name: "Serveriai",
+                    name: t("computerCategoryB.3"),
                     search: "category=b&type=serveriai"
                 },
                 {
-                    name: "Planšetiniai Kompiuteriai",
+                    name: t("computerCategoryB.4"),
                     search: "category=b&type=plansetiniai_kompiuteriai"
                 },
                 {
-                    name: "Žaidimų Kompiuteriai",
+                    name: t("computerCategoryB.5"),
                     search: "category=b&type=zaidimu_kompiuteriai"
                 },
                 {
-                    name: "Elektroninės Skaityklės",
+                    name: t("computerCategoryB.6"),
                     search: "category=b&type=elektronines_skaitykles"
                 },
                 {
-                    name: "Kita",
+                    name: t("computerCategoryB.7"),
                     search: "category=b&type=kompiuteriai_kita"
                 },
             ]
@@ -41,31 +43,31 @@ const Categories = () => {
             search: "category=a&type=isoriniai_irenginiai",
             subCat: [
                 {
-                    name: "Monitoriai",
+                    name: t("externalDevCategoryB.1"),
                     search: "category=b&type=monitoriai"
                 },
                 {
-                    name: "Projektoriai, skeneriai ir spausdintuvai",
+                    name: t("externalDevCategoryB.2"),
                     search: "category=b&type=projektoriai_skeneriai_spausdintuvai"
                 },
                 {
-                    name: "Ausinės ir garso kolonėlės",
+                    name: t("externalDevCategoryB.3"),
                     search: "category=b&type=ausines_garso_koloneles"
                 },
                 {
-                    name: "Daugiafunkciniai įrenginiai",
+                    name: t("externalDevCategoryB.4"),
                     search: "category=b&type=daugiafunkciniai_irenginiai"
                 },
                 {
-                    name: "Klaviatūros, pelės ir Web kameros",
+                    name: t("externalDevCategoryB.5"),
                     search: "category=b&type=klaviaturos_peles_web_kameros"
                 },
                 {
-                    name: "Žaidimų Priedai",
+                    name: t("externalDevCategoryB.6"),
                     search: "category=b&type=zaidimu_priedai"
                 },
                 {
-                    name: "Kita",
+                    name: t("externalDevCategoryB.7"),
                     search: "category=b&type=isoriniai_irenginiai_kita"
                 }
             ]
@@ -75,15 +77,15 @@ const Categories = () => {
             search: "category=a&type=kompiuteriu_komponentai",
             subCat: [
                 {
-                    name: "Nešiojamiems Kompiuteriams",
+                    name: t("computerComponentCategoryB.1"),
                     search: "category=b&type=nesiojamiems_kompiuteriams"
                 },
                 {
-                    name: "Stacionariems Kompiuteriams",
+                    name: t("computerComponentCategoryB.2"),
                     search: "category=b&type=stacionariems_kompiuteriams"
                 },
                 {
-                    name: "Kita",
+                    name: t("computerComponentCategoryB.3"),
                     search: "category=b&type=kompiuteriu_komponentai_kita"
                 }
             ]
@@ -93,31 +95,31 @@ const Categories = () => {
             search: "category=a&type=priedai_aksesuarai",
             subCat: [
                 {
-                    name: "Įkrovikliai, baterijos ir akumuliatoriai",
+                    name: t("accessoriesCategoryB.1"),
                     search: "category=b&type=ikrovikliai_baterijos_akumuliatoriai"
                 },
                 {
-                    name: "Adapteriai, kabeliai ir jungtys",
+                    name: t("accessoriesCategoryB.2"),
                     search: "category=b&type=adapteriai_kabeliai_jungtys"
                 },
                 {
-                    name: "Atminties kortelės ir USB atmintinės",
+                    name: t("accessoriesCategoryB.3"),
                     search: "category=b&type=atminties_korteles_usb_atmintines"
                 },
                 {
-                    name: "HDD dežutės ir išoriniai HDD",
+                    name: t("accessoriesCategoryB.4"),
                     search: "category=b&type=hdd_dezutes_ir_isoriniai_hdd"
                 },
                 {
-                    name: "Krepšiai kompiuteriams",
+                    name: t("accessoriesCategoryB.5"),
                     search: "category=b&type=krepsiai_kompiuteriams"
                 },
                 {
-                    name: "UPS (NMŠ)",
+                    name: t("accessoriesCategoryB.6"),
                     search: "category=b&type=ups"
                 },
                 {
-                    name: "Kita",
+                    name: t("accessoriesCategoryB.7"),
                     search: "category=b&type=priedai_aksesuarai_kita"
                 }
             ]
@@ -127,31 +129,31 @@ const Categories = () => {
             search: "category=a&type=programine_iranga_zaidimai",
             subCat: [
                 {
-                    name: "Kompiuteriniai žaidimai",
+                    name: t("softwareAndGamesCategoryB.1"),
                     search: "category=b&type=kompiuteriniai_zaidimai"
                 },
                 {
-                    name: "Apple programinė įranga",
+                    name: t("softwareAndGamesCategoryB.2"),
                     search: "category=b&type=apple_programine_iranga"
                 },
                 {
-                    name: "Biuro programinė įranga",
+                    name: t("softwareAndGamesCategoryB.3"),
                     search: "category=b&type=biuro_programine_iranga"
                 },
                 {
-                    name: "Mokomosios programos",
+                    name: t("softwareAndGamesCategoryB.4"),
                     search: "category=b&type=mokomosios_programos"
                 },
                 {
-                    name: "Operacinės sistemos",
+                    name: t("softwareAndGamesCategoryB.5"),
                     search: "category=b&type=operacines_sistemos"
                 },
                 {
-                    name: "Techninė programinė įranga",
+                    name: t("softwareAndGamesCategoryB.6"),
                     search: "category=b&type=technine_programine_ranga"
                 },
                 {
-                    name: "Kita",
+                    name: t("softwareAndGamesCategoryB.7"),
                     search: "category=b&type=programine_iranga_zaidimai_kita"
                 }
             ]
@@ -161,31 +163,31 @@ const Categories = () => {
             search: "category=a&type=tinklo_iranga",
             subCat: [
                 {
-                    name: "Belaidžio tinklo įranga",
+                    name: t("networkStuffCategoryB.1"),
                     search: "category=b&type=belaidzio_tinklo_iranga"
                 },
                 {
-                    name: "HUB",
+                    name: t("networkStuffCategoryB.2"),
                     search: "category=b&type=hub"
                 },
                 {
-                    name: "Maršrutizatoriai",
+                    name: t("networkStuffCategoryB.3"),
                     search: "category=b&type=marsrutizatoriai"
                 },
                 {
-                    name: "Modemai",
+                    name: t("networkStuffCategoryB.4"),
                     search: "category=b&type=modemai"
                 },
                 {
-                    name: "Switch",
+                    name: t("networkStuffCategoryB.5"),
                     search: "category=b&type=switch"
                 },
                 {
-                    name: "Aksesuarai ir kabeliai",
+                    name: t("networkStuffCategoryB.6"),
                     search: "category=b&type=aksesuarai_kabeliai"
                 },
                 {
-                    name: "Kita",
+                    name: t("networkStuffCategoryB.7"),
                     search: "category=b&type=tinklo_iranga_kita"
                 }
             ]
@@ -195,23 +197,23 @@ const Categories = () => {
             search: "category=a&type=paslaugos_remontas",
             subCat: [
                 {
-                    name: "3D spausdinimas",
+                    name: t("technicalServicesCategoryB.1"),
                     search: "category=b&type=spausdinimas_3d"
                 },
                 {
-                    name: "Remontas",
+                    name: t("technicalServicesCategoryB.2"),
                     search: "category=b&type=remontas"
                 },
                 {
-                    name: "Spausdinimas ir kpoijavimas",
+                    name: t("technicalServicesCategoryB.3"),
                     search: "category=b&type=spausdinimas_kopijavimas"
                 },
                 {
-                    name: "Supirkimas",
+                    name: t("technicalServicesCategoryB.4"),
                     search: "category=b&type=supirkimas"
                 },
                 {
-                    name: "Kita",
+                    name: t("technicalServicesCategoryB.5"),
                     search: "category=b&type=paslaugos_remontas_kita"
                 }
             ]
@@ -221,31 +223,31 @@ const Categories = () => {
             search: "category=a&type=konsoles",
             subCat: [
                 {
-                    name: "Sony",
+                    name: t("consolesCategoryB.1"),
                     search: "category=b&type=sony"
                 },
                 {
-                    name: "Microsoft",
+                    name: t("consolesCategoryB.2"),
                     search: "category=b&type=microsoft"
                 },
                 {
-                    name: "Nintendo",
+                    name: t("consolesCategoryB.3"),
                     search: "category=b&type=nintendo"
                 },
                 {
-                    name: "Sega",
+                    name: t("consolesCategoryB.4"),
                     search: "category=b&type=sega"
                 },
                 {
-                    name: "Priedai ir dalys",
+                    name: t("consolesCategoryB.5"),
                     search: "category=b&type=priedai_dalys"
                 },
                 {
-                    name: "Paslaugos",
+                    name: t("consolesCategoryB.6"),
                     search: "category=b&type=paslaugos"
                 },
                 {
-                    name: "Kita",
+                    name: t("consolesCategoryB.7"),
                     search: "category=b&type=kita"
                 }
             ]

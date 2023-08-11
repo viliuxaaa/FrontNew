@@ -29,3 +29,19 @@ input:focus,textarea:focus,select:focus{
 .flex-btn{
   @apply flex justify-between items-center;
 }
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25%, 75% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}
+
+.hover\:shake:hover {
+  animation: shake 0.4s ease-in-out infinite;
+}
