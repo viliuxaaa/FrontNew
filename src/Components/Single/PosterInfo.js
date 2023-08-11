@@ -1,7 +1,10 @@
 import React from 'react'
 import ImageView from '../ImageView'
+import PosterMenu from './PosterMenu';
+import useAuth from '../../hooks/useAuth';
 
 function PosterInfo({poster}) {
+    const {auth} = useAuth(); 
 
     const dateCreated = poster?.createdAt.substring(0,10);
     const dateUpdated = poster.updatedAt && poster.updatedAt.substring(0,10);
@@ -33,6 +36,8 @@ function PosterInfo({poster}) {
                             {dateUpdated && <p className="text-base md:text-2xl"><span className='font-medium pl-10'>Atnaujintas:</span> {dateUpdated}</p>}
                         </div>
                     </div>
+                    {/* {auth &&
+                        <PosterMenu />} */}
                 </div>
             </div>
   )

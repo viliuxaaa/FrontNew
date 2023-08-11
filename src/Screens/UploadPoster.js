@@ -290,7 +290,7 @@ function UploadPoster() {
                         <br/>
                         <span className="font-semibold"> up to 2 Mb size</span> 
                     </p>
-                     <input type="file" className="hidden"onChange={handleInputChange} accept="image/png, image/webp, image/jpeg" />
+                     <input type="file" className="hidden" onChange={handleInputChange} accept="image/png, image/webp, image/jpeg" />
                     </div>
                 </>)}
             </label>
