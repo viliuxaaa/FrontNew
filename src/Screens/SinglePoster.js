@@ -36,8 +36,8 @@ function SinglePoster() {
                             {
                                 relatedPosters.slice(0,10).map((poster,index) => (
                                     <PosterMinDetail key={index} poster={poster}/>
-                                    ))
-                                }
+                                ))
+                            }
                         </div>
                     </div>
                 </div>

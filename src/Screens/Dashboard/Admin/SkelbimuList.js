@@ -5,11 +5,9 @@ import Table from '../../../Components/Table'
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import useAuth from '../../../hooks/useAuth';
 import { useEffect } from 'react';
-import AxiosFetch from '../../../hooks/AxiosFetch';
-
+import axios from '../../../api/axios'
 
 function SkelbimuList() {
-    const privateAxios = useAxiosPrivate();
     const {auth} = useAuth(); 
     const ALL_USER_POSTERS_URL = "api/v1/poster/get/"+auth.userId+"/all";
 
@@ -17,32 +15,27 @@ function SkelbimuList() {
 
     const [finalData, setFinalData] = useState([]);
 
-
-    const [img, setImg] = useState(null);
-
-
-    async function handleRefresh() {
-        try {
-            const response = await privateAxios.get(ALL_USER_POSTERS_URL, {
-                
-            });
-
-            setImg(
-                {label: "Image 1", alt: "image1", url: "/api/v1/images/poster/get/"+response?.data[0]?.posterId+"/" + `0`}
-              ); 
-            setFinalData(response?.data);
-            
-        } catch (err) {
-            if (!err.response) {
-                setErrMsg("No Server Response");
-            } else if (err.response?.status === 409) {
-                setErrMsg("Problem 409"); //TODO reikia jog patikrintų ar toks vartotojas jau egzistuoja // cai tai padaro manau
-            } else {
-                setErrMsg("Table geting failed");
+    useEffect(() =>{
+   
+        handleRefresh();
+    }, [])
+    
+         async function handleRefresh() {
+            try {
+                const response = await axios.get("api/v1/poster/get/"+auth.userId+"/all");
+                setFinalData(response?.data);
+                console.log("axios works")
+            } catch (err) {
+                if (!err.response) {
+                    setErrMsg("No Server Response");
+                } else if (err.response?.status === 409) {
+                    setErrMsg("Problem 409"); //TODO reikia jog patikrintų ar toks vartotojas jau egzistuoja // cai tai padaro manau
+                } else {
+                    setErrMsg("Table geting failed");
+                }
+                // errRef.current.focus();
             }
-            // errRef.current.focus();
         }
-    }
 
     // useEffect(() => {
     //     handleRefresh();
@@ -75,7 +68,7 @@ function SkelbimuList() {
                </button>
             </div>
             <h3 className='text-md font-medium mt-6 text-border'>Mano Skelbimai</h3>
-            <Table finalData={finalData} img={img} admin={false} />
+            <Table poster={finalData} admin={false} />
         </div>
     </SideBar>
   )
