@@ -13,8 +13,12 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import  categoryA  from "../../enums/CategoryA"
 import { useTranslation } from "react-i18next";
+import handleChangeLanguage from '../../hooks/HandleChangeLanguage';
 
 function NavBar() {
+  const handleChangeLanguage = (lang) => {
+    i18n.changeLanguage(lang);
+};
     const [t, i18n] = useTranslation("global");
     const [modalOpen, setModalOpen ] = useState(false)
     const [checkedValues, setCheckedValues] = useState([]);
@@ -205,11 +209,11 @@ function NavBar() {
                 </div>
             </div>
             <div className="absolute flex font-medium text-text w-18 h-7 right-7 top-4">
-                <button className="w-9 h-7 transition justify-center items-center hover:scale-105 hover:text-teal-600">
+                <button className="w-9 h-7 transition justify-center items-center hover:scale-105 hover:text-teal-600" onClick = {() => handleChangeLanguage("lt")}>
                     LT
                 </button>
                 <span className="pt-[2px]">|</span>
-                <button className="w-9 h-7 transition justify-center items-center hover:scale-105 hover:text-teal-600">
+                <button className="w-9 h-7 transition justify-center items-center hover:scale-105 hover:text-teal-600" onClick = {() => handleChangeLanguage("en")}>
                     EN
                 </button>
             </div> 
