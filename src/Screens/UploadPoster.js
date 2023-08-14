@@ -11,9 +11,6 @@ import { computerAEnum as catA,
     allArrays,
     cities
   } from '../enums/AllEnumArrays';
-import { CiCircleRemove } from 'react-icons/ci'//WHAT WAS I IMPORTED FOR?
-import { BiUserCheck } from "react-icons/bi";
-
 
 // ======== PRIDETI EDIT FUNKCIONALUMA ( KAINA, NUOTRAUKOS?, TEL NR, DESCRIPTION )
 
@@ -88,8 +85,6 @@ function UploadPoster() {
         setSelectedFile6
     ]
 
-    
-
     // for poster succes notification
     const navigate = useNavigate();
     const handlePosterSuccess = () => {
@@ -162,8 +157,9 @@ function UploadPoster() {
         }
         return false;
     }
-
+    
     async function handleSubmit(event)  {
+        console.log(price)
         setSubmitAttempt(submitAttempt+1)
         event.preventDefault();
         let check = posterCheck();
@@ -324,7 +320,8 @@ function UploadPoster() {
     }
     const handlePriceChange = (e) =>{
         setPriceValid(PRICE_REGEX.test(e.target.value));
-        setPrice(e.target.value);   
+        setPrice(e.target.value);
+        console.log(e.target.value)   
     }
       // ======= event watch makes sure that once the primary category is selected, a selection for secondary will appear
     const handleSelectA = (e) => {
