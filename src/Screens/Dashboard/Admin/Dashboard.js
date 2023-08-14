@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { BsPencilSquare } from 'react-icons/bs';
 import PictureUploadModal from "../../../Components/Modals/PictureUploadModal";
-import DeleteModal from "../../../Components/Modals/DeleteModal"
+import DeleteUserModal from "../../../Components/Modals/DeleteUserModal"
 
 function Dashboard() {
     
@@ -31,7 +31,7 @@ function Dashboard() {
     const {auth} = useAuth(); 
     const USER_DETAILS_URL = "api/v1/user/get/"+auth.userId+"/profile";
     const GET_USER_IMG_URL = "api/v1/user/get/"+auth.userId+"/image";
-    const DELETE_URL = "api/v1/user/"+auth.userId+"/user-delete";
+    
 
     // get all user info load
     const [userData, setUserData] = useState();
@@ -57,11 +57,9 @@ function Dashboard() {
             modalOpen={modal1Open} 
             setModalOpen={setModal1Open} 
         />
-        <DeleteModal
+        <DeleteUserModal
             modalOpen={modal2Open} 
             setModalOpen={setModal2Open}
-            message={"Are you sure you want to delete your profile?"}
-            deletionLink={DELETE_URL} 
         />
         <h2 className='text-xl font-bold'>Mano Profilis</h2>
             <div className="p-2 md:p-8 bg-main bg-opacity-85 shadow mt-24 md:mt-14">

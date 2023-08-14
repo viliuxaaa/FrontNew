@@ -5,12 +5,14 @@ import { useNavigate } from "react-router-dom";
 import useAuth from '../../hooks/useAuth';
 import axios from '../../api/axios';
 
-function DeleteModal({ modalOpen, setModalOpen, message, deletionLink }) {
-    const DELETE_URL = deletionLink;
+function DeleteModal({ modalOpen, setModalOpen }) {
+    const { auth, setAuth } = useAuth();
+
     const logout_URL="/api/v1/auth/logout";
+    const DELETE_URL = "api/v1/user/"+auth.userId+"/user-delete";
 
     const privateAxios = useAxiosPrivate();
-    const { auth, setAuth } = useAuth();
+    
     const navigate = useNavigate();
 
     const handleLogout = async () => {
@@ -33,7 +35,7 @@ function DeleteModal({ modalOpen, setModalOpen, message, deletionLink }) {
                 navigate('/');
             }
         }catch(err){
-            console.log("YOU CANNOT DO THAT! " + message)
+            console.log("YOU CANNOT DO THAT! " )
         }}
     
   return (
@@ -44,7 +46,7 @@ function DeleteModal({ modalOpen, setModalOpen, message, deletionLink }) {
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     htmlFor="file_input"
                 >
-                    <strong>{message}</strong>
+                    <strong>Are you sure that you want to delete your account?</strong>
                 </p>
                 <button onClick={() => setModalOpen(false)}>No</button>
                 <button
