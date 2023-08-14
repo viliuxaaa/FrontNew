@@ -92,14 +92,14 @@ function Password() {
         {/* //////////////////////////////////////////////////////////////////////////////////////////////// */}
         <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
         <div className='flex flex-col gap-6'>
-            <h2 className='text-xl font-bold'>Change Password</h2>
+            <h2 className='text-xl font-bold'>{t("changePassword.changePasswordText")}</h2>
             {/* old password */}
             <div>
                 <label
                     htmlFor="password"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                    {t("registerFrame.password")}
+                    {t("changePassword.oldPassword")}
                 </label>
                 <input
                 type="password"
@@ -117,7 +117,7 @@ function Password() {
                     htmlFor="password"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                    {t("registerFrame.password")}
+                    {t("changePassword.newPassword")}
                     <FontAwesomeIcon
                         icon={faCheck}
                         className={validPwd ? "valid" : "hide"}
@@ -169,7 +169,7 @@ function Password() {
                 htmlFor="confirm-password"
                 className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                    {t("registerFrame.confirmPassword")}
+                    {t("changePassword.confirmNewPassword")}
                     <FontAwesomeIcon
                         icon={faCheck}
                         className={
@@ -210,7 +210,7 @@ function Password() {
             </div>
             <div className='flex justify-end items-center my-4'> 
                 <button type="submit" className='bg-main font-medium transitions hover:bg-subMain border border-text text-text py-3 px-6 rounded w-full sm:w-auto'>
-                    Keisti Slatazodi
+                {t("changePassword.changePasswordButton")}
                 </button> 
             </div>
         </div>

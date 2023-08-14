@@ -5,6 +5,7 @@ import { GoEye } from 'react-icons/go'
 import { FiSettings } from 'react-icons/fi'
 import useAuth from '../hooks/useAuth'
 import useAxiosPrivate from '../hooks/useAxiosPrivate'
+import { useTranslation } from "react-i18next";
 
 
 const Head = "text-xs text-left text-text font-semibold px-6 py-2 uppercase"
@@ -106,32 +107,33 @@ const Rows = (poster, i, admin) => {
 }
 
 // table
-function Table({poster, img, admin}) {
+function Table({t, poster, img, admin}) {
+  
   return (
     <div className='overflow-x-scroll overflow-hidden relative w-full'>
         <table className='w-full table-auto border border-text divide-y divide-border'>
             <thead>
                 <tr className='bg-accent'>
                     <th scope='col' className={`${Head}`}>
-                        Img
+                    {t("table.img")}
                     </th>
                     <th scope='col' className={`${Head}`}>
-                        Pavadinimas
+                    {t("table.name")}
                     </th>
                     <th scope='col' className={`${Head}`}>
-                        Kategorija A
+                    {t("table.cat")}
                     </th>
                     <th scope='col' className={`${Head}`}>
-                        Kategorija B
+                    {t("table.subcat")}
                     </th>
                     <th scope='col' className={`${Head}`}>
-                        Status
+                    {t("table.status")}
                     </th>
                     <th scope='col' className={`${Head}`}>
-                        Kaina
+                    {t("table.price")}
                     </th>
                     <th scope='col' className={`${Head} text-end`}>
-                        Veiksmai
+                    {t("table.actions")}
                     </th>
                 </tr>
             </thead>

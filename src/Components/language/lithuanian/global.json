@@ -242,7 +242,7 @@
         "EditPosterText": "Atnaujinti skelbimą: ",
         "AddPosterText": "Naujas skelbimas",
         "titleText":"Pavadinimas *",
-        "titleLongerThan10Char":"Privalo būti ne trumpesnis nei 10 raidžių",
+        "titleLongerThan10Char":"Privalo būti ne trumpesnis nei 10 raidžių.",
         "firstCat": "Kategorija *",
         "1stCatMustBePicked": "Pasirinkte kategoriją",
         "2ndCat": "Kategorijos šaka *",
@@ -269,6 +269,36 @@
         "requiredFields": "* - privalomi laukai",
         "addButton": "Įkelti skelbimą",
         "errorConnecting": "Klaida jungiantis prie serverio"
+    },
+
+    "changePassword": {
+        "changePasswordText": "Keisti slaptažodį",
+        "oldPassword":"Senas slaptažodis",
+        "newPassword":"Naujas slaptažodis",
+        "confirmNewPassword": "Patvirtinti slaptažodį",
+        "changePasswordButton": "Keisti slaptažodį"
+    },
+
+    "allPosters": {
+        "allPostersText": "Visi skelbimai",
+        "price": "Kaina:"
+    },
+
+    "myPosters": {
+        "posterListText": "Skelbimų sąrašas",
+        "searchPlaceHolder":"Ieškoti tarp skelbimų",
+        "refreshButton":"Atnaujinti",
+        "myPostersText": "Mano skelbimai"
+    },
+
+    "table": {
+        "img": "Nuotrauka",
+        "name": "Pavadinimas",
+        "cat": "Kategorija",
+        "subcat":"Kategorijos šaka",
+        "status":"Statusas",
+        "price": "Kaina",
+        "actions": "Veiksmai"
     }
 }
 
