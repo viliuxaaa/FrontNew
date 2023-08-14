@@ -9,7 +9,7 @@ function SinglePoster() {
 
     const { id } = useParams();
     const posterInfoURL = "/api/v1/poster/get/" + id;
-    const postersInfoURL = "/api/v1/poster/get/all";
+    const postersInfoURL = "/api/v1/poster/get/search";
 
     const [poster, isLoaded, error] = AxiosFetch(posterInfoURL);
     const [posters, isLoadeds, errors] = AxiosFetch(postersInfoURL);
@@ -17,7 +17,7 @@ function SinglePoster() {
 
     useEffect(() => {
         if (!isLoaded && !isLoadeds) {
-            const related = posters.filter(p => p.city === poster.city);
+            const related = posters?.filter(p => p.city === poster.city);
             setRelatedPosters(related);
         }
     }, [isLoaded, isLoadeds, poster, posters]);
