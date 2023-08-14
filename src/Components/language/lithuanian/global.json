@@ -109,31 +109,7 @@
     },
     
 
-    "createPosterPage":{
-        "addNewPoster": "Prideti naują skelbimą",
-        "posterTitle": "Skelbimo pavadinimas:",
-        "posterDescription": "Prekės/paslaugos aprašymas",
-        "posterPrice":"Įrašykite prekės kainą (eur): ",
-        "categoryAName":"Pasirinkite prekes kategoriją: ",
-        "categoryBName": "Prekes kategorijos šaka: ",
-        "defaultChoicePText": "Pasirinkte kategorija",
-        "phoneNumber": "Kontaktinis numeris: ",
-        "phoneNumberTitle":"priimami formata: +370XXXXXXXX",
-        "city": "Iš kur pardavinėjama prekė: ",
-        "otherCity": "Įrašykite vietovę: ",
-        "website": "Nuoroda į prekės tinklalapį (jei toks yra):",
-        "videoLink": "Nuoroda į vaizdinę medžiagą (jei tokia yra):",
-        "imgUploadMessage": "Nuotraukas šiuo metu galima įkelti tik vėliau. Atsiprašome už nesklandumus",
-        "submitButton":"Įkelti skelbimą!",
-        "uploadFailed": "Nepavyko įkelti skelbimo, prašome patikrinti ar visi laukai nurodyti gerai",
-        "ufPostName": "Įrašykite tinkamą skelbimo pavadinimą!", 
-        "ufPostDescription": "Skelbimas privalo turėti bent minimalų apibūdinimą!",
-        "ufPhoneNumber": "telefono numerį pateikite formatu +3706XXXXXXX",
-        "ufCity": "Pasirinkite miestą!",
-        "ufCatA": "Pasirinkite prekės kategorija!",
-        "ufCatB": "Pasirinkite prekės kategorijos šaką!",
-        "ufPrice": "Įveskite tinkamą kainą!"
-    },
+   
 
     "loginFrame": {
         "signInText": "Prisijungti į paskyrą",
@@ -276,7 +252,7 @@
         "priceText": "Kaina * (eur)",
         "priceMustBeWhole": "Privalo būti sveikas skaičius",
         "imgUploadText": "Įkelkite nuotraukas *",
-        "imgEditText": "Norint redaguoti nuotraukas, spauskite čia",
+        "imgEditLoading": "Kraunama...",
         "mustUpload1":"Būtina įkelti bent vieną nuotrauką",
         "stateText": "Būklė",
         "stateNew": "Naujas", 

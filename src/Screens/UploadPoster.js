@@ -89,12 +89,20 @@ function UploadPoster() {
         setSelectedFile6
     ]
 
+    
+
     // for poster succes notification
     const navigate = useNavigate();
     const handlePosterSuccess = () => {
         navigate('/?posterSuccess=true');
     };
     /////////////////////////////////
+
+    function changeImgRed(){
+        setImgRed(true);
+    }
+    const delay = 1000;
+    const timerImgRed = setTimeout(changeImgRed, delay)
 
     //CLICKING NAUJAS SKELBIMAS FROM UPDATING RESET
     useEffect(() => {
@@ -301,7 +309,7 @@ function UploadPoster() {
                     }
                   };
                   loadImageFromBackend();
-
+                  timerImgRed();
             } catch (error){
                 error.message = "Connection to the server failed";
                 setRequestError(error);
@@ -355,27 +363,21 @@ function UploadPoster() {
     ///////////////////////////////////////////////////////FILE INPUT HANDLING//////////////////////////////////
     const handleInputChange1 = (e) => {
         setSelectedFile1(e.target.files[0]);
-        // setChangedImgIndexes(changedImgIndexes => [...changedImgIndexes, 1]);
     }
     const handleInputChange2 = (e) => {
-        setSelectedFile2(e.target.files[0]);
-        // setChangedImgIndexes(changedImgIndexes => [...changedImgIndexes, 2]); 
+        setSelectedFile2(e.target.files[0]); 
     }
     const handleInputChange3 = (e) => {
         setSelectedFile3(e.target.files[0]);
-        // setChangedImgIndexes(changedImgIndexes => [...changedImgIndexes, 3]);
     }
     const handleInputChange4 = (e) => {
         setSelectedFile4(e.target.files[0]);
-        // setChangedImgIndexes(changedImgIndexes => [...changedImgIndexes, 4]);
     }
     const handleInputChange5 = (e) => {
         setSelectedFile5(e.target.files[0]);
-        setChangedImgIndexes(changedImgIndexes => [...changedImgIndexes, 5]);
     }
     const handleInputChange6 = (e) => {
         setSelectedFile6(e.target.files[0]);
-        // setChangedImgIndexes(changedImgIndexes => [...changedImgIndexes, 6]);
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     async function getImgs(){
@@ -393,7 +395,6 @@ function UploadPoster() {
                 }
                 // console.log(response.data)      
             }
-            
             setChangedImgIndexes(imgArray.length)
             for ( let j =0; j < imgArray.length ; j++ ){
                 functionalArr[j](imgArray[j]);
@@ -596,10 +597,10 @@ function UploadPoster() {
                                 </div>
                                 {/* ********* FILE UPLOAD ******** */}
                                 <p className={ id ? "hidden" : "block mb-2 text-sm font-medium text-gray-900 dark:text-white"} >{t("uploadPosterFrame.imgUploadText")} </p>
-                                <div>
-                                    { id && !imgRed && <button type="button" onClick={() => { setImgRed(true) }}>{t("uploadPosterFrame.imgEditText")}</button>}
+                                { id && !imgRed && <p className="grid grid-cols-3 gap-2">{t("uploadPosterFrame.imgEditLoading")}</p>}
+                                <div>   
                                 <div className=  { id && !imgRed ? "hidden": "grid grid-cols-3 gap-2"} >
-                                    {/* handleInputChange, id,  selectedFile,  setSelectedFile  */}
+                                    {/* handleInputChange,  selectedFile,  setSelectedFile  */}
                                     {inputFIeld( handleInputChange1, selectedFile1, setSelectedFile1 )}
                                     {inputFIeld( handleInputChange2, selectedFile2, setSelectedFile2 )}
                                     {inputFIeld( handleInputChange3, selectedFile3, setSelectedFile3 )}
