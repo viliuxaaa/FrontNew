@@ -36,12 +36,11 @@ function UploadPoster() {
     const posterInfoURL = `api/v1/poster/get/`+ id;
     const createURL="api/v1/poster/"+auth.userId+"/create"; //GALIMAI PERKELTI EDIT FUNKCIONALUMA I KITA FORMA
     const updateURL="api/v1/poster/"+auth.userId+"/update/"+id;
-    const ImgDelURL="api/v1/images/poster/"+auth.userId+"/"+id+"/"; //+deleteIMG position
+    const ImgDelURL="api/v1/images/poster/"+auth.userId+"/"+id+"/delete"; //+deleteIMG position
     // const updateIMG_URL = "api/v1/images/poster/"+auth.userId+"/"+posterId+"/upload"
     //Cannot use updateIMGURL because it updates too slow with the poster ID
 
     const images = new FormData();
-    const [changedImgIndexes, setChangedImgIndexes] = useState([]);
 
     const [posterEdit, setPosterEdit] = useState( null ); 
     const [imgRed, setImgRed] = useState(false);
@@ -178,16 +177,11 @@ function UploadPoster() {
             images.append('image', selectedFile6);
 
             if ( id ) {
-                console.log(changedImgIndexes);
-
-                for ( let i = 0; i < changedImgIndexes; i++){
-                    console.log(ImgDelURL + i)
-                    try{
-                        const response = await privateAxios.delete( ImgDelURL + i )
-                        console.log(response)
-                    } catch {
-                        console.log("image deletion failed")
-                    }
+                try{
+                    const response = await privateAxios.delete( ImgDelURL )
+                    console.log(response)
+                } catch {
+                    console.log("image deletion failed")
                 }
 
                 const response = await privateAxios.put(updateURL,{
@@ -393,7 +387,6 @@ function UploadPoster() {
                     continue
                 }   
             }
-            setChangedImgIndexes(imgArray.length)
             for ( let j =0; j < imgArray.length ; j++ ){
                 functionalArr[j](imgArray[j]);
             }
