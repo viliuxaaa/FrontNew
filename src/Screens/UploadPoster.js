@@ -12,6 +12,7 @@ import { computerAEnum as catA,
     cities
   } from '../enums/AllEnumArrays';
 import { CiCircleRemove } from 'react-icons/ci'//WHAT WAS I IMPORTED FOR?
+import { BiUserCheck } from "react-icons/bi";
 
 
 // ======== PRIDETI EDIT FUNKCIONALUMA ( KAINA, NUOTRAUKOS?, TEL NR, DESCRIPTION )
@@ -29,23 +30,21 @@ function UploadPoster() {
 
     const {auth} = useAuth();
     const { id } = useParams();
-    const [blob1URL, setBlob1URL] = useState();
-    const [blob2URL, setBlob2URL] = useState();
-    const [blob3URL, setBlob3URL] = useState();
-    const [blob4URL, setBlob4URL] = useState();
-    const [blob5URL, setBlob5URL] = useState();
-    const [blob6URL, setBlob6URL] = useState();
     
     const [submitAttempt, setSubmitAttempt] = useState(0);
 
     const posterInfoURL = `api/v1/poster/get/`+ id;
     const createURL="api/v1/poster/"+auth.userId+"/create"; //GALIMAI PERKELTI EDIT FUNKCIONALUMA I KITA FORMA
+    const updateURL="api/v1/poster/"+auth.userId+"/update/"+id;
+    const ImgDelURL="api/v1/images/poster/"+auth.userId+"/"+id+"/"; //+deleteIMG position
     // const updateIMG_URL = "api/v1/images/poster/"+auth.userId+"/"+posterId+"/upload"
     //Cannot use updateIMGURL because it updates too slow with the poster ID
+
     const images = new FormData();
-    
-    const [posterEdit, setPosterEdit] = useState( null );
-    const [posterEditImgCount, setPosterEditImageCount] = useState();
+    const [changedImgIndexes, setChangedImgIndexes] = useState([]);
+
+    const [posterEdit, setPosterEdit] = useState( null ); 
+    const [imgRed, setImgRed] = useState(false);
 
     const [requestError, setRequestError] = useState("");
 
@@ -81,12 +80,59 @@ function UploadPoster() {
     const [selectedFile5, setSelectedFile5] = useState(null);
     const [selectedFile6, setSelectedFile6] = useState(null);
 
+    const functionalArr = [ 
+        setSelectedFile1,
+        setSelectedFile2,
+        setSelectedFile3,
+        setSelectedFile4,
+        setSelectedFile5,
+        setSelectedFile6
+    ]
+
+    
+
     // for poster succes notification
     const navigate = useNavigate();
     const handlePosterSuccess = () => {
         navigate('/?posterSuccess=true');
     };
     /////////////////////////////////
+
+    function changeImgRed(){
+        setImgRed(true);
+    }
+    const delay = 1000;
+    const timerImgRed = setTimeout(changeImgRed, delay)
+
+    //CLICKING NAUJAS SKELBIMAS FROM UPDATING RESET
+    useEffect(() => {
+        function resetHandle(){
+            if ( !id ){
+                setPostName("");
+                setPostNameValid(false);
+                setPosterDescription("");
+                setPosterDescriptionValid(false);
+                setPrice("");
+                setPriceValid(false)
+                setCategoryA("");
+                setCategoryAValid(false);
+                setCategoryB("");
+                setCategoryBValid(false);
+                setPhoneNumber("");
+                setPhoneNumberValid(false);
+                setCity("");
+                setCityValid(false);
+                setWebsite("");
+                setVideoLink("")
+                //sets all files to null
+                for ( let i = 0; i < 6; i++ ){
+                    functionalArr[i](null);
+                }
+            } 
+        }
+        resetHandle();
+    },[])
+    
 
     function posterCheck(){
         if (
@@ -124,32 +170,80 @@ function UploadPoster() {
         let check = posterCheck();
 
         if ( check ){try {
-            images.append('image', selectedFile1)
-            images.append('image', selectedFile2)
-            images.append('image', selectedFile3)
-            images.append('image', selectedFile4)
-            images.append('image', selectedFile5)
-            images.append('image', selectedFile6)
+            images.append('image', selectedFile1);
+            images.append('image', selectedFile2);
+            images.append('image', selectedFile3);
+            images.append('image', selectedFile4);
+            images.append('image', selectedFile5);
+            images.append('image', selectedFile6);
 
-            const response = await privateAxios.post(createURL,{
-                postName: postName, 
-                description: posterDescription,
-                price: +price, //konvertuoja i skaiciu
-                categoryA: categoryA,
-                categoryB: categoryB,
-                status: "ACTIVE",
-                phoneNumber: phoneNumber,
-                city: city,
-                website: website,
-                videoLink: videoLink
-            });
+            if ( id ) {
+                console.log(changedImgIndexes);
+
+                for ( let i = 0; i < changedImgIndexes; i++){
+                    console.log(ImgDelURL + i)
+                    try{
+                        const response = await privateAxios.delete( ImgDelURL + i )
+                        console.log(response)
+                    } catch {
+                        console.log("image deletion failed")
+                    }
+                }
+
+                const response = await privateAxios.put(updateURL,{
+                    postName: postName, 
+                    description: posterDescription,
+                    price: +price, //konvertuoja i skaiciu
+                    categoryA: categoryA,
+                    categoryB: categoryB,
+                    status: "ACTIVE",
+                    phoneNumber: phoneNumber,
+                    city: city,
+                    website: website,
+                    videoLink: videoLink
+                });
+                console.log(response.data);
+    
+                handlePosterSuccess();
+             
+                if ( response.data.posterId && imgRed ){
+                    uploadImg( response.data.posterId );
+                }
+
+            } else {
+                console.log(createURL)
+                console.log(
+                    postName, 
+                    posterDescription,
+                     +price, //konvertuoja i skaiciu
+                     categoryA,
+                    categoryB,
+                    
+                    phoneNumber,
+                    city,
+                     website,
+                     videoLink
+                )
+                const response = await privateAxios.post(createURL,{
+                    postName: postName, 
+                    description: posterDescription,
+                    price: +price, //konvertuoja i skaiciu
+                    categoryA: categoryA,
+                    categoryB: categoryB,
+                    status: "ACTIVE",
+                    phoneNumber: phoneNumber,
+                    city: city,
+                    website: website,
+                    videoLink: videoLink
+                });
+
             console.log(response.data);
 
             handlePosterSuccess();
          
             if ( response.data.posterId ){
-/////////////////////////////////////////////////////////////////////////////////////
                 uploadImg( response.data.posterId );
+            }
             } 
         } catch(err) {
           setRequestError(err.message);
@@ -169,14 +263,15 @@ function UploadPoster() {
             console.error('Error uploading image: ' + error); 
         }
     }
-    //============================= POSTER UPDATE FUNCTIONALITY =======================
+    //============================= POSTER UPDATE - LOAD POSTER DATA FUNCTIONALITY =======================
     useEffect(() => {
         if ( id ){ 
         async function loadPoster() {
             try{
                 const response = await axios.get(posterInfoURL);
                 
-                
+                console.log(response.data)
+
                 setPostName(response.data.postName);
                 setPostNameValid(true);//TECHNICALLY SHOULD CHECK WITH REGEX, HOWEVER OLDER SEEDED POSTERS MIGHT NOT MEET THE REQUIREMENTS
 
@@ -208,19 +303,13 @@ function UploadPoster() {
                     if (id) {
                       try {
                         getImgs();             
-          
-                      //   console.log(selectedFile1)
-                      //   console.log(selectedFile2)
-                       
                       } catch (err) {
                         console.log(err);
                       }
                     }
                   };
-              
                   loadImageFromBackend();
-
-
+                  timerImgRed();
             } catch (error){
                 error.message = "Connection to the server failed";
                 setRequestError(error);
@@ -237,14 +326,13 @@ function UploadPoster() {
         setPostName(e.target.value);
     }
     const handleDescriptionChange = (e) => {
-        setPosterDescriptionValid(NAME_DESCRIPTION_REGEX.test(e.target.value) );
+        setPosterDescriptionValid( e.target.value.length > 10 && e.target.value.length < 1000 );
         setPosterDescription(e.target.value);
     }
     const handlePriceChange = (e) =>{
         setPriceValid(PRICE_REGEX.test(e.target.value));
         setPrice(e.target.value);   
     }
-
       // ======= event watch makes sure that once the primary category is selected, a selection for secondary will appear
     const handleSelectA = (e) => {
         setCategoryAValid(CATEGORY_REGEX.test(e.target.value));
@@ -274,48 +362,45 @@ function UploadPoster() {
     }
     ///////////////////////////////////////////////////////FILE INPUT HANDLING//////////////////////////////////
     const handleInputChange1 = (e) => {
-        setSelectedFile1(e.target.files[0])
+        setSelectedFile1(e.target.files[0]);
     }
     const handleInputChange2 = (e) => {
-        setSelectedFile2(e.target.files[0])  
+        setSelectedFile2(e.target.files[0]); 
     }
     const handleInputChange3 = (e) => {
-        setSelectedFile3(e.target.files[0])
+        setSelectedFile3(e.target.files[0]);
     }
     const handleInputChange4 = (e) => {
-        setSelectedFile4(e.target.files[0])
+        setSelectedFile4(e.target.files[0]);
     }
     const handleInputChange5 = (e) => {
-        setSelectedFile5(e.target.files[0])
+        setSelectedFile5(e.target.files[0]);
     }
     const handleInputChange6 = (e) => {
-        setSelectedFile6(e.target.files[0])
+        setSelectedFile6(e.target.files[0]);
     }
-
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     async function getImgs(){
         let imgArray = [];
         try{
             for(let i= 0 ; i < 6 ; ++i){
-                const response = await axios.get(`/api/v1/images/poster/get/${id}/${i}`,{
-                    responseType: 'blob',
-                })
-
-                // console.log(response.data)
-                imgArray.push(response.data);      
+                try{
+                    const response = await axios.get(`/api/v1/images/poster/get/${id}/${i}`,{
+                        responseType: 'blob',
+                    })
+                    imgArray.push(response.data); 
+                } catch {
+                    console.log("image was not found")
+                    continue
+                }
+                // console.log(response.data)      
             }
-            // console.log(imgArray)
-            
-            setSelectedFile1(imgArray[0])
-            console.log(imgArray)
-            setSelectedFile2(imgArray[1])
-            setSelectedFile3(imgArray[2])
-            setSelectedFile4(imgArray[3])
-            setSelectedFile5(imgArray[4])
-            setSelectedFile6(imgArray[5])
+            setChangedImgIndexes(imgArray.length)
+            for ( let j =0; j < imgArray.length ; j++ ){
+                functionalArr[j](imgArray[j]);
+            }
 
-            setBlob1URL(URL.createObjectURL(imgArray[0]));
+            // setBlob1URL(URL.createObjectURL(imgArray[0]));
         } catch(err) {
             console.log(err)
         }
@@ -323,7 +408,7 @@ function UploadPoster() {
     }
 
     ///////////////////////////////////////FIX POPPING UP NEW INPUT FIELD ////////////////////////////////////////
-    const inputFIeld = ( handleInputChange, selectedFile, setSelectedFile, imgNo ) => {
+    const inputFIeld = ( handleInputChange, selectedFile, setSelectedFile ) => {
         return(
         <div className="flex items-center justify-center w-full">  
             <label
@@ -409,7 +494,7 @@ function UploadPoster() {
                                         onChange={handleNameChange}
                                     />
                                     <p className={ (!postNameValid && postName.length !== 0) || ( !postNameValid && submitAttempt > 0 ) ?
-                                        "":"hidden" }>
+                                        "bg-red-500 rounded-md pl-2 text-white rounded-md":"hidden" }>
                                         {t("uploadPosterFrame.titleLongerThan10Char")}
                                     </p>
                                 </div>
@@ -484,7 +569,7 @@ function UploadPoster() {
                                         />
                                     </div>
                                     <p className={ ( !posterDescriptionValid && posterDescription.length < 10 && posterDescription ) || ( !posterDescriptionValid && submitAttempt > 0 ) ?
-                                            "":"hidden" }>
+                                            "bg-red-500 rounded-md pl-2 text-white":"hidden" }>
                                             {t("uploadPosterFrame.descriptionLongerThan10Char")}
                                     </p>
                                 </div>
@@ -506,28 +591,27 @@ function UploadPoster() {
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     />
                                     <p className={ (!priceValid && price) || (!priceValid && submitAttempt > 0) ?
-                                        "":"hidden" }>
+                                        "bg-red-500 pl-2 text-white rounded-md":"hidden" }>
                                         {t("uploadPosterFrame.priceMustBeWhole")}
                                     </p>
                                 </div>
-                                
-
                                 {/* ********* FILE UPLOAD ******** */}
-                                <p className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" >{t("uploadPosterFrame.imgUploadText")} </p>
-                                <div>
-                                <div className="grid grid-cols-3 gap-2">
-                                    {/* handleInputChange, id,  selectedFile,  setSelectedFile  */}
-                                    
-                                    {inputFIeld( handleInputChange1, selectedFile1, setSelectedFile1, 0 )}
-                                    {inputFIeld( handleInputChange2, selectedFile2, setSelectedFile2, 1 )}
-                                    {inputFIeld( handleInputChange3, selectedFile3, setSelectedFile3, 2 )}
-                                    {inputFIeld( handleInputChange4, selectedFile4, setSelectedFile4, 3 )}
-                                    {inputFIeld( handleInputChange5, selectedFile5, setSelectedFile5, 4 )}
-                                    {inputFIeld( handleInputChange6, selectedFile6, setSelectedFile6, 5 )}
+                                <p className={ id ? "hidden" : "block mb-2 text-sm font-medium text-gray-900 dark:text-white"} >{t("uploadPosterFrame.imgUploadText")} </p>
+                                { id && !imgRed && <p className="grid grid-cols-3 gap-2">{t("uploadPosterFrame.imgEditLoading")}</p>}
+                                <div>   
+                                <div className=  { id && !imgRed ? "hidden": "grid grid-cols-3 gap-2"} >
+                                    {/* handleInputChange,  selectedFile,  setSelectedFile  */}
+                                    {inputFIeld( handleInputChange1, selectedFile1, setSelectedFile1 )}
+                                    {inputFIeld( handleInputChange2, selectedFile2, setSelectedFile2 )}
+                                    {inputFIeld( handleInputChange3, selectedFile3, setSelectedFile3 )}
+                                    {inputFIeld( handleInputChange4, selectedFile4, setSelectedFile4 )}
+                                    {inputFIeld( handleInputChange5, selectedFile5, setSelectedFile5 )}
+                                    {inputFIeld( handleInputChange6, selectedFile6, setSelectedFile6 )}
                                 </div>
                                 <p className={ !fileCheck() && submitAttempt > 0  ?
-                                        "":"hidden" }>
-                                        {t("uploadPosterFrame.mustUpload1")}
+                                    "":"hidden" }
+                                >
+                                    {t("uploadPosterFrame.mustUpload1")}
                                 </p>
                                 </div>
 
@@ -617,7 +701,7 @@ function UploadPoster() {
                                         })}
                                     </select>
                                     <p className={ (!cityValid && city) || (!cityValid && submitAttempt > 0) ?
-                                        "":"hidden" }>
+                                        "bg-red-500 pl-2 text-white rounded-md":"hidden" }>
                                         {t("uploadPosterFrame.cityMustBePicked")}
                                     </p>
                                 </div>
@@ -675,7 +759,7 @@ function UploadPoster() {
                                 >
                                     {t("uploadPosterFrame.addButton")}
                                 </button>)}
-                                <p className={ requestError ? "" : "hidden"} >
+                                <p className={ requestError ? "bg-red-500 pl-2 text-white rounded-md" : "hidden"} >
                                     {t("uploadPosterFrame.errorConnecting")}
                                 </p>
                             </form>

@@ -92,14 +92,14 @@ function Password() {
         {/* //////////////////////////////////////////////////////////////////////////////////////////////// */}
         <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
         <div className='flex flex-col gap-6'>
-            <h2 className='text-xl font-bold'>Change Password</h2>
+            <h2 className='text-xl font-bold'>{t("changePassword.changePasswordText")}</h2>
             {/* old password */}
             <div>
                 <label
                     htmlFor="password"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                    {t("registerFrame.password")}
+                    {t("changePassword.oldPassword")}
                 </label>
                 <input
                 type="password"
@@ -107,7 +107,7 @@ function Password() {
                 id="password"
                 onChange={(e) => setOldPwd(e.target.value)}
                 value={oldPwd}
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                className="bg-background border border-background text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
                 required
                 />
             </div>
@@ -117,7 +117,7 @@ function Password() {
                     htmlFor="password"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                    {t("registerFrame.password")}
+                    {t("changePassword.newPassword")}
                     <FontAwesomeIcon
                         icon={faCheck}
                         className={validPwd ? "valid" : "hide"}
@@ -135,7 +135,7 @@ function Password() {
                 id="password"
                 onChange={(e) => setPwd(e.target.value)}
                 value={pwd}
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                className="bg-background border border-background text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                 required
                 aria-invalid={validPwd ? "false" : "true"}
                 aria-describedby="pwdnote"
@@ -169,7 +169,7 @@ function Password() {
                 htmlFor="confirm-password"
                 className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                    {t("registerFrame.confirmPassword")}
+                    {t("changePassword.confirmNewPassword")}
                     <FontAwesomeIcon
                         icon={faCheck}
                         className={
@@ -189,7 +189,7 @@ function Password() {
                     id="confirm-password"
                     onChange={(e) => setMatchPwd(e.target.value)}
                     value={matchPwd}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                    className="bg-background border border-background text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
                     required
                     aria-invalid={validMatch ? "false" : "true"}
                     aria-describedby="confirmnote"
@@ -210,7 +210,7 @@ function Password() {
             </div>
             <div className='flex justify-end items-center my-4'> 
                 <button type="submit" className='bg-main font-medium transitions hover:bg-subMain border border-text text-text py-3 px-6 rounded w-full sm:w-auto'>
-                    Keisti Slatazodi
+                {t("changePassword.changePasswordButton")}
                 </button> 
             </div>
         </div>

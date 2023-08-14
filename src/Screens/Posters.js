@@ -1,10 +1,11 @@
 import { Link, useParams } from "react-router-dom";
 import PosterMaxDetail from "../Components/PosterMaxDetail"
 import AxiosFetch from "../hooks/AxiosFetch";
-
+import { useTranslation } from "react-i18next";
 import Layout from "../Layout/Layout"
 
 function Posters() {
+    const [t, i18n] = useTranslation("global");
     const {searchType} = useParams();
     
     const getAllPosters = `/api/v1/poster/get/search?${searchType}`;
@@ -17,7 +18,7 @@ function Posters() {
                 <div className="flex-colo gap-5">
                     <div className="flex-rows ">
                         <div className="border-[2px] border-main shadow-md p-2 rounded-3xl font-medium xs:w-52 md:w-[28rem] lg:w-96 flex flex-row justify-center bg-subMain text-text">
-                            <h1 className="tracking-wider text-lg font-md font-sans">All posters</h1>
+                            <h1 className="tracking-wider text-lg font-md font-sans">{t("allPosters.allPostersText")}</h1>
                         </div>
                     </div>
                     {posters && posters.map((poster, i) => (

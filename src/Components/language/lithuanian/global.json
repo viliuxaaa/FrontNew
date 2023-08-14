@@ -14,7 +14,7 @@
         "newPostButton": "Naujas skelbimas",
         "filterButton" : "Filtras",
         "allPosts" : "Visi skelbimai",
-        "dash" : "Valdymo panelė",
+        "dash" : "Registracija",
         "city" : "Miestas",
         "searchPlaceHolder" : "Paieška",
         "categoriesPlaceHolder" : "Kategorijos"
@@ -109,31 +109,7 @@
     },
     
 
-    "createPosterPage":{
-        "addNewPoster": "Prideti naują skelbimą",
-        "posterTitle": "Skelbimo pavadinimas:",
-        "posterDescription": "Prekės/paslaugos aprašymas",
-        "posterPrice":"Įrašykite prekės kainą (eur): ",
-        "categoryAName":"Pasirinkite prekes kategoriją: ",
-        "categoryBName": "Prekes kategorijos šaka: ",
-        "defaultChoicePText": "Pasirinkte kategorija",
-        "phoneNumber": "Kontaktinis numeris: ",
-        "phoneNumberTitle":"priimami formata: +370XXXXXXXX",
-        "city": "Iš kur pardavinėjama prekė: ",
-        "otherCity": "Įrašykite vietovę: ",
-        "website": "Nuoroda į prekės tinklalapį (jei toks yra):",
-        "videoLink": "Nuoroda į vaizdinę medžiagą (jei tokia yra):",
-        "imgUploadMessage": "Nuotraukas šiuo metu galima įkelti tik vėliau. Atsiprašome už nesklandumus",
-        "submitButton":"Įkelti skelbimą!",
-        "uploadFailed": "Nepavyko įkelti skelbimo, prašome patikrinti ar visi laukai nurodyti gerai",
-        "ufPostName": "Įrašykite tinkamą skelbimo pavadinimą!", 
-        "ufPostDescription": "Skelbimas privalo turėti bent minimalų apibūdinimą!",
-        "ufPhoneNumber": "telefono numerį pateikite formatu +3706XXXXXXX",
-        "ufCity": "Pasirinkite miestą!",
-        "ufCatA": "Pasirinkite prekės kategorija!",
-        "ufCatB": "Pasirinkite prekės kategorijos šaką!",
-        "ufPrice": "Įveskite tinkamą kainą!"
-    },
+   
 
     "loginFrame": {
         "signInText": "Prisijungti į paskyrą",
@@ -263,10 +239,10 @@
         "removeImage": "Pašalinti nuotrauką",
         "uploadImageIconText": "Įkelti nuotrauką",
         "max2Mb": "Iki 2Mb",
-        "EditPosterText": "Atnaujinti skelbimą",
+        "EditPosterText": "Atnaujinti skelbimą: ",
         "AddPosterText": "Naujas skelbimas",
         "titleText":"Pavadinimas *",
-        "titleLongerThan10Char":"Privalo būti ne trumpesnis nei 10 raidžių",
+        "titleLongerThan10Char":"Privalo būti ne trumpesnis nei 10 raidžių.",
         "firstCat": "Kategorija *",
         "1stCatMustBePicked": "Pasirinkte kategoriją",
         "2ndCat": "Kategorijos šaka *",
@@ -276,6 +252,7 @@
         "priceText": "Kaina * (eur)",
         "priceMustBeWhole": "Privalo būti sveikas skaičius",
         "imgUploadText": "Įkelkite nuotraukas *",
+        "imgEditLoading": "Kraunama...",
         "mustUpload1":"Būtina įkelti bent vieną nuotrauką",
         "stateText": "Būklė",
         "stateNew": "Naujas", 
@@ -292,6 +269,48 @@
         "requiredFields": "* - privalomi laukai",
         "addButton": "Įkelti skelbimą",
         "errorConnecting": "Klaida jungiantis prie serverio"
+    },
+
+    "changePassword": {
+        "changePasswordText": "Keisti slaptažodį",
+        "oldPassword":"Senas slaptažodis",
+        "newPassword":"Naujas slaptažodis",
+        "confirmNewPassword": "Patvirtinti slaptažodį",
+        "changePasswordButton": "Keisti slaptažodį"
+    },
+
+    "allPosters": {
+        "allPostersText": "Visi skelbimai",
+        "price": "Kaina:"
+    },
+
+    "myPosters": {
+        "posterListText": "Skelbimų sąrašas",
+        "searchPlaceHolder":"Ieškoti tarp skelbimų",
+        "refreshButton":"Atnaujinti",
+        "myPostersText": "Mano skelbimai"
+    },
+
+    "table": {
+        "img": "Nuotrauka",
+        "name": "Pavadinimas",
+        "cat": "Kategorija",
+        "subcat":"Kategorijos šaka",
+        "status":"Statusas",
+        "price": "Kaina",
+        "actions": "Veiksmai"
+    },
+
+    "myProfile": {
+        "myProfileText": "Mano profilis",
+        "helloText": "Sveiki, ",
+        "emailText": "El. paštas: ",
+        "roleText":"Rolė: ",
+        "profileUpdatedText":"Profilis atnaujintas",
+        "profileCreatedText": "Profilis sukurtas: ",
+        "updateInfoButton": "Atnaujinti informaciją:",
+        "updateFotoButton": "Pakeisti profilio nuotrauką",
+        "deleteProfileButton":"Ištrinti paskyrą"
     }
 }
 

@@ -5,19 +5,18 @@ import NotFound from "./Screens/NotFound";
 import Register from "./Screens/Register";
 import Posters from "./Screens/Posters";
 import UploadPoster from "./Screens/UploadPoster";
-import Demo from "./Screens/Demo";
+import Demo from "./Screens/DeadPages/Demo";
 import Dashboard from "./Screens/Dashboard/Admin/Dashboard";
 import SkelbimuList from "./Screens/Dashboard/Admin/SkelbimuList";
-import Profile from "./Screens/Dashboard/Profile";
 import Favorites from "./Screens/Dashboard/Favorites";
 import Password from "./Screens/Dashboard/Password";
 import SinglePoster from "./Screens/SinglePoster";
 import RequireAuth from './Components/RequireAuth';
 import Aos from 'aos';
-import Duk from "./Screens/Duk";
-import Taisykles from "./Screens/Taisykles";
-import Politika from "./Screens/Politika";
-import Kontaktai from "./Screens/Kontaktai";
+import Faq from "./Screens/DeadPages/Faq";
+import Rules from "./Screens/DeadPages/Rules";
+import Privacy from "./Screens/DeadPages/Privacy";
+import Contacts from "./Screens/DeadPages/Contacts";
 
 function App() {
   Aos.init();
@@ -32,19 +31,18 @@ function App() {
       <Route path='/' element={<HomeScreen />} />
       <Route path='*' element={<NotFound />} />
       <Route path="/skelbimas/:id" element={<SinglePoster />} />
-      <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/skelbimulist" element={<SkelbimuList />} />
-      <Route path="/duk" element={<Duk />} />
-      <Route path="/taisykles" element={<Taisykles />} />
-      <Route path="/politika" element={<Politika />} />
-      <Route path="/kontaktai" element={<Kontaktai />} />
+      <Route path="/duk" element={<Faq />} />
+      <Route path="/taisykles" element={<Rules />} />
+      <Route path="/politika" element={<Privacy />} />
+      <Route path="/kontaktai" element={<Contacts />} />
       
       <Route element={<RequireAuth allowedRoles={['ADMIN', 'MANAGER', 'USER']} />}>
         <Route path="/upload" element={<UploadPoster />} />
         <Route path="/edit/:id" element={<UploadPoster />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/password" element={<Password />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         
         
       </Route>

@@ -47,7 +47,7 @@ function SideBar({admin, children}) {
 
     const Links = [
         {
-            name: "Valdymo skydelis",
+            name: "Mano Profilis",
             link: "/dashboard",
             icon: BsFillGridFill,
             },
@@ -61,16 +61,16 @@ function SideBar({admin, children}) {
             link: "/upload",
             icon: RiMovie2Fill,
             },
-            {
-            name: "Atnaujinti profilį",
-            link: "/profile",
-            icon: FiSettings,
-            },
-            {
-            name: "Mėgstamiausi skelbimai",
-            link: "/favorites",
-            icon: FaHeart,
-            },
+            // {
+            // name: "Atnaujinti profilį",
+            // link: "/profile",
+            // icon: FiSettings,
+            // },
+            // {
+            // name: "Mėgstamiausi skelbimai",
+            // link: "/favorites",
+            // icon: FaHeart,
+            // },
             {
             name: "Keisti slaptažodį",
             link: "/password",
