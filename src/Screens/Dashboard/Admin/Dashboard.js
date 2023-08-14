@@ -3,8 +3,10 @@ import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import useAuth from '../../../hooks/useAuth';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { useTranslation } from "react-i18next";
 
 function Dashboard() {
+    const [t, i18n] = useTranslation("global");
 // method to handle date formating ++++++++++++++++
     function formatTimestamp(timestamp) {
         const options = {
@@ -41,7 +43,7 @@ function Dashboard() {
 
   return (
     <SideBar admin={false}>
-        <h2 className='text-xl font-bold'>Mano Profilis</h2>
+        <h2 className='text-xl font-bold'>{t("myProfile.myProfileText")}</h2>
                     <div className="p-2 md:p-8 bg-main bg-opacity-85 shadow mt-24 md:mt-14">
                         <div className="grid grid-cols-1 md:grid-cols-3">
                         <div className="grid grid-cols-3 md:pb-16 text-center order-last md:order-first mt-20 md:mt-0">
@@ -70,18 +72,18 @@ function Dashboard() {
                         <div className="mt-10 text-center border-b border-gray-600 pb-12">
                         <h1 className="text-4xl font-medium text-gray-700">
                             {/* username */}
-                        <span className="font-light text-gray-600">Sveiki,</span> {userData?.username}
+                        <span className="font-light text-gray-600">{t("myProfile.helloText")}</span> {userData?.username}
                         </h1>
                         {/* role / update date / create date */}
-                        <p className="font-normal text-gray-600 mt-10">Jusu El-pastas yra <span className="font-bold text-gray-600">{userData?.email}</span></p>
-                        <p className="font-normal text-gray-600 mt-3">Jusu Role yra <span className="font-bold text-gray-600">{userData?.role}</span></p>
+                        <p className="font-normal text-gray-600 mt-10">{t("myProfile.emailText")}<span className="font-bold text-gray-600">{userData?.email}</span></p>
+                        <p className="font-normal text-gray-600 mt-3">{t("myProfile.roleText")}<span className="font-bold text-gray-600">{userData?.role}</span></p>
                         {
                             userData?.updatedAt && 
                             <p className="font-normal text-gray-600 mt-3">
-                                Profilis Atnaujintas <span className="font-bold text-gray-600">{formatTimestamp(userData?.updatedAt)}</span></p>
+                                {t("myProfile.profileUpdatedText")}<span className="font-bold text-gray-600">{formatTimestamp(userData?.updatedAt)}</span></p>
                         }
                         <p className="font-normal text-gray-600 mt-3">
-                            Profilis Sukurtas{" "}
+                        {t("myProfile.profileCreatedText")}{" "}
                         <span className="font-bold text-gray-600">
                             {formatTimestamp(userData?.createdAt)}
                         </span>
@@ -91,13 +93,13 @@ function Dashboard() {
                             <div className="flex flex-col sm:flex-row gap-5 justify-between mt-10 md:justify-center">
                                 {/* update info / update img / delete */}
                                 <button className="text-white py-2 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
-                                    Atnaujinti Informacija
+                                {t("myProfile.updateInfoButton")}
                                 </button>
                                 <button className="text-white py-2 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
-                                    Profilio Nuotrauka
+                                {t("myProfile.updateFotoButton")}
                                 </button>
                                 <button className="text-white py-2 px-4 uppercase rounded bg-red-600 hover:bg-red-700 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
-                                    Istrinti Paskyra
+                                {t("myProfile.deleteProfileButton")}
                                 </button>
                             </div>
                         </div>
