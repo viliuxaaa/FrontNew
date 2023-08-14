@@ -25,7 +25,8 @@ function PosterInfo({poster}) {
                             <h1 className="my-1 text-lg lg:text-2xl">Aprašymas</h1>
                         </div>
                         <div className="bg-subMain h-fit p-3 border-y-2 border-darkMain">
-                            <p className="break-after-column text-base sm:text-2xl pb-10" dangerouslySetInnerHTML={{ __html: poster?.description }} />                            
+                        <p style={{ whiteSpace: "pre-line" }} className="break-after-column text-base sm:text-2xl pb-10" dangerouslySetInnerHTML={{ __html: poster?.description }} />
+                            
                         </div>
                         <div className="bg-subMain h-fit p-3 border-b-2 border-darkMain">
                             <p className="text-base md:text-2xl flex">Tel: <span className='font-medium pl-14 md:pl-20'>8 654 844 54</span></p>
