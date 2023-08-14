@@ -9,9 +9,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react';
 import { useEffect } from 'react';
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import { useRef } from 'react';
-import { useTranslation } from "react-i18next";
 import useAuth from '../../hooks/useAuth';
+import { useTranslation } from "react-i18next";
 import { useNavigate } from 'react-router-dom';
 
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{6,24}/;

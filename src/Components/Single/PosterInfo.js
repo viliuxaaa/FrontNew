@@ -1,10 +1,15 @@
 import React from 'react'
 import ImageView from '../ImageView'
+import PosterMenu from './PosterMenu';
+import useAuth from '../../hooks/useAuth';
+import {Link} from 'react-router-dom';
 
 function PosterInfo({poster}) {
+    const {auth} = useAuth(); 
 
     const dateCreated = poster?.createdAt.substring(0,10);
     const dateUpdated = poster.updatedAt && poster.updatedAt.substring(0,10);
+  
     
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 mt-10 md:mt-10 mb-20">
@@ -30,9 +35,10 @@ function PosterInfo({poster}) {
                         </div>
                         <div className="bg-subMain rounded-b-xl h-fit p-3 border-y-2 border-darkMain">
                             <p className="text-base md:text-2xl flex">Sukurtas: <span className='font-medium pl-2'>{dateCreated}</span></p>
-                            {dateUpdated && <p className="text-base md:text-2xl"><span className='font-medium pl-10'>Atnaujintas:</span> {dateUpdated}</p>}
+                            {dateUpdated && <p className="text-base md:text-2xl"><span className='font-medium pl-10'>Atnaujintas:</span> {dateUpdated}</p>} 
                         </div>
                     </div>
+                        { auth.userId === poster.userId && <PosterMenu id={poster.posterId}/>}
                 </div>
             </div>
   )

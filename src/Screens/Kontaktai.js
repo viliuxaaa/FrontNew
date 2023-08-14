@@ -1,43 +1,31 @@
-import React from 'react'
-import Layout from '../Layout/Layout'
+import React from "react";
+import Layout from "../Layout/Layout";
+import { useTranslation } from "react-i18next";
 
 function Kontaktai() {
+  const [t, i18n] = useTranslation("global");
   return (
     <Layout>
-        <div className='flex-colo gap-8 w-full min-h-screen text-text lg:py-20 py-10 px-6'>
-            <div className="p-8 border bg-subMain border-gray-300 rounded-lg shadow-md">
-                <h2 className="text-lg font-semibold mb-4">Portalo administracijos kontaktai</h2>
-                <p className="mb-2">
-                    UAB „Aštuonios rankos“
-                </p>
-                <p className="mb-2">
-                    El. paštas: info@neskelbiu.lt
-                </p>
-                <p className="mb-2">
-                    Telefonas: +370 865 84454
-                </p>
-                <p className="mb-2">
-                    Faksas: (8-5) 22 88884
-                </p>
+      <div className="flex-colo gap-8 w-full min-h-screen text-text lg:py-20 py-10 px-6">
+        <div className="p-8 border bg-subMain border-gray-300 rounded-lg shadow-md">
+          <h2 className="text-lg font-semibold mb-4">{t("contactsFrame.1")}</h2>
+          <p className="mb-2">{t("contactsFrame.2")}</p>
+          <p className="mb-2">{t("contactsFrame.3")}</p>
+          <p className="mb-2">{t("contactsFrame.4")}</p>
+          <p className="mb-2">{t("contactsFrame.5")}</p>
 
-                <p className="mb-2">
-                    Darbo laikas:
-                </p>
-                <ul className="list-disc ml-6 mb-2">
-                    <li>I-V - 8.20-17.00</li>
-                    <li>VI-VII - nedirbame</li>
-                </ul>
+          <p className="mb-2">{t("contactsFrame.6")}</p>
+          <ul className="list-disc ml-6 mb-2">
+            <li>{t("contactsFrame.7")}</li>
+            <li>{t("contactsFrame.8")}</li>
+          </ul>
 
-                <p className="mb-2">
-                    Įmonės kodas 132333124
-                </p>
-                <p className="mb-2">
-                    PVM mok. kodas LT313115229
-                </p>
-            </div>
+          <p className="mb-2">{t("contactsFrame.9")}</p>
+          <p className="mb-2">{t("contactsFrame.10")}</p>
         </div>
-      </Layout>
-  )
+      </div>
+    </Layout>
+  );
 }
 
-export default Kontaktai
+export default Kontaktai;

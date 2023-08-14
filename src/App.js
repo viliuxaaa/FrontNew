@@ -41,6 +41,7 @@ function App() {
       
       <Route element={<RequireAuth allowedRoles={['ADMIN', 'MANAGER', 'USER']} />}>
         <Route path="/upload" element={<UploadPoster />} />
+        <Route path="/edit/:id" element={<UploadPoster />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/password" element={<Password />} />
         <Route path="/profile" element={<Profile />} />

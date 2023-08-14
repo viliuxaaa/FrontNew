@@ -14,8 +14,8 @@ function SideBar({admin, children}) {
             icon:BsFillGridFill,
         },
         {
-            name:"Movie List",
-            link:"/movieslist",
+            name:"Visi Skelbimai",
+            link:"/skelbimulist",
             icon:FaListAlt,
         },
         {

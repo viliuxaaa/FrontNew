@@ -1,9 +1,11 @@
 import Layout from "../Layout/Layout"
-import { useState } from "react";
-import { useNavigate} from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from 'react-router-dom';
 import useAuth from "../hooks/useAuth";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import { useTranslation } from "react-i18next"
+import axios from '../api/axios';
+import AxiosFetch from '../hooks/AxiosFetch';
+import { useTranslation } from "react-i18next";
 import { computerAEnum as catA,
     categoryTranslationKeys as langFileStrings,
     allArrays,
@@ -11,25 +13,40 @@ import { computerAEnum as catA,
   } from '../enums/AllEnumArrays';
 import { CiCircleRemove } from 'react-icons/ci'//WHAT WAS I IMPORTED FOR?
 
+
 // ======== PRIDETI EDIT FUNKCIONALUMA ( KAINA, NUOTRAUKOS?, TEL NR, DESCRIPTION )
 
 const PRICE_REGEX = /^[0-9]+$/;
 const CITY_REGEX = /^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ\s]+$/;
-const PHONE_REGEX = /^[+]?\d+$/;
+const PHONE_REGEX = /^\d{8,15}$/;
 const CATEGORY_REGEX = /^(?=.*[a-zA-Z_]{4,})[a-zA-Z_]*$/;
-const NAME_DESCRIPTION_REGEX = /^(?=.*[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ0-9\s]{5,})[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ0-9\s]*$/;
+const NAME_DESCRIPTION_REGEX = /^(?=.{10,1000}$)(?=.*[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ0-9\s]{5,})[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ0-9\s]*$/;
 
 function UploadPoster() {
     const privateAxios = useAxiosPrivate();
     const [t, i18n] = useTranslation("global");
     const [tempLangString, setTempLangString] = useState("");
-    const {auth} = useAuth();  
 
+    const {auth} = useAuth();
+    const { id } = useParams();
+    const [blob1URL, setBlob1URL] = useState();
+    const [blob2URL, setBlob2URL] = useState();
+    const [blob3URL, setBlob3URL] = useState();
+    const [blob4URL, setBlob4URL] = useState();
+    const [blob5URL, setBlob5URL] = useState();
+    const [blob6URL, setBlob6URL] = useState();
+    
+    const [submitAttempt, setSubmitAttempt] = useState(0);
+
+    const posterInfoURL = `api/v1/poster/get/`+ id;
     const createURL="api/v1/poster/"+auth.userId+"/create"; //GALIMAI PERKELTI EDIT FUNKCIONALUMA I KITA FORMA
     // const updateIMG_URL = "api/v1/images/poster/"+auth.userId+"/"+posterId+"/upload"
     //Cannot use updateIMGURL because it updates too slow with the poster ID
     const images = new FormData();
     
+    const [posterEdit, setPosterEdit] = useState( null );
+    const [posterEditImgCount, setPosterEditImageCount] = useState();
+
     const [requestError, setRequestError] = useState("");
 
     const [postName, setPostName] = useState("");
@@ -48,7 +65,7 @@ function UploadPoster() {
     const [categoryB, setCategoryB] = useState("");
     const [categoryBValid, setCategoryBValid] = useState(false);
     
-    const [phoneNumber, setPhoneNumber] = useState(" ");
+    const [phoneNumber, setPhoneNumber] = useState("");
     const [phoneNumberValid, setPhoneNumberValid] = useState(false);
 
     const [city, setCity] = useState('');
@@ -79,23 +96,30 @@ function UploadPoster() {
             categoryAValid &&
             categoryBValid &&
             phoneNumberValid &&
-            cityValid 
+            cityValid &&
+            fileCheck()
         ){
-            if (
-                selectedFile1 ||
-                selectedFile2 ||
-                selectedFile3 ||
-                selectedFile4 ||
-                selectedFile5 ||
-                selectedFile6 
-            ){
-                return true;
-            }
+            return true;
+        } else {
             return false;
-        } return false;
+        }
+    }
+    function fileCheck(){
+        if (
+            selectedFile1 ||
+            selectedFile2 ||
+            selectedFile3 ||
+            selectedFile4 ||
+            selectedFile5 ||
+            selectedFile6 
+        ){
+            return true;
+        }
+        return false;
     }
 
     async function handleSubmit(event)  {
+        setSubmitAttempt(submitAttempt+1)
         event.preventDefault();
         let check = posterCheck();
 
@@ -134,7 +158,7 @@ function UploadPoster() {
     }
     async function uploadImg( id ){
         try{
-            // console.log("api/v1/images/poster/"+auth.userId+"/"+id+"/upload")
+            console.log("api/v1/images/poster/"+auth.userId+"/"+id+"/upload")
             await privateAxios.post("api/v1/images/poster/"+auth.userId+"/"+id+"/upload", images, {
                 headers:{
                     'Content-Type':'multipart/form-data'
@@ -145,6 +169,67 @@ function UploadPoster() {
             console.error('Error uploading image: ' + error); 
         }
     }
+    //============================= POSTER UPDATE FUNCTIONALITY =======================
+    useEffect(() => {
+        if ( id ){ 
+        async function loadPoster() {
+            try{
+                const response = await axios.get(posterInfoURL);
+                
+                
+                setPostName(response.data.postName);
+                setPostNameValid(true);//TECHNICALLY SHOULD CHECK WITH REGEX, HOWEVER OLDER SEEDED POSTERS MIGHT NOT MEET THE REQUIREMENTS
+
+                setPosterDescription(response.data.description);
+                setPosterDescriptionValid(true);
+
+                setPrice(response.data.price);
+                setPriceValid(true);
+            
+                setPhoneNumber(response.data.phoneNumber);
+                setPhoneNumberValid(true);
+    
+                setCategoryA(response.data.categoryA);
+                setCategoryAValid(CATEGORY_REGEX.test(response.data.categoryA));
+
+                setCategoryB(response.data.categoryB);
+                setCategoryBValid(CATEGORY_REGEX.test(response.data.categoryB)); 
+
+                setCity(response.data.city);
+                setCityValid(CITY_REGEX.test(response.data.city));
+
+                setWebsite(response.data.website);
+                setVideoLink(response.data.videoLink);
+
+                setPosterEdit(response.data);
+                // setPosterEditImageCount(Object.keys(posterEdit.images).length); //sets how many times should useEffect owrk to lead images
+                
+                const loadImageFromBackend = async () => {
+                    if (id) {
+                      try {
+                        getImgs();             
+          
+                      //   console.log(selectedFile1)
+                      //   console.log(selectedFile2)
+                       
+                      } catch (err) {
+                        console.log(err);
+                      }
+                    }
+                  };
+              
+                  loadImageFromBackend();
+
+
+            } catch (error){
+                error.message = "Connection to the server failed";
+                setRequestError(error);
+            }
+        }
+        loadPoster();
+  
+       }
+      },[])
 
     //================= Setting all data and select windows ==============================
     const handleNameChange = (e) => {
@@ -162,15 +247,12 @@ function UploadPoster() {
 
       // ======= event watch makes sure that once the primary category is selected, a selection for secondary will appear
     const handleSelectA = (e) => {
-        setCategoryAValid(CATEGORY_REGEX.test());
+        setCategoryAValid(CATEGORY_REGEX.test(e.target.value));
         //when not using local simple variable the code displays previous selection, (with const and setConst it works too slow)
         let selection = catA.indexOf(e.target.value)
         setTempLangString(langFileStrings[selection]);
         setCatBArray(allArrays[selection]);
         setCategoryA(e.target.value);
-        
-        // console.log(e.target.value)
-        // console.log(catA.indexOf(e.target.value)) 
     }
     const handleSelectB = (e) => { //testing using temmporary variable because setCategoryB works slower thus console shows previous meaning of it
         setCategoryBValid(CATEGORY_REGEX.test(e.target.value) )
@@ -192,49 +274,61 @@ function UploadPoster() {
     }
     ///////////////////////////////////////////////////////FILE INPUT HANDLING//////////////////////////////////
     const handleInputChange1 = (e) => {
-        if (e.target.files[0].size < 2097152 ){
-            setSelectedFile1(e.target.files[0])    
-            console.log()
-        }
+        setSelectedFile1(e.target.files[0])
     }
     const handleInputChange2 = (e) => {
-        if (e.target.files[0]?.size < 2097152){
-            setSelectedFile2(e.target.files[0])
-           
-        }
+        setSelectedFile2(e.target.files[0])  
     }
     const handleInputChange3 = (e) => {
-        if (e.target.files[0].size < 2097152){
-            setSelectedFile3(e.target.files[0])
-        }
+        setSelectedFile3(e.target.files[0])
     }
     const handleInputChange4 = (e) => {
-        if (e.target.files[0].size < 2097152){
-            setSelectedFile4(e.target.files[0])
-            
-        }
+        setSelectedFile4(e.target.files[0])
     }
     const handleInputChange5 = (e) => {
-        if (e.target.files[0].size < 2097152){
-            setSelectedFile5(e.target.files[0])
-            
-        }
+        setSelectedFile5(e.target.files[0])
     }
     const handleInputChange6 = (e) => {
-        if (e.target.files[0].size < 2097152){
-            setSelectedFile6(e.target.files[0])
-            
-        }
+        setSelectedFile6(e.target.files[0])
     }
 
-    const inputFIeld = ( handleInputChange, id, selectedFile, setSelectedFile ) => {
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    async function getImgs(){
+        let imgArray = [];
+        try{
+            for(let i= 0 ; i < 6 ; ++i){
+                const response = await axios.get(`/api/v1/images/poster/get/${id}/${i}`,{
+                    responseType: 'blob',
+                })
+
+                // console.log(response.data)
+                imgArray.push(response.data);      
+            }
+            // console.log(imgArray)
+            
+            setSelectedFile1(imgArray[0])
+            console.log(imgArray)
+            setSelectedFile2(imgArray[1])
+            setSelectedFile3(imgArray[2])
+            setSelectedFile4(imgArray[3])
+            setSelectedFile5(imgArray[4])
+            setSelectedFile6(imgArray[5])
+
+            setBlob1URL(URL.createObjectURL(imgArray[0]));
+        } catch(err) {
+            console.log(err)
+        }
+        
+    }
+
+    ///////////////////////////////////////FIX POPPING UP NEW INPUT FIELD ////////////////////////////////////////
+    const inputFIeld = ( handleInputChange, selectedFile, setSelectedFile, imgNo ) => {
         return(
         <div className="flex items-center justify-center w-full">  
             <label
-                
                 className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
             >
-                
                 { selectedFile ? 
                 (
                 <>
@@ -243,12 +337,12 @@ function UploadPoster() {
                         setSelectedFile(null)
                     }}>
                         <img
-                            src={URL.createObjectURL(selectedFile)}
+                            src={ URL.createObjectURL(selectedFile) }
                             alt="Selected File Preview"
                             className=" object-contain rounded-lg h-[90px]"
                         />
-                        <p className="bg-subMain m-2 text-xs text-gray-500 dark:text-gray-400">
-                            <span className="font-semibold" >Remove image</span> 
+                        <p className="m-2 text-xs text-gray-500 dark:text-gray-400">
+                            <span className="font-semibold" >{t("uploadPosterFrame.removeImage")}</span> 
                         </p>
                     </button>
                     </div>
@@ -272,15 +366,13 @@ function UploadPoster() {
                         />
                     </svg>
                     <p className="m-2 text-xs text-gray-500 dark:text-gray-400">
-                        <span className="font-semibold">Upload picture</span>
+                        <span className="font-semibold">{t("uploadPosterFrame.uploadImageIconText")}</span>
                         <br/>
-                        <span className="font-semibold"> up to 2 Mb size</span> 
+                        <span className="font-semibold">{t("uploadPosterFrame.max2Mb")}</span> 
                     </p>
-                     <input type="file" className="hidden"onChange={handleInputChange} accept="image/png, image/webp, image/jpeg" />
+                     <input type="file" className="hidden" onChange={handleInputChange} accept="image/png, image/webp, image/jpeg" />
                     </div>
                 </>)}
-                
-               
             </label>
         </div>);
     }
@@ -292,17 +384,22 @@ function UploadPoster() {
                 <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto min-h-screen text-text">
                     <div className="w-full bg-gradient-to-t from-accentLower from-10% to-background to-90% rounded-lg shadow dark:border md:mt-0 sm:max-w-xl xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                            <h1 className="text-2xl flex-rows font-bold leading-tight tracking-tight text-gray-900 md:text-2x">
-                                Add a poster
+                            { id ? <h1 className="text-2xl flex-rows font-bold leading-tight tracking-tight text-gray-900 md:text-2x">
+                            {t("uploadPosterFrame.EditPosterText")} {postName}
+                            </h1> : <h1 
+                                className="text-2xl flex-rows font-bold leading-tight tracking-tight text-gray-900 md:text-2x"
+                            >
+                                {t("uploadPosterFrame.AddPosterText")}
                             </h1>
+                            }
                             <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                                 {/* ********* TITLE ******** */}
-                                <div className="mb-6">
+                                <div className={ id ? "hidden" : "mb-6"}>
                                     <label
                                         htmlFor="posterName"
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     >
-                                        Title
+                                        {t("uploadPosterFrame.titleText")}
                                     </label>
                                     <input
                                         type="text"
@@ -311,24 +408,20 @@ function UploadPoster() {
                                         value={postName} 
                                         onChange={handleNameChange}
                                     />
-                                    {
-                                        postNameValid && postName.length !== 0 ?
-                                        <></>:<></>
-                                    }
-                                    <p className={ postNameValid && postName.length !== 0 ?
+                                    <p className={ (!postNameValid && postName.length !== 0) || ( !postNameValid && submitAttempt > 0 ) ?
                                         "":"hidden" }>
-                                        Title should be concise!!!
+                                        {t("uploadPosterFrame.titleLongerThan10Char")}
                                     </p>
                                 </div>
 
                                 {/* ********* CATEGORY A ******** */}
-                                <div>
+                                <div className={ id ? "hidden" : ""}>
                                     <label
                                         htmlFor="categoryA"
                                         onChange={handleSelectA}
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     >
-                                        First category
+                                       {t("uploadPosterFrame.firstCat")}
                                     </label>
                                     <select id="categoryA" 
                                         onChange={handleSelectA}
@@ -342,16 +435,20 @@ function UploadPoster() {
                                             );
                                         })}
                                     </select>
+                                    <p className={ (!categoryAValid && categoryA) || (!categoryAValid && submitAttempt > 0)  ?
+                                        "":"hidden" }>
+                                       {t("uploadPosterFrame.1stCatMustBePicked")}
+                                    </p>
                                     
                                 </div>
 
                                 {/* ********* CATEGORY B ******** */}
-                                <div>
+                                <div className={ id ? "hidden" : ""}>
                                     <label
                                         htmlFor="categoryB"
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     >
-                                        Second category
+                                        {t("uploadPosterFrame.2ndCat")}
                                     </label>
                                     <select 
                                         id="categoryB" 
@@ -367,31 +464,40 @@ function UploadPoster() {
                                         })}
                                         {/* {console.log(catBArray)} */}
                                     </select>
+                                    <p className={ (!categoryBValid && categoryB) || ( !categoryBValid && submitAttempt > 0 )  ?
+                                        "":"hidden" }>
+                                        {t("uploadPosterFrame.2ndCatMustBePicked")}
+                                    </p>
                                 </div>
 
                                 {/* ********* DESCRIPTION ******** */}
-                                <div className="mb-6 flex-rows">
-                                    <textarea
-                                        id="posterDescription"
-                                        rows={7}
-                                        className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="Description"
-                                        maxLength={1000}
-                                        value={posterDescription} 
-                                        onChange={handleDescriptionChange}
-                                    />
+                                <div>
+                                    <div className="mb-6 flex-rows">
+                                        <textarea
+                                            id="posterDescription"
+                                            rows={7}
+                                            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            placeholder={t("uploadPosterFrame.descriptionPlaceHolder")}
+                                            maxLength={1000}
+                                            value={posterDescription} 
+                                            onChange={handleDescriptionChange}
+                                        />
+                                    </div>
+                                    <p className={ ( !posterDescriptionValid && posterDescription.length < 10 && posterDescription ) || ( !posterDescriptionValid && submitAttempt > 0 ) ?
+                                            "":"hidden" }>
+                                            {t("uploadPosterFrame.descriptionLongerThan10Char")}
+                                    </p>
                                 </div>
-
                                 {/* ********* PRICE ******** */}
                                 <div className="mb-6">
                                     <label
                                         htmlFor="price"
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     >
-                                        Price (eur)
+                                       {t("uploadPosterFrame.priceText")}
                                     </label>
                                     <input
-                                        type="number"
+                                        type="text"
                                         id="price"
                                         step = "1"
                                         min = "0"
@@ -399,18 +505,30 @@ function UploadPoster() {
                                         onChange={handlePriceChange}
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     />
+                                    <p className={ (!priceValid && price) || (!priceValid && submitAttempt > 0) ?
+                                        "":"hidden" }>
+                                        {t("uploadPosterFrame.priceMustBeWhole")}
+                                    </p>
                                 </div>
+                                
 
                                 {/* ********* FILE UPLOAD ******** */}
-                                
+                                <p className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" >{t("uploadPosterFrame.imgUploadText")} </p>
+                                <div>
                                 <div className="grid grid-cols-3 gap-2">
                                     {/* handleInputChange, id,  selectedFile,  setSelectedFile  */}
-                                    {inputFIeld( handleInputChange1, "dropzone-file1", selectedFile1, setSelectedFile1 )}
-                                    {inputFIeld( handleInputChange2, "dropzone-file2", selectedFile2, setSelectedFile2 )}
-                                    {inputFIeld( handleInputChange3, "dropzone-file3", selectedFile3, setSelectedFile3 )}
-                                    {inputFIeld( handleInputChange4, "dropzone-file4", selectedFile4, setSelectedFile4 )}
-                                    {inputFIeld( handleInputChange5, "dropzone-file5", selectedFile5, setSelectedFile5 )}
-                                    {inputFIeld( handleInputChange6, "dropzone-file6", selectedFile6, setSelectedFile6 )}
+                                    
+                                    {inputFIeld( handleInputChange1, selectedFile1, setSelectedFile1, 0 )}
+                                    {inputFIeld( handleInputChange2, selectedFile2, setSelectedFile2, 1 )}
+                                    {inputFIeld( handleInputChange3, selectedFile3, setSelectedFile3, 2 )}
+                                    {inputFIeld( handleInputChange4, selectedFile4, setSelectedFile4, 3 )}
+                                    {inputFIeld( handleInputChange5, selectedFile5, setSelectedFile5, 4 )}
+                                    {inputFIeld( handleInputChange6, selectedFile6, setSelectedFile6, 5 )}
+                                </div>
+                                <p className={ !fileCheck() && submitAttempt > 0  ?
+                                        "":"hidden" }>
+                                        {t("uploadPosterFrame.mustUpload1")}
+                                </p>
                                 </div>
 
                                 {/* ********* BR ******** */}
@@ -422,15 +540,16 @@ function UploadPoster() {
                                         htmlFor="state"
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     >
-                                        State
+                                        {t("uploadPosterFrame.stateText")}
                                     </label>
                                     <select
                                         id="state"
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     >
-                                        <option>New</option>
-                                        <option>Used</option>
+                                        <option>{t("uploadPosterFrame.stateNew")}</option>
+                                        <option>{t("uploadPosterFrame.stateUsed")}</option>
                                     </select>
+                                    {/* Needs validation if it's goig to be used */}
                                 </div>
 
                                 {/* ********* BR ******** */}
@@ -442,43 +561,49 @@ function UploadPoster() {
                                         htmlFor="who"
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     >
-                                        You are
+                                        {t("uploadPosterFrame.youAre")}
                                     </label>
                                     <select
                                         id="who"
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     >
-                                        <option>Privatus</option>
-                                        <option>Juridinis</option>
+                                        <option>{t("uploadPosterFrame.private")}</option>
+                                        <option>{t("uploadPosterFrame.company")}</option>
                                     </select>
+                                    {/* needs validation if it's going to be used */}
                                 </div>
 
-                                {/* ********* Tel Nr ******** */}
-                                <div className="mb-6">
+                                {/* ********* Tel Nr *********/}
+                                <div className={ id ? "hidden" : "mb-6"}>
                                     <label
                                         htmlFor="tel"
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     >
-                                        Phone number
+                                        {t("uploadPosterFrame.phoneNumberText")}
                                     </label>
                                     <div className="flex-rows">
                                         <h1>+</h1>
                                         <input
                                             type="tel"
                                             id="phoneNumber"
+                                            maxLength={15}
                                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             onChange={handlePhoneNumberChange}
                                         />
-                                    </div>  
+                                    </div>
+                                    <p className={ (!phoneNumberValid && submitAttempt>0) || (!phoneNumberValid && phoneNumber) ?
+                                        "":"hidden" }>
+                                        {t("uploadPosterFrame.phoneNumberMustHave")}
+                                    </p>  
                                 </div>
 
                                 {/* ********* City ******** */}
-                                <div>
+                                <div className={ id ? "hidden" : ""}>
                                     <label
                                         htmlFor="city"
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     >
-                                        City
+                                        {t("uploadPosterFrame.cityText")}
                                     </label>
                                     <select 
                                         id="city" 
@@ -491,6 +616,10 @@ function UploadPoster() {
                                             );
                                         })}
                                     </select>
+                                    <p className={ (!cityValid && city) || (!cityValid && submitAttempt > 0) ?
+                                        "":"hidden" }>
+                                        {t("uploadPosterFrame.cityMustBePicked")}
+                                    </p>
                                 </div>
 
                                 {/* ********* WEB LINK ******** */}
@@ -500,7 +629,7 @@ function UploadPoster() {
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                         
                                     >
-                                        Web link
+                                       {t("uploadPosterFrame.webLink")}
                                     </label>
                                     <input
                                         type="text"
@@ -517,7 +646,7 @@ function UploadPoster() {
                                         htmlFor="video"
                                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     >
-                                        Video link
+                                        {t("uploadPosterFrame.videoLink")}
                                     </label>
                                     <input
                                         type="text"
@@ -527,13 +656,28 @@ function UploadPoster() {
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     />
                                 </div>
-
+                                <div className="mb-6">
+                                    <p className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        {t("uploadPosterFrame.requiredFields")}
+                                    </p>
+                                </div>
+                                { id ?
+                                (<button
+                                    type="submit"
+                                    className="border-[2px] border-main w-full shadow-md bg-subMain hover:text-black text-text bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                                >
+                                    Save updated poster
+                                </button> 
+                                ) : (
                                 <button
                                     type="submit"
                                     className="border-[2px] border-main w-full shadow-md bg-subMain hover:text-black text-text bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                                 >
-                                    Add
-                                </button>
+                                    {t("uploadPosterFrame.addButton")}
+                                </button>)}
+                                <p className={ requestError ? "" : "hidden"} >
+                                    {t("uploadPosterFrame.errorConnecting")}
+                                </p>
                             </form>
                         </div>
                     </div>
