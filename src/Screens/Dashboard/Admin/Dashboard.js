@@ -6,12 +6,14 @@ import { useState } from 'react';
 import { BsPencilSquare } from 'react-icons/bs';
 import PictureUploadModal from "../../../Components/Modals/PictureUploadModal";
 import DeleteUserModal from "../../../Components/Modals/DeleteUserModal"
+import UpdateUserInfoModal from '../../../Components/Modals/UpdateUserInfoModal';
 
 function Dashboard() {
     
 
     const [modal1Open, setModal1Open ] = useState(false)
     const [modal2Open, setModal2Open ] = useState(false)
+    const [modal3Open, setModal3Open ] = useState(false)
 
 // method to handle date formating ++++++++++++++++
     function formatTimestamp(timestamp) {
@@ -60,6 +62,11 @@ function Dashboard() {
         <DeleteUserModal
             modalOpen={modal2Open} 
             setModalOpen={setModal2Open}
+        />
+        <UpdateUserInfoModal
+            modalOpen={modal3Open}
+            setModalOpen={setModal3Open}
+            user={userData}
         />
         <h2 className='text-xl font-bold'>Mano Profilis</h2>
             <div className="p-2 md:p-8 bg-main bg-opacity-85 shadow mt-24 md:mt-14">
@@ -131,12 +138,16 @@ function Dashboard() {
                 <div className='text-right py-2'>
                     <div className="flex flex-col sm:flex-row gap-5 justify-between mt-10 md:justify-center">
                         {/* update info / update img / delete */}
-                        <button className="text-white py-2 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800
+                        <button
+                            onClick={() => setModal3Open(true)} 
+                            className="text-white py-2 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800
                             shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
                         >
                             Atnaujinti Informacija
                         </button>
-                        <button onClick={() => setModal1Open(true)} className="text-white py-2 px-4 uppercase rounded
+                        <button 
+                            onClick={() => setModal1Open(true)} 
+                            className="text-white py-2 px-4 uppercase rounded
                             bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
                         >
                             Įkelti Profilio Nuotrauka
