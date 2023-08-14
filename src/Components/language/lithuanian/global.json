@@ -299,6 +299,18 @@
         "status":"Statusas",
         "price": "Kaina",
         "actions": "Veiksmai"
+    },
+
+    "myProfile": {
+        "myProfileText": "Mano profilis",
+        "helloText": "Sveiki, ",
+        "emailText": "El. paštas: ",
+        "roleText":"Rolė: ",
+        "profileUpdatedText":"Profilis atnaujintas",
+        "profileCreatedText": "Profilis sukurtas: ",
+        "updateInfoButton": "Atnaujinti informaciją:",
+        "updateFotoButton": "Pakeisti profilio nuotrauką",
+        "deleteProfileButton":"Ištrinti paskyrą"
     }
 }
 
