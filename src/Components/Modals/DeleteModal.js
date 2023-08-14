@@ -27,7 +27,7 @@ function DeleteModal({ modalOpen, setModalOpen, message, deletionLink }) {
         try{
             const response = await privateAxios.delete(DELETE_URL);
             
-            console.log(response.data)
+            // console.log(response.data)
             if(response.status === 200){
                 handleLogout();
                 navigate('/');
