@@ -1,6 +1,6 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-import Layout from "../Layout/Layout"
+import Layout from "../../Layout/Layout"
 
 export default function DefaultCarousel() {
 
