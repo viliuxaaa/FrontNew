@@ -59,32 +59,33 @@ function PosterMaxDetail({poster}) {
 
     return (
         <> 
-            <div className="hover:scale-105 transition flex flex-row justify-center sm:w-9/12 xs:mx-2 xs:gap-1 text-text"> {/**/}
-                <Link to={`/skelbimas/${poster?.posterId}`} className="flex">
-                    <div className="flex-shrink-0 pr-2">
-                            <img 
-                                src={getPosterImg} 
-                                alt="Imaasdasdge" 
-                                className="w-40 h-40 border-[2px] border-darkAccent shadow-md rounded-l-xl"
-                            />
-                    </div>
-                    <div className="xs:w-[400px] md:w-[800px] border-[2px]  border-main xs:p-1 h-40 p-2 shadow-md bg-subMain rounded-r-lg">
+            <div className="hover:scale-105 transition flex flex-row justify-center sm:w-9/12 xs:mx-2 xs:gap-1 text-text">
+            <Link to={`/skelbimas/${poster?.posterId}`} className="flex">
+                <div className="flex-shrink-0 pr-2">
+                    <img 
+                        src={getPosterImg} 
+                        alt="Image" 
+                        className="w-40 h-40 border-[2px] border-darkAccent shadow-md rounded-l-xl"
+                    />
+                </div>
+                <div className="xs:w-[400px] md:w-[800px] border-[2px] border-main xs:p-1 h-40 p-2 shadow-md bg-subMain rounded-r-lg flex flex-col justify-between">
+                    <div>
                         <h2 className="xs:text-base md:text-xl font-semibold">{titleToDisplay}</h2>
                         <p className="">
-                            {descToDisplay}                     
+                            {descToDisplay}
                         </p>
-                        <br/>
-                        <p className="pt-3 align-text-bottom sm:text-sm xs:text-base md:text-base float-right">
-                        {t("allPosters.price")} {poster?.price} &euro;
-                        </p>
-                        <p className="pt-3 align-text-bottom sm:text-sm xs:text-base md:text-base">
-                            {poster?.city}
-                        </p>   
-                        
-                                     
                     </div>
-                </Link>    
-            </div>
+                    <div className="text-basic pt-3">
+                        <p className="float-right">
+                            Kaina: {poster?.price} &euro;
+                        </p>
+                        <p className="">
+                            {poster?.city}
+                        </p>
+                    </div>
+                </div>
+            </Link>
+        </div>
         </>
     )
 }

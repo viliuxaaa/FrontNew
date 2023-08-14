@@ -494,7 +494,7 @@ function UploadPoster() {
                                         onChange={handleNameChange}
                                     />
                                     <p className={ (!postNameValid && postName.length !== 0) || ( !postNameValid && submitAttempt > 0 ) ?
-                                        "":"hidden" }>
+                                        "bg-red-500 rounded-md pl-2 text-white rounded-md":"hidden" }>
                                         {t("uploadPosterFrame.titleLongerThan10Char")}
                                     </p>
                                 </div>
@@ -569,7 +569,7 @@ function UploadPoster() {
                                         />
                                     </div>
                                     <p className={ ( !posterDescriptionValid && posterDescription.length < 10 && posterDescription ) || ( !posterDescriptionValid && submitAttempt > 0 ) ?
-                                            "":"hidden" }>
+                                            "bg-red-500 rounded-md pl-2 text-white":"hidden" }>
                                             {t("uploadPosterFrame.descriptionLongerThan10Char")}
                                     </p>
                                 </div>
@@ -591,7 +591,7 @@ function UploadPoster() {
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     />
                                     <p className={ (!priceValid && price) || (!priceValid && submitAttempt > 0) ?
-                                        "":"hidden" }>
+                                        "bg-red-500 pl-2 text-white rounded-md":"hidden" }>
                                         {t("uploadPosterFrame.priceMustBeWhole")}
                                     </p>
                                 </div>
@@ -701,7 +701,7 @@ function UploadPoster() {
                                         })}
                                     </select>
                                     <p className={ (!cityValid && city) || (!cityValid && submitAttempt > 0) ?
-                                        "":"hidden" }>
+                                        "bg-red-500 pl-2 text-white rounded-md":"hidden" }>
                                         {t("uploadPosterFrame.cityMustBePicked")}
                                     </p>
                                 </div>
@@ -759,7 +759,7 @@ function UploadPoster() {
                                 >
                                     {t("uploadPosterFrame.addButton")}
                                 </button>)}
-                                <p className={ requestError ? "" : "hidden"} >
+                                <p className={ requestError ? "bg-red-500 pl-2 text-white rounded-md" : "hidden"} >
                                     {t("uploadPosterFrame.errorConnecting")}
                                 </p>
                             </form>

@@ -242,7 +242,7 @@
         "EditPosterText": "Atnaujinti skelbimą: ",
         "AddPosterText": "Naujas skelbimas",
         "titleText":"Pavadinimas *",
-        "titleLongerThan10Char":"Privalo būti ne trumpesnis nei 10 raidžių",
+        "titleLongerThan10Char":"Privalo būti ne trumpesnis nei 10 raidžių.",
         "firstCat": "Kategorija *",
         "1stCatMustBePicked": "Pasirinkte kategoriją",
         "2ndCat": "Kategorijos šaka *",
