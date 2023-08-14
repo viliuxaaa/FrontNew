@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import MainModal from './MainModal'
-import axios from '../../api/axios';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import useAuth from '../../hooks/useAuth';
 
