@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import MainModalForCity from './MainModalForCity'
+import MainModal from './MainModal'
 
 
 
 function PictureUploadModal({ modalOpen, setModalOpen }) {
 
     function handleSubmit() {
-        
+
     }
 
   return (
-    <MainModalForCity modalOpen={modalOpen} setModalOpen={setModalOpen}>
-        <div className='inline-block border border-border md:w-3/5 lg:w-4/5 align-middle p-1 overflow-y-auto h-4/5 lg:h-3/5 2xl:-2/5 bg-darkAccent text-white'>
+    <MainModal modalOpen={modalOpen} setModalOpen={setModalOpen}>
+        <div className='inline-block border border-border md:w-3/5 lg:w-2/5 align-middle p-1 overflow-y-auto h-4/5 lg:h-3/5 2xl:-2/5 bg-darkAccent text-white'>
             <form onSubmit={handleSubmit}>
                 <label
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -34,7 +34,7 @@ function PictureUploadModal({ modalOpen, setModalOpen }) {
                 <button>Įkelti nuotrauką</button>
             </form>  
         </div>
-    </MainModalForCity>
+    </MainModal>
   )
 }
 
