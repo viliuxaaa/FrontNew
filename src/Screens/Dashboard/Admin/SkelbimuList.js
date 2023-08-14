@@ -11,7 +11,6 @@ import { useTranslation } from "react-i18next";
 function SkelbimuList() {
     const [t, i18n] = useTranslation("global");
     const {auth} = useAuth(); 
-    const ALL_USER_POSTERS_URL = "api/v1/poster/get/"+auth.userId+"/all";
 
     const [errMsg, setErrMsg] = useState("");
 

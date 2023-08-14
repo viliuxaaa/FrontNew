@@ -66,24 +66,24 @@ function Dashboard() {
                         </div>
                         </div>
                         {/* first name / last name */}
-                        <div className='font-bold text-gray-800 text-lg flex items-center justify-center pt-14'>{userData.firstname}<span className="text-lg  pl-2 font-bold text-gray-800">{userData.lastname}</span></div>
+                        <div className='font-bold text-gray-800 text-lg flex items-center justify-center pt-14'>{userData?.firstname}<span className="text-lg  pl-2 font-bold text-gray-800">{userData?.lastname}</span></div>
                         <div className="mt-10 text-center border-b border-gray-600 pb-12">
                         <h1 className="text-4xl font-medium text-gray-700">
                             {/* username */}
-                        <span className="font-light text-gray-600">Sveiki,</span> {userData.username}
+                        <span className="font-light text-gray-600">Sveiki,</span> {userData?.username}
                         </h1>
                         {/* role / update date / create date */}
-                        <p className="font-normal text-gray-600 mt-10">Jusu El-pastas yra <span className="font-bold text-gray-600">{userData.email}</span></p>
-                        <p className="font-normal text-gray-600 mt-3">Jusu Role yra <span className="font-bold text-gray-600">{userData.role}</span></p>
+                        <p className="font-normal text-gray-600 mt-10">Jusu El-pastas yra <span className="font-bold text-gray-600">{userData?.email}</span></p>
+                        <p className="font-normal text-gray-600 mt-3">Jusu Role yra <span className="font-bold text-gray-600">{userData?.role}</span></p>
                         {
-                            userData.updatedAt && 
+                            userData?.updatedAt && 
                             <p className="font-normal text-gray-600 mt-3">
-                                Profilis Atnaujintas <span className="font-bold text-gray-600">{formatTimestamp(userData.updatedAt)}</span></p>
+                                Profilis Atnaujintas <span className="font-bold text-gray-600">{formatTimestamp(userData?.updatedAt)}</span></p>
                         }
                         <p className="font-normal text-gray-600 mt-3">
                             Profilis Sukurtas{" "}
                         <span className="font-bold text-gray-600">
-                            {formatTimestamp(userData.createdAt)}
+                            {formatTimestamp(userData?.createdAt)}
                         </span>
                         </p>
                         </div>
