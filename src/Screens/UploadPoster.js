@@ -12,7 +12,7 @@ import { computerAEnum as catA,
     cities
   } from '../enums/AllEnumArrays';
 
-// ======== PRIDETI EDIT FUNKCIONALUMA ( KAINA, NUOTRAUKOS?, TEL NR, DESCRIPTION )
+  
 
 const PRICE_REGEX = /^[0-9]+$/;
 const CITY_REGEX = /^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ\s]+$/;

@@ -1,6 +1,5 @@
 import SideBar from '../SideBar'
 import axios from '../../../api/axios';
-import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
 import useAuth from '../../../hooks/useAuth';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -26,7 +25,6 @@ function Dashboard() {
 // finish handle date method ===================
     
     const {auth} = useAuth(); 
-    const privateAxios = useAxiosPrivate();
     const USER_DETAILS_URL = "api/v1/user/get/"+auth.userId+"/profile";
     const GET_USER_IMG_URL = "api/v1/user/get/"+auth.userId+"/image";
     
@@ -51,22 +49,7 @@ function Dashboard() {
             setImg(response.data);
         }catch (error) {
             console.error('Add user img to get one: ' + error); 
-        }
-        
-    }
-    
-
-    const [imgNew, setImgNew] = useState();
-    async function handleImg(){
-        try{
-            const response = await privateAxios.post(POST_USER_IMG_URL, {
-                image: imgNew,
-            });
-            setImg(response.data);
-        }catch (error) {
-            console.error('Img is too large: ' + error); 
-        }
-        
+        }   
     }
 
     useEffect(() =>{
@@ -75,11 +58,10 @@ function Dashboard() {
     }, [])
 
   return (
-    <SideBar admin={false}>
+    <SideBar admin={auth?.roles === "ADMIN"}>
         <PictureUploadModal
             modalOpen={modalOpen} 
             setModalOpen={setModalOpen} 
-            userData={userData}
         />
         <h2 className='text-xl font-bold'>Mano Profilis</h2>
                     <div className="p-2 md:p-8 bg-main bg-opacity-85 shadow mt-24 md:mt-14">
@@ -99,7 +81,6 @@ function Dashboard() {
                                     src={GET_USER_IMG_URL}
                                     alt="img"
                                 />
-                                
                             </>  
                             }
                             </div>

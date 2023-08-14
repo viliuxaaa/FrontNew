@@ -14,7 +14,7 @@ function PictureUploadModal({ modalOpen, setModalOpen }) {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        console.log(selectedFile)
+        if ( selectedFile ){
         image.append('image', selectedFile);
         try{
             const response = await privateAxios.post(POST_USER_IMG_URL, image, {
@@ -24,9 +24,10 @@ function PictureUploadModal({ modalOpen, setModalOpen }) {
             });
             setSelectedFile(null)
             console.log(response.data)
+            
         }catch(err){
             console.log("picture upload did not work")
-        }
+        }}
     
     }
 
@@ -51,9 +52,9 @@ function PictureUploadModal({ modalOpen, setModalOpen }) {
                     className="mt-1 text-sm text-gray-500 dark:text-gray-300"
                     id="file_input_help"
                 >
-                    SVG, PNG, JPG or GIF (MAX. 800x400px).
+                    SVG, PNG, JPG.
                 </p>
-                <button>Įkelti nuotrauką</button>
+                <button onClick={() => setModalOpen(false)}>Įkelti nuotrauką</button>
             </form>  
         </div>
     </MainModal>
