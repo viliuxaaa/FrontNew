@@ -46,7 +46,7 @@ function UploadPoster() {
     const [posterEdit, setPosterEdit] = useState( null ); 
     const [imgRed, setImgRed] = useState(false);
 
-    const [requestError, setRequestError] = useState("");
+    const [requestError, setRequestError] = useState('');
 
     const [postName, setPostName] = useState("");
     const [postNameValid, setPostNameValid] = useState(false);
@@ -311,8 +311,7 @@ function UploadPoster() {
                   loadImageFromBackend();
                   timerImgRed();
             } catch (error){
-                error.message = "Connection to the server failed";
-                setRequestError(error);
+                console.log("Some of poster info was not loaded")
             }
         }
         loadPoster();
@@ -392,15 +391,12 @@ function UploadPoster() {
                 } catch {
                     console.log("image was not found")
                     continue
-                }
-                // console.log(response.data)      
+                }   
             }
             setChangedImgIndexes(imgArray.length)
             for ( let j =0; j < imgArray.length ; j++ ){
                 functionalArr[j](imgArray[j]);
             }
-
-            // setBlob1URL(URL.createObjectURL(imgArray[0]));
         } catch(err) {
             console.log(err)
         }
