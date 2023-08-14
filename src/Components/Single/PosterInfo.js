@@ -25,8 +25,7 @@ function PosterInfo({poster}) {
                             <h1 className="my-1 text-lg lg:text-2xl">Aprašymas</h1>
                         </div>
                         <div className="bg-subMain h-fit p-3 border-y-2 border-darkMain">
-                        <p style={{ whiteSpace: "pre-line" }} className="break-after-column text-base sm:text-2xl pb-10" dangerouslySetInnerHTML={{ __html: poster?.description }} />
-                            
+                        <p style={{ whiteSpace: "pre-line" }} className="break-after-column text-base sm:text-2xl pb-10" dangerouslySetInnerHTML={{ __html: poster?.description }} />                            
                         </div>
                         <div className="bg-subMain h-fit p-3 border-b-2 border-darkMain">
                             <p className="text-base md:text-2xl flex">Tel: <span className='font-medium pl-14 md:pl-20'>8 654 844 54</span></p>
@@ -35,8 +34,8 @@ function PosterInfo({poster}) {
                             <p className="text-base md:text-2xl flex">Kaina: <span className='font-medium pl-8 md:pl-12'>{poster.price}</span> &euro;</p>
                         </div>
                         <div className="bg-subMain rounded-b-xl h-fit p-3 border-y-2 border-darkMain">
-                            <p className="text-base md:text-2xl flex">Sukurtas: <span className='font-medium pl-2'>{dateCreated}</span></p>
-                            {dateUpdated && <p className="text-base md:text-2xl"><span className='font-medium pl-10'>Atnaujintas:</span> {dateUpdated}</p>} 
+                            <p className="text-base md:text-2xl flex">Sukurtas: <span className='font-medium pl-16'>{dateCreated}</span></p>
+                            {dateUpdated && <p className="text-base md:text-2xl">Atnaujintas:<span className='font-medium pl-8'>{dateUpdated}</span></p>} 
                         </div>
                     </div>
                         { auth.userId === poster.userId && <PosterMenu id={poster.posterId}/>}
