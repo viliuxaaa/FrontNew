@@ -4,7 +4,11 @@ import useAuth from '../../../hooks/useAuth';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { BsPencilSquare } from 'react-icons/bs';
+import PictureUploadModal from "../../../Components/Modals/PictureUploadModal";
+
 function Dashboard() {
+    const [modalOpen, setModalOpen ] = useState(false)
+
 // method to handle date formating ++++++++++++++++
     function formatTimestamp(timestamp) {
         const options = {
@@ -128,6 +132,11 @@ function Dashboard() {
 
   return (
     <SideBar admin={false}>
+        <PictureUploadModal
+          modalOpen={modalOpen} 
+          setModalOpen={setModalOpen} 
+           
+        />
         <h2 className='text-xl font-bold'>Mano Profilis</h2>
                     <div className="p-2 md:p-8 bg-main bg-opacity-85 shadow mt-24 md:mt-14">
                         <div className="grid grid-cols-1 md:grid-cols-3">
@@ -192,8 +201,8 @@ function Dashboard() {
                                 <button className="text-white py-2 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
                                     Atnaujinti Informacija
                                 </button>
-                                <button className="text-white py-2 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
-                                    Profilio Nuotrauka
+                                <button onClick={() => setModalOpen(true)} className="text-white py-2 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
+                                    Įkelti Profilio Nuotrauka
                                 </button>
                                 <button className="text-white py-2 px-4 uppercase rounded bg-red-600 hover:bg-red-700 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
                                     Istrinti Paskyra
