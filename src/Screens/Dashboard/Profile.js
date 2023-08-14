@@ -11,13 +11,13 @@ function Profile() {
             <Uploader />
             <Input 
                 label="Vardas" 
-                placeholder="Dalius"
+                placeholder="[[[[[[[[]]]]]]]]"
                 type="text"
                 bg={true}
             />
             <Input 
                 label="Pavarde" 
-                placeholder="Daliauskas"
+                placeholder="]]]]]]]]]"
                 type="text"
                 bg={true}
             />

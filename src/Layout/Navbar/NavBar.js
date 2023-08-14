@@ -184,11 +184,10 @@ function NavBar() {
                     {t("navbarButtons.newPostButton")}
                   </NavLink>  
                   <NavLink to="/posters/search/:searchType" className={Hover}>{t("navbarButtons.allPosts")}</NavLink>
-                  <NavLink to="/dashboard" className={Hover}>{t("navbarButtons.dash")}</NavLink>
                   { auth?.userId ?                   
                     (
                         <>
-                            <NavLink to="/profile" className={Hover}>
+                            <NavLink to="/dashboard" className={Hover}>
                                 <CgProfile className="w-7 h-7" />
                             </NavLink>
                             <NavLink to="/" onClick={handleLogout} className={Hover}>
@@ -196,9 +195,12 @@ function NavBar() {
                             </NavLink>
                         </>
                     ) : (
+                      <>
+                        <NavLink to="/register" className={Hover}>{t("navbarButtons.dash")}</NavLink>
                         <NavLink to="/login" className={Hover}>
                         <CgUser className="w-8 h-8" />
                         </NavLink>
+                      </>
                     )} 
                 </div>
             </div>

@@ -36,12 +36,7 @@ function SkelbimuList() {
                 // errRef.current.focus();
             }
         }
-
-    // useEffect(() => {
-    //     handleRefresh();
-    // }, [finalData]);
-
-
+        
   return (
     <SideBar>
         <div className='flex flex-col gap-6'>

@@ -41,17 +41,6 @@ function PosterMenu( id ) {
         <AiOutlineEdit size={26} />
       </Link>
 
-      {/* change state Button - need to make this drop down at some point */}
-      <button
-        className="p-2 h-12 border border-purple-500 rounded-lg hover:bg-purple-100"
-        onClick={() => {
-          // Handle change action
-        }}
-        title="Change Poster Status"
-      >
-        Change Status
-      </button>
-
       {/* Delete Button */}
       <button
         className="p-2 border border-red-500 rounded-lg hover:bg-red-100"
