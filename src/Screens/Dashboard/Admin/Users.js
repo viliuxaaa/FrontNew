@@ -1,25 +1,15 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import SideBar from '../SideBar';
-import { FaSearch } from 'react-icons/fa';
-import Table from '../../../Components/Table';
-import useAuth from '../../../hooks/useAuth';
-import { useEffect } from 'react';
-import axios from '../../../api/axios'
+import React, { useState, useEffect } from 'react'
 import { useTranslation } from "react-i18next";
+import SideBar from '../SideBar';
+import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
 
-function SkelbimuList() {
+const Users = () => {
+    const getAllUsers_URL = "api/v1/admin/get/users";
     const [t, i18n] = useTranslation("global");
-    const {auth} = useAuth(); 
-    const id = useParams();
     const [errMsg, setErrMsg] = useState("");
 
+    const privateAxios=useAxiosPrivate();
     const [finalData, setFinalData] = useState([]);
-    
-    const getMyPosters_URL = "api/v1/poster/get/"+id.id+"/all";
-    const getAllPosters_URL = "/api/v1/poster/get/search?";
-    
-    
 
     useEffect(() =>{
         handleRefresh();
@@ -27,16 +17,9 @@ function SkelbimuList() {
     
     async function handleRefresh() {
         try {
-            if ( id.id ){
-                const response = await axios.get(getMyPosters_URL);
-                setFinalData(response?.data);
-            } else {
-                console.log(getAllPosters_URL)
-                
-                const response = await axios.get(getAllPosters_URL);
-                setFinalData(response?.data);
-                console.log(response)
-            }
+            const response = await privateAxios.get(getAllUsers_URL);
+            setFinalData(response?.data);
+            console.log(response.data)
         } catch (err) {
             if (!err.response) {
                 setErrMsg("No Server Response");
@@ -47,7 +30,6 @@ function SkelbimuList() {
             }
         }
     }
-        
   return (
     <SideBar>
         <div className='flex flex-col gap-6'>
@@ -57,10 +39,10 @@ function SkelbimuList() {
                {t("myPosters.refreshButton")}
                </button>
             </div>
-            <Table t={t} poster={finalData} admin={false} />
+            {/* <Table t={t} poster={finalData} admin={false} /> */}
         </div>
     </SideBar>
   )
 }
 
-export default SkelbimuList
+export default Users

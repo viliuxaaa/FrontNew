@@ -17,22 +17,30 @@ const Rows = (poster, i, admin) => {
     const { auth } = useAuth();
     const privateAxios = useAxiosPrivate();
     const posterDeleteURL = `api/v1/poster/` + auth?.userId + `/delete/`+ poster.posterId;
-
+    const posterDeleteAdminURL = "api/v1/admin/get/" + poster?.posterId + "/delete-poster"
     const [img, setImg] = useState(null);
 
     const deletePost = () => {
         const controller = new AbortController();
     
         const deleteThing = async () => {
-          console.log(posterDeleteURL)
           try{
-            await privateAxios.delete(
-              posterDeleteURL,
-              {
-                signal: controller.signal
-              }
-            );
-            console.log("poster: " + poster.postName + " was deleted")
+            if(auth?.roles === "ADMIN"){
+                await privateAxios.delete(
+                    posterDeleteAdminURL,
+                    {
+                        signal: controller.signal
+                    }
+                );
+            } else {
+                await privateAxios.delete(
+                    posterDeleteURL,
+                    {
+                        signal: controller.signal
+                    }
+                );
+            }
+            console.log("poster: " + poster?.postName + " was deleted")
           } catch (err) {
             console.log(err);
           }
@@ -42,17 +50,17 @@ const Rows = (poster, i, admin) => {
     
     useEffect(() =>{
         setImg(
-            {label: "Image 1", alt: "image1", url: "/api/v1/images/poster/get/"+poster.posterId+"/" + `0`}
+            {label: "Image 1", alt: "image1", url: "/api/v1/images/poster/get/"+poster?.posterId+"/" + 0}
         ); 
     }, [])
 
     
       // mazinam title teksta
       let shortTitle = poster?.postName.substring(0, 40);
-      const lastSp = shortTitle.lastIndexOf(" ");
+      const lastSp = shortTitle?.lastIndexOf(" ");
   
       if (lastSp !== -1) {
-          shortTitle = shortTitle.substring(0, lastSp) + "..";
+          shortTitle = shortTitle?.substring(0, lastSp) + "..";
       } else {
           shortTitle = shortTitle + "..";
       }
@@ -64,16 +72,16 @@ const Rows = (poster, i, admin) => {
                 <div className='w-12 p-1 bg-dry border border-text h-12 rounded overflow-hidden'>
                 {img && <img 
                     className='h-full w-full object-cover'
-                    src={img.url}
+                    src={img?.url}
                     alt={poster?.name}
                 />}
                 </div>
             </td>
             <td className={`${Text} truncate`}>{shortTitle}</td>
-            <td className={`${Text}`}>{poster.categoryA}</td>
-            <td className={`${Text}`}>{poster.categoryB}</td>
-            <td className={`${Text}`}>{poster.status}</td>
-            <td className={`${Text}`}>{poster.price}{' '}€</td>
+            <td className={`${Text}`}>{poster?.categoryA}</td>
+            <td className={`${Text}`}>{poster?.categoryB}</td>
+            <td className={`${Text}`}>{poster?.status}</td>
+            <td className={`${Text}`}>{poster?.price}{' '}€</td>
             <td className={`${Text} float-right flex items-center justify-center gap-2`}>
                 {
                     admin ? (

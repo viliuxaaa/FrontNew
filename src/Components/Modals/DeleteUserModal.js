@@ -8,21 +8,11 @@ import axios from '../../api/axios';
 function DeleteModal({ modalOpen, setModalOpen }) {
     const { auth, setAuth } = useAuth();
 
-    const logout_URL="/api/v1/auth/logout";
     const DELETE_URL = "api/v1/user/"+auth.userId+"/user-delete";
 
     const privateAxios = useAxiosPrivate();
     
     const navigate = useNavigate();
-
-    const handleLogout = async () => {
-        try {
-          await axios.post(logout_URL); // Send logout request using axios directly
-          setAuth(false); // Update the auth state locally
-        } catch (error) {
-          console.error("Logout error:", error);
-        }
-    };
 
     async function handleDelete(e) {
         e.preventDefault();
@@ -31,7 +21,7 @@ function DeleteModal({ modalOpen, setModalOpen }) {
             
             // console.log(response.data)
             if(response.status === 200){
-                handleLogout();
+                setAuth(false);
                 navigate('/');
             }
         }catch(err){
