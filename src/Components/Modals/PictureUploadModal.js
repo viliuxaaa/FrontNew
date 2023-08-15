@@ -32,10 +32,10 @@ function PictureUploadModal({ modalOpen, setModalOpen }) {
 
   return (
     <MainModal modalOpen={modalOpen} setModalOpen={setModalOpen}>
-        <div className='inline-block border border-border md:w-3/5 lg:w-2/5 align-middle p-1 overflow-y-auto h-4/5 lg:h-3/5 2xl:-2/5 bg-darkAccent text-white'>
+        <div className='inline-block border border-border rounded-md align-middle p-1 overflow-y-auto bg-darkAccent text-white'>
             <form onSubmit={(e) => handleSubmit(e)}>
                 <label
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    className="block mb-2 text-lg font-medium text-gray-900 dark:text-white"
                     htmlFor="file_input"
                 >
                     Upload file
@@ -48,12 +48,17 @@ function PictureUploadModal({ modalOpen, setModalOpen }) {
                     onChange={(e) => setSelectedFile(e.target.files[0])}
                 />
                 <p
-                    className="mt-1 text-sm text-gray-500 dark:text-gray-300"
+                    className="mt-1 text-sm text-gray-500 dark:text-gray-300 pb-3"
                     id="file_input_help"
                 >
                     SVG, PNG, JPG.
                 </p>
-                <button onClick={() => setModalOpen(false)}>Įkelti nuotrauką</button>
+                <button 
+                    className="px-6 py-2 bg-gray-600 hover:bg-gray-800 text-white rounded-full shadow-md transition duration-300 ease-in-out focus:outline-none"
+                    onClick={() => setModalOpen(false)}
+                >
+                    Įkelti nuotrauką
+                </button>
             </form>  
         </div>
     </MainModal>

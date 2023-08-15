@@ -103,26 +103,26 @@ function Dashboard() {
                     <h1 className="text-4xl font-medium text-gray-700">
                         {/* username */}
                         <span className="font-light text-gray-600">
-                            Sveiki,
+                            Sveiki,{" "}
                         </span>
                         {userData?.username}
                     </h1>
                     {/* role / update date / create date */}
                     <p className="font-normal text-gray-600 mt-10">
-                        Jusu El-pastas yra 
+                        Jusu El-pastas yra{" "}
                         <span className="font-bold text-gray-600">
                             {userData?.email}
                         </span>
                     </p>
                     <p className="font-normal text-gray-600 mt-3">
-                        Jusu Role yra 
+                        Jusu Role yra{" "} 
                         <span className="font-bold text-gray-600">
                             {userData?.role}
                         </span>
                     </p>
                     {userData?.updatedAt && 
                         <p className="font-normal text-gray-600 mt-3">
-                            Profilis Atnaujintas 
+                            Profilis Atnaujintas{" "} 
                             <span className="font-bold text-gray-600">
                                 {formatTimestamp(userData?.updatedAt)}
                             </span>

@@ -285,7 +285,7 @@
     },
 
     "myPosters": {
-        "posterListText": "Skelbimų sąrašas",
+        "posterListText": "Mano skelbimai",
         "searchPlaceHolder":"Ieškoti tarp skelbimų",
         "refreshButton":"Atnaujinti",
         "myPostersText": "Mano skelbimai"

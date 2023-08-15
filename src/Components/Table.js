@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 const Head = "text-xs text-left text-text font-semibold px-6 py-2 uppercase"
 const Text = 'text-sm text-text text-left leading-6 whitespace-nowrap px-5 py-2'
 
+
 // rows
 const Rows = (poster, i, admin) => {
     const { auth } = useAuth();
@@ -44,6 +45,18 @@ const Rows = (poster, i, admin) => {
             {label: "Image 1", alt: "image1", url: "/api/v1/images/poster/get/"+poster.posterId+"/" + `0`}
         ); 
     }, [])
+
+    
+      // mazinam title teksta
+      let shortTitle = poster?.postName.substring(0, 40);
+      const lastSp = shortTitle.lastIndexOf(" ");
+  
+      if (lastSp !== -1) {
+          shortTitle = shortTitle.substring(0, lastSp) + "..";
+      } else {
+          shortTitle = shortTitle + "..";
+      }
+      ///////////////////////////
     
     return (
         <tr key={i}>
@@ -56,7 +69,7 @@ const Rows = (poster, i, admin) => {
                 />}
                 </div>
             </td>
-            <td className={`${Text} truncate`}>{poster.postName}</td>
+            <td className={`${Text} truncate`}>{shortTitle}</td>
             <td className={`${Text}`}>{poster.categoryA}</td>
             <td className={`${Text}`}>{poster.categoryB}</td>
             <td className={`${Text}`}>{poster.status}</td>

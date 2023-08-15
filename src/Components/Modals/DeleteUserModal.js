@@ -40,22 +40,28 @@ function DeleteModal({ modalOpen, setModalOpen }) {
     
   return (
     <MainModal modalOpen={modalOpen} setModalOpen={setModalOpen}>
-        <div className='inline-block border border-border md:w-3/5 lg:w-2/5 align-middle p-1 overflow-y-auto h-4/5 lg:h-3/5 2xl:-2/5 bg-darkAccent text-white'>
+        <div className='inline-block border border-border rounded-md align-middle p-6 overflow-y-auto h-4/5 lg:h-3/5 bg-darkAccent text-white'>
             
                 <p
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    className="block mb-2 text-lg font-medium text-gray-900 dark:text-white"
                     htmlFor="file_input"
                 >
-                    <strong>Are you sure that you want to delete your account?</strong>
+                    <strong>Ar tikrai norite ištrinti savo paskyrą?</strong>
                 </p>
-                <button onClick={() => setModalOpen(false)}>No</button>
+                <button 
+                    className="px-6 py-2 bg-gray-600 hover:bg-gray-800 text-white rounded-full shadow-md transition duration-300 ease-in-out focus:outline-none"
+                    onClick={() => setModalOpen(false)}
+                >
+                    Ne
+                </button>
                 <button
+                    className="px-5 py-2 bg-red-500 hover:bg-red-700 text-white rounded-full shadow-md transition duration-300 ease-in-out focus:outline-none"
                     onClick={(e) => {
                         setModalOpen(false)
                         handleDelete(e)
                     }}
                 >
-                    .... Y E S
+                    Taip
                 </button>
            
         </div>

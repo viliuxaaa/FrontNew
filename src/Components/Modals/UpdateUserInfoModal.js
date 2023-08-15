@@ -60,12 +60,12 @@ function UpdateUserInfoModal({ modalOpen, setModalOpen, user }) {
     
   return (
     <MainModal modalOpen={modalOpen} setModalOpen={setModalOpen}>
-        <div className='inline-block border border-border md:w-3/5 lg:w-2/5 align-middle p-1 overflow-y-auto h-4/5 lg:h-3/5 2xl:-2/5 bg-darkAccent text-white'>
+        <div className='inline-block border border-border rounded-md w-[350px] align-middle p-1 overflow-y-auto bg-darkAccent text-white'>
             <form>
                 <div>
                     <label
                     htmlFor="firstname"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
                     >
                         {t("registerFrame.firstName")}
                         <FontAwesomeIcon
@@ -113,10 +113,10 @@ function UpdateUserInfoModal({ modalOpen, setModalOpen, user }) {
                     </p>
                 </div>
                 {/* LASTNAME */}
-                <div>
+                <div className='pb-6'>
                     <label
                         htmlFor="lastname"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
                     >
                         {t("registerFrame.lastName")}
                         <FontAwesomeIcon
@@ -160,6 +160,7 @@ function UpdateUserInfoModal({ modalOpen, setModalOpen, user }) {
                     </p>
                 </div>
                 <button
+                    className="px-6 py-2 bg-gray-600 hover:bg-gray-800 text-white rounded-full shadow-md transition duration-300 ease-in-out focus:outline-none"
                     onClick={(e) => handleSubmit(e)}
                 >
                     Submit changes

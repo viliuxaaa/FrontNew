@@ -12,14 +12,14 @@ import Favorites from "./Screens/Dashboard/Favorites";
 import Password from "./Screens/Dashboard/Password";
 import SinglePoster from "./Screens/SinglePoster";
 import RequireAuth from './Components/RequireAuth';
-import Aos from 'aos';
+import AOS from 'aos';
 import Faq from "./Screens/DeadPages/Faq";
 import Rules from "./Screens/DeadPages/Rules";
 import Privacy from "./Screens/DeadPages/Privacy";
 import Contacts from "./Screens/DeadPages/Contacts";
 
 function App() {
-  Aos.init();
+  AOS.init();
   return (
     <Routes>
       <Route path="/posters/search/" element={<Posters />} />

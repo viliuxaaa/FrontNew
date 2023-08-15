@@ -15,8 +15,8 @@ function CityModal({ modalOpen, setModalOpen, setCheckedValues, checkedValues, C
 
   return (
     <MainModalForCity modalOpen={modalOpen} setModalOpen={setModalOpen} setCheckedValues={setCheckedValues} checkedValues={checkedValues}>
-        <div className='inline-block border border-border md:w-3/5 lg:w-4/5 align-middle p-1 overflow-y-auto h-4/5 lg:h-3/5 2xl:-2/5 bg-darkAccent text-white'>
-                <div className='flex flex-col pb-1 gap-1'>
+        <div className='inline-block border border-border rounded-md md:w-3/5 lg:w-4/5 align-middle p-1 overflow-y-auto h-4/5 lg:h-3/5 2xl:-2/5 bg-darkAccent text-white'>
+                <div className='flex flex-col pb-6 gap-1'>
                 <h3 className="mb-5 text-lg font-medium text-gray-900">Visi Miestai</h3>
                     <ul className="grid w-full gap-2 grid-cols-2 md:grid-cols-4 lg:grid-cols-6 2xl:grid-cols-8">
                         {CityData.map((city,i) => (
@@ -41,13 +41,13 @@ function CityModal({ modalOpen, setModalOpen, setCheckedValues, checkedValues, C
                     </ul>
                 </div>
             <button 
-                className='border border-text text-text bg-subMain px-2 rounded float-left'
+                className="px-6 ml-20 mb-5 py-2 bg-gray-600 float-left hover:bg-gray-800 text-white rounded-full shadow-md transition duration-300 ease-in-out focus:outline-none"
                 onClick={() => setModalOpen(false)}
             >
                 issaugoti poasirinkima
             </button>
             <button 
-                className='border border-text text-text bg-subMain px-2 rounded float-right'
+                className="px-6 py-2 mr-20 mb-2 bg-gray-600 float-right hover:bg-gray-800 text-white rounded-full shadow-md transition duration-300 ease-in-out focus:outline-none"
                 onClick={() => setCheckedValues([])}
             >
                 isvalyti viska
