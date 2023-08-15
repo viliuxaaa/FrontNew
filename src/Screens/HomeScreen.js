@@ -22,7 +22,6 @@ function HomeScreen() {
                         data-aos="flip-up"
                         data-aos-duration="1000"
                         data-aos-delay="6"
-                        
                         className="hover:scale-105 transition">
                         <Category category={categories.category1} />
                     </div>
@@ -30,7 +29,7 @@ function HomeScreen() {
                         data-aos="flip-up"
                         data-aos-duration="1000"
                         data-aos-delay="6"
-                        
+                        data-aos-anchor-placement="top-bottom"
                         className="hover:scale-105 transition">
                         <Category category={categories.category2}/>
                     </div>
@@ -38,7 +37,7 @@ function HomeScreen() {
                         data-aos="flip-up"
                         data-aos-duration="1000"
                         data-aos-delay="6"
-                        
+                        data-aos-anchor-placement="top-bottom"
                         className="hover:scale-105 transition">
                         <Category category={categories.category3} />
                     </div>
@@ -46,7 +45,7 @@ function HomeScreen() {
                         data-aos="flip-up"
                         data-aos-duration="1000"
                         data-aos-delay="6"
-                        
+                        data-aos-anchor-placement="top-bottom"
                         className="hover:scale-105 transition">
                         <Category category={categories.category4} />
                     </div>
@@ -54,7 +53,7 @@ function HomeScreen() {
                         data-aos="flip-up"
                         data-aos-duration="1000"
                         data-aos-delay="6"
-                         
+                        data-aos-anchor-placement="top-bottom" 
                         className="hover:scale-105 transition">
                         <Category category={categories.category5} />
                     </div>
@@ -62,7 +61,7 @@ function HomeScreen() {
                         data-aos="flip-up"
                         data-aos-duration="1000"
                         data-aos-delay="6"
-                        
+                        data-aos-anchor-placement="top-bottom"
                         className="hover:scale-105 transition">
                         <Category category={categories.category6} />
                     </div>
@@ -70,7 +69,7 @@ function HomeScreen() {
                         data-aos="flip-up"
                         data-aos-duration="1000"
                         data-aos-delay="6"
-                         
+                        data-aos-anchor-placement="top-bottom" 
                         className="hover:scale-105 transition">
                         <Category category={categories.category7} />
                     </div>
@@ -78,7 +77,7 @@ function HomeScreen() {
                         data-aos="flip-up"
                         data-aos-duration="1000"
                         data-aos-delay="6"
-                         
+                        data-aos-anchor-placement="top-bottom" 
                         className="hover:scale-105 transition">
                         <Category category={categories.category8} />
                     </div>

@@ -1,5 +1,5 @@
 import SideBar from '../SideBar'
-import axios from '../../../api/axios';
+import axios, { axiosPrivate } from '../../../api/axios';
 import useAuth from '../../../hooks/useAuth';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -7,6 +7,7 @@ import { BsPencilSquare } from 'react-icons/bs';
 import PictureUploadModal from "../../../Components/Modals/PictureUploadModal";
 import DeleteUserModal from "../../../Components/Modals/DeleteUserModal"
 import UpdateUserInfoModal from '../../../Components/Modals/UpdateUserInfoModal';
+import { FaTimes } from 'react-icons/fa';
 
 function Dashboard() {
     
@@ -33,6 +34,7 @@ function Dashboard() {
     const {auth} = useAuth(); 
     const USER_DETAILS_URL = "api/v1/user/get/"+auth.userId+"/profile";
     const GET_USER_IMG_URL = "api/v1/user/get/"+auth.userId+"/image";
+    const DELETE_IMG_URL = "api/v1/user/"+auth.userId+"/image-delete";
     
 
     // get all user info load
@@ -47,11 +49,29 @@ function Dashboard() {
         }
         
     }
-    
-
     useEffect(() =>{
         handleRefresh();
     }, [])
+// delete user img 
+const [imageDeleted, setImageDeleted] = useState(false);
+async function handleDeleteImage(){
+    try{
+        await axiosPrivate.delete(DELETE_IMG_URL);
+        setImageDeleted(true);
+    }catch (error) {
+        console.error('Failed to delete img [try refresh page]: ' + error); 
+    }
+    
+}
+const [hovered, setHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setHovered(false);
+  };
 
   return (
     <SideBar admin={auth?.roles === "ADMIN"}>
@@ -78,17 +98,29 @@ function Dashboard() {
                     <div className="w-48 h-48 bg-indigo-100 mx-auto rounded-full shadow-2xl absolute inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500">
                     { !userData?.havePicture ?
                     <img 
-                        class="w-48 h-48 rounded-full object-cover" 
+                        className="w-48 h-48 rounded-full object-cover" 
                         src="/images/profile5.jpg" 
                         alt="placeholder img"
                     />
                     : 
                     <img 
                         className="w-48 h-48 rounded-full object-cover" 
-                        src={GET_USER_IMG_URL}
+                        src={imageDeleted || !userData?.havePicture ? "/images/profile5.jpg" : GET_USER_IMG_URL}
                         alt="profile img"
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
                     />  
                     }
+                    {hovered && !imageDeleted && (
+                        <button
+                        onClick={() => handleDeleteImage()}
+                        className="absolute bottom-7 right-7 p-1 bg-red-600 rounded-full text-white"
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                        >
+                        <FaTimes />
+                        </button>
+                    )}
                     </div>
                 </div>
                 </div>
