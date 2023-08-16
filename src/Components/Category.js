@@ -14,8 +14,8 @@ function Category({category}) {
                     </div>
                     <div className="font-medium  flex flex-col items-center bg-subMain w-full h-48 rounded-b-lg p-1">
                         {
-                            category.subCat.map((subCat) => (
-                                <Link to={`/posters/search/${subCat.search}`} className="hover:border-b hover:border-t hover:bg-main border-text">
+                            category.subCat.map((subCat, i) => (
+                                <Link key={i} to={`/posters/search/${subCat.search}`} className="hover:border-b hover:border-t hover:bg-main border-text">
                                     <span className="">{subCat.name}</span>
                                 </Link>
                             ))

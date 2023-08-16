@@ -137,6 +137,7 @@ return (
               </tr>
           </thead>
           <tbody className='bg-main border-t border-text divide-y divide-gray-800'>
+              
               {users && users
               .filter( (user) => user.id !== auth.userId)
               .map((user, i) => Rows(user, i))}

@@ -26,7 +26,8 @@ const Rows = (poster, i, t ) => {
     const [catADisplay, setCatADisplay] = useState('');
     const [catBArray, setCatBArray] = useState([]);
     const [catBDisplay, setCatBDisplay] = useState('');
-    const [tempLangString, setTempLangString ] = useState("")
+    const [tempLangString, setTempLangString ] = useState("");
+    const [isLoading, setIsLoading] = useState(true);
 
     const deletePost = () => {
         const controller = new AbortController();
@@ -65,38 +66,43 @@ const Rows = (poster, i, t ) => {
         
     }, [])
 
-    function translateCategories(){
+    async function translateCategories(){
         //LOOK AT ALL CATA ENUM VALUES TO FIND MATCH THEN DISPLAY TRANSLATABLE STRING
         for( let i = 0; i < catA.length; i++ ){
             if( catA[i] === poster?.categoryA ){
                 setCatBArray(allArrays[i])
                 setCatADisplay(t("computerCategoryA."+ i))
                 setTempLangString(langFileStrings[i])
+                // console.log(t("computerCategoryA."+ i))
             }
         }
+        translateBCategories();
+        // console.log(poster?.categoryB)
+    }
+    function translateBCategories(){
         for(let j=0 ;j<catBArray.length; j++){
             if ( catBArray[j] === poster?.categoryB ){
                 setCatBDisplay(t(tempLangString+"."+j))
-                
             }
+            setIsLoading(false);
         }
 
-        // console.log(poster?.categoryB)
     }
+
+    // mazinam title teksta
+    let shortTitle = poster?.postName.substring(0, 40);
+    const lastSp = shortTitle?.lastIndexOf(" ");
+
+    if (lastSp !== -1) {
+        shortTitle = shortTitle?.substring(0, lastSp) + "..";
+    } else {
+        shortTitle = shortTitle + "..";
+    }
+    ///////////////////////////
     
-      // mazinam title teksta
-      let shortTitle = poster?.postName.substring(0, 40);
-      const lastSp = shortTitle?.lastIndexOf(" ");
-  
-      if (lastSp !== -1) {
-          shortTitle = shortTitle?.substring(0, lastSp) + "..";
-      } else {
-          shortTitle = shortTitle + "..";
-      }
-      ///////////////////////////
-    
-    return (
-        <tr key={i}>
+    return ( 
+        <>
+        { <tr key={i}>
             <td className={`${Text}`}>
                 <div className='w-12 p-1 bg-dry border border-text h-12 rounded overflow-hidden'>
                 {img && <img 
@@ -152,7 +158,8 @@ const Rows = (poster, i, t ) => {
                     )//http://localhost:3006/skelbimas/4
                 }
             </td>
-        </tr>
+        </tr>}
+        </>
     )
 }
 
