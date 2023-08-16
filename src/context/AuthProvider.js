@@ -7,7 +7,7 @@ export const AuthProvider = ({ children }) => {
     const [auth, setAuth] = useState({});
     useEffect(() => {
         const accessToken = Cookies.get('accessToken');
-        const userId = Cookies.get(+'userId');
+        const userId = Cookies.get('userId');
         const user = Cookies.get('user');
         const email = Cookies.get('email');
         const roles = Cookies.get('roles');
