@@ -7,6 +7,7 @@ import PosterMaxDetail from "../Components/PosterMaxDetail";
 import AxiosFetch from "../hooks/AxiosFetch";
 
 function Posters() {
+  
   const maxPage = 3;
   const [page, setPage] = useState(maxPage);
   const [maxPosters, setMaxPosters] = useState(true);
@@ -41,11 +42,11 @@ function Posters() {
           <div className="flex-rows">
             <div className="border-[2px] border-main shadow-md px-10 py-2 rounded-3xl font-medium justify-center bg-subMain text-text">
               <p className="tracking-wider text-lg font-md font-sans">
-                Total{' '}
+              {t("posters.totalText")}{' '}
                 <span className="font-extrabold text-text">
                   {posters?.length}
                 </span>{' '}
-                items Found
+                {t("posters.itemsFoundText")}
               </p>
             </div>
           </div>
@@ -61,7 +62,7 @@ function Posters() {
               onClick={HandleLoadingMore}
               className="flex hover:scale-105 transition items-center gap-3 text-text py-3 bg-subMain px-8 rounded-md font-semibold border-2 border-main"
             >
-              Load More <CgSpinner className="animate-spin" />
+              {t("posters.loadMore")} <CgSpinner className="animate-spin" />
             </button>
           </div>
         )}

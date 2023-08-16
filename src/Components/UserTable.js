@@ -117,19 +117,19 @@ return (
                   {t("table.img")}
                   </th>
                   <th scope='col' className={`${Head}`}>
-                  Usernames
+                  {t("userTable.username")}
                   </th>
                   <th scope='col' className={`${Head}`}>
-                  Firstname
+                  {t("userTable.firstName")}
                   </th>
                   <th scope='col' className={`${Head}`}>
-                  Lastname
+                  {t("userTable.lastName")}
                   </th>
                   <th scope='col' className={`${Head}`}>
-                  Email
+                  {t("userTable.email")}
                   </th>
                   <th scope='col' className={`${Head}`}>
-                  Role
+                  {t("userTable.role")}
                   </th>
                   <th scope='col' className={`${Head} text-end`}>
                   {t("table.actions")}

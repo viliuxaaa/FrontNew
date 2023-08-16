@@ -6,22 +6,24 @@ import { HiViewGridAdd } from 'react-icons/hi'
 import { FiSettings } from 'react-icons/fi'
 import { NavLink } from 'react-router-dom'
 import useAuth from '../../hooks/useAuth'
+import { useTranslation } from "react-i18next";
 
 function SideBar({ children}) {
+    const [t, i18n] = useTranslation("global");
     const { auth } = useAuth();
     const AdminLinks = [
         {
-            name:"Dashboard",
+            name:t("sideBar.myProfile"),
             link:"/dashboard",
             icon:BsFillGridFill,
         },
         {
-            name:"Visi Skelbimai",
+            name:t("sideBar.allPosts"),
             link:"/skelbimulist",
             icon:FaListAlt,
         },
         {
-            name: "Mano skelbimai",
+            name: t("sideBar.myPosts"),
             link: `/manoskelbimai/${auth.userId}`,
             icon: FaListAlt,
         },
@@ -31,12 +33,12 @@ function SideBar({ children}) {
         //     icon:HiViewGridAdd,
         // },
         {
-            name:"Users",
+            name:t("sideBar.allUsers"),
             link:"/userslist",
             icon:FaUsers,
         },
         {
-            name: "Keisti slaptažodį",
+            name: t("sideBar.changePassword"),
             link: "/password",
             icon: RiLockPasswordLine,
         },
@@ -44,17 +46,17 @@ function SideBar({ children}) {
 
     const Links = [
         {
-            name: "Mano Profilis",
+            name: t("sideBar.myProfile"),
             link: "/dashboard",
             icon: BsFillGridFill,
             },
             {
-            name: "Mano skelbimai",
+            name: t("sideBar.myPosts"),
             link: `/manoskelbimai/${auth.userId}`,
             icon: FaListAlt,
             },
             {
-            name: "Pridėti Skelbima",
+            name: t("sideBar.addPost"),
             link: "/upload",
             icon: RiMovie2Fill,
             },
@@ -69,7 +71,7 @@ function SideBar({ children}) {
             // icon: FaHeart,
             // },
             {
-            name: "Keisti slaptažodį",
+            name: t("sideBar.changePassword"),
             link: "/password",
             icon: RiLockPasswordLine,
             },

@@ -163,7 +163,7 @@ function UpdateUserInfoModal({ modalOpen, setModalOpen, user }) {
                     className="px-6 py-2 bg-gray-600 hover:bg-gray-800 text-white rounded-full shadow-md transition duration-300 ease-in-out focus:outline-none"
                     onClick={(e) => handleSubmit(e)}
                 >
-                    Submit changes
+                    {t("modal.submitChanges")}
                 </button>
             </form>
         </div>
