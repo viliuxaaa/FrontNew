@@ -1,4 +1,5 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import HomeScreen from "./Screens/HomeScreen";
 import Login from "./Screens/Login";
 import NotFound from "./Screens/NotFound";
@@ -19,8 +20,28 @@ import Privacy from "./Screens/DeadPages/Privacy";
 import Contacts from "./Screens/DeadPages/Contacts";
 import Users from "./Screens/Dashboard/Admin/Users";
 
+const DelayedRoute = ({ path, component: Component, delay }) => {
+  // const history = useHistory();
+  const [shouldRender, setShouldRender] = useState(false);
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setShouldRender(true);
+    }, delay);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [delay]);
+
+  return shouldRender ? (
+    <Route path={path} render={() => <Component />} />
+  ) : <></>;
+}
+
 function App() {
   AOS.init();
+
+
   return (
     <Routes>
       <Route path="/posters/search/" element={<Posters />} />
@@ -32,7 +53,7 @@ function App() {
       <Route path='/' element={<HomeScreen />} />
       <Route path='*' element={<NotFound />} />
       <Route path="/skelbimas/:id" element={<SinglePoster />} />
-      
+    
       <Route path="/duk" element={<Faq />} />
       <Route path="/taisykles" element={<Rules />} />
       <Route path="/politika" element={<Privacy />} />

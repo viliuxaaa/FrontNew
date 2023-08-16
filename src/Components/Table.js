@@ -8,7 +8,8 @@ import useAxiosPrivate from '../hooks/useAxiosPrivate'
 import { useTranslation } from "react-i18next";
 import { computerAEnum as catA,
     categoryTranslationKeys as langFileStrings,
-    allArrays
+    allArrays,
+    allBCategoriesMix
   } from '../enums/AllEnumArrays';
 
 

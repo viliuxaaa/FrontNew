@@ -27,11 +27,13 @@ const Rows = (user, i) => {
         console.log("error locking or unlocking a user")
       }
     }
-    lockUser();
+    
     const toggleLock = () => {
       const newLockState = !userLocked;
       lockUser(newLockState);
     };
+
+    toggleLock();
   }
 
   const deleteUser = () => {

@@ -32,19 +32,19 @@ const Users = () => {
             }
         }
     }
-  return (
-    <SideBar>
-        <div className='flex flex-col gap-6'>
-            <div className='flex-btn gap-2'>
-               <h2 className='text-xl font-bold'>Vartotoju sąrašas</h2>
-               <button onClick={() => handleRefresh()} className='bg-main font-medium transitions hover:bg-subMain border border-text text-text py-3 px-6 rounded'>
-               {t("myPosters.refreshButton")}
-               </button>
+    return (
+        <SideBar>
+            <div className='flex flex-col gap-6'>
+                <div className='flex-btn gap-2'>
+                <h2 className='text-xl font-bold'>Vartotojų sąrašas</h2>
+                <button onClick={() => handleRefresh()} className='bg-main font-medium transitions hover:bg-subMain border border-text text-text py-3 px-6 rounded'>
+                {t("myPosters.refreshButton")}
+                </button>
+                </div>
+                <UserTable t={t} users={finalData}  />
             </div>
-            <UserTable t={t} users={finalData}  />
-        </div>
-    </SideBar>
-  )
+        </SideBar>
+    )
 }
 
 export default Users
