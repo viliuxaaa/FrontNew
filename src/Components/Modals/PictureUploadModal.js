@@ -12,7 +12,7 @@ function PictureUploadModal({ modalOpen, setModalOpen }) {
     const image = new FormData();
 
     async function handleSubmit(e) {
-        e.preventDefault();
+        // e.preventDefault();
         if ( selectedFile ){
         image.append('image', selectedFile);
         try{

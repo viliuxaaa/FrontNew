@@ -20,24 +20,6 @@ import Privacy from "./Screens/DeadPages/Privacy";
 import Contacts from "./Screens/DeadPages/Contacts";
 import Users from "./Screens/Dashboard/Admin/Users";
 
-const DelayedRoute = ({ path, component: Component, delay }) => {
-  // const history = useHistory();
-  const [shouldRender, setShouldRender] = useState(false);
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setShouldRender(true);
-    }, delay);
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [delay]);
-
-  return shouldRender ? (
-    <Route path={path} render={() => <Component />} />
-  ) : <></>;
-}
-
 function App() {
   AOS.init();
 

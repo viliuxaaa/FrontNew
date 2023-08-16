@@ -29,6 +29,8 @@ const Rows = (poster, i, t ) => {
     const [catBArray, setCatBArray] = useState([]);
     const [catBDisplay, setCatBDisplay] = useState('');
     const [tempLangString, setTempLangString ] = useState("");
+
+
     const [isLoading, setIsLoading] = useState(true);
 
     const deletePost = () => {
@@ -115,6 +117,8 @@ const Rows = (poster, i, t ) => {
             <td className={`${Text} truncate`}>{shortTitle}</td>
             <td className={`${Text}`}>{catADisplay}</td>
             <td className={`${Text}`}>{catBDisplay}</td>
+
+            
             <td className={`${Text}`}>{poster?.status}</td>
             <td className={`${Text}`}>{poster?.price}{' '}€</td>
             <td className={`${Text} float-right flex items-center justify-center gap-2`}>
@@ -131,7 +135,7 @@ const Rows = (poster, i, t ) => {
                                 <MdDelete />
                             </button>
                             <Link 
-                                to={`/skelbimas/${poster?.name}`} 
+                                to={`/skelbimas/${poster?.posterId}`} 
                                 className='bg-subMain border hover:bg-purple-400 border-text text-text rounded flex-colo w-7 h-7'
                             >
                                 <GoEye />
@@ -148,10 +152,12 @@ const Rows = (poster, i, t ) => {
                             >
                                 <MdDelete />
                             </button>
+                           
                             <Link 
                                 to={`/skelbimas/${poster?.posterId}`} 
                                 className='bg-subMain border hover:bg-purple-400 border-text text-text rounded flex-colo w-7 h-7'
                             >
+                                 
                                 <GoEye />
                             </Link>
                         </>
