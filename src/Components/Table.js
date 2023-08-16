@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom'
 import { GoEye } from 'react-icons/go'
 import { FiSettings } from 'react-icons/fi'
 import useAuth from '../hooks/useAuth'
-import useAxiosPrivate from '../hooks/useAxiosPrivate';
+import useAxiosPrivate from '../hooks/useAxiosPrivate'
+import { useTranslation } from "react-i18next";
 import { computerAEnum as catA,
     categoryTranslationKeys as langFileStrings,
-    allArrays,
+    allArrays
   } from '../enums/AllEnumArrays';
 
 
@@ -56,14 +57,12 @@ const Rows = (poster, i, t ) => {
         }
         deleteThing();
     }
-
     
     useEffect(() =>{
-        translateCategories(); 
         setImg(
             {label: "Image 1", alt: "image1", url: "/api/v1/images/poster/get/"+poster?.posterId+"/" + 0}
         );
-        
+        translateCategories(); 
     }, [])
 
     async function translateCategories(){
@@ -131,7 +130,7 @@ const Rows = (poster, i, t ) => {
                                 <MdDelete />
                             </button>
                             <Link 
-                                to={`/skelbimas/${poster?.posterId}`} 
+                                to={`/skelbimas/${poster?.name}`} 
                                 className='bg-subMain border hover:bg-purple-400 border-text text-text rounded flex-colo w-7 h-7'
                             >
                                 <GoEye />
