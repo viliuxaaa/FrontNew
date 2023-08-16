@@ -44,10 +44,10 @@ function App() {
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/password" element={<Password />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/manoskelbimai/:id" element={<SkelbimuList />} />
+        <Route path="/manoskelbimai/:id" element={<SkelbimuList key={(1)}/>} />
       </Route>
       <Route element={<RequireAuth allowedRoles={['ADMIN', 'MANAGER']} />}>
-        <Route path="/skelbimulist" element={<SkelbimuList />} />
+        <Route path="/skelbimulist" element={<SkelbimuList key={(2)}/>} />
       </Route>
       <Route element={<RequireAuth allowedRoles={['ADMIN']} />}>
         <Route path="/userslist" element={<Users />} />
