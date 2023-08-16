@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useTranslation } from "react-i18next";
 import SideBar from '../SideBar';
 import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
+import UserTable from '../../../Components/UserTable';
 
 const Users = () => {
     const getAllUsers_URL = "api/v1/admin/get/users";
@@ -16,6 +17,7 @@ const Users = () => {
     }, [])
     
     async function handleRefresh() {
+        setFinalData(null);
         try {
             const response = await privateAxios.get(getAllUsers_URL);
             setFinalData(response?.data);
@@ -34,12 +36,12 @@ const Users = () => {
     <SideBar>
         <div className='flex flex-col gap-6'>
             <div className='flex-btn gap-2'>
-               <h2 className='text-xl font-bold'>{t("myPosters.posterListText")}</h2>
+               <h2 className='text-xl font-bold'>Vartotoju sąrašas</h2>
                <button onClick={() => handleRefresh()} className='bg-main font-medium transitions hover:bg-subMain border border-text text-text py-3 px-6 rounded'>
                {t("myPosters.refreshButton")}
                </button>
             </div>
-            {/* <Table t={t} poster={finalData} admin={false} /> */}
+            <UserTable t={t} users={finalData}  />
         </div>
     </SideBar>
   )

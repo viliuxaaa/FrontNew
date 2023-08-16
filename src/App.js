@@ -32,7 +32,7 @@ function App() {
       <Route path='/' element={<HomeScreen />} />
       <Route path='*' element={<NotFound />} />
       <Route path="/skelbimas/:id" element={<SinglePoster />} />
-      <Route path="/skelbimulist" element={<SkelbimuList />} />
+      
       <Route path="/duk" element={<Faq />} />
       <Route path="/taisykles" element={<Rules />} />
       <Route path="/politika" element={<Privacy />} />
@@ -45,6 +45,9 @@ function App() {
         <Route path="/password" element={<Password />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/manoskelbimai/:id" element={<SkelbimuList />} />
+      </Route>
+      <Route element={<RequireAuth allowedRoles={['ADMIN', 'MANAGER']} />}>
+        <Route path="/skelbimulist" element={<SkelbimuList />} />
       </Route>
       <Route element={<RequireAuth allowedRoles={['ADMIN']} />}>
         <Route path="/userslist" element={<Users />} />

@@ -26,6 +26,7 @@ function SkelbimuList() {
     }, [])
     
     async function handleRefresh() {
+        setFinalData(null);
         try {
             if ( id.id ){
                 const response = await axios.get(getMyPosters_URL);

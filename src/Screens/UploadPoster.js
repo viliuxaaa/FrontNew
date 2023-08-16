@@ -27,15 +27,6 @@ function UploadPoster() {
 
     const {auth} = useAuth();
     const { id } = useParams();
-<<<<<<< Updated upstream
-=======
-    const [blob1URL, setBlob1URL] = useState();
-    const [blob2URL, setBlob2URL] = useState();
-    const [blob3URL, setBlob3URL] = useState();
-    const [blob4URL, setBlob4URL] = useState();
-    const [blob5URL, setBlob5URL] = useState();
-    const [blob6URL, setBlob6URL] = useState();
->>>>>>> Stashed changes
     
     const [submitAttempt, setSubmitAttempt] = useState(0);
 
@@ -47,19 +38,11 @@ function UploadPoster() {
     //Cannot use updateIMGURL because it updates too slow with the poster ID
 
     const images = new FormData();
-<<<<<<< Updated upstream
 
     const [posterEdit, setPosterEdit] = useState( null ); 
     const [imgRed, setImgRed] = useState(false);
 
     const [requestError, setRequestError] = useState('');
-=======
-    
-    const [posterEdit, setPosterEdit] = useState( null );
-    const [posterEditImgCount, setPosterEditImageCount] = useState();
-
-    const [requestError, setRequestError] = useState("");
->>>>>>> Stashed changes
 
     const [postName, setPostName] = useState("");
     const [postNameValid, setPostNameValid] = useState(false);
@@ -93,22 +76,14 @@ function UploadPoster() {
     const [selectedFile5, setSelectedFile5] = useState(null);
     const [selectedFile6, setSelectedFile6] = useState(null);
 
-<<<<<<< Updated upstream
     const functionalArr = [ 
-=======
-    const setPosterEditImages = [
->>>>>>> Stashed changes
         setSelectedFile1,
         setSelectedFile2,
         setSelectedFile3,
         setSelectedFile4,
         setSelectedFile5,
         setSelectedFile6
-<<<<<<< Updated upstream
     ]
-=======
-    ];
->>>>>>> Stashed changes
 
     // for poster succes notification
     const navigate = useNavigate();
@@ -296,19 +271,11 @@ function UploadPoster() {
                 setPrice(response.data.price);
                 setPriceValid(true);
             
-<<<<<<< Updated upstream
                 setPhoneNumber(response.data.phoneNumber);
                 setPhoneNumberValid(true);
     
                 setCategoryA(response.data.categoryA);
                 setCategoryAValid(CATEGORY_REGEX.test(response.data.categoryA));
-=======
-            setPosterEdit(response.data);
-            setPosterEditImageCount(Object.keys(posterEdit.images).length); //sets how many times should useEffect owrk to lead images
-
-            setPostName(response.data.postName);
-            setPostNameValid(true);//TECHNICALLY SHOULD CHECK WITH REGEX, HOWEVER OLDER SEEDED POSTERS MIGHT NOT MEET THE REQUIREMENTS
->>>>>>> Stashed changes
 
                 setCategoryB(response.data.categoryB);
                 setCategoryBValid(CATEGORY_REGEX.test(response.data.categoryB)); 
@@ -402,16 +369,10 @@ function UploadPoster() {
     const handleInputChange6 = (e) => {
         setSelectedFile6(e.target.files[0]);
     }
-<<<<<<< Updated upstream
-=======
-
-
->>>>>>> Stashed changes
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     async function getImgs(){
         let imgArray = [];
         try{
-<<<<<<< Updated upstream
             for(let i= 0 ; i < 6 ; ++i){
                 try{
                     const response = await axios.get(`/api/v1/images/poster/get/${id}/${i}`,{
@@ -426,62 +387,11 @@ function UploadPoster() {
             for ( let j =0; j < imgArray.length ; j++ ){
                 functionalArr[j](imgArray[j]);
             }
-=======
-            for(let i= 0 ; i < posterEditImgCount ; ++i){
-                const response = await axios.get(`/api/v1/images/poster/get/${id}/0`,{
-                    responseType: 'blob',
-                })
-                
-                // console.log(response.data)
-                imgArray.push(response.data);
-                setPosterEditImages[0](response.data)
-                
-            }
-            console.log(selectedFile1)
-            console.log(selectedFile2)
-
-            // console.log(imgArray)
-
-            
-            // setSelectedFile1(imgArray[0])
-            // setSelectedFile2(imgArray[1])
-            // setSelectedFile3(imgArray[2])
-            // setSelectedFile4(imgArray[3])
-            // setSelectedFile5(imgArray[4])
-
-            // setSelectedFile6(imgArray[5])
-
-            setBlob1URL(URL.createObjectURL(imgArray[0]));
-
-
-            return imgArray;
->>>>>>> Stashed changes
         } catch(err) {
             console.log(err)
         }
         
     }
-<<<<<<< Updated upstream
-=======
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    useEffect(() => {
-        const loadImageFromBackend = async () => {
-          if (id) {
-            try {
-              await getImgs();             
-
-            //   console.log(selectedFile1)
-            //   console.log(selectedFile2)
-             
-            } catch (err) {
-              console.log(err);
-            }
-          }
-        };
-    
-        loadImageFromBackend();
-      }, []);
->>>>>>> Stashed changes
 
     ///////////////////////////////////////FIX POPPING UP NEW INPUT FIELD ////////////////////////////////////////
     const inputFIeld = ( handleInputChange, selectedFile, setSelectedFile, imgNo ) => {
@@ -570,7 +480,7 @@ function UploadPoster() {
                                         onChange={handleNameChange}
                                     />
                                     <p className={ (!postNameValid && postName.length !== 0) || ( !postNameValid && submitAttempt > 0 ) ?
-                                        "bg-red-500 rounded-md pl-2 text-white rounded-md":"hidden" }>
+                                        "bg-red-500 pl-2 text-white rounded-md":"hidden" }>
                                         {t("uploadPosterFrame.titleLongerThan10Char")}
                                     </p>
                                 </div>
@@ -645,13 +555,8 @@ function UploadPoster() {
                                         />
                                     </div>
                                     <p className={ ( !posterDescriptionValid && posterDescription.length < 10 && posterDescription ) || ( !posterDescriptionValid && submitAttempt > 0 ) ?
-<<<<<<< Updated upstream
                                             "bg-red-500 rounded-md pl-2 text-white":"hidden" }>
                                             {t("uploadPosterFrame.descriptionLongerThan10Char")}
-=======
-                                            "":"hidden" }>
-                                            Poster description must be over 10 characters!
->>>>>>> Stashed changes
                                     </p>
                                 </div>
                                 {/* ********* PRICE ******** */}
@@ -677,7 +582,6 @@ function UploadPoster() {
                                     </p>
                                 </div>
                                 {/* ********* FILE UPLOAD ******** */}
-<<<<<<< Updated upstream
                                 <p className={ id ? "hidden" : "block mb-2 text-sm font-medium text-gray-900 dark:text-white"} >{t("uploadPosterFrame.imgUploadText")} </p>
                                 { id && !imgRed && <p className="grid grid-cols-3 gap-2">{t("uploadPosterFrame.imgEditLoading")}</p>}
                                 <div>   
@@ -689,19 +593,6 @@ function UploadPoster() {
                                     {inputFIeld( handleInputChange4, selectedFile4, setSelectedFile4 )}
                                     {inputFIeld( handleInputChange5, selectedFile5, setSelectedFile5 )}
                                     {inputFIeld( handleInputChange6, selectedFile6, setSelectedFile6 )}
-=======
-                                <p className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" > Upload photos* </p>
-                                <div>
-                                <div className="grid grid-cols-3 gap-2">
-                                    {/* handleInputChange, id,  selectedFile,  setSelectedFile  */}
-                                    
-                                    {inputFIeld( handleInputChange1, selectedFile1, setSelectedFile1, 0 )}
-                                    {inputFIeld( handleInputChange2, selectedFile2, setSelectedFile2, 1 )}
-                                    {inputFIeld( handleInputChange3, selectedFile3, setSelectedFile3, 2 )}
-                                    {inputFIeld( handleInputChange4, selectedFile4, setSelectedFile4, 3 )}
-                                    {inputFIeld( handleInputChange5, selectedFile5, setSelectedFile5, 4 )}
-                                    {inputFIeld( handleInputChange6, selectedFile6, setSelectedFile6, 5 )}
->>>>>>> Stashed changes
                                 </div>
                                 <p className={ !fileCheck() && submitAttempt > 0  ?
                                     "":"hidden" }
@@ -852,17 +743,10 @@ function UploadPoster() {
                                     type="submit"
                                     className="border-[2px] border-main w-full shadow-md bg-subMain hover:text-black text-text bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                                 >
-<<<<<<< Updated upstream
                                     {t("uploadPosterFrame.addButton")}
                                 </button>)}
                                 <p className={ requestError ? "bg-red-500 pl-2 text-white rounded-md" : "hidden"} >
                                     {t("uploadPosterFrame.errorConnecting")}
-=======
-                                    Add
-                                </button>)}
-                                <p className={ requestError ? "" : "hidden"} >
-                                    Error connecting to the server!
->>>>>>> Stashed changes
                                 </p>
                             </form>
                         </div>

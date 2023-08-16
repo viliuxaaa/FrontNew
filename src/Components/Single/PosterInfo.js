@@ -34,19 +34,11 @@ function PosterInfo({poster}) {
                             <p className="text-base md:text-2xl flex">Kaina: <span className='font-medium pl-8 md:pl-12'>{poster.price}</span> &euro;</p>
                         </div>
                         <div className="bg-subMain rounded-b-xl h-fit p-3 border-y-2 border-darkMain">
-<<<<<<< Updated upstream
                             <p className="text-base md:text-2xl flex">Sukurtas: <span className='font-medium pl-16'>{dateCreated}</span></p>
                             {dateUpdated && <p className="text-base md:text-2xl">Atnaujintas:<span className='font-medium pl-8'>{dateUpdated}</span></p>} 
                         </div>
                     </div>
                         { auth.userId === poster.userId && <PosterMenu id={poster.posterId}/>}
-=======
-                            <p className="text-base md:text-2xl flex">Sukurtas: <span className='font-medium pl-2'>{dateCreated}</span></p>
-                            {dateUpdated && <p className="text-base md:text-2xl"><span className='font-medium pl-10'>Atnaujintas:</span> {dateUpdated}</p>} 
-                        </div>
-                    </div>
-                        { auth.userId === poster.posterId && <PosterMenu id={poster.posterId}/>}
->>>>>>> Stashed changes
                 </div>
             </div>
   )

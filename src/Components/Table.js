@@ -6,6 +6,11 @@ import { FiSettings } from 'react-icons/fi'
 import useAuth from '../hooks/useAuth'
 import useAxiosPrivate from '../hooks/useAxiosPrivate'
 import { useTranslation } from "react-i18next";
+import { computerAEnum as catA,
+    categoryTranslationKeys as langFileStrings,
+    allArrays
+  } from '../enums/AllEnumArrays';
+
 
 
 const Head = "text-xs text-left text-text font-semibold px-6 py-2 uppercase"
@@ -13,13 +18,16 @@ const Text = 'text-sm text-text text-left leading-6 whitespace-nowrap px-5 py-2'
 
 
 // rows
-const Rows = (poster, i, admin) => {
+const Rows = (poster, i, t ) => {
     const { auth } = useAuth();
     const privateAxios = useAxiosPrivate();
     const posterDeleteURL = `api/v1/poster/` + auth?.userId + `/delete/`+ poster.posterId;
     const posterDeleteAdminURL = "api/v1/admin/get/" + poster?.posterId + "/delete-poster"
     const [img, setImg] = useState(null);
-
+    const [catADisplay, setCatADisplay] = useState('');
+    const [catBArray, setCatBArray] = useState([]);
+    const [catBDisplay, setCatBDisplay] = useState('');
+    const [tempLangString, setTempLangString ] = useState("")
     const deletePost = () => {
         const controller = new AbortController();
     
@@ -51,9 +59,29 @@ const Rows = (poster, i, admin) => {
     useEffect(() =>{
         setImg(
             {label: "Image 1", alt: "image1", url: "/api/v1/images/poster/get/"+poster?.posterId+"/" + 0}
-        ); 
+        );
+        translateCategories(); 
     }, [])
 
+    function translateCategories(){
+        //LOOK AT ALL CATA ENUM VALUES TO FIND MATCH THEN DISPLAY TRANSLATABLE STRING
+        for( let i = 0; i < catA.length; i++ ){
+            if( catA[i] === poster?.categoryA ){
+                setCatBArray(allArrays[i])
+                setCatADisplay(t("computerCategoryA."+ i))
+                setTempLangString(langFileStrings[i])
+            }
+        }
+        for(let j=0 ;j<catBArray.length; j++){
+            if ( catBArray[j] === poster?.categoryB ){
+                setCatBDisplay(t(tempLangString+"."+j))
+                console.log(t(tempLangString+"."+j))
+            }
+            
+        }
+
+        console.log(poster?.categoryB)
+    }
     
       // mazinam title teksta
       let shortTitle = poster?.postName.substring(0, 40);
@@ -78,13 +106,13 @@ const Rows = (poster, i, admin) => {
                 </div>
             </td>
             <td className={`${Text} truncate`}>{shortTitle}</td>
-            <td className={`${Text}`}>{poster?.categoryA}</td>
-            <td className={`${Text}`}>{poster?.categoryB}</td>
+            <td className={`${Text}`}>{catADisplay}</td>
+            <td className={`${Text}`}>{catBDisplay}</td>
             <td className={`${Text}`}>{poster?.status}</td>
             <td className={`${Text}`}>{poster?.price}{' '}€</td>
             <td className={`${Text} float-right flex items-center justify-center gap-2`}>
                 {
-                    admin ? (
+                    auth.roles === "ADMIN" ? (
                         <>
                             {/* <button className='bg-subMain hover:bg-green-400 border border-text text-text rounded flex-colo w-7 h-7'>
                                 <FiSettings />
@@ -159,7 +187,7 @@ function Table({t, poster, img, admin}) {
                 </tr>
             </thead>
             <tbody className='bg-main border-t border-text divide-y divide-gray-800'>
-                {poster && poster.map((poster, i) => Rows(poster, i, img, admin))}
+                {poster && poster.map((poster, i) => Rows(poster, i, t))}
             </tbody>
         </table>
     </div>
