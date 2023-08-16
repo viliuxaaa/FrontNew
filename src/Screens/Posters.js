@@ -61,7 +61,7 @@ function Posters() {
               onClick={HandleLoadingMore}
               className="flex hover:scale-105 transition items-center gap-3 text-text py-3 bg-subMain px-8 rounded-md font-semibold border-2 border-main"
             >
-              Loading More <CgSpinner className="animate-spin" />
+              Load More <CgSpinner className="animate-spin" />
             </button>
           </div>
         )}

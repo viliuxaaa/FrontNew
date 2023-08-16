@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { MdDelete } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import { GoEye } from 'react-icons/go'
-import { FiSettings } from 'react-icons/fi'
+import { AiOutlineLock, AiOutlineUnlock } from 'react-icons/ai'
 import useAuth from '../hooks/useAuth'
 import useAxiosPrivate from '../hooks/useAxiosPrivate'
 import { useTranslation } from "react-i18next";
@@ -15,17 +15,23 @@ const Rows = (user, i) => {
   const userDeleteURL = "api/v1/admin/get/"+ user.id+"/delete";
   const userLockURL = "api/v1/admin/get/"+ user.id+"/change-lock"
   const [img, setImg] = useState(null);
+  const [userLocked, setUserLocked] = useState(false);
 
-  const lockUser = () => {
+  const lockUser = (isLocked) => {
     const lockUser = async () => {
       try{
         const response = await privateAxios.put(userLockURL);
+        setUserLocked(isLocked);
         console.log(response.data)
       }catch(err){
         console.log("error locking or unlocking a user")
       }
     }
     lockUser();
+    const toggleLock = () => {
+      const newLockState = !userLocked;
+      lockUser(newLockState);
+    };
   }
 
   const deleteUser = () => {
@@ -73,10 +79,11 @@ const Rows = (user, i) => {
               
               { user.role !== "ADMIN" &&
               <>
-              <button className='bg-subMain hover:bg-green-400 border border-text text-text rounded flex-colo w-7 h-7'
-                onClick={() => lockUser()}
+              <button 
+                className='bg-subMain hover:bg-green-400 border border-text text-text rounded flex-colo w-7 h-7'
+                onClick={() => lockUser(!userLocked)}
               >
-                  <FiSettings />
+                  {!userLocked ? <AiOutlineUnlock /> : <AiOutlineLock className='text-red-700'/>}
               </button>
               <button
                   className='bg-subMain hover:bg-red-500 border border-text text-text rounded flex-colo w-7 h-7'

@@ -31,7 +31,7 @@ function LatestPosters() {
                         onScroll={handleScroll}
                         style={isScrollable ? { overflow: "scroll" } : {}}
                         >
-                        <PosterMinDetail key={index} poster={poster}/>
+                        <PosterMinDetail poster={poster}/>
                         </div>
                     ))}
                 </div>

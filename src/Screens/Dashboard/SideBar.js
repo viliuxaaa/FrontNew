@@ -50,7 +50,7 @@ function SideBar({ children}) {
             },
             {
             name: "Mano skelbimai",
-            link: "/skelbimulist/",
+            link: `/manoskelbimai/${auth.userId}`,
             icon: FaListAlt,
             },
             {
