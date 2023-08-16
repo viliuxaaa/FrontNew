@@ -114,7 +114,7 @@ function Password() {
             {/* new Password  */}
             <div>
                 <label
-                    htmlFor="password"
+                    htmlFor="password1"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                     {t("changePassword.newPassword")}
@@ -131,8 +131,8 @@ function Password() {
                 </label>
                 <input
                 type="password"
-                name="password"
-                id="password"
+                name="password1"
+                id="password1"
                 onChange={(e) => setPwd(e.target.value)}
                 value={pwd}
                 className="bg-background border border-background text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"

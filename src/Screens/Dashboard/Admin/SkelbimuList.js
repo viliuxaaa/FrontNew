@@ -35,11 +35,8 @@ function SkelbimuList() {
                 const response = await axios.get(getMyPosters_URL);
                 setFinalData(response?.data);
             } else {
-                console.log(getAllPosters_URL)
-                
                 const response = await axios.get(getAllPosters_URL);
                 setFinalData(response?.data);
-                console.log(response)
             }
         } catch (err) {
             if (!err.response) {

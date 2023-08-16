@@ -70,7 +70,7 @@ function HomeScreen() {
                         data-aos-duration="1000"
                         data-aos-delay="6"
                         data-aos-anchor-placement="top-bottom" 
-                        className="hover:scale-105 transition">
+                        className="hover:scale-105 transition tttt">
                         <Category category={categories.category7} />
                     </div>
                     <div
@@ -78,6 +78,7 @@ function HomeScreen() {
                         data-aos-duration="1000"
                         data-aos-delay="6"
                         data-aos-anchor-placement="top-bottom" 
+                        data-aos-anchor=".tttt" 
                         className="hover:scale-105 transition">
                         <Category category={categories.category8} />
                     </div>

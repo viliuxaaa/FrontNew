@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom'
 import { GoEye } from 'react-icons/go'
 import { FiSettings } from 'react-icons/fi'
 import useAuth from '../hooks/useAuth'
-import useAxiosPrivate from '../hooks/useAxiosPrivate';
+import useAxiosPrivate from '../hooks/useAxiosPrivate'
+import { useTranslation } from "react-i18next";
 import { computerAEnum as catA,
     categoryTranslationKeys as langFileStrings,
-    allArrays,
+    allArrays
   } from '../enums/AllEnumArrays';
 
 
@@ -26,7 +27,8 @@ const Rows = (poster, i, t ) => {
     const [catADisplay, setCatADisplay] = useState('');
     const [catBArray, setCatBArray] = useState([]);
     const [catBDisplay, setCatBDisplay] = useState('');
-    const [tempLangString, setTempLangString ] = useState("")
+    const [tempLangString, setTempLangString ] = useState("");
+    const [isLoading, setIsLoading] = useState(true);
 
     const deletePost = () => {
         const controller = new AbortController();
@@ -55,48 +57,51 @@ const Rows = (poster, i, t ) => {
         }
         deleteThing();
     }
-
     
     useEffect(() =>{
-        translateCategories(); 
         setImg(
             {label: "Image 1", alt: "image1", url: "/api/v1/images/poster/get/"+poster?.posterId+"/" + 0}
         );
-        
+        translateCategories(); 
     }, [])
 
-    function translateCategories(){
+    async function translateCategories(){
         //LOOK AT ALL CATA ENUM VALUES TO FIND MATCH THEN DISPLAY TRANSLATABLE STRING
         for( let i = 0; i < catA.length; i++ ){
             if( catA[i] === poster?.categoryA ){
                 setCatBArray(allArrays[i])
                 setCatADisplay(t("computerCategoryA."+ i))
                 setTempLangString(langFileStrings[i])
+                // console.log(t("computerCategoryA."+ i))
             }
         }
+        translateBCategories();
+        // console.log(poster?.categoryB)
+    }
+    function translateBCategories(){
         for(let j=0 ;j<catBArray.length; j++){
             if ( catBArray[j] === poster?.categoryB ){
                 setCatBDisplay(t(tempLangString+"."+j))
-                
             }
+            setIsLoading(false);
         }
 
-        // console.log(poster?.categoryB)
     }
+
+    // mazinam title teksta
+    let shortTitle = poster?.postName.substring(0, 40);
+    const lastSp = shortTitle?.lastIndexOf(" ");
+
+    if (lastSp !== -1) {
+        shortTitle = shortTitle?.substring(0, lastSp) + "..";
+    } else {
+        shortTitle = shortTitle + "..";
+    }
+    ///////////////////////////
     
-      // mazinam title teksta
-      let shortTitle = poster?.postName.substring(0, 40);
-      const lastSp = shortTitle?.lastIndexOf(" ");
-  
-      if (lastSp !== -1) {
-          shortTitle = shortTitle?.substring(0, lastSp) + "..";
-      } else {
-          shortTitle = shortTitle + "..";
-      }
-      ///////////////////////////
-    
-    return (
-        <tr key={i}>
+    return ( 
+        <>
+        { <tr key={i}>
             <td className={`${Text}`}>
                 <div className='w-12 p-1 bg-dry border border-text h-12 rounded overflow-hidden'>
                 {img && <img 
@@ -125,7 +130,7 @@ const Rows = (poster, i, t ) => {
                                 <MdDelete />
                             </button>
                             <Link 
-                                to={`/skelbimas/${poster?.posterId}`} 
+                                to={`/skelbimas/${poster?.name}`} 
                                 className='bg-subMain border hover:bg-purple-400 border-text text-text rounded flex-colo w-7 h-7'
                             >
                                 <GoEye />
@@ -152,7 +157,8 @@ const Rows = (poster, i, t ) => {
                     )//http://localhost:3006/skelbimas/4
                 }
             </td>
-        </tr>
+        </tr>}
+        </>
     )
 }
 
