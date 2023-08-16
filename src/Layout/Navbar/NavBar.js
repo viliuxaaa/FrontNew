@@ -152,19 +152,22 @@ function NavBar() {
                 {/* search Form */}
                 <div className="col-span-3 flex w-full">
                     <form  className="w-full border border-text text-sm bg-background rounded flex-btn gap-4">
-                        <button 
-                            type="button" 
-                            className="bg-subMain w-12 flex-colo h-12 rounded text-text"
-                        >
-                            <Link to={"/posters/search/" + searchLink}>
+                            <Link 
+                              className="bg-subMain w-12 flex-colo h-12 rounded text-text" 
+                              to={"/posters/search/" + searchLink}
+                            >
                                 <FaSearch />
                             </Link> 
-                        </button>
                         <input
                             type="text" 
                             placeholder={t("navbarButtons.searchPlaceHolder")}
                             className="font-medium placeholder:text-text text-sm w-11/12 h-12 bg-transparent border-none px-2 text-text"
                             onChange={(e) => handleChange(e.target.value)}
+                            onKeyDown={(e) => {
+                              if (e.key === 'Enter') {
+                                  e.preventDefault();
+                              }
+                          }}
                         />
                         
                     </form>
