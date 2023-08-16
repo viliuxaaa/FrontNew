@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { MdDelete } from 'react-icons/md'
-import { Link } from 'react-router-dom'
-import { GoEye } from 'react-icons/go'
 import { AiOutlineLock, AiOutlineUnlock } from 'react-icons/ai'
 import useAuth from '../hooks/useAuth'
 import useAxiosPrivate from '../hooks/useAxiosPrivate'
-import { useTranslation } from "react-i18next";
 const Head = "text-xs text-left text-text font-semibold px-6 py-2 uppercase"
 const Text = 'text-sm text-text text-left leading-6 whitespace-nowrap px-5 py-2'
 
 const Rows = (user, i) => {
-  
   const privateAxios = useAxiosPrivate();
   const userDeleteURL = "api/v1/admin/get/"+ user.id+"/delete";
   const userLockURL = "api/v1/admin/get/"+ user.id+"/change-lock"
@@ -18,7 +14,7 @@ const Rows = (user, i) => {
   const [userLocked, setUserLocked] = useState(false);
 
   const lockUser = (isLocked) => {
-    const lockUser = async () => {
+    const performLockUser = async () => {
       try{
         const response = await privateAxios.put(userLockURL);
         setUserLocked(isLocked);
@@ -27,7 +23,7 @@ const Rows = (user, i) => {
         console.log("error locking or unlocking a user")
       }
     }
-    lockUser();
+    performLockUser();
     const toggleLock = () => {
       const newLockState = !userLocked;
       lockUser(newLockState);
@@ -35,7 +31,6 @@ const Rows = (user, i) => {
   }
 
   const deleteUser = () => {
-  
       const deleteThing = async () => {
         try{
           await privateAxios.delete(userDeleteURL)
