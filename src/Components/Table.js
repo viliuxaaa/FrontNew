@@ -77,7 +77,6 @@ const Rows = (poster, i, t ) => {
                 setCatBDisplay(t(tempLangString+"."+j))
                 console.log(t(tempLangString+"."+j))
             }
-            
         }
 
         console.log(poster?.categoryB)
