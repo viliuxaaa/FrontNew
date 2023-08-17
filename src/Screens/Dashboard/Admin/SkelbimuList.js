@@ -7,12 +7,10 @@ import useAuth from '../../../hooks/useAuth';
 import { useEffect } from 'react';
 import axios from '../../../api/axios'
 import { useTranslation } from "react-i18next";
-import { TableProvider } from '../../../context/TableProvider';
 import useTableContext from '../../../hooks/useTableContext';
 
 function SkelbimuList() {
     const [t, i18n] = useTranslation("global");
-    const {auth} = useAuth(); 
 
     const id = useParams();
     const [errMsg, setErrMsg] = useState("");
@@ -22,7 +20,7 @@ function SkelbimuList() {
     const getMyPosters_URL = "api/v1/poster/get/"+id.id+"/all";
     const getAllPosters_URL = "/api/v1/poster/get/search?";
 
-    const {refresh} = useTableContext();
+    const {refresh, setRefresh} = useTableContext();
    
 
     useEffect(() =>{
@@ -30,8 +28,9 @@ function SkelbimuList() {
             setFinalData(null);
         }
         handleRefresh();
-        console.log(id.id)
-    }, [])
+        setRefresh(false);
+    }, [refresh])
+    
        
     
     async function handleRefresh() {

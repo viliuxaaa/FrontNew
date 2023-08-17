@@ -5,8 +5,6 @@ import { GoEye } from 'react-icons/go'
 import useAuth from '../hooks/useAuth'
 import useAxiosPrivate from '../hooks/useAxiosPrivate'
 import { computerAEnum as catA,
-    categoryTranslationKeys as langFileStrings,
-    allArrays,
     allBCategoriesMix
   } from '../enums/AllEnumArrays';
 import  useTableContext  from '../hooks/useTableContext'
@@ -16,21 +14,15 @@ const Text = 'text-sm text-text text-left leading-6 whitespace-nowrap px-5 py-2'
 
 // rows
 const Rows = (poster, t ) => {
-    const {refresh, setRefresh} = useTableContext()
-    
+    const { setRefresh } = useTableContext()
+
     const { auth } = useAuth();
     const privateAxios = useAxiosPrivate();
     const posterDeleteURL = `api/v1/poster/` + auth?.userId + `/delete/`+ poster.posterId;
     const posterDeleteAdminURL = "api/v1/admin/get/" + poster?.posterId + "/delete-poster"
     const [img, setImg] = useState(null);
     const [catADisplay, setCatADisplay] = useState('');
-    const [catBArray, setCatBArray] = useState([]);
     const [catBDisplay, setCatBDisplay] = useState('');
-    const [tempLangString, setTempLangString ] = useState("");
-
-    
-    const [isLoading, setIsLoading] = useState(true);
-
 
     const deletePost = () => {
         const controller = new AbortController();
@@ -52,7 +44,7 @@ const Rows = (poster, t ) => {
                     }
                 );
             }
-            console.log("poster: " + poster?.postName + " was deleted")
+            setRefresh(true);
           } catch (err) {
             console.log(err);
           }
@@ -65,28 +57,25 @@ const Rows = (poster, t ) => {
             {label: "Image 1", alt: "image1", url: "/api/v1/images/poster/get/"+poster?.posterId+"/" + 0}
         );
         translateCategories(); 
-    }, [refresh])
+    }, [])
 
     function translateCategories(){
         //LOOK AT ALL CATA ENUM VALUES TO FIND MATCH THEN DISPLAY TRANSLATABLE STRING
         for( let i = 0; i < catA.length; i++ ){
             if( catA[i] === poster?.categoryA ){
-                setCatBArray(allArrays[i])
-                setCatADisplay(t("mainCat."+ i))
-                setTempLangString(langFileStrings[i])
-                // console.log(t("computerCategoryA."+ i))
+                setCatADisplay(t("computerCategoryA."+ i))
             }
         }
         translateBCategories();
-        // console.log(poster?.categoryB)
+        
     }
     function translateBCategories(){
         for(let j=0 ;j<allBCategoriesMix.length; j++){
             if ( allBCategoriesMix[j] === poster?.categoryB ){
                 setCatBDisplay(t("allCategoryBMix."+j))
+                // console.log(poster.categoryB)
             }
         }
-
     }
 
     // mazinam title teksta
@@ -101,7 +90,6 @@ const Rows = (poster, t ) => {
     ///////////////////////////
     
     return ( 
-        
         <tr key={poster?.postName}>
             <td className={`${Text}`}>
                 <div className='w-12 p-1 bg-dry border border-text h-12 rounded overflow-hidden'>
@@ -167,13 +155,6 @@ const Rows = (poster, t ) => {
 
 // table
 function Table({t, poster}) {
-
-    const { refresh } = useTableContext();
-
-    useEffect(() => {
-        console.log("HELLO FROM TABLE REFRESH")
-    }, [refresh])
-
     return (
         <div className='overflow-x-scroll overflow-hidden relative w-full'>
             <table className='w-full table-auto border border-text divide-y divide-border'>
