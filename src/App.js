@@ -19,9 +19,11 @@ import Rules from "./Screens/DeadPages/Rules";
 import Privacy from "./Screens/DeadPages/Privacy";
 import Contacts from "./Screens/DeadPages/Contacts";
 import Users from "./Screens/Dashboard/Admin/Users";
+import Cookies from 'js-cookie';
 
 function App() {
   AOS.init();
+  const expiresAt = Cookies.get('expire');
 
 
   return (
@@ -41,7 +43,12 @@ function App() {
       <Route path="/politika" element={<Privacy />} />
       <Route path="/kontaktai" element={<Contacts />} />
       
-      <Route element={<RequireAuth allowedRoles={['ADMIN', 'MANAGER', 'USER']} />}>
+      <Route element={
+        <RequireAuth 
+          allowedRoles={['ADMIN', 'MANAGER', 'USER']}
+          expiresAt={expiresAt} 
+        />}
+      >
         <Route path="/upload" element={<UploadPoster />} />
         <Route path="/edit/:id" element={<UploadPoster />} />
         <Route path="/favorites" element={<Favorites />} />
@@ -49,10 +56,18 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/manoskelbimai/:id" element={<SkelbimuList key={(1)}/>} />
       </Route>
-      <Route element={<RequireAuth allowedRoles={['ADMIN', 'MANAGER']} />}>
+
+      <Route 
+        element={
+          <RequireAuth 
+            allowedRoles={['ADMIN', 'MANAGER']}
+            expiresAt={expiresAt}
+          />
+        }
+      >
         <Route path="/skelbimulist" element={<SkelbimuList key={(2)}/>} />
       </Route>
-      <Route element={<RequireAuth allowedRoles={['ADMIN']} />}>
+      <Route element={<RequireAuth expiresAt={expiresAt} allowedRoles={['ADMIN']} />}>
         <Route path="/userslist" element={<Users />} />
       </Route>
 

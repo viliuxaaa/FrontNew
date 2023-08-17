@@ -12,10 +12,9 @@ const RequireAuth = ({ allowedRoles }) => {
   useEffect(() => {
 
     console.log(Date.now())
-    console.log(expiresAt)
     console.log(Date.now() < auth?.expiresAt)
-    
-    if( Date.now() < +expiresAt ){
+    console.log(expiresAt)
+    if( Date.now() > +expiresAt ){
       setAuth({});
       console.log("turejo pasibaigti")
     }
