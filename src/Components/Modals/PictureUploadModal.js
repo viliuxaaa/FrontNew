@@ -12,10 +12,14 @@ function PictureUploadModal({ modalOpen, setModalOpen }) {
     const image = new FormData();
 
     async function handleSubmit(e) {
-        // e.preventDefault();
+        // e.preventDefault()
+        console.log(image)
+        console.log(selectedFile)
+        console.log(POST_USER_IMG_URL)
         if ( selectedFile ){
         image.append('image', selectedFile);
         try{
+            console.log(image)
             const response = await privateAxios.post(POST_USER_IMG_URL, image, {
                 headers:{
                     'Content-Type':'multipart/form-data'

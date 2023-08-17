@@ -21,7 +21,6 @@ const Users = () => {
         try {
             const response = await privateAxios.get(getAllUsers_URL);
             setFinalData(response?.data);
-            console.log(response.data)
         } catch (err) {
             if (!err.response) {
                 setErrMsg("No Server Response");

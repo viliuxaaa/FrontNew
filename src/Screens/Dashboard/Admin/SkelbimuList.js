@@ -7,6 +7,8 @@ import useAuth from '../../../hooks/useAuth';
 import { useEffect } from 'react';
 import axios from '../../../api/axios'
 import { useTranslation } from "react-i18next";
+import { TableProvider } from '../../../context/TableProvider';
+import useTableContext from '../../../hooks/useTableContext';
 
 function SkelbimuList() {
     const [t, i18n] = useTranslation("global");
@@ -18,8 +20,9 @@ function SkelbimuList() {
     
     const getMyPosters_URL = "api/v1/poster/get/"+id.id+"/all";
     const getAllPosters_URL = "/api/v1/poster/get/search?";
-    
-    
+
+    const {refresh} = useTableContext();
+    console.log(refresh)
 
     useEffect(() =>{
         if( !id.id ){
@@ -42,7 +45,7 @@ function SkelbimuList() {
             if (!err.response) {
                 setErrMsg("No Server Response");
             } else if (err.response?.status === 409) {
-                setErrMsg("Problem 409"); //TODO reikia jog patikrintų ar toks vartotojas jau egzistuoja // cai tai padaro manau
+                setErrMsg("Problem 409"); //TODO reikia jog patikrintų ar toks vartotojas jau egzistuoja 
             } else {
                 setErrMsg("Table loading failed");
             }
@@ -62,7 +65,11 @@ function SkelbimuList() {
                 {t("myPosters.refreshButton")}
                 </button>
             </div>
-            {finalData && <Table t={t} poster={finalData} admin={false} />}
+            {finalData && 
+                <TableProvider >
+                    <Table t={t} poster={finalData} admin={false} />
+                </TableProvider>
+            }
             {errMsg && <p>Connection to the server failed</p>}
         </div>
     </SideBar>

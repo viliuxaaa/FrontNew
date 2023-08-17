@@ -11,7 +11,7 @@ import { computerAEnum as catA,
     allArrays,
     allBCategoriesMix
   } from '../enums/AllEnumArrays';
-
+import  useTableContext  from '../hooks/useTableContext'
 
 
 const Head = "text-xs text-left text-text font-semibold px-6 py-2 uppercase"
@@ -19,7 +19,9 @@ const Text = 'text-sm text-text text-left leading-6 whitespace-nowrap px-5 py-2'
 
 
 // rows
-const Rows = (poster, i, t ) => {
+const Rows = (poster, t ) => {
+    const {refresh} = useTableContext()
+    console.log(refresh)
     const { auth } = useAuth();
     const privateAxios = useAxiosPrivate();
     const posterDeleteURL = `api/v1/poster/` + auth?.userId + `/delete/`+ poster.posterId;
@@ -30,7 +32,7 @@ const Rows = (poster, i, t ) => {
     const [catBDisplay, setCatBDisplay] = useState('');
     const [tempLangString, setTempLangString ] = useState("");
 
-
+    
     const [isLoading, setIsLoading] = useState(true);
 
     const deletePost = () => {
@@ -62,6 +64,7 @@ const Rows = (poster, i, t ) => {
     }
     
     useEffect(() =>{
+        
         setImg(
             {label: "Image 1", alt: "image1", url: "/api/v1/images/poster/get/"+poster?.posterId+"/" + 0}
         );
@@ -104,7 +107,7 @@ const Rows = (poster, i, t ) => {
     
     return ( 
         <>
-        { <tr key={i}>
+        { <tr key={poster?.postName}>
             <td className={`${Text}`}>
                 <div className='w-12 p-1 bg-dry border border-text h-12 rounded overflow-hidden'>
                 {img && <img 
@@ -117,8 +120,6 @@ const Rows = (poster, i, t ) => {
             <td className={`${Text} truncate`}>{shortTitle}</td>
             <td className={`${Text}`}>{catADisplay}</td>
             <td className={`${Text}`}>{catBDisplay}</td>
-
-            
             <td className={`${Text}`}>{poster?.status}</td>
             <td className={`${Text}`}>{poster?.price}{' '}€</td>
             <td className={`${Text} float-right flex items-center justify-center gap-2`}>
@@ -201,7 +202,7 @@ function Table({t, poster}) {
                 </tr>
             </thead>
             <tbody className='bg-main border-t border-text divide-y divide-gray-800'>
-                {poster && poster.map((poster, i) => Rows(poster, i, t))}
+                {poster && poster.map((poster) => Rows(poster, t))}
             </tbody>
         </table>
     </div>

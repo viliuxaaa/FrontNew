@@ -6,11 +6,13 @@ import { AiOutlineLock, AiOutlineUnlock } from 'react-icons/ai'
 import useAuth from '../hooks/useAuth'
 import useAxiosPrivate from '../hooks/useAxiosPrivate'
 import { useTranslation } from "react-i18next";
+import { useTableContext } from 'flowbite-react/lib/esm/components/Table/TableContext'
+
 const Head = "text-xs text-left text-text font-semibold px-6 py-2 uppercase"
 const Text = 'text-sm text-text text-left leading-6 whitespace-nowrap px-5 py-2'
 
 const Rows = (user, i) => {
-  
+  // const { refresh, useRefresh } = useTableContext();
   const privateAxios = useAxiosPrivate();
   const userDeleteURL = "api/v1/admin/get/"+ user.id+"/delete";
   const userLockURL = "api/v1/admin/get/"+ user.id+"/change-lock"
@@ -49,6 +51,7 @@ const Rows = (user, i) => {
       deleteThing();
   }
   useEffect(() =>{
+    // console.log(refresh)
     if ( user.havePicture ){
       setImg(
           {label: "Image 1", alt: "user image", url: "api/v1/user/get/"+user?.id+"/image"}

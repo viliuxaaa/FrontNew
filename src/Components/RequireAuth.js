@@ -1,22 +1,31 @@
 import { useLocation, Navigate, Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { useEffect, useState } from "react";
-
+import Cookies from 'js-cookie';
 
 const RequireAuth = ({ allowedRoles }) => {
-  const { auth } = useAuth();
+  const { auth, setAuth } = useAuth();
   const location = useLocation();
   const [shouldRender, setShouldRender] = useState(false);
+  const expiresAt = Cookies.get('expire');
 
   useEffect(() => {
-        const timeoutId = setTimeout(() => {
-          setShouldRender(true);
-        }, 1);
-        console.log("require auth works")
-        return () => {
-          clearTimeout(timeoutId);
-        };
-      }, []);
+
+    console.log(Date.now())
+    console.log(expiresAt)
+    console.log(Date.now() < auth?.expiresAt)
+    
+    if( Date.now() < +expiresAt ){
+      setAuth({});
+      console.log("turejo pasibaigti")
+    }
+    const timeoutId = setTimeout(() => {
+      setShouldRender(true);
+    }, 1);
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [location]);
 
   const returnObject = () => {
     
