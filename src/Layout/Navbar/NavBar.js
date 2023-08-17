@@ -134,7 +134,7 @@ function NavBar() {
         if (checkedValues.length > 0) {
             c = "&city=" + checkedValues; 
         }
-        if (text !== "") {
+        if (orderBy !== "") {
           d = "&" + orderBy; 
       }
         setSearchLink(a + b + c + d)
