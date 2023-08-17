@@ -2,6 +2,7 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import { CgProfile, CgUser } from "react-icons/cg";
 import FilterIndex from "../../Components/Home/FilterIndex";
+import FilterIndex2 from "../../Components/Home/FilterIndex2";
 import { BiChevronDown, BiLogIn } from "react-icons/bi";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -181,6 +182,11 @@ function NavBar() {
                     </button>
                     <span className="w-[5px]"></span>
                     <FilterIndex
+                        catt={catt}
+                        setCatt={setCatt} 
+                    />
+                    <span className="w-[5px]"></span>
+                    <FilterIndex2
                         catt={catt}
                         setCatt={setCatt} 
                     />
