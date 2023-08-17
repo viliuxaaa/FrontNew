@@ -235,7 +235,7 @@
     "removeImage": "Pašalinti nuotrauką",
     "uploadImageIconText": "Įkelti nuotrauką",
     "max2Mb": "Iki 2Mb",
-    "EditPosterText": "Atnaujinti skelbimą: ",
+    "EditPosterText": "Atnaujinti skelbimą:   ",
     "AddPosterText": "Naujas skelbimas",
     "titleText": "Pavadinimas *",
     "titleLongerThan10Char": "Privalo būti ne trumpesnis nei 10 raidžių.",
@@ -294,7 +294,8 @@
     "subcat": "Kategorijos šaka",
     "status": "Statusas",
     "price": "Kaina",
-    "actions": "Veiksmai"
+    "actions": "Veiksmai",
+    "title": "Vartorojų sąrašas"
   },
 
   "myProfile": {
@@ -304,7 +305,7 @@
     "roleText": "Rolė: ",
     "profileUpdatedText": "Profilis atnaujintas",
     "profileCreatedText": "Profilis sukurtas: ",
-    "updateInfoButton": "Atnaujinti informaciją:",
+    "updateInfoButton": "Atnaujinti informaciją",
     "updateFotoButton": "Pakeisti profilio nuotrauką",
     "deleteProfileButton": "Ištrinti paskyrą"
   },
@@ -359,6 +360,7 @@
   },
 
   "adminReg": {
-    "adminRegText": "Registruoti administratorių"
+    "adminRegText": "Registruoti administratorių",
+    "regButton": "Registruoti administratorių"
   }
 }

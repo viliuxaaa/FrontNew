@@ -460,7 +460,7 @@ function AdminRegister() {
                                         type="submit"
                                         className="border-[2px] border-main w-full shadow-md bg-subMain hover:text-black text-text bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                                     >
-                                        Registruoti
+                                        {t("adminReg.regButton")}
                                     </button>
                                 </form>
                             </div>

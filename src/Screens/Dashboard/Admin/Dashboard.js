@@ -90,7 +90,7 @@ const [hovered, setHovered] = useState(false);
             setModalOpen={setModal3Open}
             user={userData}
         />
-        <h2 className='text-xl font-bold'>Mano Profilis</h2>
+        <h2 className='text-xl font-bold'>{t("myProfile.myProfileText")}</h2>
             <div className="p-2 md:p-8 bg-main bg-opacity-85 shadow mt-24 md:mt-14">
                 <div className="grid grid-cols-1 md:grid-cols-3">
                     {/* Next Div keeps profile image centered */}

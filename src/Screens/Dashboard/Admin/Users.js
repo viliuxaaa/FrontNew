@@ -35,7 +35,7 @@ const Users = () => {
         <SideBar>
             <div className='flex flex-col gap-6'>
                 <div className='flex-btn gap-2'>
-                <h2 className='text-xl font-bold'>Vartotojų sąrašas</h2>
+                <h2 className='text-xl font-bold'>{t("table.title")}</h2>
                 <button onClick={() => handleRefresh()} className='bg-main font-medium transitions hover:bg-subMain border border-text text-text py-3 px-6 rounded'>
                 {t("myPosters.refreshButton")}
                 </button>

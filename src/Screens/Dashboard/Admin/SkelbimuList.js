@@ -59,7 +59,7 @@ function SkelbimuList() {
                 {id.id ? 
                     <h2 className='text-xl font-bold'>{t("myPosters.posterListText")}</h2> 
                 :
-                    <h2 className='text-xl font-bold'>Visi skelbimai</h2> 
+                    <h2 className='text-xl font-bold'>{t("allPosters.allPostersText")}</h2> 
                 }
                 <button onClick={() => handleRefresh()} className='bg-main font-medium transitions hover:bg-subMain border border-text text-text py-3 px-6 rounded'>
                 {t("myPosters.refreshButton")}

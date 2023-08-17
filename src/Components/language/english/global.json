@@ -231,7 +231,7 @@
       "removeImage": "Remove Image",
       "uploadImageIconText": "Upload Image",
       "max2Mb": "Up to 2MB",
-      "EditPosterText": "Update Advertisement:",
+      "EditPosterText": "Update Advertisement:   ",
       "AddPosterText": "New Advertisement",
       "titleText": "Title *",
       "titleLongerThan10Char": "Must be longer than 10 characters.",
@@ -290,7 +290,8 @@
       "subcat": "Subcategory",
       "status": "Status",
       "price": "Price",
-      "actions": "Actions"
+      "actions": "Actions",
+      "title": "Users list"
     },
   
     "myProfile": {
@@ -300,7 +301,7 @@
       "roleText": "Role: ",
       "profileUpdatedText": "Profile Updated",
       "profileCreatedText": "Profile Created: ",
-      "updateInfoButton": "Update Information:",
+      "updateInfoButton": "Update Information",
       "updateFotoButton": "Change Profile Picture",
       "deleteProfileButton": "Delete Account"
     },
@@ -334,7 +335,7 @@
   
     "posters": {
       "totalText": "Total Found",
-      "itemsFoundText": "advertisements",
+      "itemsFoundText": "Advertisements",
       "loadMore": "Load More"
     },
     "latestPoster": {
@@ -355,6 +356,7 @@
       },
 
       "adminReg": {
-        "adminRegText": "Register admin"
+        "adminRegText": "Register administrator",
+        "regButton": "Register adminstrator"
       }
   }  
