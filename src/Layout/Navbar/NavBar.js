@@ -25,6 +25,7 @@ function NavBar() {
     const [checkedValues, setCheckedValues] = useState([]);
 
     const [catt, setCatt] = useState("");
+    const [orderBy, setOrderBy] = useState("");
     const[text, setText] = useState("")
     const handleChange = (value) => {
         setText(value);
@@ -110,6 +111,7 @@ function NavBar() {
         let a = ""
         let b = ""
         let c = ""
+        let d = ""
         if (catt !== "") {
             a = catt; 
         }
@@ -119,8 +121,11 @@ function NavBar() {
         if (checkedValues.length > 0) {
             c = "&city=" + checkedValues; 
         }
-        setSearchLink(a + b + c)
-    }, [catt, checkedValues, text])
+        if (text !== "") {
+          d = "&" + orderBy; 
+      }
+        setSearchLink(a + b + c + d)
+    }, [catt, checkedValues, text, orderBy])
 
 
     const CityData = cities;
@@ -187,8 +192,8 @@ function NavBar() {
                     />
                     <span className="w-[5px]"></span>
                     <FilterIndex2
-                        catt={catt}
-                        setCatt={setCatt} 
+                        orderByy={orderBy}
+                        setOrderByy={setOrderBy} 
                     />
                 </div>
                 {/* menus */}

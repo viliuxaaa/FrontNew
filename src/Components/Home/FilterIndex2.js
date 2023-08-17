@@ -1,29 +1,29 @@
 import { Listbox, Transition } from '@headlessui/react';
 import { useState, Fragment, useEffect } from 'react';
 import { BiChevronDown } from 'react-icons/bi';
-import  CategoryA  from "../../enums/CategoryA"
+import  OrderBy  from "../../enums/OrderBy"
 import { useTranslation } from "react-i18next";
 
 
 
-function FilterIndex({catt, setCatt}) {
-    const CatData = CategoryA();
+function FilterIndex({orderByy, setOrderByy}) {
+    const OrderByData = OrderBy();
     const [t, i18n] = useTranslation("global");
-    const [cat, setCat] = useState({name:t("navbarButtons.categoriesPlaceHolder")});
-    const categoryA = CategoryA()
+    const [orderBy, setOrderBy] = useState({name:t("navbarButtons.categoriesPlaceHolder")});
+    const orders = OrderBy()
     useEffect(() => {
-        for(let i=0; i < categoryA.length; i++) {
-            if(categoryA[i].name === cat.name) {
-                setCatt(categoryA[i].search)
+        for(let i=0; i < orders.length; i++) {
+            if(orders[i].name === orderBy.name) {
+                setOrderByy(orders[i].search)
             }
         }
-    }, [cat])
+    }, [orderBy])
 
     const Filter = [
         {
-            value:cat,
-            onChange:setCat,
-            items:CatData
+            value:orderBy,
+            onChange:setOrderBy,
+            items:OrderByData
         }
     ]
 
