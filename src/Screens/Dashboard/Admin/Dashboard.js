@@ -8,8 +8,10 @@ import PictureUploadModal from "../../../Components/Modals/PictureUploadModal";
 import DeleteUserModal from "../../../Components/Modals/DeleteUserModal"
 import UpdateUserInfoModal from '../../../Components/Modals/UpdateUserInfoModal';
 import { FaTimes } from 'react-icons/fa';
+import { useTranslation } from "react-i18next";
 
 function Dashboard() {
+    const [t, i18n] = useTranslation("global");
     
 
     const [modal1Open, setModal1Open ] = useState(false)
@@ -135,33 +137,33 @@ const [hovered, setHovered] = useState(false);
                     <h1 className="text-4xl font-medium text-gray-700">
                         {/* username */}
                         <span className="font-light text-gray-600">
-                            Sveiki,{" "}
+                        {t("myProfile.helloText")}{" "}
                         </span>
                         {userData?.username}
                     </h1>
                     {/* role / update date / create date */}
                     <p className="font-normal text-gray-600 mt-10">
-                        Jusu El-pastas yra{" "}
+                    {t("myProfile.emailText")}{" "}
                         <span className="font-bold text-gray-600">
                             {userData?.email}
                         </span>
                     </p>
                     <p className="font-normal text-gray-600 mt-3">
-                        Jusu Role yra{" "} 
+                    {t("myProfile.roleText")}{" "} 
                         <span className="font-bold text-gray-600">
                             {userData?.role}
                         </span>
                     </p>
                     {userData?.updatedAt && 
                         <p className="font-normal text-gray-600 mt-3">
-                            Profilis Atnaujintas{" "} 
+                            {t("myProfile.profileUpdatedText")}{" "} 
                             <span className="font-bold text-gray-600">
                                 {formatTimestamp(userData?.updatedAt)}
                             </span>
                         </p>
                     }
                     <p className="font-normal text-gray-600 mt-3">
-                        Profilis Sukurtas{" "}
+                    {t("myProfile.profileCreatedText")}{" "}
                         <span className="font-bold text-gray-600">
                         {formatTimestamp(userData?.createdAt)}
                         </span>
@@ -175,21 +177,21 @@ const [hovered, setHovered] = useState(false);
                             className="text-white py-2 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800
                             shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
                         >
-                            Atnaujinti Informacija
+                            {t("myProfile.updateInfoButton")}
                         </button>
                         <button 
                             onClick={() => setModal1Open(true)} 
                             className="text-white py-2 px-4 uppercase rounded
                             bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
                         >
-                            Įkelti Profilio Nuotrauka
+                            {t("myProfile.updateFotoButton")}
                         </button>
                         <button
                             onClick={() => setModal2Open(true)} 
                             className="text-white py-2 px-4 uppercase rounded bg-red-600 hover:bg-red-700 shadow 
                             hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
                         >
-                            Istrinti Paskyra
+                           {t("myProfile.deleteProfileButton")}
                         </button>
                     </div>
                 </div>

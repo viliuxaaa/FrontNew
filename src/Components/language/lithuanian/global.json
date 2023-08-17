@@ -17,9 +17,9 @@
     "dash": "Registracija",
     "city": "Miestas",
     "searchPlaceHolder": "Paieška",
-    "catPlaceHolder": "Kategorijos"
+    "categoriesPlaceHolder": "Kategorijos"
   },
-  "mainCat": {
+  "computerCategoryA": {
     "0": "---",
     "1": "Kompiuteriai",
     "2": "Išoriniai įrenginiai",
@@ -347,5 +347,18 @@
 
   "cat": {
     "cat": "Kategorija"
+  },
+
+  "orderBy": {
+    "0": "---",
+    "1": "Naujausi viršuje",
+    "2": "Atnaujinti viršuje",
+    "3": "Pigiausi viršuje",
+    "4": "Brangiausi viršuje",
+    "5": "Rušiuoti pagal"
+  },
+
+  "adminReg": {
+    "adminRegText": "Registruoti administratorių"
   }
 }

@@ -5,24 +5,24 @@ const OrderBy = () => {
     
     const orderBy = [
         {
-            name: "---",
+            name: t("orderBy.0"),
             search: "",
         },
         
         {
-            name: "Naujausi viršuje",
+            name: t("orderBy.1"),
             search: "createdAt=true",
         },
         {
-            name: "Atnaujinti viršuje",
+            name: t("orderBy.2"),
             search: "updatedAt=true",
         },
         {
-            name: "Pigiausi viršuje",
+            name: t("orderBy.3"),
             search: "priceIsAscending=true",
         },
         {
-            name: "Brangiausi viršuje",
+            name: t("orderBy.4"),
             search: "priceIsAscending=false",
         }
     ];

@@ -5,7 +5,7 @@ const Categories = () => {
     const [t, i18n] = useTranslation("global");
     const categories = {    
         category1 : {
-            name: t("mainCat.1"),
+            name: t("computerCategoryA.1"),
             search: "category=a&type=kompiuteriai",
             subCat: [
                 {
@@ -39,7 +39,7 @@ const Categories = () => {
             ]
         },
         category2 : {
-            name: t("mainCat.2"),
+            name: t("computerCategoryA.2"),
             search: "category=a&type=isoriniai_irenginiai",
             subCat: [
                 {
@@ -73,7 +73,7 @@ const Categories = () => {
             ]
         },
         category3 : {
-            name: t("mainCat.3"),
+            name: t("computerCategoryA.3"),
             search: "category=a&type=kompiuteriu_komponentai",
             subCat: [
                 {
@@ -91,7 +91,7 @@ const Categories = () => {
             ]
         },
         category4 : {
-            name: t("mainCat.4"),
+            name: t("computerCategoryA.4"),
             search: "category=a&type=priedai_aksesuarai",
             subCat: [
                 {
@@ -125,7 +125,7 @@ const Categories = () => {
             ]
         },
         category5 :  {
-            name: t("mainCat.5"),
+            name: t("computerCategoryA.5"),
             search: "category=a&type=programine_iranga_zaidimai",
             subCat: [
                 {
@@ -159,7 +159,7 @@ const Categories = () => {
             ]
         },
         category6 : {
-            name: t("mainCat.6"),
+            name: t("computerCategoryA.6"),
             search: "category=a&type=tinklo_iranga",
             subCat: [
                 {
@@ -193,7 +193,7 @@ const Categories = () => {
             ]
         },
         category7 : {
-            name: t("mainCat.7"),
+            name: t("computerCategoryA.7"),
             search: "category=a&type=paslaugos_remontas",
             subCat: [
                 {
@@ -219,7 +219,7 @@ const Categories = () => {
             ]
         },
         category8 : {
-            name: t("mainCat.8"),
+            name: t("computerCategoryA.8"),
             search: "category=a&type=konsoles",
             subCat: [
                 {

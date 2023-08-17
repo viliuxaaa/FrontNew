@@ -18,7 +18,7 @@
       "searchPlaceHolder": "Search",
       "catPlaceHolder": "Categories"
     },
-    "mainCat": {
+    "computerCategoryA": {
       "0": "---",
       "1": "Computers",
       "2": "External Devices",
@@ -343,5 +343,18 @@
 
     "cat": {
         "cat": "Category"
-    }
+    },
+
+    "orderBy": {
+        "0": "---",
+        "1": "Newest first",
+        "2": "Updated first",
+        "3": "Cheapest first",
+        "4": "Most expensive first",
+        "5": "Sort by"
+      },
+
+      "adminReg": {
+        "adminRegText": "Register admin"
+      }
   }  

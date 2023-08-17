@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 function FilterIndex({orderByy, setOrderByy}) {
     const OrderByData = OrderBy();
     const [t, i18n] = useTranslation("global");
-    const [orderBy, setOrderBy] = useState({name:'Rusuoti'});
+    const [orderBy, setOrderBy] = useState({name:t("orderBy.5")});
     const orders = OrderBy()
     useEffect(() => {
         for(let i=0; i < orders.length; i++) {

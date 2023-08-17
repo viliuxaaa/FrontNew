@@ -29,7 +29,7 @@ function SideBar({ children}) {
             icon: FaListAlt,
         },
         {
-            name:"Register Admin",
+            name:t("adminReg.adminRegText"),
             link:"/adminregister",
             icon:HiViewGridAdd,
         },
