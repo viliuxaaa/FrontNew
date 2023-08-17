@@ -44,7 +44,7 @@ function ImageView( {poster} ) {
             <div className="my-10">
                 <div className="flex-colo">
 
-                    <div className="flex-rows w-1/6 lg:w-4/6">
+                    <div className="flex-rows min-h-full w-3/5 lg:w-4/5">
                           <Carousel
                           showArrows={false}
                           autoPlay={false}

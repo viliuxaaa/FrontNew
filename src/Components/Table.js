@@ -170,7 +170,7 @@ const Rows = (poster, i, t ) => {
 }
 
 // table
-function Table({t, poster, img, admin}) {
+function Table({t, poster}) {
   
   return (
     <div className='overflow-x-scroll overflow-hidden relative w-full'>

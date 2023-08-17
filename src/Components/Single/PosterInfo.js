@@ -3,6 +3,7 @@ import ImageView from '../ImageView'
 import PosterMenu from './PosterMenu';
 import useAuth from '../../hooks/useAuth';
 import {Link} from 'react-router-dom';
+import { TbCurrencyEuro } from 'react-icons/tb'
 
 function PosterInfo({poster}) {
     const {auth} = useAuth(); 
@@ -13,34 +14,66 @@ function PosterInfo({poster}) {
     
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 mt-10 md:mt-10 mb-20">
-                <div className="xs:order-last lg:order-first lg:mt-12">
-                    <ImageView poster={poster}/>
+        <div className="xs:order-last lg:order-first lg:mt-12">
+            <ImageView poster={poster}/>
+        </div>
+        <div className="flex flex-col px-3 md:px-0 items-center mt-5 lg:mt-20 sm:p-5 lg:pr-20 text-text ">
+            <div className="bg-main border-[2px] border-darkMain container shadow-xl rounded-xl font-semibold text-3xl w-full mx-auto px-2 mb-5 py-2 xs:pt-7 xs:pb-3 lg:py-6">
+                <h1 className='text-lg lg:text-2xl'>{poster?.postName}</h1>
+            </div>
+            { auth.userId === poster.userId && <PosterMenu id={poster.posterId}/>}
+            {/* ////////////////////////////// */}
+            <div className="bg-main border-[2px] border-darkMain container shadow-xl rounded-xl font-semibold text-3xl w-full mt-2 mx-auto px-2 py-2 xs:pt-7 xs:pb-3 lg:py-6">
+            <table class="bg-main border-2 border-darkMain container font-medium text-3xl w-full mx-auto px-5 py-2 xs:pt-7 xs:pb-3 lg:py-6">
+                <tr class="bg-subMain h-fit p-3 border-b-2 border-darkMain">
+                    <td class="text-base md:text-2xl px-4">Tel:</td>
+                    <td class="text-base md:text-2xl flex"><span class="font-normal">8 654 844 54</span></td>
+                </tr>
+                <tr class="bg-subMain h-fit p-3 border-t-2 border-darkMain">
+                    <td class="text-base md:text-2xl px-4">Miestas:</td>
+                    <td class="text-base md:text-2xl flex"><span class="font-normal">{poster.city}</span></td>
+                </tr>
+                <tr class="bg-subMain h-fit p-3 border-t-2 border-darkMain">
+                    <td class="text-base md:text-2xl px-4">Kategorija:</td>
+                    <td class="text-base md:text-2xl flex"><span class="font-normal">{poster.categoryA}</span></td>
+                </tr>
+                <tr class="bg-subMain h-fit p-3 border-t-2 border-darkMain">
+                    <td class="text-base md:text-2xl px-4">Statusas:</td>
+                    <td class="text-base md:text-2xl flex"><span class="font-normal">{poster.status}</span></td>
+                </tr>
+                <tr class="bg-subMain h-fit p-3 border-t-2 border-darkMain">
+                    <td class="text-base md:text-2xl px-4">Website:</td>
+                    <td class="text-base md:text-2xl flex"><span class="font-normal">{poster.website ? poster.website : '-'}</span></td>
+                </tr>
+                <tr class="bg-subMain h-fit p-3 border-t-2 border-darkMain">
+                    <td class="text-base md:text-2xl px-4">VideoLink:</td>
+                    <td class="text-base md:text-2xl flex"><span class="font-normal">{poster.videolink ? poster.videolink : '-'}</span></td>
+                </tr>
+                <tr class="bg-subMain rounded-b-xl h-fit p-3 border-y-2 border-darkMain">
+                    <td class="text-base md:text-2xl px-4">Sukurtas:</td>
+                    <td class="text-base md:text-2xl flex"><span class="font-normal">{dateCreated ? dateCreated : '-'}</span></td>
+                </tr>
+                <tr class="bg-subMain rounded-b-xl h-fit p-3 border-y-2 border-darkMain">
+                    <td class="text-base md:text-2xl px-4">Atnaujintas:</td>
+                    <td class="text-base md:text-2xl flex"><span class="font-normal">{dateUpdated ? dateUpdated : '-'}</span></td>
+                </tr>
+                <tr class="bg-subMain h-[60px] p-3">
+                    <td class="text-base md:text-2xl px-4">Kaina:</td>
+                    <td class="text-6xl flex pt-2"><span class="font-normal text-green-500">{poster.price}</span> <TbCurrencyEuro size={36}/></td>
+                </tr>
+            </table>
+            </div>
+            {/* /////////////////// */}
+            <div className="bg-darkAccent border-[2px] border-darkMain container shadow-xl rounded-xl font-sm text-xl w-full mx-auto my-5">
+                <div className="bg-main rounded-t-xl h-fit text-3xl flex-rows">
+                    <h1 className="my-1 text-lg lg:text-2xl">Aprašymas</h1>
                 </div>
-                <div className="flex flex-col px-3 md:px-0 items-center mt-5 lg:mt-20 sm:p-5 lg:pr-20 text-text">
-                    <div className="bg-main border-[2px] border-darkMain container shadow-xl rounded-xl font-semibold text-3xl w-full mx-auto px-5 py-2 xs:pt-7 xs:pb-3 lg:pt-9 lg:pb-6">
-                        <h1 className='text-lg lg:text-2xl'>{poster?.postName}</h1>
-                    </div>
-                    <div className="bg-darkAccent border-[2px] border-darkMain container shadow-xl rounded-xl font-sm text-xl w-full mx-auto my-10">
-                        <div className="bg-main rounded-t-xl h-fit text-3xl flex-rows">
-                            <h1 className="my-1 text-lg lg:text-2xl">Aprašymas</h1>
-                        </div>
-                        <div className="bg-subMain h-fit p-3 border-y-2 border-darkMain">
-                        <p style={{ whiteSpace: "pre-line" }} className="break-after-column text-base sm:text-2xl pb-10" dangerouslySetInnerHTML={{ __html: poster?.description }} />                            
-                        </div>
-                        <div className="bg-subMain h-fit p-3 border-b-2 border-darkMain">
-                            <p className="text-base md:text-2xl flex">Tel: <span className='font-medium pl-14 md:pl-20'>8 654 844 54</span></p>
-                        </div>
-                        <div className="bg-subMain h-fit p-3">
-                            <p className="text-base md:text-2xl flex">Kaina: <span className='font-medium pl-8 md:pl-12'>{poster.price}</span> &euro;</p>
-                        </div>
-                        <div className="bg-subMain rounded-b-xl h-fit p-3 border-y-2 border-darkMain">
-                            <p className="text-base md:text-2xl flex">Sukurtas: <span className='font-medium pl-16'>{dateCreated}</span></p>
-                            {dateUpdated && <p className="text-base md:text-2xl">Atnaujintas:<span className='font-medium pl-8'>{dateUpdated}</span></p>} 
-                        </div>
-                    </div>
-                        { auth.userId === poster.userId && <PosterMenu id={poster.posterId}/>}
+                <div className="bg-subMain rounded-b-xl h-fit p-3 border-y-2 border-darkMain">
+                    <p style={{ whiteSpace: "pre-line" }} className="break-after-column text-base sm:text-2xl pb-10" dangerouslySetInnerHTML={{ __html: poster?.description }} />                            
                 </div>
             </div>
+        </div>
+    </div>
   )
 }
 

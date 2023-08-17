@@ -9,12 +9,12 @@ function Footer() {
         <footer className="bg-main py-4 shadow-md border-black">
             <div className="container mx-auto px-10">
                 <div className="sm:flex sm:items-center sm:justify-between">
-                <a
-                    href="/"
+                <Link
+                    to="/"
                     className="flex items-center mb-4 sm:mb-0"
                 >
                     <img src="/images/logo.png" alt="logo" className="w-full object-contain h-12" /><br />
-                </a>
+                </Link>
                 <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
                 <li>
                     <p className="text-text">
@@ -29,33 +29,33 @@ function Footer() {
                 </ul>
                 <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
                     <li>
-                    <a href="/duk" className="mr-4 hover:underline text-text md:mr-6 ">
+                    <Link to="/duk" className="mr-4 hover:underline text-text md:mr-6 ">
                     {t("footerFrame.footerFAQ")}
-                    </a>
+                    </Link>
                     </li>
                     <li>
-                    <a href="/taisykles" className="mr-4 hover:underline text-text md:mr-6">
+                    <Link to="/taisykles" className="mr-4 hover:underline text-text md:mr-6">
                     {t("footerFrame.footerRules")}
-                    </a>
+                    </Link>
                     </li>
                     <li>
-                    <a href="/politika" className="mr-4 hover:underline text-text md:mr-6 ">
+                    <Link to="/politika" className="mr-4 hover:underline text-text md:mr-6 ">
                     {t("footerFrame.footerPrivacy")}
-                    </a>
+                    </Link>
                     </li>
                     <li>
-                    <a href="/kontaktai" className="hover:underline text-text">
+                    <Link to="/kontaktai" className="hover:underline text-text">
                     {t("footerFrame.footerContacts")}
-                    </a>
+                    </Link>
                     </li>
                 </ul>
                 </div>
-                <hr className="my-6 border-gray-600 sm:mx-auto dark:border-gray-700 lg:my-6 text-text" />
-                <span className="block text-sm text-text sm:text-center dark:text-gray-800 ">
+                <hr className="my-6 border-gray-600 sm:mx-auto lg:my-6 text-text" />
+                <span className="block text-sm text-text sm:text-center">
                2023-2024{" "} © {" "}
-                <a href="/" className="hover:underline text-text">
+                <Link to="/" className="hover:underline text-text">
                 UAB „Aštuonios rankos“
-                </a>
+                </Link>
                 </span>
             </div>
             </footer>
