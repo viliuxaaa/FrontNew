@@ -7,6 +7,7 @@ import { FiSettings } from 'react-icons/fi'
 import { NavLink } from 'react-router-dom'
 import useAuth from '../../hooks/useAuth'
 import { useTranslation } from "react-i18next";
+import { AiOutlineTable } from 'react-icons/ai'
 
 function SideBar({ children}) {
     const [t, i18n] = useTranslation("global");
@@ -20,7 +21,7 @@ function SideBar({ children}) {
         {
             name:t("sideBar.allPosts"),
             link:"/skelbimulist",
-            icon:FaListAlt,
+            icon:AiOutlineTable,
         },
         {
             name: t("sideBar.myPosts"),
