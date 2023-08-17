@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import SideBar from '../SideBar';
 import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
 import UserTable from '../../../Components/UserTable';
+import useTableContext from '../../../hooks/useTableContext';
 
 const Users = () => {
     const getAllUsers_URL = "api/v1/admin/get/users";
@@ -11,13 +12,15 @@ const Users = () => {
 
     const privateAxios=useAxiosPrivate();
     const [finalData, setFinalData] = useState([]);
+    const {refresh, setRefresh} = useTableContext();
 
     useEffect(() =>{
-        handleRefresh();
-    }, [])
-    
-    async function handleRefresh() {
         setFinalData(null);
+        handleRefresh();
+        setRefresh(false);
+    }, [refresh])
+    
+    async function handleRefresh() { 
         try {
             const response = await privateAxios.get(getAllUsers_URL);
             setFinalData(response?.data);
@@ -40,7 +43,8 @@ const Users = () => {
                 {t("myPosters.refreshButton")}
                 </button>
                 </div>
-                <UserTable t={t} users={finalData}  />
+                { finalData && <UserTable t={t} users={finalData}  />}
+                {errMsg && <p>Connection to the server failed</p>}
             </div>
         </SideBar>
     )

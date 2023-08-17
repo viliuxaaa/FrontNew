@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { MdDelete } from 'react-icons/md'
-import { Link } from 'react-router-dom'
-import { GoEye } from 'react-icons/go'
 import { AiOutlineLock, AiOutlineUnlock } from 'react-icons/ai'
 import useAuth from '../hooks/useAuth'
 import useAxiosPrivate from '../hooks/useAxiosPrivate'
-import { useTranslation } from "react-i18next";
-import { useTableContext } from 'flowbite-react/lib/esm/components/Table/TableContext'
+import  useTableContext  from '../hooks/useTableContext'
 
 const Head = "text-xs text-left text-text font-semibold px-6 py-2 uppercase"
 const Text = 'text-sm text-text text-left leading-6 whitespace-nowrap px-5 py-2'
 
 const Rows = (user, i) => {
-  // const { refresh, useRefresh } = useTableContext();
+  const { setRefresh } = useTableContext()
   const privateAxios = useAxiosPrivate();
   const userDeleteURL = "api/v1/admin/get/"+ user.id+"/delete";
   const userLockURL = "api/v1/admin/get/"+ user.id+"/change-lock"
@@ -44,6 +41,7 @@ const Rows = (user, i) => {
         try{
           await privateAxios.delete(userDeleteURL)
           console.log("user: " + user?.username + " was deleted")
+          setRefresh(true);
         } catch (err) {
           console.log(err);
         }
@@ -97,12 +95,6 @@ const Rows = (user, i) => {
                   <MdDelete />
               </button>
               </>}
-              {/* <Link 
-                  to={`/skelbimas/${user?.userId}`} 
-                  className='bg-subMain border hover:bg-purple-400 border-text text-text rounded flex-colo w-7 h-7'
-              >
-                  <GoEye />
-              </Link> */}
           </>
           </td>
       </tr>

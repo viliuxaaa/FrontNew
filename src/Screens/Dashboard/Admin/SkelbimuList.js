@@ -24,9 +24,8 @@ function SkelbimuList() {
    
 
     useEffect(() =>{
-        if( !id.id ){
-            setFinalData(null);
-        }
+        setFinalData(null);
+        
         handleRefresh();
         setRefresh(false);
     }, [refresh])
@@ -34,7 +33,6 @@ function SkelbimuList() {
        
     
     async function handleRefresh() {
-        setFinalData(null);
         try {
             if ( id.id ){
                 const response = await axios.get(getMyPosters_URL);
