@@ -21,7 +21,7 @@ function PosterInfo({poster}) {
             <div className="bg-main border-[2px] border-darkMain container shadow-xl rounded-xl font-semibold text-3xl w-full mx-auto px-2 mb-5 py-2 xs:pt-7 xs:pb-3 lg:py-6">
                 <h1 className='text-lg lg:text-2xl'>{poster?.postName}</h1>
             </div>
-            { auth.userId === poster.userId && <PosterMenu id={poster.posterId}/>}
+            { +auth.userId === poster.userId && <PosterMenu id={poster.posterId}/>}
             {/* ////////////////////////////// */}
             <div className="bg-main border-[2px] border-darkMain container shadow-xl rounded-xl font-semibold text-3xl w-full mt-2 mx-auto px-2 py-2 xs:pt-7 xs:pb-3 lg:py-6">
             <table class="bg-main border-2 border-darkMain container font-medium text-3xl w-full mx-auto px-5 py-2 xs:pt-7 xs:pb-3 lg:py-6">
