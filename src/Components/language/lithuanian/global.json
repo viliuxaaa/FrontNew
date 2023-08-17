@@ -356,11 +356,25 @@
     "2": "Atnaujinti viršuje",
     "3": "Pigiausi viršuje",
     "4": "Brangiausi viršuje",
-    "5": "Rušiuoti pagal"
+    "5": "Rušiuoti"
   },
 
   "adminReg": {
     "adminRegText": "Registruoti administratorių",
     "regButton": "Registruoti administratorių"
+  },
+
+  "single": {
+    "tel": "Tel:",
+    "miestas": "Miestas:",
+    "kat": "Kategorija:",
+    "status": "Statusas:",
+    "website": "Website:",
+    "video": "VideoLink:",
+    "sukurtas": "Sukurtas:",
+    "atnaujintas": "Atnaujintas:",
+    "kaina": "Kaina:",
+    "aprasymas": "Aprašymas",
+    "sudominti": "Jus gali sudominti"
   }
 }

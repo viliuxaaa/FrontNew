@@ -358,5 +358,19 @@
       "adminReg": {
         "adminRegText": "Register administrator",
         "regButton": "Register adminstrator"
+      },
+
+      "single": {
+        "tel": "Phone:",
+        "miestas": "City:",
+        "kat": "Category:",
+        "status": "Status:",
+        "website": "Website:",
+        "video": "Video Link:",
+        "sukurtas": "Created:",
+        "atnaujintas": "Updated:",
+        "kaina": "Price:",
+        "aprasymas": "Description",
+        "sudominti": "You might be interested"
       }
   }  

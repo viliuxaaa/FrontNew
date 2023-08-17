@@ -2,12 +2,10 @@ import Layout from '../../Layout/Layout'
 import { BsFillGridFill } from 'react-icons/bs'
 import { FaListAlt, FaUsers, FaHeart } from 'react-icons/fa'
 import { RiMovie2Fill, RiLockPasswordLine } from 'react-icons/ri'
-import { HiViewGridAdd } from 'react-icons/hi'
-import { FiSettings } from 'react-icons/fi'
 import { NavLink } from 'react-router-dom'
 import useAuth from '../../hooks/useAuth'
 import { useTranslation } from "react-i18next";
-import { AiOutlineTable } from 'react-icons/ai'
+import { AiOutlineTable, AiOutlineUserAdd } from 'react-icons/ai'
 
 function SideBar({ children}) {
     const [t, i18n] = useTranslation("global");
@@ -31,7 +29,7 @@ function SideBar({ children}) {
         {
             name:t("adminReg.adminRegText"),
             link:"/adminregister",
-            icon:HiViewGridAdd,
+            icon:AiOutlineUserAdd,
         },
         {
             name:t("sideBar.allUsers"),
