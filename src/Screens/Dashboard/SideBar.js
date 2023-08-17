@@ -27,11 +27,11 @@ function SideBar({ children}) {
             link: `/manoskelbimai/${auth.userId}`,
             icon: FaListAlt,
         },
-        // {
-        //     name:"Categories",
-        //     link:"/categories",
-        //     icon:HiViewGridAdd,
-        // },
+        {
+            name:"Register Admin",
+            link:"/adminregister",
+            icon:HiViewGridAdd,
+        },
         {
             name:t("sideBar.allUsers"),
             link:"/userslist",

@@ -20,6 +20,7 @@ import Privacy from "./Screens/DeadPages/Privacy";
 import Contacts from "./Screens/DeadPages/Contacts";
 import Users from "./Screens/Dashboard/Admin/Users";
 import Cookies from 'js-cookie';
+import AdminRegister from "./Screens/AdminRegister";
 
 function App() {
   AOS.init();
@@ -69,6 +70,7 @@ function App() {
       </Route>
       <Route element={<RequireAuth expiresAt={expiresAt} allowedRoles={['ADMIN']} />}>
         <Route path="/userslist" element={<Users />} />
+        <Route path="/adminregister" element={<AdminRegister />} />
       </Route>
 
       <Route path="/demo" element={<Demo />} /> 

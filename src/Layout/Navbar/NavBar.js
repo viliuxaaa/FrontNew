@@ -40,6 +40,7 @@ function NavBar() {
       const params = new URLSearchParams(location.search);
       const loginSuccess = params.get('loginSuccess');
       const regSuccess = params.get('registrationSuccess');
+      const regAdminSuccess = params.get('registrationAdminSuccess');
       const posterSuccess = params.get('posterSuccess');
       const passwordSuccess = params.get('passwordSuccess');
   
@@ -81,6 +82,18 @@ function NavBar() {
       }
       if (passwordSuccess === 'true') {
         toast.success('Slaptažodis sėkmingai pakeistas!🔐', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
+      if (regAdminSuccess === 'true') {
+        toast.success('Sėkmingai užsiregistravote Administratoriu! 🎉', {
           position: "bottom-right",
           autoClose: 5000,
           hideProgressBar: false,
