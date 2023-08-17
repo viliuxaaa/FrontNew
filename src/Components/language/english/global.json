@@ -1,316 +1,340 @@
 {
-    "header":{
-        "message": "sveiki lietuviu kalba"
+    "header": {
+      "message": "hello"
     },
-    "home":{
-        "body": "antru ranku parduotuve kompiuteriams ir viskam susijusiam su jais"
+    "home": {
+      "body": "a second-hand store for computers and everything related to them"
     },
-
-    "navbarButtons":{
-        "loginButton": "1",
-        "signUpButton": "1",
-        "myProfileButton": "2",
-        "logOutButton": "3",
-        "newPostButton": "4 post",
-        "filterButton" : "s",
-        "allPosts" : "d skelbimai",
-        "dash" : "f",
-        "city" : "Miestas",
-        "searchPlaceHolder" : "Paieška",
-        "categoriesPlaceHolder" : "Kategorijos"
-  
+    "navbarButtons": {
+      "loginButton": "Log In",
+      "signUpButton": "Sign Up",
+      "myProfileButton": "My Account",
+      "logOutButton": "Log Out",
+      "newPostButton": "New Post",
+      "filterButton": "Filter",
+      "allPosts": "All Posts",
+      "dash": "Dashboard",
+      "city": "City",
+      "searchPlaceHolder": "Search",
+      "categoriesPlaceHolder": "Categories"
     },
-    "computerCategoryA":{
-        "0":"---",
-        "1": "v",
-        "2": "f įrenginiai",
-        "3": "Kompiuterių komponentai",
-        "4": "priedai, aksesuarai",
-        "5": "d įranga, žaidimai",
-        "6": "Tinklo įranga",
-        "7": "Paslaugos, remontas",
-        "8": "Konsolės"
+    "computerCategoryA": {
+      "0": "---",
+      "1": "Computers",
+      "2": "External Devices",
+      "3": "Computer Components",
+      "4": "Accessories",
+      "5": "Software, Games",
+      "6": "Networking Equipment",
+      "7": "Services, Repairs",
+      "8": "Consoles"
     },
     "computerCategoryB": {
-        "0": "---",
-        "1": "d kompiuteriai",
-        "2": "sd d",
-        "3": "Serveriai",
-        "4": "d kompiuteriai",
-        "5": "Žaidimų kompiuteriai",
-        "6": "Elektroninės skaityklės",
-        "7": "d"
+      "0": "---",
+      "1": "Laptops",
+      "2": "Desktops",
+      "3": "Servers",
+      "4": "Tablets",
+      "5": "Gaming Computers",
+      "6": "E-Readers",
+      "7": "Other"
     },
     "externalDevCategoryB": {
-        "0": "---",
-        "1": "Monitoriai",
-        "2": "d skeneriai spausdintuvai",
-        "3": "Ausinės garso kolonėlės",
-        "4": "Daugiafunkciniai įrenginiai",
-        "5": "Klaviatūros, pelės, web kameros",
-        "6": "Žaidimų priedai",
-        "7": "Kita"
+      "0": "---",
+      "1": "Monitors",
+      "2": "Projectors, Scanners, Printers",
+      "3": "Headphones, Speakers",
+      "4": "Multifunction Devices",
+      "5": "Keyboards, Mice, Webcams",
+      "6": "Gaming Accessories",
+      "7": "Other"
     },
-
     "computerComponentCategoryB": {
-        "0": "---",
-        "1": "Nešiojamiems kompiuteriams",
-        "2": "Stacionariems kompiuteriams",
-        "3": "Kita"
+      "0": "---",
+      "1": "For Laptops",
+      "2": "For Desktops",
+      "3": "Other"
     },
     "accessoriesCategoryB": {
-        "0": "---",
-        "1": "Įkrovidijos, akumuliatoriai",
-        "2": "Adapteriai, kabeliai, jungtys",
-        "3": "d kdinės",
-        "4": "HDD dėžutės ir išoriniai HDD",
-        "5": "Krediams",
-        "6": "UPS (NMŠ)",
-        "7": "Kita"
+      "0": "---",
+      "1": "Chargers, Batteries, Power Banks",
+      "2": "Adapters, Cables, Connectors",
+      "3": "Memory Cards, USB Drives",
+      "4": "HDD Enclosures, External HDDs",
+      "5": "Computer Bags",
+      "6": "UPS (Uninterruptible Power Supply)",
+      "7": "Other"
     },
-
     "softwareAndGamesCategoryB": {
-        "0": "---",
-        "1": "Kompiuteriniai žaidimai",
-        "2": "d d įranga",
-        "3": "Biuro d įranga",
-        "4": "Mokomosios programos",
-        "5": "Opdemos",
-        "6": "Tecdįranga",
-        "7": "Kita"
+      "0": "---",
+      "1": "Computer Games",
+      "2": "Apple Software",
+      "3": "Office Software",
+      "4": "Educational Software",
+      "5": "Operating Systems",
+      "6": "Technical Software",
+      "7": "Other"
     },
     "networkStuffCategoryB": {
-        "0": "---",
-        "1": "Belaidžio tinklo įranga",
-        "2": "Hub",
-        "3": "Maršrutizatoriai",
-        "4": "Modemai",
-        "5": "Switch",
-        "6": "Aksesuarai, kabeliai",
-        "7": "Kita"
+      "0": "---",
+      "1": "Wireless Network Equipment",
+      "2": "Hub",
+      "3": "Routers",
+      "4": "Modems",
+      "5": "Switch",
+      "6": "Accessories, Cables",
+      "7": "Other"
     },
     "technicalServicesCategoryB": {
-        "0": "---",
-        "1": "3D spausdinimas",
-        "2": "Remontas",
-        "3": "Spdmas",
-        "4": "Supirkimas",
-        "5": "Kita"
+      "0": "---",
+      "1": "3D Printing",
+      "2": "Repairs",
+      "3": "Printing, Copying",
+      "4": "Buyback",
+      "5": "Other"
     },
     "consolesCategoryB": {
-        "0": "---",
-        "1": "Sony",
-        "2": "Microsoft",
-        "3": "Nintendo",
-        "4": "Sega",
-        "5": "Priedai, dalys",
-        "6": "Paslaugos",
-        "7": "Kita"
+      "0": "---",
+      "1": "Sony",
+      "2": "Microsoft",
+      "3": "Nintendo",
+      "4": "Sega",
+      "5": "Accessories, Parts",
+      "6": "Services",
+      "7": "Other"
     },
-    
-
-   
-
     "loginFrame": {
-        "signInText": "Prisijungti į paskyrą",
-        "username": "Prisijungimo vardas",
-        "password": "Slaptažodis",
-        "rememberMeText": "Prisiminti mane",
-        "signInButton": "Prisijungti",
-        "dontHaveAcc": "Neturite paskyros?",
-        "signUp": "Registruotis"
+      "signInText": "Sign In to Your Account",
+      "username": "Username",
+      "password": "Password",
+      "rememberMeText": "Remember Me",
+      "signInButton": "Sign In",
+      "dontHaveAcc": "Don't have an account?",
+      "signUp": "Sign Up"
     },
-
+  
     "registerFrame": {
-        "createAccText": "Sukurti paskyrą",
-        "username": "Prisijungimo vardas",
-        "firstName": "Vardas",
-        "firstNamePlaceHolder":"Vardenis",
-        "lastName":"Pavardė",
-        "lastNamePlaceHolder": "Pavardenis",
-        "email": "El. paštas",
-        "emailPlaceHolder": "vardenis@mail.com",
-        "password":"Slaptažodis",
-        "confirmPassword": "Patvirtinti slaptažodį",
-        "iAcceptText": "Sutinku su",
-        "termsAndConditionsLink": "taisyklėmis ir sąlygomis",
-        "createAccButton": "Sukurti paskyrą",
-        "alredyHaveText": "Jau turite paskyrą?",
-        "loginLink":"Prisijungti"
+      "createAccText": "Create Account",
+      "username": "Username",
+      "firstName": "First Name",
+      "firstNamePlaceHolder": "John",
+      "lastName": "Last Name",
+      "lastNamePlaceHolder": "Doe",
+      "email": "Email",
+      "emailPlaceHolder": "john.doe@example.com",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "iAcceptText": "I Accept the",
+      "termsAndConditionsLink": "terms and conditions",
+      "createAccButton": "Create Account",
+      "alredyHaveText": "Already have an account?",
+      "loginLink": "Log In"
     },
-
+  
     "registerValidations": {
-        "username4To24Char": "Nuo 4 iki 24 simbolių",
-        "beginWithLetter": "Turi prasidėti raide",
-        "usernameSymbolsAllowed": "Galima naudoti raides, skaičius, brūkšnius ir apatinius brūkšnius ",
-        "name3to24Char":"Nuo 3 iki 24 simbolių",
-        "nameOnlyLetters":"Gallima naudoti tik raides",
-        "lastname3to24Char": "Nuo 3 iki 24 simbolių",
-        "lastnameOnlyLetters": "Gallima naudoti tik raides",
-        "emailValid": "El. paštas turi buti galiojantis",
-        "password8to24Char":"Nuo 4 iki 24 simbolių",
-        "passwordMustInclude": "Privalo turėti didžiają ir mažają raides, skaičių ir specialų simbolį",
-        "passwordSpecialSymbols": "Galimi specialūs simboliai:",
-        "passwordMustMatch": "Slaptažodis turi sutapti"
+      "username4To24Char": "4 to 24 characters",
+      "beginWithLetter": "Must begin with a letter",
+      "usernameSymbolsAllowed": "Letters, numbers, dashes, and underscores allowed",
+      "name3to24Char": "3 to 24 characters",
+      "nameOnlyLetters": "Only letters allowed",
+      "lastname3to24Char": "3 to 24 characters",
+      "lastnameOnlyLetters": "Only letters allowed",
+      "emailValid": "Email must be valid",
+      "password8to24Char": "8 to 24 characters",
+      "passwordMustInclude": "Must include uppercase and lowercase letters, a number, and a special character",
+      "passwordSpecialSymbols": "Allowed special symbols:",
+      "passwordMustMatch": "Password must match"
     },
-
+  
     "footerFrame": {
-        "footerWorkingHours": "Darbo laikas: I-V 08:20 - 17:00",
-        "footerHelp": "Pagalba: +370 865 84454",
-        "footerFAQ": "D.U.K.",
-        "footerRules":"Naudojimo taisyklės",
-        "footerPrivacy":"Privatumo politika",
-        "footerContacts": "Kontaktai"
+      "footerWorkingHours": "Working Hours: Mon-Fri 08:20 - 17:00",
+      "footerHelp": "Help: +370 865 84454",
+      "footerFAQ": "F.A.Q.",
+      "footerRules": "Usage Rules",
+      "footerPrivacy": "Privacy Policy",
+      "footerContacts": "Contacts"
     },
-
+  
     "FAQFrame": {
-        "1": "Dažniausiai užduodami klausimai",
-        "2": "Kaip galėčiau ištrinti/redaguoti savo skelbimą?",
-        "3": "Jeigu skelbimą dėjote kaip registruotas vartotojas, prisijunkite prie neskelbiu.lt portalo, eikite į „Mano skelbimai“ ir ties norimu skelbimu paspauskite „Pašalinti“.",
-        "4":"Jeigu skelbimą įkėlėte kaip neregistruotas vartotojas, skelbimo įkėlimo dieną, el. paštu arba SMS žinute, turėjote gauti jo prisijungimo duomenis.",
-        "5":"Jeigu prisijungimo duomenų neturite, atsidarykite savo skelbimą neskelbiu.lt portale ir virš jo pavadinimo spauskite langelį 'Tavo skelbimas?', tuomet 'Redaguoti' ir 'Pamiršote prisijungimus?'.",
-        "6":"Kokia yra skelbimo kaina?",
-        "7": "Daugelio kategorijų skelbimai yra NEMOKAMI PRIVATIEMS ASMENIMS, parduodantiems savo asmeninius daiktus. Kai kurių kategorijų skelbimai išlieka mokami. Tai transporto priemonės ir jų dalys, nekilnojamasis turtas, paslaugos ir kt.",
-        "8": "JURIDINIAMS asmenims ir FIZINIAMS ASMENIMS, kurių skelbimai susiję su KOMERCINE VEIKLA, skelbimų įdėjimas yra mokamas.",
-        "9": "Primename, kad skelbimus, apmokant SMS žinute, yra taikomas žinutės administravimo mokestis (jo dydis priklauso nuo mokamos sumos ir yra nurodomas apmokėjimo puslapyje).",
-        "10":"Skelbimai daugumoje kategorijų galioja 60 dienų (drabužių/avalynės kategorijoje - 90 dienų, ilgalaikės namų, butų ir kambarių nuomos kategorijose - 40 dienų, kolekcionavimo ir dovanojimo kategorijose - 30 dienų).",
-        "11":"Kaip veikia skelbimo iškėlimas žvaigždutėmis?",
-        "12": "Žvaigždutėmis skelbimas iškeliamas aukščiau sąraše – kuo daugiau žvaigždučių užsakyta skelbimui, tuo aukščiau sąraše jis bus rodomas. Jei keli skelbimai yra su vienodu žvaigždučių skaičiumi, aukščiau bus rodomas tas, kurio žvaigždutės užsakytos ilgesniam laikui. Skelbimo iškėlimą užsakyti galite prisijungę prie savo skelbimo paskyros. Vienos žvaigždutės kaina vienai parai yra 0,99 €, dvi žvaigždutės vienai parai atitinkamai kainuos 1,98 € ir t.t.",
-        "13": "Kaip apmokėti skelbimus esant užsienyje?",
-        "14": "Skelbimus apmokant SMS žinute, telefono numeris turi būti lietuviškas (kodas +370), bei mokėjimo metu būti Lietuvos teritorijoje. Jei esate užsienyje, galbūt kas nors esantis Lietuvoje galėtų SMS žinutę išsiųsti už Jus.",
-        "15": "Jei naudojatės lietuviško banko el. bankininkyste, neskelbiu.lt paslaugas galite apmokėti iš bet kurios šalies. Taip pat mokėjimą atlikti galite kreditine kortele arba per Paysera sistemą.",
-        "16": "Jeigu nei vienas iš aukščiau pateiktų variantų Jums netinka, parašykite mums el. paštu info@neskelbiu.lt – atsiųsime įmonės rekvizitus, kuriais mokėjimą galima bus atlikti iš bet kurio banko.",
-        "17":"Kas yra asmeninis neskelbiu.lt puslapis ir kaip juo naudotis?",
-        "18": "Jei esate registruotas portalo vartotojas, Jums gali būti sugeneruotas (jeigu taip pažymėjote savo paskyros nustatymuose) asmeninio neskelbiu.lt puslapio adresas. Dedant skelbimą informacijos pildymo formos apačioje galite pažymėti varnelę 'Rodyti šį skelbimą asmeniniame puslapyje'. Tuomet skelbime bus rodoma Jūsų asmeninio puslapio nuoroda, ant kurios paspaudę kiti vartotojai atskirame puslapyje galės matyti visą Jūsų prekių/paslaugų asortimentą (skelbimus, kuriuos pasirinkote rodyti asmeniniame puslapyje).",
-        "19": "Kaip patvirtinti tapatybę?",
-        "20": "Dalies skelbimų kontaktų blokeliuose rodoma žyma „Tapatybė patvirtinta“. Tapatybė patvirtinama automatiškai, už neskelbiu.lt paslaugas apmokėjus banko pavedimu. Jeigu Jūsų tapatybė dar nėra patvirtinta, papildykite neskelbiu.lt sąskaitą banko pavedimu bent 0,1 €."
+      "1": "Frequently Asked Questions",
+      "2": "How can I delete/edit my listing?",
+      "3": "If you added the listing as a registered user, log in to the neskelbiu.lt portal, go to 'My Listings', and click 'Remove' on the desired listing.",
+      "4": "If you added the listing as an unregistered user, on the day of listing submission, you should have received login details via email or SMS.",
+      "5": "If you don't have the login details, open your listing on neskelbiu.lt portal, click 'Your listing?', then 'Edit', and 'Forgot login details?'.",
+      "6": "What is the listing price?",
+      "7": "Listings in many categories are FREE for PRIVATE INDIVIDUALS selling their personal items. Some categories remain paid, such as vehicles and their parts, real estate, services, etc.",
+      "8": "For LEGAL ENTITIES and INDIVIDUALS conducting COMMERCIAL ACTIVITIES, listing placement is paid.",
+      "9": "Please note that there is an SMS administration fee when paying via SMS (the amount depends on the payment and is indicated on the payment page).",
+      "10": "Listings in most categories are valid for 60 days (90 days for clothing/shoes category, 40 days for long-term home, apartment, and room rental categories, 30 days for collectibles and gifts categories).",
+      "11": "How does the star highlighting of a listing work?",
+      "12": "Listings with stars are highlighted higher in the list – the more stars ordered for a listing, the higher it appears. If multiple listings have the same number of stars, the one with longer star duration will be shown higher. You can order star highlighting by logging into your listing account. One star costs €0.99 for one day, two stars cost €1.98 for one day, and so on.",
+      "13": "How to pay for listings while abroad?",
+      "14": "When paying for listings via SMS, the phone number must be Lithuanian (+370), and the payment must be made while in Lithuania. If you are abroad, someone in Lithuania may send an SMS for you.",
+      "15": "If you use a Lithuanian bank's online banking, you can pay for neskelbiu.lt services from any country. You can also pay with a credit card or through the Paysera system.",
+      "16": "If none of the above options suits you, write to us at info@neskelbiu.lt – we will provide the company's details for payment from any bank.",
+      "17": "What is a personal neskelbiu.lt page and how to use it?",
+      "18": "If you are a registered portal user, you may have a generated personal neskelbiu.lt page (if you have selected this in your account settings). In the listing information form, you can check the box 'Show this listing on my personal page'. Then, your listing will have a link to your personal page, where other users can see your entire assortment of goods/services (listings you have chosen to display on your personal page).",
+      "19": "How to verify identity?",
+      "20": "The 'Identity verified' mark is shown in the contact blocks of some listings. Identity is automatically verified when you pay for neskelbiu.lt services via bank transfer. If your identity isn't verified yet, you can top up your neskelbiu.lt account with a bank transfer of at least €0.1."
     },
-
+  
     "rulesFrame": {
-        "1": "NAUDOJIMO TAISYKLĖS (redakcija 2023-08-10)",
-        "2": "1. TAISYKLIŲ TAIKYMAS IR AIŠKINIMAS",
-        "3": "1.1. Šis dokumentas yra sutartis tarp UAB 'Įdomios technologijos' (juridinio asmens kodas – 387661902, PVM mokėtojo kodas – LT228176005, registruotos buveinės adresas Pylimo g. 17A, 03234 Vilnius, Lietuva",
-        "4": "Naudodamiesi Svetaine Jūs patvirtinate, kad esate susipažinęs su šios sutarties sąlygomis ir taisyklėmis (toliau – Taisyklės), sutinkate su Taisyklėmis ir įsipareigojate jų laikytis.",
-        "5": " Naudojimasis Svetaine šių Taisyklių prasme apima visų ir bet kokių veiksmų atlikimą, Klientui prisijungus prie Svetainės naudojantis interneto ryšiu. Šių Taisyklių prasme, paslaugos apima visus ir bet kokius Kliento veiksmus, kuriuos jis gali atlikti Svetainėje, įskaitant skelbimų skelbimą, skelbiamos informacijos skaitymą, klausimų, atsiliepimų ir komentarų rašymą, tiesioginių (online) žinučių rašymą, bet kokio pobūdžio informacijos ir (ar) duomenų pateikimą, siuntimą bei gavimą, tačiau tuo neapsiribojant (toliau – Paslaugos). Klientas bet kokiu būdu ir forma naudodamasis Svetaine ir (ar) Paslaugomis, besąlygiškai ir neatšaukiamai įsipareigoja laikytis visų šiose Taisyklėse nustatytų reikalavimų. Jei Klientas nesutinka besąlygiškai bei neatšaukiamai prisiimti ir laikytis visų šiose Taisyklėse nustatytų įsipareigojimų, jis neturi teisės naudotis jokiomis Paslaugomis ir (ar) Svetaine.",
-        "6": "1.4. Dalis Svetainėje teikiamų Paslaugų yra teikiamos Klientui už atlygį (toliau – Mokamos Paslaugos). Mokamos Paslaugos yra apibūdintos ir nurodytos Svetainėje, Jų kaina nurodyta konkrečios Mokamos Paslaugos užsakymo puslapyje. Toliau šiose Taisyklėse nuoroda į „Paslaugas“ apims visas Paslaugas, įskaitant ir Mokamas Paslaugas, o nuoroda į „Mokamas Paslaugas“ apims tik tas Paslaugas už kurias Klientas moka užmokestį.",
-        "7": "1.5. Visi Klientai yra skirstomi į verslo ir privačius klientus ir apibrėžiami kaip nurodyta žemiau:",
-        "8": "1.5.1. Verslo Klientams priskiriami fiziniai ir juridiniai asmenys, kurie, atsižvelgiant į įkeltų skelbimų kiekį, skelbimų turinį (pavyzdžiui, aprašymo, nuotraukų), kitas turimas susijusias paskyras, Paslaugomis naudojasi prekybos, verslo, amato, profesijos tikslais (pavyzdžiui, vykdo tęstinę prekybą, teikia paslaugas, parduoda veislinių gyvūnų jauniklius, vykdo ūkinę veiklą, superka daiktus ir pan.) (toliau – Verslininkai);",
-        "9": "1.5.2. Privatiems Klientams priskiriami fiziniai ir juridiniai asmenys, kurie Paslaugomis naudojasi su savo verslu, amatu ar profesija nesusijusiais tikslais (vartojimo tikslais) (toliau – Privatūs klientai).",
-        "10": "1.6. Be šių Taisyklių santykiams tarp Kliento ir neskelbiu.LT reguliuoti taikomos Lietuvos Respublikos teisės aktų nuostatos, specialios sąlygos ir taisyklės, pateikiamos Svetainėje bei nusistovėjusi gera verslo praktika. Vartotojų apsaugos reikalavimai netaikomi sutarčiai, kai prekes, paslaugas siūlantis asmuo nėra Verslininkas.",
-        "11": "1.7. Jeigu kuri nors šių Taisyklių nuostata prieštarauja įstatymams arba dėl kokios nors priežasties tampa dalinai arba visai negaliojančia, ji nedaro negaliojančiomis likusių Taisyklių nuostatų.",
-        "12": "2. BENDROSIOS SĄLYGOS",
-        "13": "2.1. neskelbiu.LT suteikia Klientams virtualią erdvę, t. y. Svetainę, kurioje Klientai turi galimybę paskelbti savo skelbimus apie siūlomas ar ieškomas prekes ar paslaugas (toliau – Skelbimai), skaityti Skelbimus, ieškoti Skelbimų, rašyti po Skelbimais komentarus ir tiesiogines žinutes bei naudotis kitomis Paslaugomis.",
-        "14": "2.2. Klientų keliami Skelbimai Svetainėje yra aiškiai atskirti: Privačių klientų Skelbimai yra pažymėti „Privataus asmens skelbimas“ kontaktų skiltyje, o Verslininkų skelbimai yra pažymėti „Verslo kliento skelbimas“.",
-        "15": "2.3. Klientas pripažįsta ir sutinka, kad jis pats, o ne neskelbiu.LT, yra atsakingas už visą Turinį, kurį gauna, siunčia ar bet kuriais kitais būdais perduoda naudodamasis Svetaine ir (ar) Paslaugomis. Turinys šiose Taisyklėse reiškia Skelbimą, o taip pat visą ir bet kokią informaciją, įskaitant duomenis, duomenų bazes, simbolius, tekstą, fotografijas, paveikslėlius, video medžiagą, dokumentus, komentarus, žinutes, bet tuo neapsiribojant, kurią Klientas pateikia, gauna, saugo, siunčia, priima ar perduoda naudodamasis Paslaugomis ir (ar) Svetaine (toliau – Turinys).",
-        "16": "2.4. Klientas supranta ir sutinka su tuo, jog neskelbiu.LT nekontroliuoja kitų Svetainės naudotojų, lankytojų ar trečiųjų šalių Turinio, kurį Klientas gali gauti, perskaityti ar kitaip sužinoti naudodamasis Svetaine ar Paslaugomis, todėl neskelbiu.LT nebus atsakingas dėl tokio Turinio tikslumo, vientisumo ir (ar) kokybės.",
-        "17": "2.5. Klientas supranta ir sutinka su tuo, kad neskelbiu.LT turi teisę, tačiau ne pareigą, savo nuožiūra tikrinti Kliento gaunamą ir perduodamą Turinį, siekiant aptikti neskelbiu.LT nepageidaujamu ar pažeidžiančiu šias Taisykles pripažįstamą Turinį, o tokį Turinį aptikus – jį šalinti ar blokuoti tokio Turinio bet kokį perdavimą.",
-        "18": "2.6. neskelbiu.LT jokiu būdu nedalyvaus pirkimo-pardavimo ar kitokiuose su Svetainėje siūlomomis prekėmis ir (ar) paslaugomis ar Skelbimais susijusiuose sandoriuose tarp Klientų (nei kaip tarpininkas, įgaliotas asmuo, atstovas ar kaip kitaip). neskelbiu.LT nebus Kliento agentu, atstovu, tarpininku ir kt.",
-        "19": "2.7. Bet koks informacijos paskelbimas ir (ar) padarymas viešai prieinama Svetainėje nėra laikoma neskelbiu.LT pasiūlymu (oferta) sudaryti sandorį.",
-        "20": "2.8. Kliento sudaryta Sutartis dėl Skelbimo patalpinimo Svetainėje yra terminuota, priklausomai nuo Skelbimo kategorijos: Skelbimai daugumoje kategorijų galioja 60 dienų (drabužių / avalynės kategorijoje - 90 dienų, ilgalaikės namų, butų ir kambarių nuomos kategorijose - 40 dienų, kolekcionavimo ir dovanojimo kategorijose - 30 dienų). Anksčiau nutraukti sutartį Klientas gali savo iniciatyva ištrindamas Skelbimą, tačiau pinigai už neišnaudotą Skelbimo talpinimo laiką nebus grąžinami. Daugiau informacijos skaitykite Taisyklių 6.6. punkte.",
-        "21": "2.9. Visi pranešimai ir informacija tarp Kliento ir neskelbiu.LT bus siunčiama elektroninėmis priemonėmis adresais, nurodytais šiose Taisyklėse arba Svetainėje, nebent šiose Taisyklėse nurodyta kitaip."
+      "1": "USAGE RULES (as of 2023-08-10)",
+      "2": "1. APPLICATION AND INTERPRETATION OF RULES",
+      "3": "1.1. This document is an agreement between UAB 'Įdomios technologijos' (legal entity code – 387661902, VAT payer code – LT228176005, registered address Pylimo g. 17A, 03234 Vilnius, Lithuania).",
+      "4": "By using the Website, you acknowledge that you have read and agree to abide by these terms and rules (hereinafter – Rules). The term 'Website use' in these Rules refers to all and any actions performed by the Client while accessing the Website using an internet connection.",
+      "5": "In the context of these Rules, services include all and any actions the Client can perform on the Website, including posting listings, reading posted information, asking questions, writing feedback and comments, sending direct (online) messages, providing and receiving any type of information or data, but not limited to (hereinafter – Services). By using the Website and (or) Services in any way or form, the Client unconditionally and irrevocably agrees to comply with all the requirements set forth in these Rules. If the Client does not unconditionally and irrevocably agree to accept and comply with all the obligations set forth in these Rules, they do not have the right to use any Services and (or) the Website.",
+      "6": "1.4. Some of the Services provided on the Website are provided to the Client for a fee (hereinafter – Paid Services). Paid Services are described and specified on the Website, and their price is indicated on the specific Paid Services order page. Herein, the term 'Services' will include all Services, including Paid Services, and the term 'Paid Services' will only include those Services for which the Client pays a fee.",
+      "7": "1.5. All Clients are categorized as business and private clients and are defined as follows:",
+      "8": "1.5.1. Business Clients include individuals and legal entities who, based on the number of posted listings, content of the listings (e.g., description, photos), and other related accounts, use the Services for trade, business, occupation, or professional purposes (e.g., continuous trade, service provision, selling offspring of breeding animals, running a business, buying items, etc.) (hereinafter – Entrepreneurs);",
+      "9": "1.5.2. Private Clients include individuals and legal entities who use the Services for non-commercial purposes not related to their business, occupation, or profession (for consumption purposes) (hereinafter – Private Clients).",
+      "10": "1.6. In addition to these Rules, the relationship between the Client and neskelbiu.LT is governed by the laws of the Republic of Lithuania, special conditions, and rules provided on the Website, as well as established good business practices. Consumer protection requirements do not apply to the contract when the person offering goods, services is not an Entrepreneur.",
+      "11": "1.7. If any provision of these Rules contradicts the law or becomes partially or completely invalid for any reason, it does not invalidate the remaining provisions of these Rules.",
+      "12": "2. GENERAL TERMS",
+      "13": "2.1. neskelbiu.LT provides Clients with a virtual space, i.e., the Website, where Clients can post their listings about offered or sought goods or services (hereinafter – Listings), read Listings, search for Listings, write comments on Listings, send direct messages, and use other Services.",
+      "14": "2.2. The Listings posted by Clients on the Website are clearly distinguished: Listings by Private Clients are marked as 'Listing by a Private Person' in the contact section, while Listings by Entrepreneurs are marked as 'Listing by a Business Client'.",
+      "15": "2.3. The Client acknowledges and agrees that they themselves, not neskelbiu.LT, are responsible for all Content they receive, send, or otherwise transmit using the Website and (or) Services. Content in these Rules means Listings and any other information, including data, databases, symbols, text, photographs, images, video materials, documents, comments, messages, etc., which the Client provides, receives, stores, sends, receives, or transmits using the Services and (or) the Website (hereinafter – Content).",
+      "16": "2.4. The Client understands and agrees that neskelbiu.LT does not control the Content of other Website users, visitors, or third parties, which the Client may receive, read, or learn about using the Website or Services. Therefore, neskelbiu.LT will not be responsible for the accuracy, integrity, and (or) quality of such Content.",
+      "17": "2.5. The Client understands and agrees that neskelbiu.LT has the right, but not the obligation, to review the Content received and transmitted by the Client in order to detect unwanted or Content violating these recognized Rules. Upon finding such Content, neskelbiu.LT may remove or block any transmission of such Content.",
+      "18": "2.6. neskelbiu.LT will in no way participate in purchase-sale or other transactions related to goods and (or) services offered on the Website or Listings between Clients (neither as an intermediary, authorized person, representative, nor otherwise). neskelbiu.LT will not act as the Client's agent, representative, intermediary, etc.",
+      "19": "2.7. Any publication and (or) making information publicly available on the Website does not constitute an offer from neskelbiu.LT to conclude a transaction.",
+      "20": "2.8. The Agreement concluded by the Client for placing a Listing on the Website is limited in duration, depending on the Listing category: Listings in most categories are valid for 60 days (90 days for clothing / shoes category, 40 days for long-term home, apartment, and room rental categories, 30 days for collectibles and gifts categories). The Client can terminate the Agreement earlier by deleting the Listing, but money for the unused Listing placement time will not be refunded. For more information, read Clause 6.6 of the Rules.",
+      "21": "2.9. All communications and information between the Client and neskelbiu.LT will be sent electronically to the addresses specified in these Rules or on the Website, unless otherwise specified in these Rules."
     },
-
+  
     "privacyFrame": {
-        "1": "PRIVATUMO POLITIKA (redakcija 2023-05-12)",
-        "2": "Mes suvokiame ypatingą svarbą, tenkančią Jūsų asmens duomenų apsaugai, todėl renkame ir tvarkome tik tuos Jūsų duomenis, kurie reikalingi vykdant mūsų veiklą. Asmens duomenis mes tvarkome teisėtai, skaidriai ir sąžiningai, iš anksto nustatytais tikslais ir tik tokia apimtimi, kuri reikalinga tikslams pasiekti. Tvarkydami asmens duomenis, siekiame, kad jie būtų tikslūs, saugūs, konfidencialūs, tinkamai laikomi ir saugomi.",
-        "3": "Tvarkydami Jūsų asmens duomenis mes laikomės Bendrojo asmens duomenų apsaugos reglamento (toliau – BDAR), Lietuvos Respublikos asmens duomenų teisinės apsaugos įstatymo, taip pat kituose teisės aktuose nustatytų asmens duomenų tvarkymo reikalavimų.",
-        "4":"1. KAS YRA ŠIS DOKUMENTAS?",
-        "5":"1.1. Ši privatumo politika (toliau – Privatumo politika) nustato privatumo sąlygas Jums naudojantis Svetaine. Šioje Privatumo politikoje „Svetaine“ yra vadinama interneto svetainė www.neskelbiu.lt ir (ar) neskelbiu.LT mobilioji aplikacija, kurią galima atsiųsti iš „Apple App Store“ ir „Google Play“.",
-        "6": "1.2. Atidžiai perskaitykite šią Privatumo politiką tam, kad sužinotumėte kaip mes tvarkome Jūsų asmens duomenis, iš kur juos gauname bei kokios Jūsų, kaip asmens duomenų subjekto, teisės.",
-        "7": "1.3. Jei naudojatės Svetaine, vadinasi, Jūs perskaitėte ir sutikote su šia Privatumo politika ir joje nurodytais Jūsų asmens duomenų tvarkymo tikslais, būdais bei tvarka. Jeigu Jūs nesutinkate su Privatumo politika, Jūs neturite teisės naudotis Svetaine.",
-        "8": "1.4. Šioje Privatumo politikoje naudojama sąvoka „asmens duomenys“ – tai bet kokia informacija, pagal kurią galima Jus atpažinti – tiesiogiai ar netiesiogiai nustatyti Jūsų tapatybę. Asmens duomenimis yra pavardė, vardas, gimimo data, pašto ar e. pašto adresas, buvimo vietos duomenys ir interneto identifikatorius, Jums būdingos savybės ir kt.",
-        "9": "1.5. Privatumo politika galioja visiems asmenims, apsilankiusiems Svetainėje, taip pat veiksmams, kuriuos Jūs galite atlikti Svetainėje."
+      "1": "PRIVACY POLICY (as of 2023-05-12)",
+      "2": "We understand the importance of protecting your personal data, so we collect and process only the data necessary for our operations. We handle personal data lawfully, transparently, and fairly, for predetermined purposes and only to the extent necessary to achieve those goals. When processing personal data, we aim for accuracy, security, confidentiality, proper retention, and protection.",
+      "3": "When processing your personal data, we comply with the General Data Protection Regulation (GDPR), the Law on Legal Protection of Personal Data of the Republic of Lithuania, and other legal requirements for the processing of personal data.",
+      "4": "1. WHAT IS THIS DOCUMENT?",
+      "5": "1.1. This privacy policy (hereinafter – Privacy Policy) sets out the privacy terms for using the Website. In this Privacy Policy, the term 'Website' refers to the website www.neskelbiu.lt and (or) the neskelbiu.LT mobile application, which can be downloaded from the 'Apple App Store' and 'Google Play'.",
+      "6": "1.2. Please read this Privacy Policy carefully to understand how we process your personal data, where we obtain it from, and your rights as a data subject.",
+      "7": "1.3. By using the Website, you have read and agreed to this Privacy Policy and the purposes, methods, and procedures for processing your personal data set out in it. If you do not agree with the Privacy Policy, you do not have the right to use the Website.",
+      "8": "1.4. In this Privacy Policy, the term 'personal data' refers to any information that can identify you – directly or indirectly establish your identity. Personal data includes last name, first name, date of birth, postal or email address, location data, internet identifiers, your specific attributes, etc.",
+      "9": "1.5. This Privacy Policy applies to all individuals who visit the Website and to actions that you can perform on the Website."
     },
-
+  
     "contactsFrame": {
-        "1": "Portalo administracijos kontaktai",
-        "2": "UAB 'Aštuonios rankos'",
-        "3": "El. paštas: info@neskelbiu.lt",
-        "4":"Telefonas: +370 865 84454",
-        "5":"Faksas: (8-5) 22 88884",
-        "6": "Darbo laikas:",
-        "7": "I-V - 8.20-17.00",
-        "8": "VI-VII - nedirbame",
-        "9":"Įmonės kodas 132333124",
-        "10": "PVM mok. kodas LT313115229"
+      "1": "Portal Administration Contacts",
+      "2": "UAB 'Eight Hands'",
+      "3": "Email: info@neskelbiu.lt",
+      "4": "Phone: +370 865 84454",
+      "5": "Fax: (8-5) 22 88884",
+      "6": "Working Hours:",
+      "7": "Mon-Fri - 8:20-17:00",
+      "8": "Sat-Sun - Closed",
+      "9": "Company Code: 132333124",
+      "10": "VAT Payment Code LT313115229"
     },
-
-    "uploadPosterFrame":{
-        "removeImage": "Pašalinti nuotrauką",
-        "uploadImageIconText": "Įkelti nuotrauką",
-        "max2Mb": "Iki 2Mb",
-        "EditPosterText": "Atnaujinti skelbimą: ",
-        "AddPosterText": "Naujas skelbimas",
-        "titleText":"Pavadinimas *",
-        "titleLongerThan10Char":"Privalo būti ne trumpesnis nei 10 raidžių.",
-        "firstCat": "Kategorija *",
-        "1stCatMustBePicked": "Pasirinkte kategoriją",
-        "2ndCat": "Kategorijos šaka *",
-        "2ndCatMustBePicked":"Pasirinkite kategorijos šaką",
-        "descriptionPlaceHolder": "Aprašymas *",
-        "descriptionLongerThan10Char": "Privalo būti ne trumpesnis nei 10 raidžių",
-        "priceText": "Kaina * (eur)",
-        "priceMustBeWhole": "Privalo būti sveikas skaičius",
-        "imgUploadText": "Įkelkite nuotraukas *",
-        "imgEditLoading": "Kraunama...",
-        "mustUpload1":"Būtina įkelti bent vieną nuotrauką",
-        "stateText": "Būklė",
-        "stateNew": "Naujas", 
-        "stateUsed": "Naudotas",
-        "youAre": "Jūs esate:",
-        "private": "Privatus asmuo",
-        "company": "Juridinis asmuo",
-        "phoneNumberText": "Kontaktinis tel. nr.",
-        "phoneNumberMustHave": "Tel nr. formatas: +3706XXXXXXX",
-        "cityText": "Miestas",
-        "cityMustBePicked": "Privalote pasirinkti miestą",
-        "webLink": "Nuoroda į prekės puslapį",
-        "videoLink": "Nuoroda į video",
-        "requiredFields": "* - privalomi laukai",
-        "addButton": "Įkelti skelbimą",
-        "errorConnecting": "Klaida jungiantis prie serverio"
+  
+    "uploadPosterFrame": {
+      "removeImage": "Remove Image",
+      "uploadImageIconText": "Upload Image",
+      "max2Mb": "Up to 2MB",
+      "EditPosterText": "Update Advertisement:",
+      "AddPosterText": "New Advertisement",
+      "titleText": "Title *",
+      "titleLongerThan10Char": "Must be longer than 10 characters.",
+      "firstCat": "Category *",
+      "1stCatMustBePicked": "Choose a category",
+      "2ndCat": "Subcategory *",
+      "2ndCatMustBePicked": "Choose a subcategory",
+      "descriptionPlaceHolder": "Description *",
+      "descriptionLongerThan10Char": "Must be longer than 10 characters.",
+      "priceText": "Price * (EUR)",
+      "priceMustBeWhole": "Must be a whole number",
+      "imgUploadText": "Upload Images *",
+      "imgEditLoading": "Loading...",
+      "mustUpload1": "At least one image is required",
+      "stateText": "Condition",
+      "stateNew": "New",
+      "stateUsed": "Used",
+      "youAre": "You are:",
+      "private": "Private Individual",
+      "company": "Legal Entity",
+      "phoneNumberText": "Contact Phone Number",
+      "phoneNumberMustHave": "Phone number format: +3706XXXXXXX",
+      "cityText": "City",
+      "cityMustBePicked": "You must choose a city",
+      "webLink": "Link to Item Page",
+      "videoLink": "Video Link",
+      "requiredFields": "* - required fields",
+      "addButton": "Upload Advertisement",
+      "errorConnecting": "Error connecting to the server"
     },
-
+  
     "changePassword": {
-        "changePasswordText": "Keisti slaptažodį",
-        "oldPassword":"Senas slaptažodis",
-        "newPassword":"Naujas slaptažodis",
-        "confirmNewPassword": "Patvirtinti slaptažodį",
-        "changePasswordButton": "Keisti slaptažodį"
+      "changePasswordText": "Change Password",
+      "oldPassword": "Old Password",
+      "newPassword": "New Password",
+      "confirmNewPassword": "Confirm New Password",
+      "changePasswordButton": "Change Password"
     },
-
+  
     "allPosters": {
-        "allPostersText": "Visi skelbimai",
-        "price": "Kaina:"
+      "allPostersText": "All Advertisements",
+      "price": "Price:"
     },
-
+  
     "myPosters": {
-        "posterListText": "Skelbimų sąrašas",
-        "searchPlaceHolder":"Ieškoti tarp skelbimų",
-        "refreshButton":"Atnaujinti",
-        "myPostersText": "Mano skelbimai"
+      "posterListText": "My Advertisements",
+      "searchPlaceHolder": "Search among advertisements",
+      "refreshButton": "Refresh",
+      "myPostersText": "My Advertisements"
     },
-
+  
     "table": {
-        "img": "Nuotrauka",
-        "name": "Pavadinimas",
-        "cat": "Kategorija",
-        "subcat":"Kategorijos šaka",
-        "status":"Statusas",
-        "price": "Kaina",
-        "actions": "Veiksmai"
+      "img": "Image",
+      "name": "Title",
+      "cat": "Category",
+      "subcat": "Subcategory",
+      "status": "Status",
+      "price": "Price",
+      "actions": "Actions"
     },
-
+  
     "myProfile": {
-        "myProfileText": "Mano profilis",
-        "helloText": "Sveiki, ",
-        "emailText": "El. paštas: ",
-        "roleText":"Rolė: ",
-        "profileUpdatedText":"Profilis atnaujintas",
-        "profileCreatedText": "Profilis sukurtas: ",
-        "updateInfoButton": "Atnaujinti informaciją:",
-        "updateFotoButton": "Pakeisti profilio nuotrauką",
-        "deleteProfileButton":"Ištrinti paskyrą"
+      "myProfileText": "My Profile",
+      "helloText": "Hello, ",
+      "emailText": "Email: ",
+      "roleText": "Role: ",
+      "profileUpdatedText": "Profile Updated",
+      "profileCreatedText": "Profile Created: ",
+      "updateInfoButton": "Update Information:",
+      "updateFotoButton": "Change Profile Picture",
+      "deleteProfileButton": "Delete Account"
+    },
+  
+    "pageNotFound": {
+      "pageNotFoundText": "Page Not Found",
+      "doesNotExistText": "The page you were looking for was not found. Please check if you entered the correct URL",
+      "backHome": "Back to Home"
+    },
+  
+    "modal": {
+      "submitChanges": "Save Changes"
+    },
+  
+    "sideBar": {
+      "myProfile": "My Profile",
+      "allPosts": "All Advertisements",
+      "myPosts": "My Advertisements",
+      "allUsers": "Users",
+      "changePassword": "Change Password",
+      "addPost": "New Advertisement"
+    },
+  
+    "userTable": {
+      "username": "Username",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "role": "Role"
+    },
+  
+    "posters": {
+      "totalText": "Total Found",
+      "itemsFoundText": "advertisements",
+      "loadMore": "Load More"
     }
-}
-
+  }  
