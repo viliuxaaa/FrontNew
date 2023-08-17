@@ -17,9 +17,9 @@
     "dash": "Registracija",
     "city": "Miestas",
     "searchPlaceHolder": "Paieška",
-    "categoriesPlaceHolder": "Kategorijos"
+    "catPlaceHolder": "Kategorijos"
   },
-  "computerCategoryA": {
+  "mainCat": {
     "0": "---",
     "1": "Kompiuteriai",
     "2": "Išoriniai įrenginiai",
@@ -340,5 +340,12 @@
     "totalText": "Iš viso rasta",
     "itemsFoundText": "skelbimų",
     "loadMore": "Įkelti daugiau"
+  },
+  "latestPoster": {
+    "latestPosterText": "Naujausi skelbimai"
+  },
+
+  "cat": {
+    "cat": "Kategorija"
   }
 }

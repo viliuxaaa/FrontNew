@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 function FilterIndex({catt, setCatt}) {
     const CatData = CategoryA();
     const [t, i18n] = useTranslation("global");
-    const [cat, setCat] = useState({name:t("navbarButtons.categoriesPlaceHolder")});
+    const [cat, setCat] = useState({name:t("cat.cat")});
     const categoryA = CategoryA()
     useEffect(() => {
         for(let i=0; i < categoryA.length; i++) {

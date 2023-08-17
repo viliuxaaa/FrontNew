@@ -13,12 +13,12 @@
       "newPostButton": "New Post",
       "filterButton": "Filter",
       "allPosts": "All Posts",
-      "dash": "Dashboard",
+      "dash": "Registration",
       "city": "City",
       "searchPlaceHolder": "Search",
-      "categoriesPlaceHolder": "Categories"
+      "catPlaceHolder": "Categories"
     },
-    "computerCategoryA": {
+    "mainCat": {
       "0": "---",
       "1": "Computers",
       "2": "External Devices",
@@ -336,5 +336,12 @@
       "totalText": "Total Found",
       "itemsFoundText": "advertisements",
       "loadMore": "Load More"
+    },
+    "latestPoster": {
+      "latestPosterText": "Latest posters"
+    },
+
+    "cat": {
+        "cat": "Category"
     }
   }  

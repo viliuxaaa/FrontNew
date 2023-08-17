@@ -5,7 +5,7 @@ const Categories = () => {
     const [t, i18n] = useTranslation("global");
     const categories = {    
         category1 : {
-            name: "Kompiuteriai",
+            name: t("mainCat.1"),
             search: "category=a&type=kompiuteriai",
             subCat: [
                 {
@@ -39,7 +39,7 @@ const Categories = () => {
             ]
         },
         category2 : {
-            name: "Išoriniai Įrenginiai",
+            name: t("mainCat.2"),
             search: "category=a&type=isoriniai_irenginiai",
             subCat: [
                 {
@@ -73,7 +73,7 @@ const Categories = () => {
             ]
         },
         category3 : {
-            name: "Kompiuterių komponentai",
+            name: t("mainCat.3"),
             search: "category=a&type=kompiuteriu_komponentai",
             subCat: [
                 {
@@ -91,7 +91,7 @@ const Categories = () => {
             ]
         },
         category4 : {
-            name: "Priedai, aksesuarai",
+            name: t("mainCat.4"),
             search: "category=a&type=priedai_aksesuarai",
             subCat: [
                 {
@@ -125,7 +125,7 @@ const Categories = () => {
             ]
         },
         category5 :  {
-            name: "Programinė įranga, žaidimai",
+            name: t("mainCat.5"),
             search: "category=a&type=programine_iranga_zaidimai",
             subCat: [
                 {
@@ -159,7 +159,7 @@ const Categories = () => {
             ]
         },
         category6 : {
-            name: "Tinklo įranga",
+            name: t("mainCat.6"),
             search: "category=a&type=tinklo_iranga",
             subCat: [
                 {
@@ -193,7 +193,7 @@ const Categories = () => {
             ]
         },
         category7 : {
-            name: "Paslaugos, remontas",
+            name: t("mainCat.7"),
             search: "category=a&type=paslaugos_remontas",
             subCat: [
                 {
@@ -219,7 +219,7 @@ const Categories = () => {
             ]
         },
         category8 : {
-            name: "Konsolės",
+            name: t("mainCat.8"),
             search: "category=a&type=konsoles",
             subCat: [
                 {
