@@ -12,13 +12,10 @@ import { computerAEnum as catA,
     cities
   } from '../enums/AllEnumArrays';
 
-  
-
 const PRICE_REGEX = /^[0-9]+$/;
 const CITY_REGEX = /^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ\s]+$/;
 const PHONE_REGEX = /^\d{8,15}$/;
 const CATEGORY_REGEX = /^(?=.*[a-zA-Z_]{4,})[a-zA-Z_]*$/;
-const NAME_DESCRIPTION_REGEX = /^(?=.{10,1000}$)(?=.*[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ0-9\s]{5,})[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ0-9\s]*$/;
 
 function UploadPoster() {
     const privateAxios = useAxiosPrivate();
@@ -45,10 +42,10 @@ function UploadPoster() {
     const [requestError, setRequestError] = useState('');
 
     const [postName, setPostName] = useState("");
-    const [postNameValid, setPostNameValid] = useState(false);
+    
 
     const [posterDescription, setPosterDescription] = useState("");
-    const [posterDescriptionValid, setPosterDescriptionValid] = useState(false);
+    
     
     const [price, setPrice] = useState('');
     const [priceValid, setPriceValid] = useState(false);
@@ -103,9 +100,9 @@ function UploadPoster() {
         function resetHandle(){
             if ( !id ){
                 setPostName("");
-                setPostNameValid(false);
+                
                 setPosterDescription("");
-                setPosterDescriptionValid(false);
+                
                 setPrice("");
                 setPriceValid(false)
                 setCategoryA("");
@@ -129,9 +126,8 @@ function UploadPoster() {
     
 
     function posterCheck(){
-        if (
-            postNameValid &&
-            posterDescriptionValid &&
+        if ( postName &&
+            posterDescription &&
             priceValid &&
             categoryAValid &&
             categoryBValid &&
@@ -263,10 +259,8 @@ function UploadPoster() {
                 console.log(response.data)
 
                 setPostName(response.data.postName);
-                setPostNameValid(true);//TECHNICALLY SHOULD CHECK WITH REGEX, HOWEVER OLDER SEEDED POSTERS MIGHT NOT MEET THE REQUIREMENTS
 
                 setPosterDescription(response.data.description);
-                setPosterDescriptionValid(true);
 
                 setPrice(response.data.price);
                 setPriceValid(true);
@@ -311,11 +305,11 @@ function UploadPoster() {
 
     //================= Setting all data and select windows ==============================
     const handleNameChange = (e) => {
-        setPostNameValid(NAME_DESCRIPTION_REGEX.test(e.target.value));
+        
         setPostName(e.target.value);
     }
     const handleDescriptionChange = (e) => {
-        setPosterDescriptionValid( e.target.value.length > 10 && e.target.value.length < 1000 );
+        
         setPosterDescription(e.target.value);
     }
     const handlePriceChange = (e) =>{
@@ -479,7 +473,7 @@ function UploadPoster() {
                                         value={postName} 
                                         onChange={handleNameChange}
                                     />
-                                    <p className={ (!postNameValid && postName.length !== 0) || ( !postNameValid && submitAttempt > 0 ) ?
+                                    <p className={ ( !postName && submitAttempt > 0 ) ?
                                         "bg-red-500 pl-2 text-white rounded-md":"hidden" }>
                                         {t("uploadPosterFrame.titleLongerThan10Char")}
                                     </p>
@@ -554,7 +548,7 @@ function UploadPoster() {
                                             onChange={handleDescriptionChange}
                                         />
                                     </div>
-                                    <p className={ ( !posterDescriptionValid && posterDescription.length < 10 && posterDescription ) || ( !posterDescriptionValid && submitAttempt > 0 ) ?
+                                    <p className={  !posterDescription && submitAttempt > 0  ?
                                             "bg-red-500 rounded-md pl-2 text-white":"hidden" }>
                                             {t("uploadPosterFrame.descriptionLongerThan10Char")}
                                     </p>

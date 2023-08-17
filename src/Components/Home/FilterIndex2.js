@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 
 
 
-function FilterIndex({orderByy, setOrderByy}) {
+function FilterIndex({orderByy, setOrderByy, language}) {
     const OrderByData = OrderBy();
     const [t, i18n] = useTranslation("global");
     const [orderBy, setOrderBy] = useState({name:t("orderBy.5")});
@@ -17,7 +17,7 @@ function FilterIndex({orderByy, setOrderByy}) {
                 setOrderByy(orders[i].search)
             }
         }
-    }, [orderBy])
+    }, [orderBy, language])
 
     const Filter = [
         {

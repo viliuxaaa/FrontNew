@@ -11,9 +11,8 @@ export const AuthProvider = ({ children }) => {
         const user = Cookies.get('user');
         const email = Cookies.get('email');
         const roles = Cookies.get('roles');
-        const expiresAt = Cookies.get('expire');
-        
-        setAuth({ userId, user, email, roles, accessToken, expiresAt });
+    
+        setAuth({ userId, user, email, roles, accessToken });
       }, []);
     
     return (

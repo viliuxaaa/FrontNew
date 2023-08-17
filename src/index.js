@@ -6,9 +6,9 @@ import { BrowserRouter } from 'react-router-dom';
 import global_lt from './Components/language/lithuanian/global.json';
 import global_en from "./Components/language/english/global.json"
 import i18next from 'i18next';
-import { I18nContext, I18nextProvider } from "react-i18next";
+import { I18nextProvider } from "react-i18next";
 import { AuthProvider } from './context/AuthProvider';
-import Cookies from 'js-cookie';
+import { TableProvider } from '../src/context/TableProvider';
 
 i18next.init({
   interpolation: {escapeValue: true},
@@ -22,16 +22,17 @@ i18next.init({
       },
   },
 });
-const expiresAt = Cookies.get('expire');
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <I18nextProvider i18n={i18next}>
-    <AuthProvider expiresAt={expiresAt}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+    <AuthProvider>
+      <TableProvider >
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </TableProvider>
     </AuthProvider>
- 
   </I18nextProvider>
 );

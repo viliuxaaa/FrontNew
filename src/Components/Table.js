@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { MdDelete } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import { GoEye } from 'react-icons/go'
-import { FiSettings } from 'react-icons/fi'
 import useAuth from '../hooks/useAuth'
 import useAxiosPrivate from '../hooks/useAxiosPrivate'
-import { useTranslation } from "react-i18next";
 import { computerAEnum as catA,
     categoryTranslationKeys as langFileStrings,
     allArrays,
@@ -13,15 +11,13 @@ import { computerAEnum as catA,
   } from '../enums/AllEnumArrays';
 import  useTableContext  from '../hooks/useTableContext'
 
-
 const Head = "text-xs text-left text-text font-semibold px-6 py-2 uppercase"
 const Text = 'text-sm text-text text-left leading-6 whitespace-nowrap px-5 py-2'
 
-
 // rows
 const Rows = (poster, t ) => {
-    const {refresh} = useTableContext()
-    console.log(refresh)
+    const {refresh, setRefresh} = useTableContext()
+    
     const { auth } = useAuth();
     const privateAxios = useAxiosPrivate();
     const posterDeleteURL = `api/v1/poster/` + auth?.userId + `/delete/`+ poster.posterId;
@@ -34,6 +30,7 @@ const Rows = (poster, t ) => {
 
     
     const [isLoading, setIsLoading] = useState(true);
+
 
     const deletePost = () => {
         const controller = new AbortController();
@@ -62,21 +59,20 @@ const Rows = (poster, t ) => {
         }
         deleteThing();
     }
-    
+
     useEffect(() =>{
-        
         setImg(
             {label: "Image 1", alt: "image1", url: "/api/v1/images/poster/get/"+poster?.posterId+"/" + 0}
         );
         translateCategories(); 
-    }, [])
+    }, [refresh])
 
-    async function translateCategories(){
+    function translateCategories(){
         //LOOK AT ALL CATA ENUM VALUES TO FIND MATCH THEN DISPLAY TRANSLATABLE STRING
         for( let i = 0; i < catA.length; i++ ){
             if( catA[i] === poster?.categoryA ){
                 setCatBArray(allArrays[i])
-                setCatADisplay(t("computerCategoryA."+ i))
+                setCatADisplay(t("mainCat."+ i))
                 setTempLangString(langFileStrings[i])
                 // console.log(t("computerCategoryA."+ i))
             }
@@ -85,11 +81,10 @@ const Rows = (poster, t ) => {
         // console.log(poster?.categoryB)
     }
     function translateBCategories(){
-        for(let j=0 ;j<catBArray.length; j++){
-            if ( catBArray[j] === poster?.categoryB ){
-                setCatBDisplay(t(tempLangString+"."+j))
+        for(let j=0 ;j<allBCategoriesMix.length; j++){
+            if ( allBCategoriesMix[j] === poster?.categoryB ){
+                setCatBDisplay(t("allCategoryBMix."+j))
             }
-            setIsLoading(false);
         }
 
     }
@@ -106,8 +101,8 @@ const Rows = (poster, t ) => {
     ///////////////////////////
     
     return ( 
-        <>
-        { <tr key={poster?.postName}>
+        
+        <tr key={poster?.postName}>
             <td className={`${Text}`}>
                 <div className='w-12 p-1 bg-dry border border-text h-12 rounded overflow-hidden'>
                 {img && <img 
@@ -165,48 +160,54 @@ const Rows = (poster, t ) => {
                     )//http://localhost:3006/skelbimas/4
                 }
             </td>
-        </tr>}
-        </>
+        </tr>
+        
     )
 }
 
 // table
 function Table({t, poster}) {
-  
-  return (
-    <div className='overflow-x-scroll overflow-hidden relative w-full'>
-        <table className='w-full table-auto border border-text divide-y divide-border'>
-            <thead>
-                <tr className='bg-accent'>
-                    <th scope='col' className={`${Head}`}>
-                    {t("table.img")}
-                    </th>
-                    <th scope='col' className={`${Head}`}>
-                    {t("table.name")}
-                    </th>
-                    <th scope='col' className={`${Head}`}>
-                    {t("table.cat")}
-                    </th>
-                    <th scope='col' className={`${Head}`}>
-                    {t("table.subcat")}
-                    </th>
-                    <th scope='col' className={`${Head}`}>
-                    {t("table.status")}
-                    </th>
-                    <th scope='col' className={`${Head}`}>
-                    {t("table.price")}
-                    </th>
-                    <th scope='col' className={`${Head} text-end`}>
-                    {t("table.actions")}
-                    </th>
-                </tr>
-            </thead>
-            <tbody className='bg-main border-t border-text divide-y divide-gray-800'>
-                {poster && poster.map((poster) => Rows(poster, t))}
-            </tbody>
-        </table>
-    </div>
-  )
+
+    const { refresh } = useTableContext();
+
+    useEffect(() => {
+        console.log("HELLO FROM TABLE REFRESH")
+    }, [refresh])
+
+    return (
+        <div className='overflow-x-scroll overflow-hidden relative w-full'>
+            <table className='w-full table-auto border border-text divide-y divide-border'>
+                <thead>
+                    <tr className='bg-accent'>
+                        <th scope='col' className={`${Head}`}>
+                        {t("table.img")}
+                        </th>
+                        <th scope='col' className={`${Head}`}>
+                        {t("table.name")}
+                        </th>
+                        <th scope='col' className={`${Head}`}>
+                        {t("table.cat")}
+                        </th>
+                        <th scope='col' className={`${Head}`}>
+                        {t("table.subcat")}
+                        </th>
+                        <th scope='col' className={`${Head}`}>
+                        {t("table.status")}
+                        </th>
+                        <th scope='col' className={`${Head}`}>
+                        {t("table.price")}
+                        </th>
+                        <th scope='col' className={`${Head} text-end`}>
+                        {t("table.actions")}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody className='bg-main border-t border-text divide-y divide-gray-800'>
+                    {poster && poster.map((poster) => Rows(poster, t))}
+                </tbody>
+            </table>
+        </div>
+    )
 }
 
 export default Table

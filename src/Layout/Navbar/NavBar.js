@@ -15,6 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import  categoryA  from "../../enums/CategoryA"
 import { useTranslation } from "react-i18next";
 import handleChangeLanguage from '../../hooks/HandleChangeLanguage';
+import  CategoryA  from "../../enums/CategoryA"
 
 function NavBar() {
   const handleChangeLanguage = (lang) => {
@@ -109,7 +110,8 @@ function NavBar() {
     const { auth, setAuth } = useAuth();
 
     const logout_URL="/api/v1/auth/logout";
-    
+          
+    const categoryA = CategoryA();
 
     const handleLogout = async () => {
         try {
@@ -138,7 +140,7 @@ function NavBar() {
           d = "&" + orderBy; 
       }
         setSearchLink(a + b + c + d)
-    }, [catt, checkedValues, text, orderBy])
+    }, [catt, checkedValues, text, orderBy, i18n.language])
 
 
     const CityData = cities;
@@ -147,7 +149,8 @@ function NavBar() {
     const hover = "hover:text-cyan-800 transition hover:scale-105 transitions text-text";
     const Hover = ({isActive}) => (isActive ? "text-custom" : hover)
     
-    return (
+    const ReturnElement = () => {
+      return(
         <>
         <CityModal
           modalOpen={modalOpen} 
@@ -201,12 +204,16 @@ function NavBar() {
                     <span className="w-[5px]"></span>
                     <FilterIndex
                         catt={catt}
-                        setCatt={setCatt} 
+                        setCatt={setCatt}
+                        language={i18n.language}
+                        placeholder={t("cat.cat")} 
                     />
+                    
                     <span className="w-[5px]"></span>
                     <FilterIndex2
                         orderByy={orderBy}
-                        setOrderByy={setOrderBy} 
+                        setOrderByy={setOrderBy}
+                        language={i18n.language}   
                     />
                 </div>
                 {/* menus */}
@@ -217,14 +224,14 @@ function NavBar() {
                   <NavLink to="/posters/search/:searchType" className={Hover}>{t("navbarButtons.allPosts")}</NavLink>
                   { auth?.userId ?                   
                     (
-                        <>
-                            <NavLink to="/dashboard" className={Hover}>
-                                <CgProfile className="w-7 h-7" />
-                            </NavLink>
-                            <NavLink to="/" onClick={handleLogout} className={Hover}>
-                                <BiLogIn className="w-8 h-8" />
-                            </NavLink>
-                        </>
+                      <>
+                          <NavLink to="/dashboard" className={Hover}>
+                              <CgProfile className="w-7 h-7" />
+                          </NavLink>
+                          <NavLink to="/" onClick={handleLogout} className={Hover}>
+                              <BiLogIn className="w-8 h-8" />
+                          </NavLink>
+                      </>
                     ) : (
                       <>
                         <NavLink to="/register" className={Hover}>{t("navbarButtons.dash")}</NavLink>
@@ -246,7 +253,10 @@ function NavBar() {
             </div> 
       </div>
     </>
-  );
+      )
+    }
+
+    return ReturnElement();
 }
 
 export default NavBar;

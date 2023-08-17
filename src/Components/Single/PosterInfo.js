@@ -2,7 +2,6 @@ import React from 'react'
 import ImageView from '../ImageView'
 import PosterMenu from './PosterMenu';
 import useAuth from '../../hooks/useAuth';
-import {Link} from 'react-router-dom';
 import { TbCurrencyEuro } from 'react-icons/tb'
 
 function PosterInfo({poster, t}) {

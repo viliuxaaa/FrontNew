@@ -13,6 +13,7 @@ import useTableContext from '../../../hooks/useTableContext';
 function SkelbimuList() {
     const [t, i18n] = useTranslation("global");
     const {auth} = useAuth(); 
+
     const id = useParams();
     const [errMsg, setErrMsg] = useState("");
 
@@ -22,14 +23,16 @@ function SkelbimuList() {
     const getAllPosters_URL = "/api/v1/poster/get/search?";
 
     const {refresh} = useTableContext();
-    console.log(refresh)
+   
 
     useEffect(() =>{
         if( !id.id ){
             setFinalData(null);
         }
         handleRefresh();
+        console.log(id.id)
     }, [])
+       
     
     async function handleRefresh() {
         setFinalData(null);
@@ -66,9 +69,7 @@ function SkelbimuList() {
                 </button>
             </div>
             {finalData && 
-                <TableProvider >
-                    <Table t={t} poster={finalData} admin={false} />
-                </TableProvider>
+                <Table t={t} poster={finalData} admin={false} />
             }
             {errMsg && <p>Connection to the server failed</p>}
         </div>

@@ -6,11 +6,12 @@ import { useTranslation } from "react-i18next";
 
 
 
-function FilterIndex({catt, setCatt}) {
-    const CatData = CategoryA();
+function FilterIndex({catt, setCatt, language, placeholder}) {
+    
+    const categoryA = CategoryA();
     const [t, i18n] = useTranslation("global");
-    const [cat, setCat] = useState({name:t("cat.cat")});
-    const categoryA = CategoryA()
+    const [cat, setCat] = useState({name:placeholder});
+    
     useEffect(() => {
         for(let i=0; i < categoryA.length; i++) {
             if(categoryA[i].name === cat.name) {
@@ -23,7 +24,7 @@ function FilterIndex({catt, setCatt}) {
         {
             value:cat,
             onChange:setCat,
-            items:CatData
+            items:categoryA
         }
     ]
 

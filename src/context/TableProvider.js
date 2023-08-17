@@ -6,8 +6,8 @@ const TableContext = createContext({});
 export const TableProvider = ({ children }) => {
     const [ refresh, setRefresh] = useState(false);
     useEffect(() => {
-        const falseset = false;
-        setRefresh({falseset});
+        setRefresh(false)
+        setRefresh({refresh});
 
       }, []);
     
