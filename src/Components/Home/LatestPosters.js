@@ -1,6 +1,5 @@
 
 import {useState} from "react";
-import SinglePoster from "../PosterMinDetail";
 import AxiosFetch from "../../hooks/AxiosFetch";
 import PosterMinDetail from "../PosterMinDetail";
 import { useTranslation } from "react-i18next";

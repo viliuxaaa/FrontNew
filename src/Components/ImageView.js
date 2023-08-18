@@ -2,20 +2,19 @@
 import { Carousel } from "react-responsive-carousel";
 import PosterImgModal from "./Modals/PosterImgModal";
 import { useEffect, useState } from "react";
-import AxiosFetch from "../hooks/AxiosFetch";
+
 
 
 function ImageView( {poster} ) {
     const [modalOpen, setModalOpen] = useState(false);
     const [img, setImg] = useState(null);
     const getPosterImg = `/api/v1/images/poster/get/${poster.posterId}/` 
-    const [image0, isPending, error] = AxiosFetch(getPosterImg + `0`);
+    
 
     const propertyCount = Object.keys(poster.images).length;
     const itemElements = [];
 
-    // console.log(poster)
-    // console.log( image0 )
+    
     useEffect(() => {
       if(modalOpen === false){
         setImg();
@@ -35,9 +34,6 @@ function ImageView( {poster} ) {
       );
     }
 
-    // console.log(getPosterImg + `0`)
-
-
     return (
         <> 
           <PosterImgModal modalOpen={modalOpen} setModalOpen={setModalOpen} img={img}/>
@@ -45,17 +41,16 @@ function ImageView( {poster} ) {
                 <div className="flex-colo">
 
                     <div className="flex-rows min-h-full w-3/5 lg:w-4/5">
-                          <Carousel
-                          showArrows={false}
-                          autoPlay={false}
-                          infiniteLoop={true}
-                          dynamicHeight={true}
-                          centerMode={false}
-                          className="carousel-container"
-                          
-                          >
-                          {itemElements}
-                        </Carousel>
+                      <Carousel
+                        showArrows={false}
+                        autoPlay={false}
+                        infiniteLoop={true}
+                        dynamicHeight={true}
+                        centerMode={false}
+                        className="carousel-container"
+                      >
+                        {itemElements}
+                      </Carousel>
                     </div>
                 </div>
             </div>                  
