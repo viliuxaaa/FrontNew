@@ -18,7 +18,7 @@ function SinglePoster() {
 
     useEffect(() => {
         if (!isLoaded && !isLoadeds) {
-            const related = posters?.filter(p => p.city === poster.city);
+            const related = posters?.filter(p => p.categoryA === poster.categoryA);
             setRelatedPosters(related);
         }
     }, [isLoaded, isLoadeds, poster, posters]);

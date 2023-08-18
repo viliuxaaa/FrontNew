@@ -45,7 +45,6 @@ function UpdateUserInfoModal({ modalOpen, setModalOpen, user }) {
     
 //NEED TO FINISH
     async function handleSubmit(e) {
-        e.preventDefault();
         try{
             const response = await privateAxios.post(UPDATE_NAME_URL,{
                 firstname: firstName,
