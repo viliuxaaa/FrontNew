@@ -24,7 +24,7 @@
     "1": "Kompiuteriai",
     "2": "Išoriniai įrenginiai",
     "3": "Kompiuterių komponentai",
-    "4": "priedai, aksesuarai",
+    "4": "Priedai, aksesuarai",
     "5": "Programinė įranga, žaidimai",
     "6": "Tinklo įranga",
     "7": "Paslaugos, remontas",
@@ -428,5 +428,9 @@
     "kaina": "Kaina:",
     "aprasymas": "Aprašymas",
     "sudominti": "Jus gali sudominti"
+  },
+  "allErrors": {
+      "serverConnectionError": "nepavyko prisijungti prie serverio"
   }
+
 }
