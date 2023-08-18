@@ -1,16 +1,45 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ImageView from '../ImageView'
 import PosterMenu from './PosterMenu';
 import useAuth from '../../hooks/useAuth';
 import { TbCurrencyEuro } from 'react-icons/tb'
+import { useTranslation } from 'react-i18next';
+import { computerAEnum as catA,
+    allBCategoriesMix
+  } from '../../enums/AllEnumArrays';
+
 
 function PosterInfo({poster, t}) {
     const {auth} = useAuth(); 
 
     const dateCreated = poster?.createdAt.substring(0,10);
     const dateUpdated = poster.updatedAt && poster.updatedAt.substring(0,10);
-  
+    const [catADisplay, setCatADisplay] = useState('');
+    const [catBDisplay, setCatBDisplay] = useState('');
+
+    useEffect(() => {
+        translateCategories();
+    },[])
     
+    function translateCategories(){
+        //LOOK AT ALL CATA ENUM VALUES TO FIND MATCH THEN DISPLAY TRANSLATABLE STRING
+        for( let i = 0; i < catA.length; i++ ){
+            if( catA[i] === poster?.categoryA ){
+                setCatADisplay(t("computerCategoryA."+ i))
+            }
+        }
+        translateBCategories();
+        
+    }
+    function translateBCategories(){
+        for(let j=0 ;j<allBCategoriesMix.length; j++){
+            if ( allBCategoriesMix[j] === poster?.categoryB ){
+                setCatBDisplay(t("allCategoryBMix."+j))
+            }
+        }
+    }
+
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 mt-10 md:mt-10 mb-20">
         <div className="xs:order-last lg:order-first lg:mt-12">
@@ -35,7 +64,7 @@ function PosterInfo({poster, t}) {
                     </tr>
                     <tr className="bg-subMain h-fit p-3 border-t-2 border-darkMain">
                         <td className="text-base md:text-2xl px-4">{t("single.kat")}</td>
-                        <td className="text-base md:text-2xl flex"><span className="font-normal">{poster.categoryA}</span></td>
+                        <td className="text-base md:text-2xl flex"><span className="font-normal">{catADisplay}</span></td>
                     </tr>
                     <tr className="bg-subMain h-fit p-3 border-t-2 border-darkMain">
                         <td className="text-base md:text-2xl px-4">{t("single.status")}</td>
