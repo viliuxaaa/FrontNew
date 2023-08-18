@@ -3,7 +3,6 @@ import ImageView from '../ImageView'
 import PosterMenu from './PosterMenu';
 import useAuth from '../../hooks/useAuth';
 import { TbCurrencyEuro } from 'react-icons/tb'
-import { useTranslation } from 'react-i18next';
 import { computerAEnum as catA,
     allBCategoriesMix
   } from '../../enums/AllEnumArrays';
@@ -38,7 +37,6 @@ function PosterInfo({poster, t}) {
             }
         }
     }
-
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 mt-10 md:mt-10 mb-20">

@@ -4,7 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import useAuth from "../hooks/useAuth";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import axios from '../api/axios';
-import AxiosFetch from '../hooks/AxiosFetch';
 import { useTranslation } from "react-i18next";
 import { computerAEnum as catA,
     categoryTranslationKeys as langFileStrings,
@@ -31,12 +30,11 @@ function UploadPoster() {
     const createURL="api/v1/poster/"+auth.userId+"/create"; //GALIMAI PERKELTI EDIT FUNKCIONALUMA I KITA FORMA
     const updateURL="api/v1/poster/"+auth.userId+"/update/"+id;
     const ImgDelURL="api/v1/images/poster/"+auth.userId+"/"+id+"/delete"; //+deleteIMG position
-    // const updateIMG_URL = "api/v1/images/poster/"+auth.userId+"/"+posterId+"/upload"
+
     //Cannot use updateIMGURL because it updates too slow with the poster ID
 
     const images = new FormData();
 
-    const [posterEdit, setPosterEdit] = useState( null ); 
     const [imgRed, setImgRed] = useState(false);
 
     const [requestError, setRequestError] = useState('');
@@ -155,7 +153,6 @@ function UploadPoster() {
     }
     
     async function handleSubmit(event)  {
-        console.log(price)
         setSubmitAttempt(submitAttempt+1)
         event.preventDefault();
         let check = posterCheck();
@@ -170,8 +167,8 @@ function UploadPoster() {
 
             if ( id ) {
                 try{
-                    const response = await privateAxios.delete( ImgDelURL )
-                    console.log(response)
+                    await privateAxios.delete( ImgDelURL )
+
                 } catch {
                     console.log("image deletion failed")
                 }
@@ -188,7 +185,7 @@ function UploadPoster() {
                     website: website,
                     videoLink: videoLink
                 });
-                console.log(response.data);
+
     
                 handlePosterSuccess();
              
@@ -197,19 +194,7 @@ function UploadPoster() {
                 }
 
             } else {
-                console.log(createURL)
-                console.log(
-                    postName, 
-                    posterDescription,
-                     +price, //konvertuoja i skaiciu
-                     categoryA,
-                    categoryB,
-                    
-                    phoneNumber,
-                    city,
-                     website,
-                     videoLink
-                )
+
                 const response = await privateAxios.post(createURL,{
                     postName: postName, 
                     description: posterDescription,
@@ -223,7 +208,7 @@ function UploadPoster() {
                     videoLink: videoLink
                 });
 
-            console.log(response.data);
+ 
 
             handlePosterSuccess();
          
@@ -238,7 +223,7 @@ function UploadPoster() {
     }
     async function uploadImg( id ){
         try{
-            console.log("api/v1/images/poster/"+auth.userId+"/"+id+"/upload")
+
             await privateAxios.post("api/v1/images/poster/"+auth.userId+"/"+id+"/upload", images, {
                 headers:{
                     'Content-Type':'multipart/form-data'
@@ -256,8 +241,6 @@ function UploadPoster() {
             try{
                 const response = await axios.get(posterInfoURL);
                 
-                console.log(response.data)
-
                 setPostName(response.data.postName);
 
                 setPosterDescription(response.data.description);
@@ -280,9 +263,6 @@ function UploadPoster() {
                 setWebsite(response.data.website);
                 setVideoLink(response.data.videoLink);
 
-                setPosterEdit(response.data);
-                // setPosterEditImageCount(Object.keys(posterEdit.images).length); //sets how many times should useEffect owrk to lead images
-                
                 const loadImageFromBackend = async () => {
                     if (id) {
                       try {
@@ -315,7 +295,7 @@ function UploadPoster() {
     const handlePriceChange = (e) =>{
         setPriceValid(PRICE_REGEX.test(e.target.value));
         setPrice(e.target.value);
-        console.log(e.target.value)   
+  
     }
       // ======= event watch makes sure that once the primary category is selected, a selection for secondary will appear
     const handleSelectA = (e) => {
@@ -527,7 +507,7 @@ function UploadPoster() {
                                             </option>                 
                                         );
                                         })}
-                                        {/* {console.log(catBArray)} */}
+
                                     </select>
                                     <p className={ (!categoryBValid && categoryB) || ( !categoryBValid && submitAttempt > 0 )  ?
                                         "":"hidden" }>

@@ -1,6 +1,5 @@
 import React from 'react'
 import SideBar from './SideBar'
-// import FavoriteTable from '../../Components/FavoriteTable'
 
 
 function Favorites() {
@@ -13,8 +12,6 @@ function Favorites() {
                     Delete All
                </button>
             </div>
-            {/* admin - true gives admin controls */}
-            {/* <FavoriteTable data={posters} /> */}
         </div>
     </SideBar>
   )

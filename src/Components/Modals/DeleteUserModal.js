@@ -3,11 +3,11 @@ import MainModal from './MainModal'
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import { useNavigate } from "react-router-dom";
 import useAuth from '../../hooks/useAuth';
-import axios from '../../api/axios';
+import { useTranslation } from 'react-i18next';
 
 function DeleteModal({ modalOpen, setModalOpen }) {
     const { auth, setAuth } = useAuth();
-
+    const [t, i18n] = useTranslation("global");
     const DELETE_URL = "api/v1/user/"+auth.userId+"/user-delete";
 
     const privateAxios = useAxiosPrivate();
@@ -19,7 +19,6 @@ function DeleteModal({ modalOpen, setModalOpen }) {
         try{
             const response = await privateAxios.delete(DELETE_URL);
             
-            // console.log(response.data)
             if(response.status === 200){
                 setAuth(false);
                 navigate('/');
@@ -36,13 +35,13 @@ function DeleteModal({ modalOpen, setModalOpen }) {
                     className="block mb-2 text-lg font-medium text-gray-900 dark:text-white"
                     htmlFor="file_input"
                 >
-                    <strong>Ar tikrai norite ištrinti savo paskyrą?</strong>
+                    <strong>{t("deleteUserModal.0")}</strong>
                 </p>
                 <button 
                     className="px-6 py-2 bg-gray-600 hover:bg-gray-800 text-white rounded-full shadow-md transition duration-300 ease-in-out focus:outline-none"
                     onClick={() => setModalOpen(false)}
                 >
-                    Ne
+                    {t("deleteUserModal.1")}
                 </button>
                 <button
                     className="px-5 py-2 bg-red-500 hover:bg-red-700 text-white rounded-full shadow-md transition duration-300 ease-in-out focus:outline-none"
@@ -51,7 +50,7 @@ function DeleteModal({ modalOpen, setModalOpen }) {
                         handleDelete(e)
                     }}
                 >
-                    Taip
+                    {t("deleteUserModal.2")}
                 </button>
            
         </div>

@@ -23,8 +23,6 @@ function Password() {
 
     const [t, i18n] = useTranslation("global");
 
-    // const errRef = useRef(); 
-
     const [oldPwd, setOldPwd] = useState("");
 
     const [pwd, setPwd] = useState("");
@@ -46,8 +44,6 @@ function Password() {
 
     useEffect(() => {
         const result = PWD_REGEX.test(pwd);
-        // console.log(result);
-        // console.log(pwd);
         setValidPwd(result);
         const match = pwd === matchPwd;
         setValidMatch(match);
@@ -82,7 +78,6 @@ function Password() {
             } else {
                 setErrMsg("Change failed");
             }
-            // errRef.current.focus();
         }
     }
 

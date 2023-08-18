@@ -44,7 +44,7 @@ const Users = () => {
                 </button>
                 </div>
                 { finalData && <UserTable t={t} users={finalData}  />}
-                {errMsg && <p>Connection to the server failed</p>}
+                {errMsg && <p>{t("allErrors.serverConnectionError")}</p>}
             </div>
         </SideBar>
     )

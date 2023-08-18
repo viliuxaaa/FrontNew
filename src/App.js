@@ -1,5 +1,4 @@
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Route, Routes } from "react-router-dom";
 import HomeScreen from "./Screens/HomeScreen";
 import Login from "./Screens/Login";
 import NotFound from "./Screens/NotFound";
@@ -24,7 +23,7 @@ import AdminRegister from "./Screens/AdminRegister";
 
 function App() {
   AOS.init();
-  const expiresAt = Cookies.get('expire');
+  
 
 
   return (
@@ -47,7 +46,6 @@ function App() {
       <Route element={
         <RequireAuth 
           allowedRoles={['ADMIN', 'MANAGER', 'USER']}
-          expiresAt={expiresAt} 
         />}
       >
         <Route path="/upload" element={<UploadPoster />} />
@@ -58,17 +56,11 @@ function App() {
         <Route path="/manoskelbimai/:id" element={<SkelbimuList key={(1)}/>} />
       </Route>
 
-      <Route 
-        element={
-          <RequireAuth 
-            allowedRoles={['ADMIN', 'MANAGER']}
-            expiresAt={expiresAt}
-          />
-        }
-      >
+      <Route element={<RequireAuth allowedRoles={['ADMIN', 'MANAGER']}/>}>
         <Route path="/skelbimulist" element={<SkelbimuList key={(2)}/>} />
       </Route>
-      <Route element={<RequireAuth expiresAt={expiresAt} allowedRoles={['ADMIN']} />}>
+
+      <Route element={<RequireAuth allowedRoles={['ADMIN']} />}>
         <Route path="/userslist" element={<Users />} />
         <Route path="/adminregister" element={<AdminRegister />} />
       </Route>

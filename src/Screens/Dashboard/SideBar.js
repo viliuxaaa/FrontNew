@@ -59,16 +59,6 @@ function SideBar({ children}) {
             link: "/upload",
             icon: RiMovie2Fill,
             },
-            // {
-            // name: "Atnaujinti profilį",
-            // link: "/profile",
-            // icon: FiSettings,
-            // },
-            // {
-            // name: "Mėgstamiausi skelbimai",
-            // link: "/favorites",
-            // icon: FaHeart,
-            // },
             {
             name: t("sideBar.changePassword"),
             link: "/password",

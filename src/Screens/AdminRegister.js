@@ -6,7 +6,6 @@ import {
     faInfoCircle
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import "./Register.css";
 import { useTranslation } from "react-i18next";

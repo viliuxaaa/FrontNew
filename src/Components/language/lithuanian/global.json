@@ -431,6 +431,11 @@
   },
   "allErrors": {
       "serverConnectionError": "nepavyko prisijungti prie serverio"
-  }
+  },
 
+  "deleteUserModal": {
+      "0": "Ar tikrai norite ištrinti savo paskyrą?",
+      "1": "Ne",
+      "2": "Taip"
+  }
 }

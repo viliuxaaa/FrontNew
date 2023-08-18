@@ -12,16 +12,16 @@ function SinglePoster() {
     const posterInfoURL = "/api/v1/poster/get/" + id;
     const postersInfoURL = "/api/v1/poster/get/search";
 
-    const [poster, isLoaded, error] = AxiosFetch(posterInfoURL);
-    const [posters, isLoadeds, errors] = AxiosFetch(postersInfoURL);
+    const [poster, isLoading, error] = AxiosFetch(posterInfoURL);
+    const [posters, isPending, errors] = AxiosFetch(postersInfoURL);
     const [relatedPosters, setRelatedPosters] = useState([]);
 
     useEffect(() => {
-        if (!isLoaded && !isLoadeds) {
+        if (!isLoading && !isPending) {
             const related = posters?.filter(p => p.categoryA === poster.categoryA);
             setRelatedPosters(related);
         }
-    }, [isLoaded, isLoadeds, poster, posters]);
+    }, [isLoading, isPending, poster, posters]);
 
 
     return (

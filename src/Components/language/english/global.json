@@ -427,6 +427,11 @@
       },
       "allErrors": {
         "serverConnectionError": "failed to connect to the server"
-      }
-      
-  }  
+      },
+      "deleteUserModal": {
+        "0": "Are you sure you want to delete your account?",
+        "1": "No",
+        "2": "Yes"
+    }
+}
+  
